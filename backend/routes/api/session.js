@@ -1,8 +1,9 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { validateLogin } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -10,6 +11,7 @@ const router = express.Router();
 // POST /api/session - LOG IN USER
 router.post(
   '/',
+  validateLogin,
   asyncHandler(async (req, res, next) => {
     const { credential, password } = req.body;
 
