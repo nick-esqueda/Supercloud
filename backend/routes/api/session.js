@@ -7,7 +7,7 @@ const { User } = require('../../db/models');
 const router = express.Router();
 
 // ROUTES **********************************************************
-// POST '/api/session' - LOG IN USER
+// POST /api/session - LOG IN USER
 router.post(
   '/',
   asyncHandler(async (req, res, next) => {
@@ -31,7 +31,7 @@ router.post(
   })
 );
 
-// DELETE '/api/session' - LOG OUT USER
+// DELETE /api/session - LOG OUT USER
 router.delete(
   '/',
   (_req, res) => {
