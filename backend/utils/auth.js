@@ -32,20 +32,26 @@ const restoreUser = (req, res, next) => {
   const { token } = req.cookies;
 
   return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+    // if the JWT was tampered with, don't do anything...
     if (err) {
       return next();
     }
 
+    // try to find a user in DB from the JWT...
     try {
+      // pin the user (might not exist) on the request obj
       const { id } = jwtPayload.data;
       req.user = await User.scope('currentUser').findByPk(id);
     } catch (e) {
+      // if sequelize error, delete whatever token the client had
       res.clearCookie('token');
       return next();
     }
 
+    // if user doesn't exist in DB, delete whatever token the client had
     if (!req.user) res.clearCookie('token');
 
+    // move on
     return next();
   });
 };

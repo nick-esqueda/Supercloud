@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 const router = express.Router();
@@ -41,6 +41,19 @@ router.delete(
     return res.json({ message: 'success' });
   }
 );
+
+// GET /api/users - RESTORE USER SESSION/GET USER
+router.get(
+  '/',
+  restoreUser,
+  (req, res) => {
+    const { user } = req;
+
+    if (user) return res.json({ user: user.toSafeObject() });
+    else return res.json({});
+  }
+);
+
 
 
 module.exports = router;
