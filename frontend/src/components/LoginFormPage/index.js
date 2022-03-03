@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { login } from '../../store/session';
+import { loginUser } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
@@ -33,7 +33,7 @@ function LoginFormPage() {
 
     setValidationErrors([]);
 
-    return dispatch(login({ credential, password }))
+    return dispatch(loginUser({ credential, password }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
