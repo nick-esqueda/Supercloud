@@ -7,7 +7,7 @@ const { User } = require('../../db/models');
 const router = express.Router();
 
 // ROUTES **********************************************************
-// POST '/api/session' - USER LOG IN
+// POST '/api/session' - LOG IN USER
 router.post(
   '/',
   asyncHandler(async (req, res, next) => {
@@ -29,6 +29,17 @@ router.post(
 
     return res.json({ user });
   })
+);
+
+// DELETE '/api/session' - LOG OUT USER
+router.delete(
+  '/',
+  (_req, res) => {
+    // if you have problems getting to this route:
+    // try to add "Content-Type": "application/json" header to fetch
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+  }
 );
 
 
