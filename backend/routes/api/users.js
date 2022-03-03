@@ -1,14 +1,16 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { validateSignup } = require('../../utils/validation');
 
 const router = express.Router();
 
 // POST /api/users - SIGN UP NEW USER
 router.post(
   '/',
+  validateSignup,
   asyncHandler(async (req, res, next) => {
     const {
       email, password, username, bio, location, profileImageURL, bannerImageURL,
