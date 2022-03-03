@@ -22,9 +22,7 @@ function LoginFormPage() {
     if (!validationErrors.length) setShowErrors(false);
   }, [credential, password]);
 
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
+  if (sessionUser) return <Redirect to="/" />;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +45,7 @@ function LoginFormPage() {
     <form onSubmit={onSubmit}>
       <ul>
         {showErrors && validationErrors.map((err, i) => (
-            <li key={i}>{err}</li>
+          <li key={i}>{err}</li>
         ))}
       </ul>
       <label>
