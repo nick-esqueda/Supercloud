@@ -17,7 +17,7 @@ const removeUser = () => {
   };
 };
 
-// THUNK CREATORS *****************************************
+// THUNK ACTION CREATORS **********************************
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
   const res = await csrfFetch('/api/session', {
@@ -32,6 +32,12 @@ export const login = (user) => async (dispatch) => {
   dispatch(setUser(data.user));
   return res;
 };
+export const restoreUser = () => async dispatch => {
+  const response = await csrfFetch('/api/session');
+  const data = await response.json();
+  dispatch(setUser(data.user));
+  return response;
+};
 
 // REDUCER ************************************************
 const initialState = { user: null };
@@ -40,12 +46,10 @@ const sessionReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case SET_USER:
-      // newState = Object.assign({}, state);
       newState = {...state};
       newState.user = action.payload;
       return newState;
     case REMOVE_USER:
-      // newState = Object.assign({}, state);
       newState = {...state};
       newState.user = null;
       return newState;
