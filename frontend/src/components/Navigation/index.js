@@ -1,27 +1,15 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import './Navigation.css';
 
 const Navigation = () => {
-  return (
-    <header>
-      <div className="header__left flexRow">
-        <div className="header__logo" style={{ textDecoration: 'overline' }}>cloud</div>
-        <nav>
-          <NavLink exact to="/">home</NavLink>
-          <NavLink to="/sample-survey">likes</NavLink>
-          <NavLink to="/sensory-preferences-survey">random</NavLink>
-        </nav>
-      </div>
+  const sessionUser = useSelector(state => state.session.user);
 
-      <div className="header__middle">
-        <form className="header__searchForm">
-          <input type="text" placeholder="search" className="header__searchInput" />
-          <button>search</button>
-        </form>
-      </div>
-
-      <div className="header__right flexRow">
+  let sessionLinks;
+  if (sessionUser) {
+    sessionLinks = (
+      <>
         <div className="header__upload">
           <NavLink to="/upload">upload</NavLink>
         </div>
@@ -38,6 +26,52 @@ const Navigation = () => {
             about
           </NavLink>
         </div>
+      </>
+    )
+
+  } else {
+    sessionLinks = (
+      <>
+        <div className="login_signup_btn_container">
+          <NavLink to="/login">
+            <button className="btn btn--secondary--outline">log in</button>
+          </NavLink>
+          <NavLink to="/signup">
+            <button className="btn btn--primary">create account</button>
+          </NavLink>
+        </div>
+        <div className="header__upload">
+          <NavLink to="/upload">upload</NavLink>
+        </div>
+        <div className="header__about">
+          <NavLink to="/about">
+            about
+          </NavLink>
+        </div>
+      </>
+    )
+  }
+
+  return (
+    <header>
+      <div className="header__left flexRow">
+        <NavLink to="/" className="header__logo">cloud</NavLink>
+        <nav className="nav_links">
+          <NavLink exact to="/">home</NavLink>
+          <NavLink to="/">likes</NavLink>
+          <NavLink to="/">random</NavLink>
+        </nav>
+      </div>
+
+      <div className="header__middle">
+        <form className="header__searchForm">
+          <input type="text" placeholder="search" className="header__searchInput" />
+          <button>search</button>
+        </form>
+      </div>
+
+      <div className="header__right flexRow">
+        {sessionLinks}
       </div>
 
     </header>

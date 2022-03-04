@@ -17,20 +17,25 @@ function App() {
 
   return (
     <>
-      {isLoaded
-        ? <Switch>
-            <Route path="/">
-              <Navigation />
+      {isLoaded ? (
+        <>
+          <Navigation />
+          <Switch>
+            <Route exact path="/">
+
             </Route>
-            <Route path="/login">
+            <Route exact path="/login">
               <LoginFormPage />
             </Route>
-            <Route path="/signup">
+            <Route exact path="/signup">
               <SignupFormPage />
             </Route>
           </Switch>
-        : <h4>loading...</h4>
-      }
+        </>
+
+      ) : (
+        <h4>loading...</h4>
+      )}
     </>
   );
 }

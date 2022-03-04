@@ -27,7 +27,6 @@ main {
 }
 
 h1 {
-  /* text-shadow: .2em .2em 0px WHITE; */
   text-decoration: overline;
 }
 
@@ -105,7 +104,7 @@ small {
   border-radius: 4px;
 
   font-family: 'Roboto Mono', monospace;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 200;
   letter-spacing: -0.5px;
   text-align: center;
@@ -117,31 +116,27 @@ small {
   cursor: pointer;
   transition: margin-top 0.15s, background 0.15s, border-color 0.15s, color 0.15s;
 }
+.btn:hover {
+  box-shadow: 0px 0px 4px 1px rgba(216, 216, 216, 0.226);
+}
 
-/* solid green button skin */
+/* solid yellow button skin */
 .btn--primary {
   font-weight: 400;
+  color: black;
   background: #FFFF5D;
   border-color: #FFFF5D;
-  color: black;
 }
-/* green outlined button skin */
+/* yellow outlined button skin */
 .btn--primary--outline {
   border-color: #FFFF64;
   color: #FFFF64;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-/* green outlined button hover */
-/* .btn--primary--outline:hover {
-  background: #FF5500;
-  border-color: #FF5500;
-  color: #ffffff;
-} */
-/* green buttons when clicked */
 .btn--primary:active,
 .btn--primary--outline:active {
-  background: #ff5500b0;
-  border-color: #ff5500b0;
+  background: #c9c950;
+  border-color: #c9c950;
 }
 
 /* solid white button skin */
@@ -152,44 +147,13 @@ small {
 }
 /* white outlined button skin */
 .btn--secondary--outline {
-  font-size: 12px;
-  border: 1px solid #ffffff;
+  /* font-size: 14px; */
+  border: 1px solid #b3b3b3;
   color: #ffffff;
   background-color: transparent;
   transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
-/* white outline button hover */
-.btn--secondary--outline:hover {
-  box-shadow: 0px 0px 4px 1px rgba(255, 255, 255, 0.288);
-}
 /* white buttons when clicked */
 .btn--secondary--outline:active {
-  border-color: rgba(139, 139, 139, 0.199);
-  background: rgba(139, 139, 139, 0.199);
-}
-
-/* red button */
-.btn_container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  /* gap: 1em; */
-}
-
-.btn--red {
-  border-color: #ca1b1b;
-  background-color: #ca1b1b;
-  color: white;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-}
-
-.btn--red:hover {
-  background: #ca1b1b;
-  border-color: #ca1b1b;
-  color: #ffffff;
-}
-
-.btn--red:active {
-  /* margin-top: 2px; */
-  background: #ca1b1b;
+  border-color: #b3b3b36e;
 }
