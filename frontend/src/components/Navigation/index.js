@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Modal from "../Modal";
+import LoginModal from "../Modal/LoginModal";
 
 import './Navigation.css';
 import ProfileNavButton from "./ProfileNavButton";
@@ -29,16 +31,18 @@ const Navigation = () => {
     sessionLinks = (
       <>
         <div className="login_signup_btn_container">
-          <NavLink to="/login">
-            <button className="btn btn--secondary--outline">log in</button>
-          </NavLink>
+          <div>
+            <LoginModal />
+          </div>
           <NavLink to="/signup">
             <button className="btn btn--primary">create account</button>
           </NavLink>
         </div>
+
         <div className="header__upload">
           <NavLink to="/upload">upload</NavLink>
         </div>
+
         <div className="header__about">
           <NavLink to="/about">
             about

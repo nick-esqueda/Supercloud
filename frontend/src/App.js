@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
+import LoginFormPage from './components/LoginForm';
 import Navigation from './components/Navigation';
 import SignupFormPage from './components/SignupFormPage';
 import { restoreUser } from './store/session';

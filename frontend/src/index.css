@@ -170,3 +170,33 @@ li {
 .btn--secondary--outline:active {
   border-color: #b3b3b36e;
 }
+
+
+/* FORMS *********************************************************************/
+/* form container for input and label etc. */
+.form_group {
+  padding: .5em;
+  font-size: 12px;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* form input */
+.form_input {
+  margin: 6px 0;
+  background-color: #212121;
+  color: white;
+  border: 1px solid #535353;
+  border-radius: 4px;
+}
+
+/* form containers */
+.form_container {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid #535353;
+
+  box-shadow: 8px 8px #535353;
+}
