@@ -118,7 +118,7 @@ header {
 
   position: relative;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 .header__profileNavBtn::after {
@@ -130,6 +130,11 @@ header {
   height: 2em;
   width: 2em;
   border-radius: 100%;
+}
+.header__username {
+  width: 110px;
+  position: relative;
+  text-align: left;
 }
 
 .login_signup_btn_container {

@@ -35,11 +35,12 @@ function ProfileNavButton({ user }) {
   return (
     <div className="header__profileNavBtn" onClick={openMenu}>
       <img
-        src="https://pbs.twimg.com/media/EoXQszAVgAE5UMV.jpg"
+        src={user.profileImageURL ? user.profileImageURL : "https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"}
         alt="profile-picture"
         className="header__userPfp"
       />
-      <span className="header__username">username here</span>
+      {/* TODO: FIX OVERFLOW FOR LONG USERNAMES */}
+      <span className="header__username">{user.username}</span>
       {showMenu && (
         <ul className="profile_nav_dropdown">
           <li>
