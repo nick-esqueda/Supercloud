@@ -2,25 +2,21 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import './Navigation.css';
+import ProfileNavButton from "./ProfileNavButton";
 
 const Navigation = () => {
-  const sessionUser = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user);
 
   let sessionLinks;
-  if (sessionUser) {
+  if (user) {
     sessionLinks = (
       <>
         <div className="header__upload">
           <NavLink to="/upload">upload</NavLink>
         </div>
-        <NavLink to="/users/:userId OR INTERPOLATION OF CURR USER?" className="header__userNavButton">
-          <img
-            src="https://pbs.twimg.com/media/EoXQszAVgAE5UMV.jpg"
-            alt="profile-picture"
-            className="header__userPfp"
-          />
-          <span className="header__username">username here</span>
-        </NavLink>
+
+        <ProfileNavButton user={user}/>
+
         <div className="header__about">
           <NavLink to="/about">
             about
