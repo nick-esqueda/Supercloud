@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Modal from "../Modal";
 import LoginModal from "../Modal/LoginModal";
+import SignupModal from "../Modal/SignupModal";
 
 import './Navigation.css';
 import ProfileNavButton from "./ProfileNavButton";
@@ -34,9 +34,10 @@ const Navigation = () => {
           <div>
             <LoginModal />
           </div>
-          <NavLink to="/signup">
-            <button className="btn btn--primary">create account</button>
-          </NavLink>
+          <div>
+            <SignupModal />
+            {/* <button className="btn btn--primary">create account</button> */}
+          </div>
         </div>
 
         <div className="header__upload">

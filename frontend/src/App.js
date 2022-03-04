@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Navigation from './components/Navigation';
-import SignupFormPage from './components/SignupFormPage';
+import SignupForm from './components/SignupForm';
 import { restoreUser } from './store/session';
 
 function App() {
@@ -27,9 +27,9 @@ function App() {
             {/* <Route exact path="/login">
               <LoginForm />
             </Route> */}
-            <Route exact path="/signup">
-              <SignupFormPage />
-            </Route>
+            {/* <Route exact path="/signup">
+              <SignupForm />
+            </Route> */}
           </Switch>
         </>
 
