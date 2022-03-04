@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Modal from '.';
+import LoginForm from '../LoginForm';
 
 
 function LoginModal() {
@@ -16,7 +17,7 @@ function LoginModal() {
 
       {showModal && (
         <Modal closeModal={() => setShowModal(false)}>
-          this is the text inside the modal
+          <LoginForm />
         </Modal>
       )}
     </>
