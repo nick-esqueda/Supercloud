@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { login } from '../../store/session';
+import { loginUser } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
@@ -22,9 +22,7 @@ function LoginFormPage() {
     if (!validationErrors.length) setShowErrors(false);
   }, [credential, password]);
 
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
+  if (sessionUser) return <Redirect to="/" />;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +31,7 @@ function LoginFormPage() {
 
     setValidationErrors([]);
 
-    return dispatch(login({ credential, password }))
+    return dispatch(loginUser({ credential, password }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -47,7 +45,7 @@ function LoginFormPage() {
     <form onSubmit={onSubmit}>
       <ul>
         {showErrors && validationErrors.map((err, i) => (
-            <li key={i}>{err}</li>
+          <li key={i}>{err}</li>
         ))}
       </ul>
       <label>
