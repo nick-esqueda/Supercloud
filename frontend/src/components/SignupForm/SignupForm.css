@@ -1,0 +1,43 @@
+.signup_container {
+  display: grid;
+  grid-template-rows: 100px 500px 50px;
+  grid-template-columns: 56% 42%;
+  column-gap: 2%;
+  grid-template-areas:
+  "top top"
+  "left right"
+  "bottom bottom"
+  ;
+}
+
+.signup__header {
+  grid-area: top;
+  text-align: right;
+}
+
+.signup_form {
+  grid-area: left;
+  padding-right: 1em;
+}
+
+
+.signup_image {
+  grid-area: right;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+}
+
+
+.signup__bottom {
+  grid-area: bottom;
+  margin: 16px 0 0;
+  padding: 10px;
+  border-top: 1px solid #535353;
+
+  display: flex;
+  justify-content: flex-end;
+
+}

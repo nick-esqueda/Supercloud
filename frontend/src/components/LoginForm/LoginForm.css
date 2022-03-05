@@ -1,0 +1,39 @@
+.login_container {
+  display: grid;
+  grid-template-rows: 100px 450px 50px;
+  grid-template-columns: 42% 56%;
+  column-gap: 2%;
+  grid-template-areas:
+  "top top"
+  "left right"
+  "bottom bottom"
+  ;
+}
+
+.login_image {
+  grid-area: left;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.login_form {
+  grid-area: right;
+  padding-left: 1em;
+}
+
+.login_btn_container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login__bottom {
+  grid-area: bottom;
+  margin: 16px 0 0;
+  padding: 10px;
+  border-top: 1px solid #535353;
+
+  display: flex;
+  justify-content: flex-end;
+}
