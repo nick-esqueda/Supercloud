@@ -66,6 +66,12 @@ function SignupForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             maxLength={256}
+            style={
+              showErrors && (validationErrors.includes('please enter your email')
+                || validationErrors.includes('email must be a valid')
+                || validationErrors.includes('email must be unique')
+              ) ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+            }
           />
         </div>
 
@@ -78,6 +84,11 @@ function SignupForm() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             maxLength={30}
+            style={
+              showErrors && validationErrors.includes('please enter a username') || validationErrors.includes('username must be unique')
+              ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+            }
+
           />
 
         </div>
@@ -90,6 +101,7 @@ function SignupForm() {
             className="form_input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={showErrors && validationErrors.includes('please enter your password') ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
           />
         </div>
 
@@ -101,6 +113,9 @@ function SignupForm() {
             className="form_input"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            style={
+              showErrors && validationErrors.includes('please confirm your password') || validationErrors.includes('passwords must match')
+              ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
           />
         </div>
 
@@ -114,7 +129,7 @@ function SignupForm() {
         className='signup_image'
       />
 
-      <ul>
+      <ul className="signup__error_container">
         {showErrors && validationErrors.map((err, i) => (
           <li key={i}>{err}</li>
         ))}

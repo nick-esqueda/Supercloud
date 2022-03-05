@@ -1,6 +1,5 @@
 const { validationResult, check } = require('express-validator');
 
-// middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
 const handleValidationErrors = (req, _res, next) => {
   const validationErrors = validationResult(req);
@@ -22,10 +21,10 @@ const validateLogin = [
   check('credential')
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage('Please provide a valid email or username.'),
+    .withMessage('please enter your username or email'),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a password.'),
+    .withMessage('please enter your password'),
   handleValidationErrors
 ];
 
@@ -33,25 +32,25 @@ const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Please provide a valid email.'),
+    .withMessage('please provide a valid email'),
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
-    .withMessage('Please provide a username with at least 4 characters.'),
+    .withMessage('please provide a username with at least 4 characters'),
   check('username')
     .not()
     .isEmail()
-    .withMessage('Username cannot be an email.'),
+    .withMessage('username cannot be an email'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
-    .withMessage('Password must be 6 characters or more.'),
+    .withMessage('password must be 6 characters or more'),
   check('bio')
     .isLength({ max: 255 })
-    .withMessage('Bio must be shorter than 255 characters.'),
+    .withMessage('bio must be shorter than 255 characters'),
   check('location')
     .isLength({ max: 50 })
-    .withMessage('Location must be shorter than 50 characters.'),
+    .withMessage('location must be shorter than 50 characters'),
   handleValidationErrors
 ];
 

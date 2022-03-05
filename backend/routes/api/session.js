@@ -21,7 +21,7 @@ router.post(
       const err = new Error('Login failed');
       err.status = 401;
       err.title = 'Login failed';
-      err.errors = ['Sorry, the username/email or password didn\'t work'];
+      err.errors = ["your info didn't match an account"];
       return next(err);
     }
 

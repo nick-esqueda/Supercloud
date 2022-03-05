@@ -1,11 +1,12 @@
 .signup_container {
   display: grid;
-  grid-template-rows: 100px 500px 50px;
+  grid-template-rows: 100px 280px 220px 50px;
   grid-template-columns: 56% 42%;
   column-gap: 2%;
   grid-template-areas:
   "top top"
-  "left right"
+  "left-top right"
+  "left-bottom right"
   "bottom bottom"
   ;
 }
@@ -16,10 +17,9 @@
 }
 
 .signup_form {
-  grid-area: left;
+  grid-area: left-top;
   padding-right: 1em;
 }
-
 
 .signup_image {
   grid-area: right;
@@ -28,6 +28,26 @@
 
   object-fit: cover;
 
+}
+
+.signup__error_container {
+  grid-area: left-bottom;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.signup__error_container li {
+  height: 24px;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+.signup__error_container li::before {
+  content: '*';
+  font-weight: 500;
+
+  color: red;
 }
 
 
