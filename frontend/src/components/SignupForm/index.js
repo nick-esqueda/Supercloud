@@ -91,7 +91,7 @@ function SignupForm() {
             onChange={(e) => setUsername(e.target.value)}
             maxLength={30}
             style={
-              showErrors && validationErrors.includes('please enter a username') || validationErrors.includes('username must be unique')
+              showErrors && (validationErrors.includes('please enter a username') || validationErrors.includes('username must be unique'))
               ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
             }
 
@@ -120,7 +120,7 @@ function SignupForm() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             style={
-              showErrors && validationErrors.includes('please confirm your password') || validationErrors.includes('passwords must match')
+              showErrors && (validationErrors.includes('please confirm your password') || validationErrors.includes('passwords must match'))
               ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
           />
         </div>
@@ -135,7 +135,7 @@ function SignupForm() {
       </form>
 
       <img src='https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-        alt='login-image'
+        alt='gradient'
         className='signup_image'
       />
 
