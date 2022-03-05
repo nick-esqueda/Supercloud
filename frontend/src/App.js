@@ -22,7 +22,7 @@ function App() {
           <Navigation />
           <Switch>
             <Route exact path="/">
-
+              <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
             </Route>
             {/* <Route exact path="/login">
               <LoginForm />

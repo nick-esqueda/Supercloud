@@ -36,7 +36,6 @@ const Navigation = () => {
           </div>
           <div>
             <SignupModal />
-            {/* <button className="btn btn--primary">create account</button> */}
           </div>
         </div>
 

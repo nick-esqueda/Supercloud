@@ -26,10 +26,6 @@ main {
   width: 1280px;
 }
 
-h1 {
-  text-decoration: overline;
-}
-
 h1, h2 {
   /* border: 2px solid #FF5500; */
   padding: .5em 1em;
