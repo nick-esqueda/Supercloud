@@ -1,6 +1,6 @@
 .signup_container {
   display: grid;
-  grid-template-rows: 100px 280px 220px 50px;
+  grid-template-rows: 100px 320px 180px 50px;
   grid-template-columns: 56% 42%;
   column-gap: 2%;
   grid-template-areas:
