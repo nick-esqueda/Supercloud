@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { signupUser } from "../../store/session";
+import { loginUser, signupUser } from "../../store/session";
 import './SignupForm.css';
 
 function SignupForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
 
+  const [demoUser, setDemoUser] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +34,11 @@ function SignupForm() {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    if (demoUser) {
+      setDemoUser(false);
+      return dispatch(loginUser({ credential: 'Demo User', password: 'password' }));
+    }
+
     if (validationErrors.length) return setShowErrors(true);
 
     if (password === confirmPassword) {
@@ -54,7 +60,7 @@ function SignupForm() {
 
   return (
     <div className="signup_container">
-      <h2 className="signup__header">welcome to the <span style={{ textDecoration: 'overline' }}>cloud</span></h2>
+      <h2 className="signup__header">welcome to the <span style={{ textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h2>
 
       <form onSubmit={onSubmit} className="signup_form">
         <div className="form_group">
@@ -121,6 +127,10 @@ function SignupForm() {
 
         <div className=''>
           <button type="submit" className='btn btn--primary' style={{ width: '100%', }}>sign up</button>
+          <button type="submit" className='btn btn--secondary--outline'
+            style={{ width: '100%', marginTop: '8px' }}
+            onClick={(e) => setDemoUser(true)}
+          >demo user</button>
         </div>
       </form>
 

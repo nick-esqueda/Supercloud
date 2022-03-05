@@ -27,6 +27,7 @@
 .login_btn_container {
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
 }
 
 .login__error_container {
