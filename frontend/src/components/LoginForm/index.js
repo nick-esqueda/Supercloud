@@ -15,7 +15,7 @@ function LoginForm() {
 
   useEffect(() => {
     const validationErrors = [];
-    if (credential === '') validationErrors.push('please enter a name');
+    if (credential === '') validationErrors.push('please enter your username or email');
     if (password === '') validationErrors.push('please enter your password');
     setValidationErrors(validationErrors);
 
@@ -60,6 +60,7 @@ function LoginForm() {
             className='form_input'
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
+            style={showErrors && validationErrors.includes('please enter your username or email') ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
           />
         </div>
 
@@ -72,6 +73,7 @@ function LoginForm() {
             className='form_input'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={showErrors && validationErrors.includes('please enter your password') ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
           />
         </div>
 
@@ -80,7 +82,7 @@ function LoginForm() {
         </div>
       </form>
 
-      <ul>
+      <ul className='login__error_container'>
         {showErrors && validationErrors.map((err, i) => (
           <li key={i}>{err}</li>
         ))}
