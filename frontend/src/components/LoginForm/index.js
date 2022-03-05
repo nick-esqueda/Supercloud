@@ -41,12 +41,18 @@ function LoginForm() {
       });
   }
 
+  const demoLogin = (e) => {
+    setCredential('Demo User');
+    setPassword('password');
+    return;
+  }
+
   return (
     <div className='login_container'>
       <h2>login</h2>
 
       <img src='https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-        alt='login-image'
+        alt='gradient'
         className='login_image'
       />
 
@@ -78,7 +84,8 @@ function LoginForm() {
         </div>
 
         <div className='login_btn_container'>
-          <button type="submit" className='btn btn--primary'>Log In</button>
+          <button type="submit" onClick={demoLogin} className='btn btn--primary'>demo login</button>
+          <button type="submit" className='btn btn--primary'>log in</button>
         </div>
       </form>
 
