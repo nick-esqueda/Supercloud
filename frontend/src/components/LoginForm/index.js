@@ -84,7 +84,7 @@ function LoginForm() {
         </div>
 
         <div className='login_btn_container'>
-          <button type="submit" onClick={demoLogin} className='btn btn--primary'>demo login</button>
+          <button type="submit" onClick={demoLogin} className='btn btn--secondary--outline'>demo user</button>
           <button type="submit" className='btn btn--primary'>log in</button>
         </div>
       </form>
