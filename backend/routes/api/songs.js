@@ -11,10 +11,10 @@ const router = express.Router();
 // GET /api/songs/:songId - GET A SINGLE SONG
 router.get(
   '/:songId(\\d+)',
-  // what here?
   asyncHandler(async (req, res, next) => {
     const id = +req.params.songId;
-    return res.json(id);
+    const song = await Song.findByPk(id);
+    return res.json(song);
   })
 )
 
