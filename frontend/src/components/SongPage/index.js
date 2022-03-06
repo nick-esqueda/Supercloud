@@ -1,11 +1,11 @@
-import React from 'react'
+import Header from './Header'
 import './SongPage.css'
 
 export default function SongPage() {
   return (
     <>
       <div className='song_header'>
-        header
+        <Header />
       </div>
 
       <div className='song_main'>
