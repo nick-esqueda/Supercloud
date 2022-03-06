@@ -9,28 +9,37 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Users' }
       },
       songURL: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
+        unique: true,
       },
       artworkURL: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        unique: true,
       },
       title: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(255)
       },
       genre: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(25)
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(255)
       },
       duration: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(5)
       },
       plays: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
