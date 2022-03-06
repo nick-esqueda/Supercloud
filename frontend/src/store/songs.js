@@ -13,7 +13,15 @@ const addSong = (song) => {
 
 
 // THUNK ACTION CREATORS **********************************
-
+export const fetchSong = id => async dispatch => {
+  const res = await fetch(`/api/songs/${id}`);
+  
+  if (res.ok) {
+    const song = await res.json();
+    dispatch(addSong(song));
+    return song;
+  }  
+}
 
 
 
