@@ -28,23 +28,32 @@
 
 .song__profile_card {
   grid-area: left;
+  padding: 16px;
   
-  border: 1px solid cyan;
+}
+.song__profile_card > a {
+  border-radius: 100%;
+}
+.song__profile_card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 100%;
 }
 
 .song__description {
-  border: 1px solid green;
-  
   padding: 16px;
+  
+  text-align: left;
 }
 
 .song__body {
   grid-area: mid; 
+  
+  border-right: 1px solid #535353;
 }
 
 .song_sidebar {
   grid-area: side;
   height: 100%;
-  
-  border: 1px solid blue;
 }

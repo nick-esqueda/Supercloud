@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom'
+import ArtistBadge from './ArtistBadge'
 import CommentSection from './CommentSection'
 import Header from './Header'
 import Sidebar from './Sidebar'
@@ -16,12 +18,12 @@ export default function SongPage() {
         </div>
 
         <div className='song__profile_card'>
-          profile card
+          <ArtistBadge />
         </div>
 
         <div className='song__body'>
           <div className="song__description">
-            song description
+            {'song description'}
           </div>
           <div className='song__comments'>
             <CommentSection />
@@ -31,7 +33,7 @@ export default function SongPage() {
         <div className='song_sidebar'>
           <Sidebar />
         </div>
-        
+
       </div>
     </>
   )
