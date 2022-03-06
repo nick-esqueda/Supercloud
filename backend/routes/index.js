@@ -8,7 +8,7 @@ router.use('/api', apiRouter);
 
 // ROUTES ***********************************************************
 // GENERATE S3 URL TO SEND BACK TO CLIENT
-app.get('/s3URL', async (req, res) => {
+router.get('/s3URL', async (req, res) => {
   const url = await generateUploadURL();
   res.send({ url })
 });

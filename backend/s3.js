@@ -1,6 +1,8 @@
 const aws = require('aws-sdk');
-import crypto from 'crypto';
-import { promisify } from 'util';
+// import crypto from 'crypto';
+// import { promisify } from 'util';
+const crypto = require('crypto');
+const { promisify } = require('util');
 const randomBytes = promisify(crypto.randomBytes)
 
 const bucketName = 'supercloud-bucket';
@@ -11,7 +13,7 @@ const s3 = new aws.S3({
   signatureVersion: 'v4',
 });
 
-export const generateUploadURL = async () => {
+const generateUploadURL = async () => {
   const rawBytes = await randomBytes(16);
   const filename = rawBytes.toString('hex');
 
@@ -27,3 +29,5 @@ export const generateUploadURL = async () => {
   const uploadURL = await s3.getSignedUrlPromise('putObject', params);
   return uploadURL;
 }
+
+module.exports = { generateUploadURL };

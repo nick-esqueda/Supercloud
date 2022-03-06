@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Navigation from './components/Navigation';
 import SignupForm from './components/SignupForm';
-import UploadInputS3 from './components/UploadInputS3';
 import { restoreUser } from './store/session';
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
           <Switch>
             <Route exact path="/">
               <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
-              <UploadInputS3 />
             </Route>
             {/* <Route exact path="/login">
               <LoginForm />
