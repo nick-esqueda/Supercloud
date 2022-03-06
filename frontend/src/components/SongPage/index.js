@@ -1,3 +1,4 @@
+import CommentSection from './CommentSection'
 import Header from './Header'
 import './SongPage.css'
 
@@ -22,7 +23,7 @@ export default function SongPage() {
             song description
           </div>
           <div className='song__comments'>
-            comment section
+            <CommentSection />
           </div>
         </div>
 
