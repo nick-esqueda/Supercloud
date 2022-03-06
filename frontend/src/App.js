@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SongCard from './components/SongCard';
+import SongPage from './components/SongPage';
 import { restoreUser } from './store/session';
 
 function App() {
@@ -25,7 +26,9 @@ function App() {
               <SongCard />
             </Route>
 
-
+            <Route exact path="/songs/:songId">
+              <SongPage />
+            </Route>
           </Switch>
         </>
 
