@@ -2,9 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginForm from './components/LoginForm';
 import Navigation from './components/Navigation';
-import SignupForm from './components/SignupForm';
+import SongCard from './components/SongCard';
 import { restoreUser } from './store/session';
 
 function App() {
@@ -23,14 +22,10 @@ function App() {
           <Switch>
             <Route exact path="/">
               <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
-              <img src='https://supercloud-bucket.s3.amazonaws.com/supercloud-logo-v1.0.jpg'></img>
+              <SongCard />
             </Route>
-            {/* <Route exact path="/login">
-              <LoginForm />
-            </Route> */}
-            {/* <Route exact path="/signup">
-              <SignupForm />
-            </Route> */}
+
+
           </Switch>
         </>
 
