@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
-export default function Sidebar() {
+export default function Sidebar({ artist }) {
   return (
     <div className="sidebar_container">
       <span className='inner_section_header'>
@@ -17,10 +17,10 @@ export default function Sidebar() {
       </span>
 
       <ul className="songs">
-        {/* map through artist's and render out song card (small) component (limit 3(?)) */}
-        <li>song placeholder</li>
-        <li>song placeholder</li>
-        <li>song placeholder</li>
+        {/* render out song card (small) component (limit 3(?)) */}
+        {artist?.Songs?.map(song => (
+          <li key={song.id}>{song.title}</li>
+        ))}
       </ul>
     </div>
   )

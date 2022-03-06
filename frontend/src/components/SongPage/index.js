@@ -35,7 +35,7 @@ export default function SongPage() {
 
         <div className='song__body'>
           <div className="song__description">
-            {'song description'}
+            {song?.description}
           </div>
           <div className='song__comments'>
             <CommentSection />
@@ -43,7 +43,7 @@ export default function SongPage() {
         </div>
 
         <div className='song_sidebar'>
-          <Sidebar />
+          <Sidebar artist={song?.User} />
         </div>
 
       </div>
