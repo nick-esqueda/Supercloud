@@ -1,5 +1,6 @@
 import CommentSection from './CommentSection'
 import Header from './Header'
+import Sidebar from './Sidebar'
 import './SongPage.css'
 
 export default function SongPage() {
@@ -28,7 +29,7 @@ export default function SongPage() {
         </div>
 
         <div className='song_sidebar'>
-          sidebar
+          <Sidebar />
         </div>
         
       </div>
