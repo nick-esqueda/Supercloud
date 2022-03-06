@@ -2,7 +2,7 @@ import './Header.css';
 import { NavLink } from 'react-router-dom';
 
 export default function Header({ song }) {
-  console.log('SONG FROM STORE', song);
+  console.log('song createdAt should be different...', song)
   return (
     <div className='header_container'>
       
@@ -10,13 +10,13 @@ export default function Header({ song }) {
         <div className="song_header__top_left">
           <div className="song_header__play"></div>
           <div className="song_header__song">
-            <h2>song title goes here</h2>
-            <NavLink to={'/artist-link-here'}>artist</NavLink>
+            <h2>{song.title}</h2>
+            <NavLink to={'/artist-link-here'}>{song.User.username}</NavLink>
           </div>
         </div>
         <div className="song_header__top_right">
-          <span>x months ago</span>
-          <span className='genre'>genre</span>
+          <span>{song.createdAt}</span>
+          <span className='genre'>{song.genre}</span>
         </div>
       </div>
       
