@@ -9,8 +9,6 @@
   width: 100%;
   height: auto;
 
-  border: 1px solid blue;
-  
   display: grid;
   grid-template-rows: 90px auto;
   grid-template-columns: auto 55% 30%;
@@ -18,7 +16,12 @@
     "top top side"
     "left mid side";
 }
-
+.song__actions,
+.song__profile_card,
+.song__description,
+.song_sidebar {
+  padding: 16px;
+}
 
 .song__actions {
   grid-area: top;
@@ -28,13 +31,10 @@
 
 .song__profile_card {
   grid-area: left;
-  padding: 16px;
   
 }
 
 .song__description {
-  padding: 16px;
-  
   text-align: left;
 }
 
