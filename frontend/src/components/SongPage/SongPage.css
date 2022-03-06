@@ -39,10 +39,7 @@
 }
 
 .song__body {
-  grid-area: mid;
-  
-  border: 1px solid red;
-  
+  grid-area: mid; 
 }
 
 .song_sidebar {
