@@ -31,15 +31,6 @@
   padding: 16px;
   
 }
-.song__profile_card > a {
-  border-radius: 100%;
-}
-.song__profile_card img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 100%;
-}
 
 .song__description {
   padding: 16px;
