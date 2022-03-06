@@ -2,7 +2,6 @@ import './Header.css';
 import { NavLink } from 'react-router-dom';
 
 export default function Header({ song }) {
-  console.log('song createdAt should be different...', song)
   return (
     <div className='header_container'>
       
