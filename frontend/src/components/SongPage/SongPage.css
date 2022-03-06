@@ -26,7 +26,7 @@
 .song__actions {
   grid-area: top;
   
-  border: 1px solid green;
+  border: 1px solid blue;
 }
 
 .song__profile_card {
