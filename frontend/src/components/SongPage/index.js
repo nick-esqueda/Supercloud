@@ -1,5 +1,7 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { fetchSong } from '../../store/songs'
 import ArtistBadge from './ArtistBadge'
 import CommentSection from './CommentSection'
 import Header from './Header'
@@ -8,8 +10,15 @@ import './SongPage.css'
 
 export default function SongPage() {
   const { songId } = useParams();
-  console.log(songId);
-  // const song = useSelector(state => state.songs[songId]); // adjust after making reducer
+  console.log('song id from useParams', songId);
+  const dispatch = useDispatch();
+  
+  const song = useSelector(state => state.songs[songId]);
+  console.log('song from useSelector', song);
+  
+  useEffect(() => {
+    dispatch(fetchSong(songId));
+  }, [dispatch]);
   
   return (
     <>
