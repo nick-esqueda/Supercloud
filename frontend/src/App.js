@@ -26,8 +26,12 @@ function App() {
               <SongCard />
             </Route>
 
-            <Route exact path="/songs/:songId">
+            <Route exact path="/songs/:songId(\\d+)">
               <SongPage />
+            </Route>
+            
+            <Route>
+              404 page
             </Route>
           </Switch>
         </>
