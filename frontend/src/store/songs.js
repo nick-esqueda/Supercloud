@@ -21,7 +21,7 @@ const addSong = (song) => {
 // REDUCER ************************************************
 const initialState = { songs: null };
 
-const sessionReducer = (state = initialState, action) => {
+const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ADD_SONG:
@@ -33,4 +33,4 @@ const sessionReducer = (state = initialState, action) => {
   }
 };
 
-export default sessionReducer;
+export default songsReducer;
