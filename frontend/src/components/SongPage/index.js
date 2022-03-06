@@ -10,11 +10,9 @@ import './SongPage.css'
 
 export default function SongPage() {
   const { songId } = useParams();
-  console.log('song id from useParams', songId);
   const dispatch = useDispatch();
   
   const song = useSelector(state => state.songs[songId]);
-  console.log('song from useSelector', song);
   
   useEffect(() => {
     dispatch(fetchSong(songId));
@@ -23,7 +21,7 @@ export default function SongPage() {
   return (
     <>
       <div className='song_header'>
-        <Header />
+        <Header song={song} />
       </div>
 
       <div className='song_main'>

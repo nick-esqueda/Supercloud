@@ -1,7 +1,8 @@
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ song }) {
+  console.log('SONG FROM STORE', song);
   return (
     <div className='header_container'>
       
