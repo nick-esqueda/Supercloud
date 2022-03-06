@@ -19,6 +19,7 @@ router.get(
     });
     // changes createdAt to "x y's ago" format
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+    console.log(song);
     return res.json(song);
   })
 )
