@@ -1,0 +1,14 @@
+.comment_section {
+  padding: 16px;
+}
+
+.comments__comment_count {
+  padding: 0 0 6px;
+  border-bottom: 1px solid #535353;
+  text-align: left;
+  display: block;
+}
+
+/* ul.comments {
+    
+} */
