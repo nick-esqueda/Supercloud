@@ -30,7 +30,7 @@ export default function SongPage() {
         </div>
 
         <div className='song__profile_card'>
-          <ArtistBadge song={song} />
+          <ArtistBadge artist={song?.User} />
         </div>
 
         <div className='song__body'>

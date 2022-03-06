@@ -15,7 +15,7 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const id = +req.params.songId;
     const song = await Song.findByPk(id, {
-      include: { model: User }
+      include: { model: User, include: { model: Song } }
     });
     // changes createdAt to "x y's ago" format
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
