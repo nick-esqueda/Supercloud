@@ -33,8 +33,7 @@ const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ADD_SONG:
-      newState = {...state};
-      newState.songs[action.song.id] = action.song;
+      newState = {...state, [action.song.id]: action.song};
       return newState;
     default:
       return state;
