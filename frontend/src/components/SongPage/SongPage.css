@@ -1,0 +1,53 @@
+.song_header {
+  width: 100%;
+  height: 380px;
+
+  border: 1px solid red;
+}
+
+.song_main {
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid blue;
+  
+  display: grid;
+  grid-template-rows: 90px auto;
+  grid-template-columns: auto 55% 30%;
+  grid-template-areas: 
+    "top top side"
+    "left mid side";
+}
+
+
+.song__actions {
+  grid-area: top;
+  
+  border: 1px solid green;
+}
+
+.song__profile_card {
+  grid-area: left;
+  
+  border: 1px solid cyan;
+}
+
+.song__description {
+  border: 1px solid green;
+  
+  padding: 16px;
+}
+
+.song__body {
+  grid-area: mid;
+  
+  border: 1px solid red;
+  
+}
+
+.song_sidebar {
+  grid-area: side;
+  height: 100%;
+  
+  border: 1px solid blue;
+}
