@@ -10,7 +10,7 @@ export default function Header({ song }) {
           <div className="song_header__play"></div>
           <div className="song_header__song">
             <h2>{song?.title}</h2>
-            <NavLink to={'/artist-link-here'}>{song?.User.username}</NavLink>
+            <NavLink to={'/artist-link-here'}>{song?.User?.username}</NavLink>
           </div>
         </div>
         <div className="song_header__top_right">

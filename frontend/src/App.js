@@ -1,18 +1,22 @@
 // import React from 'react';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
 import { restoreUser } from './store/session';
+import { fetchSongs } from './store/songs';
 
 function App() {
   const dispatch = useDispatch();
+  const songs = useSelector(state => state.songs);
+  console.log('SONGS USESELECTOR IN APP.JS', songs);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
+    dispatch(fetchSongs());
   }, [dispatch]);
 
   return (
@@ -23,6 +27,7 @@ function App() {
           <Switch>
             <Route exact path="/">
               <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
+              
               <SongCard />
             </Route>
 

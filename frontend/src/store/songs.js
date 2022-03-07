@@ -57,21 +57,20 @@ export const fetchSongs = (userId, playlistId) => async dispatch => {
 // REDUCER ************************************************
 const songsReducer = (state = {}, action) => {
   let newState;
-  console.log(state.songs);
   switch (action.type) {
     case ADD_SONG: {
-      if (!state[action.song.id]) {
-        newState = {...state};
-        newState[action.song.id] = action.song;
-        return newState;
-      } else return {...state};
+      newState = {...state};
+      newState[action.song.id] = action.song;
+      return newState;
     }
     case ADD_SONGS: {
       const newSongs = {};
       action.songs.forEach(song => {
-        newSongs[song.id] = song;
+        if (!state[song.id]) {
+          newSongs[song.id] = song;
+        }
       });
-      return { ...state, ...newSongs }
+      return {...state, ...newSongs}
     }
     default:
       return state;
