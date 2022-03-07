@@ -17,8 +17,6 @@ const generateUploadURL = async () => {
   const rawBytes = await randomBytes(16);
   const filename = rawBytes.toString('hex');
 
-  // const filename = 'test audio file 3';
-
   const params = {
     Bucket: bucketName,
     Key: filename,

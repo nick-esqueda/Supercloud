@@ -46,12 +46,17 @@ export default function SongForm() {
   }
 
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (validationErrors.length) return setShowErrors(true);
+    // if (validationErrors.length) return setShowErrors(true);
 
     // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
+    const res = await fetch('/api/s3URL');
+    const { url } = await res.json();
+    console.log(url);
+  
+    return;
   }
 
   return (
