@@ -1,6 +1,6 @@
 import './SongCard.css';
 
-export default function SongCard() {
+export default function SongCard({ song }) {
   return (
     <div className='song_card_container'>
       <img src="https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
