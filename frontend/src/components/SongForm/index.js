@@ -50,6 +50,7 @@ export default function SongForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (validationErrors.length) return setShowErrors(true);
 
     console.log(
       { songFile, artworkFile, title, genre, description }
