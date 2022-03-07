@@ -39,6 +39,7 @@
   
   background-color: #FFFF5D;
   border-radius: 100%;
+  cursor: pointer;
 }
 .top__play::before {
   content: '▶';
