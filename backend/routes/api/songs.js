@@ -23,6 +23,11 @@ router.get(
   })
 )
 
+// GET /api/songs - GET ALL SONGS
+router.get('/', asyncHandler(async (req, res) => {
+  const songs = await Song.findAll();
+  return res.json(songs);
+}));
 
 
 
