@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { postToS3 } from "./s3Fetch";
 import './SongForm.css'
 
 export default function SongForm() {
@@ -49,13 +50,16 @@ export default function SongForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    if (!songFile) return console.log('upload a file first');
     // if (validationErrors.length) return setShowErrors(true);
 
     // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
     const res = await fetch('/api/s3URL');
     const { url } = await res.json();
-    console.log(url);
   
+    const songURL = await postToS3(url, songFile);
+    console.log('SONG URL AFTER FETCH AND INSIDE ONSUBMIT', songURL);
+    
     return;
   }
 
