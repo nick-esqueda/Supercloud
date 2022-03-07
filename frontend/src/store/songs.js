@@ -23,28 +23,28 @@ const addSongs = (songs) => {
 // THUNK ACTION CREATORS **********************************
 export const fetchSong = id => async dispatch => {
   const res = await fetch(`/api/songs/${id}`);
-  
+
   if (res.ok) {
     const song = await res.json();
     dispatch(addSong(song));
     return song;
-  }  
+  }
 }
 
 export const fetchSongs = (userId, playlistId) => async dispatch => {
   if (userId) {
     console.log('pass in userId arg to get here');
   }
-  
+
   if (playlistId) {
     console.log('pass in null arg, then playlistId arg to get here');
   }
-  
+
   else {
     const res = await fetch(`/api/songs`);
-    
+
     if (res.ok) {
-      const songs =  await res.json();
+      const songs = await res.json();
       dispatch(addSongs(songs));
       return songs;
     }
@@ -61,11 +61,17 @@ const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ADD_SONG: {
-      newState = {...state, [action.song.id]: action.song};
-      return newState;
+      if (!state[action.song.id]) {
+        newState = { ...state, [action.song.id]: action.song };
+        return newState;
+      } else return {...state};
     }
     case ADD_SONGS: {
-      
+      const newSongs = {};
+      action.songs.forEach(song => {
+        newSongs[song.id] = song;
+      });
+      return { ...state, ...newSongs }
     }
     default:
       return state;
