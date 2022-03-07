@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { postToS3 } from "./s3Fetch";
+import { postToS3, getSongDuration, secondsToMSS } from "./utils";
 import './SongForm.css'
 
 export default function SongForm() {
@@ -51,9 +51,12 @@ export default function SongForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
+    
+    const durationInSeconds = await getSongDuration(audioInputRef.current.files[0]);
+    const duration = secondsToMSS(durationInSeconds);
 
     console.log(
-      { songURL, artworkURL, title, genre, description }
+      { songURL, artworkURL, title, genre, description, duration }
     );
 
     return;
