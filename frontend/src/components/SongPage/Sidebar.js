@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import SongCardSmall from "../SongCard/SongCardSmall";
 import "./Sidebar.css";
 
 export default function Sidebar({ artist }) {
@@ -18,8 +19,8 @@ export default function Sidebar({ artist }) {
 
       <ul className="songs">
         {/* render out song card (small) component (limit 3(?)) */}
-        {artist?.Songs?.map(song => (
-          <li key={song.id}>{song.title}</li>
+        {artist?.Songs?.map((song, i) => (
+          <li key={song.id}><SongCardSmall artist={artist} index={i} /></li>
         ))}
       </ul>
     </div>

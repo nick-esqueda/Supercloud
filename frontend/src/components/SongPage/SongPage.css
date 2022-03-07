@@ -46,5 +46,5 @@
 
 .song_sidebar {
   grid-area: side;
-  height: 100%;
+  height: auto;
 }

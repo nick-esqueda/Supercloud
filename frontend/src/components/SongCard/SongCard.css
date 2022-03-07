@@ -1,4 +1,5 @@
-.song_card_container {
+.song_card_container,
+.song_card_small_container {
   width: 100%;
   height: 160px;
   margin: 24px 0;
@@ -15,7 +16,8 @@
   object-fit: cover;
 }
 
-.song_card__content {
+.song_card__content,
+.song_card_small__content {
   width: 100%;
   height: 100%;
 }
@@ -58,10 +60,13 @@
 }
 
 .top__title_artist {
+  height: 100%;
   width: 100%;
+  text-align: left;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .top__right {
@@ -114,4 +119,31 @@
 .bottom__right {
   display: flex;
   gap: 8px;
+}
+
+
+
+/* SONG CARD SMALL *******************************************
+*************************************************************/
+
+.song_card_small_container {
+  height: 64px;
+  margin: 12px 0;
+}
+
+.song_card_small__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.song_card_small_container > a > img {
+  height: 64px;
+  width: 64px;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.song_card_small__top span {
+  display: block;
 }

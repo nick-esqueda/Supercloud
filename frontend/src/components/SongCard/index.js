@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import './SongCard.css';
 
 export default function SongCard({ song }) {
-  console.log('INDIVIDUAL SONG IN SONGCARD', song);
   return (
     <div className='song_card_container'>
       <NavLink to={`/songs/${song?.id}`}>
