@@ -32,7 +32,7 @@ export default function SongForm() {
     if (!title) errors.push('please enter a title');
     if (title.length > 255) errors.push('title must be shorter than 255 characters');
     if (genre.length > 25) errors.push('genre must be shorter than 25 characters');
-    if (description.length > 255) errors.push('description must be shorter than 255 characters');
+    if (description.length > 500) errors.push('description must be shorter than 500 characters');
 
     setValidationErrors(errors);
   }, [songURL, artworkURL, title, genre, description]);
@@ -178,7 +178,7 @@ export default function SongForm() {
               description
               
               <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
-                {showErrors && validationErrors.includes('description must be shorter than 255 characters') ? 'description must be shorter than 255 characters' : null}
+                {showErrors && validationErrors.includes('description must be shorter than 500 characters') ? 'description must be shorter than 500 characters' : null}
               </span>
             </label>
             <textarea
@@ -188,7 +188,7 @@ export default function SongForm() {
               onChange={e => setDescription(e.target.value)}
               className="form_input"
               rows={8}
-              maxLength={255}
+              maxLength={500}
             >
             </textarea>
           </div>

@@ -20,7 +20,6 @@ module.exports = {
       },
       artworkURL: {
         type: Sequelize.TEXT,
-        unique: true,
       },
       title: {
         allowNull: false,
@@ -30,7 +29,7 @@ module.exports = {
         type: Sequelize.STRING(25)
       },
       description: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(500)
       },
       duration: {
         allowNull: false,

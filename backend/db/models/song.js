@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     artworkURL: {
       type: DataTypes.TEXT,
-      unique: true,
     },
     title: {
       allowNull: false,
@@ -32,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(500),
       validate: {
         max: 255
       },
