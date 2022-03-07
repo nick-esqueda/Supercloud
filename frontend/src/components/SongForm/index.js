@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { postToS3, getSongDuration, secondsToMSS } from "./utils";
 import './SongForm.css'
+import { postSong } from "../../store/songs";
 
 export default function SongForm() {
   const history = useHistory();
-  const [songFile, setSongFile] = useState('');
-  const [artworkFile, setArtworkFile] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
+  const dispatch = useDispatch();
+  const [songURL, setSongURL] = useState('');
+  const [artworkURL, setArtworkURL] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
@@ -22,36 +26,44 @@ export default function SongForm() {
     // TODO: highlight input fields that don't pass validation, like in signup form
 
     const errors = [];
+    
+    console.log('artwork file in useEffect: ', artworkURL);
+    console.log('song file in useEffect: ', songURL);
 
-    if (!songFile) errors.push('please upload a song first');
-    if (!artworkFile) errors.push('please upload some cover art');
+    if (!songURL) errors.push('please upload a song first');
+    // TODO: file over 100MB
     if (!title) errors.push('please enter a title');
+    if (title.length > 255) errors.push('title must be shorter than 255 characters');
+    if (genre.length > 25) errors.push('genre must be shorter than 25 characters');
+    if (description.length > 255) errors.push('description must be shorter than 255 characters');
 
     setValidationErrors(errors);
-  }, [songFile, artworkFile, title, genre, description]);
+  }, [songURL, artworkURL, title, genre, description]);
+  
+    const s3Upload = async (file, inputName) => {
+    if (!file) return console.log('upload a file first');
 
-  const setPreviewImage = (e) => {
-    const file = e.target.files[0];
+    const res = await fetch('/api/s3URL');
+    const { url } = await res.json();
+    const fileURL = await postToS3(url, file);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.addEventListener('load', e => {
-        artworkPreview.current.setAttribute('src', e.currentTarget.result);
-      });
-
-      reader.readAsDataURL(file);
-
-      setArtworkFile(file);
-    }
+    if (inputName === 'song') return setSongURL(fileURL);
+    if (inputName === 'artwork') return setArtworkURL(fileURL);
   }
 
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-
     if (validationErrors.length) return setShowErrors(true);
+    
+    const durationInSeconds = await getSongDuration(audioInputRef.current.files[0]);
+    const duration = secondsToMSS(durationInSeconds);
 
-    // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
+    const song = { songURL, artworkURL, title, genre, description, duration };
+    
+    const newSong = await dispatch(postSong(song));
+    console.log('new song from database inside on onSubmit', newSong);
+
+    return history.push(`/songs/${newSong.id}`);
   }
 
   return (
@@ -62,7 +74,7 @@ export default function SongForm() {
         <div className="song_form__left">
           <div className="image_preview">
             <img
-              src={artworkFile}
+              src={artworkURL}
               alt="artwork-placeholder"
               className="artwork"
               ref={artworkPreview}
@@ -82,21 +94,28 @@ export default function SongForm() {
               name="artwork"
               ref={artworkInputRef}
               hidden={true}
-              onChange={setPreviewImage}
+              onChange={e => s3Upload(e.target.files[0], e.target.name)}
             />
           </div>
 
           <div>
-            <h4 style={{ marginTop: '20px' }}>select song</h4>
+            <h4 style={{ marginTop: '20px' }}>select song<span style={{ color: 'red' }}>*</span></h4>
+            <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+              {showErrors && validationErrors.includes('please upload a song first') ? 'please upload a song first' : null}
+            </span>
 
             <div className="custom_upload_container">
               <button
                 type="button"
                 id="customUploadButton"
                 className="btn btn--secondary--outline"
-                style={{ width: '110px', margin: '0' }}
                 ref={uploadSongBtn}
                 onClick={e => audioInputRef.current.click()}
+                style={
+                  showErrors && (validationErrors.includes('please upload a song first'))
+                    ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+                }
+
               >
                 upload file
               </button>
@@ -109,8 +128,8 @@ export default function SongForm() {
                 ref={audioInputRef}
                 hidden={true}
                 onChange={e => {
-                  setSongFile(e.target.files[0]);
                   setCustomFileText(e.target.files[0].name);
+                  s3Upload(e.target.files[0], e.target.name);
                 }}
               />
             </div>
@@ -120,17 +139,34 @@ export default function SongForm() {
 
         <div className="song_form__right">
           <div className="form_group">
-            <label htmlFor='title'>title</label>
+            <label htmlFor='title' style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>title<span style={{ color: 'red' }}>*</span></span>
+
+              <span style={{ color: 'rgba(253, 69, 69, 1)' }}>
+                {showErrors && validationErrors.includes('please enter a title') ? 'please enter a title' : null}
+              </span>
+            </label>
             <input type="text"
               id="title"
               value={title}
               onChange={e => setTitle(e.target.value)}
               className="form_input"
+              style={
+                showErrors && (validationErrors.includes('please enter a title'))
+                  ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+              }
+
             />
           </div>
 
           <div className="form_group">
-            <label htmlFor='genre'>genre</label>
+            <label htmlFor='genre' style={{ display: 'flex', justifyContent: 'space-between' }}>
+              genre
+              
+              <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+                {showErrors && validationErrors.includes('genre must be shorter than 25 characters') ? 'genre must be shorter than 25 characters' : null}
+              </span>
+            </label>
             <input type="text"
               id="genre"
               maxLength={25}
@@ -141,7 +177,13 @@ export default function SongForm() {
           </div>
 
           <div className="form_group">
-            <label htmlFor='description'>description</label>
+            <label htmlFor='description' style={{ display: 'flex', justifyContent: 'space-between' }}>
+              description
+              
+              <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+                {showErrors && validationErrors.includes('description must be shorter than 255 characters') ? 'description must be shorter than 255 characters' : null}
+              </span>
+            </label>
             <textarea
               id="description"
               placeholder="tell us about your song"
@@ -149,30 +191,33 @@ export default function SongForm() {
               onChange={e => setDescription(e.target.value)}
               className="form_input"
               rows={8}
+              maxLength={255}
             >
             </textarea>
           </div>
         </div>
 
-        <ul className='error_container'>
-          {showErrors && validationErrors.map(err => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-
         <div className="song_form__bottom">
           <span className="required_label">required fields</span>
-          {/* button here (disable button until required inputs are filled) */}
           <div className="btn_container">
             <button type="button" className="btn btn--secondary" onClick={e => {
-                if (window.confirm('Are you sure you want to cancel your upload?')) {
-                  history.push('/');
-                }
-              }}
+              if (window.confirm('Are you sure you want to cancel your upload?')) {
+                history.push('/');
+              }
+            }}
             >
               cancel
             </button>
-            <button type="submit" className="btn btn--primary">save</button>
+            <button type="submit" className="btn btn--primary"
+              disabled={!songURL ? true : false}
+              style={
+                !songURL
+                ? { backgroundColor: '#b3b3b3', borderColor: '#b3b3b3', cursor: 'not-allowed' }
+                : null
+              }
+            >
+              save
+            </button>
           </div>
         </div>
 

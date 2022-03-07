@@ -9,13 +9,11 @@
 }
 
 form.song_form {
-  /* height: 600px; */
   width: 100%;
 
   display: grid;
   grid-template-rows: 440px 140px 60px;
   grid-template-columns: 320px 420px;
-  /* column-gap: 2%; */
   grid-template-areas:
   "left right"
   "errors errors"
@@ -89,11 +87,11 @@ form.song_form {
 
 
 /* RIGHT *********************************************/
-label[for='title']::after,
+/* label[for='title']::after,
 form.song_form h4::before {
   content: '*';
   color: red;
-}
+} */
 
 
 

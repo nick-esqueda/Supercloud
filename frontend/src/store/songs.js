@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 // ACTION VARIABLES ***************************************
 const ADD_SONG = 'songs/ADD_SONG';
 const ADD_SONGS = 'songs/ADD_SONGS'
@@ -51,7 +53,19 @@ export const fetchSongs = (userId, playlistId) => async dispatch => {
   }
 }
 
-
+// USE csrfFetch for requests other than "GET"
+export const postSong = song => async dispatch => {
+  const res = await csrfFetch('/api/songs', {
+    method: 'POST',
+    body: JSON.stringify(song)
+  });
+  
+  if (res.ok) {
+    const newSong = res.json();
+    dispatch(addSong(newSong));
+    return newSong;
+  }
+}
 
 
 // REDUCER ************************************************
