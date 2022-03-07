@@ -55,14 +55,14 @@ export const fetchSongs = (userId, playlistId) => async dispatch => {
 
 
 // REDUCER ************************************************
-const initialState = { songs: null };
-
-const songsReducer = (state = initialState, action) => {
+const songsReducer = (state = {}, action) => {
   let newState;
+  console.log(state.songs);
   switch (action.type) {
     case ADD_SONG: {
       if (!state[action.song.id]) {
-        newState = { ...state, [action.song.id]: action.song };
+        newState = {...state};
+        newState[action.song.id] = action.song;
         return newState;
       } else return {...state};
     }
