@@ -6,3 +6,7 @@ npx sequelize model:generate --name Song --attributes userId:integer,songURL:tex
 
 ## seed db
 npx dotenv sequelize db:seed:all
+
+
+## REBUILD
+npx dotenv sequelize db:seed:undo:all && npx dotenv sequelize db:migrate:undo:all && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all
