@@ -31,23 +31,12 @@ export default function SongForm() {
     setValidationErrors(errors);
   }, [songFile, artworkFile, title, genre, description]);
   
-  
-  // CONSOLE.LOGS FOR FILE UPLOADS
-  useEffect(() => {
-    console.log('SONG FILE CONTROLLED INPUT VALUE AFTER FETCH/SET: ', songFile);
-  }, [songFile]);
-  useEffect(() => {
-    console.log('ARTWORK FILE CONTROLLED INPUT VALUE AFTER FETCH/SET: ', artworkFile);
-  }, [artworkFile]);
-
-  const s3Upload = async (file, inputName) => {
+    const s3Upload = async (file, inputName) => {
     if (!file) return console.log('upload a file first');
-    console.log('name of input once entering s3Upload()', inputName);
 
     const res = await fetch('/api/s3URL');
     const { url } = await res.json();
     const fileURL = await postToS3(url, file);
-    console.log('FILE URL AFTER FETCH AND INSIDE ONSUBMIT', fileURL);
 
     if (inputName === 'song') return setSongFile(fileURL);
     if (inputName === 'artwork') return setArtworkFile(fileURL);
@@ -55,9 +44,6 @@ export default function SongForm() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    if (!songFile) return console.log('upload a file first');
-    // if (validationErrors.length) return setShowErrors(true);
 
     // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
 
