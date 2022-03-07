@@ -10,6 +10,7 @@
 .song_card_container > img {
   height: 160px;
   width: 160px;
+  margin-right: 16px;
   object-fit: cover;
 }
 
@@ -30,9 +31,29 @@
 
 .top__play {
   height: 40px;
-  width: 40px;
+  min-width: 40px;
+  margin-right: 8px;
+  
   background-color: #FFFF5D;
   border-radius: 100%;
+}
+.top__play::before {
+  content: '▶';
+  color: #212121;
+  font-size: 28px;
+  position: relative;
+  right: -2px;
+}
+.top__play::after {
+  /* content: '||'; */
+  color: #212121;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: -4px;
+  
+  position: relative;
+  left: -1.8px;
+  bottom: -1px;
 }
 
 .top__title_artist {
@@ -42,21 +63,51 @@
   align-items: flex-start;
 }
 
+.top__right {
+  width: 160px;
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.song_card_container .genre {
+  padding: 2px 16px;
+  margin: 0;
+  font-size: 12px;
+}
+
 
 /* MIDDLE *****************************************/
 .song_card__waveform {
   height: 80px;
   width: 100%;
-  background-color: gray;
+  padding: 16px;
+  border: 1px solid red;
 }
 
 
 
 /* BOTTOM ******************************************/
+.song_card__bottom {
+  align-items: flex-end;
+}
+
 .bottom__buttons {
   display: flex;
   justify-content: space-around;
   gap: 8px;
+}
+
+.bottom__buttons button {
+  font-size: 11px;
+}
+.bottom__buttons button:hover {
+  background-color: #FFFF5D;
+  border-color: transparent;
+  color: black;
+  font-weight: 400;
 }
 
 .bottom__right {
