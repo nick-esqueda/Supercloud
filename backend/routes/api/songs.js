@@ -40,13 +40,8 @@ router.post(
   requireAuth,
   // VALIDATIONS HERE
   asyncHandler(async (req, res) => {
-    console.log('REQ.BODY INSIDE ROUTE', req.body);
     const userId = req.user.id
-    console.log('USER ID INSIDE ROUTE', userId);
-
-    const song = await Song.create({
-      ...req.body, userId
-    });
+    const song = await Song.create({...req.body, userId});
     // changes createdAt to "x y's ago" format
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
     return res.json(song);

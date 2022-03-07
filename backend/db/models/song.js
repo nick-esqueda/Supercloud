@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     artworkURL: {
       type: DataTypes.TEXT,
-      unique: true,
     },
     title: {
       allowNull: false,

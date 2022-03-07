@@ -54,6 +54,10 @@ const validateSignup = [
   handleValidationErrors
 ];
 
+const validateSong = [
+  
+];
+
 
 module.exports = {
   handleValidationErrors, validateLogin, validateSignup

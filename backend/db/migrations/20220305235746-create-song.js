@@ -20,7 +20,6 @@ module.exports = {
       },
       artworkURL: {
         type: Sequelize.TEXT,
-        unique: true,
       },
       title: {
         allowNull: false,
