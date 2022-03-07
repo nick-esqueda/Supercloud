@@ -12,7 +12,8 @@ router.use('/songs', songsRouter);
 // GENERATE S3 URL TO SEND BACK TO CLIENT
 router.get('/s3URL', async (req, res) => {
   const url = await generateUploadURL();
-  res.json({ url });
+  console.log('s3 url inside backend route: ', url);
+  return res.json({ url });
 });
 
 
