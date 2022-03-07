@@ -30,22 +30,28 @@ export default function SongForm() {
 
     setValidationErrors(errors);
   }, [songFile, artworkFile, title, genre, description]);
+  
+  
+  // CONSOLE.LOGS FOR FILE UPLOADS
+  useEffect(() => {
+    console.log('SONG FILE CONTROLLED INPUT VALUE AFTER FETCH/SET: ', songFile);
+  }, [songFile]);
+  useEffect(() => {
+    console.log('ARTWORK FILE CONTROLLED INPUT VALUE AFTER FETCH/SET: ', artworkFile);
+  }, [artworkFile]);
 
-  const setPreviewImage = (e) => {
-    const file = e.target.files[0];
+  const s3Upload = async (file, inputName) => {
+    if (!file) return console.log('upload a file first');
+    console.log('name of input once entering s3Upload()', inputName);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.addEventListener('load', e => {
-        artworkPreview.current.setAttribute('src', e.currentTarget.result);
-      });
+    const res = await fetch('/api/s3URL');
+    const { url } = await res.json();
+    const fileURL = await postToS3(url, file);
+    console.log('FILE URL AFTER FETCH AND INSIDE ONSUBMIT', fileURL);
 
-      reader.readAsDataURL(file);
-
-      setArtworkFile(file);
-    }
+    if (inputName === 'song') return setSongFile(fileURL);
+    if (inputName === 'artwork') return setArtworkFile(fileURL);
   }
-
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -54,12 +60,7 @@ export default function SongForm() {
     // if (validationErrors.length) return setShowErrors(true);
 
     // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
-    const res = await fetch('/api/s3URL');
-    const { url } = await res.json();
-  
-    const songURL = await postToS3(url, songFile);
-    console.log('SONG URL AFTER FETCH AND INSIDE ONSUBMIT', songURL);
-    
+
     return;
   }
 
@@ -91,7 +92,7 @@ export default function SongForm() {
               name="artwork"
               ref={artworkInputRef}
               hidden={true}
-              onChange={setPreviewImage}
+              onChange={e => s3Upload(e.target.files[0], e.target.name)}
             />
           </div>
 
@@ -118,8 +119,8 @@ export default function SongForm() {
                 ref={audioInputRef}
                 hidden={true}
                 onChange={e => {
-                  setSongFile(e.target.files[0]);
                   setCustomFileText(e.target.files[0].name);
+                  s3Upload(e.target.files[0], e.target.name);
                 }}
               />
             </div>
@@ -174,10 +175,10 @@ export default function SongForm() {
           {/* button here (disable button until required inputs are filled) */}
           <div className="btn_container">
             <button type="button" className="btn btn--secondary" onClick={e => {
-                if (window.confirm('Are you sure you want to cancel your upload?')) {
-                  history.push('/');
-                }
-              }}
+              if (window.confirm('Are you sure you want to cancel your upload?')) {
+                history.push('/');
+              }
+            }}
             >
               cancel
             </button>
