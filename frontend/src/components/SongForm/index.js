@@ -23,10 +23,12 @@ export default function SongForm() {
     // TODO: highlight input fields that don't pass validation, like in signup form
 
     const errors = [];
+    
+    console.log('artwork file in useEffect: ', artworkFile);
+    console.log('song file in useEffect: ', songFile);
 
     if (!songFile) errors.push('please upload a song first');
     // TODO: file over 100MB
-    // if (!artworkFile) errors.push('please upload some cover art');
     if (!title) errors.push('please enter a title');
     if (title.length > 255) errors.push('title must be shorter than 255 characters');
     if (genre.length > 25) errors.push('genre must be shorter than 25 characters');
@@ -49,7 +51,9 @@ export default function SongForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
+    console.log(
+      { songFile, artworkFile, title, genre, description }
+    );
 
     return;
   }
