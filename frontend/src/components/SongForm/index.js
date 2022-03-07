@@ -24,8 +24,12 @@ export default function SongForm() {
     const errors = [];
 
     if (!songFile) errors.push('please upload a song first');
-    if (!artworkFile) errors.push('please upload some cover art');
+    // TODO: file over 100MB
+    // if (!artworkFile) errors.push('please upload some cover art');
     if (!title) errors.push('please enter a title');
+    if (title.length > 255) errors.push('title must be shorter than 255 characters');
+    if (genre.length > 25) errors.push('genre must be shorter than 25 characters');
+    if (description.length > 255) errors.push('description must be shorter than 255 characters');
 
     setValidationErrors(errors);
   }, [songFile, artworkFile, title, genre, description]);
@@ -87,16 +91,23 @@ export default function SongForm() {
           </div>
 
           <div>
-            <h4 style={{ marginTop: '20px' }}>select song</h4>
+            <h4 style={{ marginTop: '20px' }}>select song<span style={{ color: 'red' }}>*</span></h4>
+            <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+              {showErrors && validationErrors.includes('please upload a song first') ? 'please upload a song first' : null}
+            </span>
 
             <div className="custom_upload_container">
               <button
                 type="button"
                 id="customUploadButton"
                 className="btn btn--secondary--outline"
-                style={{ width: '110px', margin: '0' }}
                 ref={uploadSongBtn}
                 onClick={e => audioInputRef.current.click()}
+                style={
+                  showErrors && (validationErrors.includes('please upload a song first'))
+                    ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+                }
+
               >
                 upload file
               </button>
@@ -120,17 +131,34 @@ export default function SongForm() {
 
         <div className="song_form__right">
           <div className="form_group">
-            <label htmlFor='title'>title</label>
+            <label htmlFor='title' style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>title<span style={{ color: 'red' }}>*</span></span>
+
+              <span style={{ color: 'rgba(253, 69, 69, 1)' }}>
+                {showErrors && validationErrors.includes('please enter a title') ? 'please enter a title' : null}
+              </span>
+            </label>
             <input type="text"
               id="title"
               value={title}
               onChange={e => setTitle(e.target.value)}
               className="form_input"
+              style={
+                showErrors && (validationErrors.includes('please enter a title'))
+                  ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+              }
+
             />
           </div>
 
           <div className="form_group">
-            <label htmlFor='genre'>genre</label>
+            <label htmlFor='genre' style={{ display: 'flex', justifyContent: 'space-between' }}>
+              genre
+              
+              <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+                {showErrors && validationErrors.includes('genre must be shorter than 25 characters') ? 'genre must be shorter than 25 characters' : null}
+              </span>
+            </label>
             <input type="text"
               id="genre"
               maxLength={25}
@@ -141,7 +169,13 @@ export default function SongForm() {
           </div>
 
           <div className="form_group">
-            <label htmlFor='description'>description</label>
+            <label htmlFor='description' style={{ display: 'flex', justifyContent: 'space-between' }}>
+              description
+              
+              <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+                {showErrors && validationErrors.includes('description must be shorter than 255 characters') ? 'description must be shorter than 255 characters' : null}
+              </span>
+            </label>
             <textarea
               id="description"
               placeholder="tell us about your song"
@@ -149,26 +183,20 @@ export default function SongForm() {
               onChange={e => setDescription(e.target.value)}
               className="form_input"
               rows={8}
+              maxLength={255}
             >
             </textarea>
           </div>
         </div>
 
-        <ul className='error_container'>
-          {showErrors && validationErrors.map(err => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-
         <div className="song_form__bottom">
           <span className="required_label">required fields</span>
-          {/* button here (disable button until required inputs are filled) */}
           <div className="btn_container">
             <button type="button" className="btn btn--secondary" onClick={e => {
-                if (window.confirm('Are you sure you want to cancel your upload?')) {
-                  history.push('/');
-                }
-              }}
+              if (window.confirm('Are you sure you want to cancel your upload?')) {
+                history.push('/');
+              }
+            }}
             >
               cancel
             </button>
