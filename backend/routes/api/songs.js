@@ -25,7 +25,9 @@ router.get(
 
 // GET /api/songs - GET ALL SONGS
 router.get('/', asyncHandler(async (req, res) => {
-  const songs = await Song.findAll();
+  const songs = await Song.findAll({
+    include: { model: User },
+  });
   return res.json(songs);
 }));
 
