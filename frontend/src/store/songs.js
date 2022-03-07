@@ -31,6 +31,26 @@ export const fetchSong = id => async dispatch => {
   }  
 }
 
+export const fetchSongs = (userId, playlistId) => async dispatch => {
+  if (userId) {
+    console.log('pass in userId arg to get here');
+  }
+  
+  if (playlistId) {
+    console.log('pass in null arg, then playlistId arg to get here');
+  }
+  
+  else {
+    const res = await fetch(`/api/songs`);
+    
+    if (res.ok) {
+      const songs =  await res.json();
+      dispatch(addSongs(songs));
+      return songs;
+    }
+  }
+}
+
 
 
 
