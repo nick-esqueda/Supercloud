@@ -208,7 +208,16 @@ export default function SongForm() {
             >
               cancel
             </button>
-            <button type="submit" className="btn btn--primary">save</button>
+            <button type="submit" className="btn btn--primary"
+              disabled={!songURL ? true : false}
+              style={
+                !songURL
+                ? { backgroundColor: '#b3b3b3', borderColor: '#b3b3b3', cursor: 'not-allowed' }
+                : null
+              }
+            >
+              save
+            </button>
           </div>
         </div>
 
