@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { Song, User } = require('../../db/models');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { getTimeElapsed } = require('../../utils/utils');
-const { validateLogin } = require('../../utils/validation');
+const { validateSong } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -38,7 +38,7 @@ router.get('/', asyncHandler(async (req, res) => {
 router.post(
   '/',
   requireAuth,
-  // VALIDATIONS HERE
+  validateSong,
   asyncHandler(async (req, res) => {
     const userId = req.user.id
     const song = await Song.create({...req.body, userId});
