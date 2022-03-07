@@ -5,8 +5,8 @@ import './SongForm.css'
 
 export default function SongForm() {
   const history = useHistory();
-  const [songFile, setSongFile] = useState('');
-  const [artworkFile, setArtworkFile] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
+  const [songURL, setSongURL] = useState('');
+  const [artworkURL, setArtworkURL] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
@@ -24,10 +24,10 @@ export default function SongForm() {
 
     const errors = [];
     
-    console.log('artwork file in useEffect: ', artworkFile);
-    console.log('song file in useEffect: ', songFile);
+    console.log('artwork file in useEffect: ', artworkURL);
+    console.log('song file in useEffect: ', songURL);
 
-    if (!songFile) errors.push('please upload a song first');
+    if (!songURL) errors.push('please upload a song first');
     // TODO: file over 100MB
     if (!title) errors.push('please enter a title');
     if (title.length > 255) errors.push('title must be shorter than 255 characters');
@@ -35,7 +35,7 @@ export default function SongForm() {
     if (description.length > 255) errors.push('description must be shorter than 255 characters');
 
     setValidationErrors(errors);
-  }, [songFile, artworkFile, title, genre, description]);
+  }, [songURL, artworkURL, title, genre, description]);
   
     const s3Upload = async (file, inputName) => {
     if (!file) return console.log('upload a file first');
@@ -44,8 +44,8 @@ export default function SongForm() {
     const { url } = await res.json();
     const fileURL = await postToS3(url, file);
 
-    if (inputName === 'song') return setSongFile(fileURL);
-    if (inputName === 'artwork') return setArtworkFile(fileURL);
+    if (inputName === 'song') return setSongURL(fileURL);
+    if (inputName === 'artwork') return setArtworkURL(fileURL);
   }
 
   const onSubmit = async (e) => {
@@ -53,7 +53,7 @@ export default function SongForm() {
     if (validationErrors.length) return setShowErrors(true);
 
     console.log(
-      { songFile, artworkFile, title, genre, description }
+      { songURL, artworkURL, title, genre, description }
     );
 
     return;
@@ -67,7 +67,7 @@ export default function SongForm() {
         <div className="song_form__left">
           <div className="image_preview">
             <img
-              src={artworkFile}
+              src={artworkURL}
               alt="artwork-placeholder"
               className="artwork"
               ref={artworkPreview}
