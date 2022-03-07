@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
+import UploadSongPage from './components/UploadSongPage';
 import { restoreUser } from './store/session';
 import { fetchSongs } from './store/songs';
 
@@ -35,6 +36,10 @@ function App() {
             <Route exact path="/songs/:songId(\d+)">
               <SongPage />
             </Route>
+            
+            <Route exact path="/upload">
+              <UploadSongPage />
+            </Route>            
             
             <Route>
               404 page
