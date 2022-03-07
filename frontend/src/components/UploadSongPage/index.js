@@ -1,7 +1,10 @@
 import React from 'react'
+import SongForm from '../SongForm'
 
 export default function UploadSongPage() {
   return (
-    <div>UploadSongPage</div>
+    <div>
+      <SongForm />
+    </div>
   )
 }
