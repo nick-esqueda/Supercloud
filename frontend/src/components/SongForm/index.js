@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import './SongForm.css'
 
 export default function SongForm() {
+  const history = useHistory();
   const [songFile, setSongFile] = useState('');
   const [artworkFile, setArtworkFile] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
   const [title, setTitle] = useState('');
@@ -162,7 +164,14 @@ export default function SongForm() {
           <span className="required_label">required fields</span>
           {/* button here (disable button until required inputs are filled) */}
           <div className="btn_container">
-            <button type="button" className="btn btn--secondary">cancel</button>
+            <button type="button" className="btn btn--secondary" onClick={e => {
+                if (window.confirm('Are you sure you want to cancel your upload?')) {
+                  history.push('/');
+                }
+              }}
+            >
+              cancel
+            </button>
             <button type="submit" className="btn btn--primary">save</button>
           </div>
         </div>
