@@ -58,16 +58,12 @@ export default function SongForm() {
     const durationInSeconds = await getSongDuration(audioInputRef.current.files[0]);
     const duration = secondsToMSS(durationInSeconds);
 
-    // console.log(
-    //   { songURL, artworkURL, title, genre, description, duration }
-    // );
-    
     const song = { songURL, artworkURL, title, genre, description, duration };
     
     const newSong = await dispatch(postSong(song));
     console.log('new song from database inside on onSubmit', newSong);
 
-    return;
+    return history.push(`/songs/${newSong.id}`);
   }
 
   return (
