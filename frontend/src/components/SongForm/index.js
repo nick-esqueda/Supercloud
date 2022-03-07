@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { postToS3, getSongDuration, secondsToMSS } from "./utils";
 import './SongForm.css'
+import { postSong } from "../../store/songs";
 
 export default function SongForm() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [songURL, setSongURL] = useState('');
   const [artworkURL, setArtworkURL] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
   const [title, setTitle] = useState('');
@@ -55,9 +58,14 @@ export default function SongForm() {
     const durationInSeconds = await getSongDuration(audioInputRef.current.files[0]);
     const duration = secondsToMSS(durationInSeconds);
 
-    console.log(
-      { songURL, artworkURL, title, genre, description, duration }
-    );
+    // console.log(
+    //   { songURL, artworkURL, title, genre, description, duration }
+    // );
+    
+    const song = { songURL, artworkURL, title, genre, description, duration };
+    
+    const newSong = await dispatch(postSong(song));
+    console.log('new song from database inside on onSubmit', newSong);
 
     return;
   }
