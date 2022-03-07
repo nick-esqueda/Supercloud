@@ -20,7 +20,7 @@ export default function ArtistBadge({ artist }) {
             style={{ position: 'relative', bottom: '-8px' }}
             alt=''
           />
-          &nbsp;{artist?.Songs.length}
+          &nbsp;{artist?.Songs?.length}
         </span>
       </div>
 

@@ -28,6 +28,9 @@ router.get('/', asyncHandler(async (req, res) => {
   const songs = await Song.findAll({
     include: { model: User },
   });
+  songs.forEach(song => {
+    song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+  });
   return res.json(songs);
 }));
 
