@@ -5,19 +5,26 @@ export default function SongCard({ song }) {
   console.log('INDIVIDUAL SONG IN SONGCARD', song);
   return (
     <div className='song_card_container'>
-      <img src={song?.artworkURL
-        ? song.artworkURL
-        : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-      }
-        alt="artwork"
-      />
+      <NavLink to={`/songs/${song?.id}`}>
+        <img src={song?.artworkURL
+          ? song.artworkURL
+          : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+        }
+          alt="artwork"
+        />
+      </NavLink>
+
 
       <div className='song_card__content'>
         <div className='song_card__top'>
           <div className='top__play'></div>
           <div className='top__title_artist'>
-            <small>{song?.User.username}</small>
-            <span>{song.title}</span>
+            <NavLink to={`/users/${song.User.id}`}>
+              <small>{song?.User.username}</small>
+            </NavLink>
+            <NavLink to={`/songs/${song?.id}`}>
+              <span>{song.title}</span>
+            </NavLink>
           </div>
           <div className='top__right'>
             <small>{song?.createdAt}</small>
@@ -54,7 +61,7 @@ export default function SongCard({ song }) {
               <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
                 style={{ transform: 'scale(1.0)' }}
               />
-              &nbsp;edit  
+              &nbsp;edit
             </button>
             <button className='btn btn--secondary--outline'>
               <img src="https://a-v2.sndcdn.com/assets/images/delete-d90bf5e4.svg"
@@ -68,7 +75,7 @@ export default function SongCard({ song }) {
             <span>💬 {"cmnts"}</span>
           </div>
         </div>
-        
+
       </div>
 
     </div>

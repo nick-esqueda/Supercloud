@@ -8,7 +8,7 @@
 }
 
 
-.song_card_container > img {
+.song_card_container > a > img {
   height: 160px;
   width: 160px;
   margin-right: 16px;
