@@ -72,6 +72,10 @@ li {
   align-items: center;
 }
 
+.blur {
+  filter: blur(10px);
+}
+
 
 /* OOP CLASSES **************************************************************/
 .flexRow {

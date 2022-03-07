@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '.';
 import SignupForm from '../SignupForm';
 
 export default function SignupModal() {
   const [showModal, setShowModal] = useState(false);
+  
+  useEffect(() => {
+    const root = document.getElementById('root');
+    if (showModal) root.classList.add('blur')
+  
+    return () => root.classList.remove('blur');
+  }, [showModal])
 
   return (
     <>
