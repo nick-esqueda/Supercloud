@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import './SongForm/SongForm.css';
 
+import 'dotenv/config'
+
 export default function S3Test() {
+  console.log(process.env.AWS_ACCESS_KEY_ID);
   const history = useHistory();
   const [songFile, setSongFile] = useState('');
   const [artworkFile, setArtworkFile] = useState('https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60');
@@ -20,7 +23,7 @@ export default function S3Test() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (validationErrors.length) return setShowErrors(true);
+    // if (validationErrors.length) return setShowErrors(true);
 
     // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
   }
