@@ -27,9 +27,6 @@ export default function SongForm() {
 
     const errors = [];
     
-    console.log('artwork file in useEffect: ', artworkURL);
-    console.log('song file in useEffect: ', songURL);
-
     if (!songURL) errors.push('please upload a song first');
     // TODO: file over 100MB
     if (!title) errors.push('please enter a title');
