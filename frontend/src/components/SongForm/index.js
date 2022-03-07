@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { postToS3 } from "./s3Fetch";
 import './SongForm.css'
 
 export default function SongForm() {
@@ -33,29 +34,24 @@ export default function SongForm() {
 
     setValidationErrors(errors);
   }, [songFile, artworkFile, title, genre, description]);
+  
+    const s3Upload = async (file, inputName) => {
+    if (!file) return console.log('upload a file first');
 
-  const setPreviewImage = (e) => {
-    const file = e.target.files[0];
+    const res = await fetch('/api/s3URL');
+    const { url } = await res.json();
+    const fileURL = await postToS3(url, file);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.addEventListener('load', e => {
-        artworkPreview.current.setAttribute('src', e.currentTarget.result);
-      });
-
-      reader.readAsDataURL(file);
-
-      setArtworkFile(file);
-    }
+    if (inputName === 'song') return setSongFile(fileURL);
+    if (inputName === 'artwork') return setArtworkFile(fileURL);
   }
 
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (validationErrors.length) return setShowErrors(true);
-
     // TODO: THUNK HERE WITH S3 FETCHES FOR BOTH FILES
+
+    return;
   }
 
   return (
@@ -86,7 +82,7 @@ export default function SongForm() {
               name="artwork"
               ref={artworkInputRef}
               hidden={true}
-              onChange={setPreviewImage}
+              onChange={e => s3Upload(e.target.files[0], e.target.name)}
             />
           </div>
 
@@ -120,8 +116,8 @@ export default function SongForm() {
                 ref={audioInputRef}
                 hidden={true}
                 onChange={e => {
-                  setSongFile(e.target.files[0]);
                   setCustomFileText(e.target.files[0].name);
+                  s3Upload(e.target.files[0], e.target.name);
                 }}
               />
             </div>
