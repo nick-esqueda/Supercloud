@@ -36,7 +36,7 @@
   display: flex;
 }
 .song_header__play {
-  width: 60px;
+  min-width: 60px;
   height: 60px;
   
   background-color: #FFFF5D;
