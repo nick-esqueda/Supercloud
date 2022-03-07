@@ -1,0 +1,18 @@
+.comment_section {
+  padding: 16px;
+}
+
+.inner_section_header {
+  padding: 0 0 6px;
+  border-bottom: 1px solid #535353;
+  
+  text-align: left;
+  font-style: italic;
+  
+  position: relative;
+  display: block;
+}
+
+/* ul.comments {
+    
+} */

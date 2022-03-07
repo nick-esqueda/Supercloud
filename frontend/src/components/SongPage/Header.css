@@ -1,0 +1,136 @@
+.header_container {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  
+  background: linear-gradient(135deg, rgb(145, 129, 79) 0%, rgb(48, 37, 28) 100%);
+  
+  display: grid;
+  grid-template-columns: auto auto 348px;
+  grid-template-rows: 50% 50%;
+  grid-template-areas: 
+    "top top right"
+    "bottom bottom right"
+}
+
+.song_header__top,
+.song_header__bottom,
+.song_header__right {
+  width: 100%;
+  height: 100%;
+  padding: 16px;  
+}
+
+
+/* TOP */
+.song_header__top {
+  grid-area: top;
+  
+  display: flex;
+  justify-content: space-between;
+}
+
+.song_header__top_left {
+  width: 100%;
+  
+  display: flex;
+}
+.song_header__play {
+  width: 60px;
+  height: 60px;
+  
+  background-color: #FFFF5D;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.song_header__play::before {
+  content: '▶';
+  color: #212121;
+  font-size: 42px;
+  position: relative;
+  right: -4px;
+}
+.song_header__play::after {
+  /* content: '||'; */
+  color: #212121;
+  font-weight: bold;
+  font-size: 36px;
+  letter-spacing: -8px;
+  
+  position: relative;
+  left: -3.5px;
+  bottom: -1px;
+}
+
+.song_header__song {
+  padding: 0 8px;
+  
+  display: flex;
+  flex-direction:  column;
+  align-items: flex-start;
+}
+.song_header__song h2 {
+  margin: 0;
+  padding: 6px;
+  
+  text-align: left;
+  
+  background-color: #212121;
+}
+.song_header__song a {
+  padding: 6px;
+  margin: 6px 0;
+  /* font-style: italic; */
+  background-color: #212121;
+}
+
+
+.song_header__top_right {
+  min-width: 128px;
+  
+  text-align: right;
+}
+.genre {
+  margin: 6px 0;
+  padding: 4px 12px;
+  background-color: #212121;
+  border-radius: 5em;
+  display: inline-block;
+}
+.genre::before {
+  content: '#';
+}
+
+
+
+
+/* BOTTOM */
+.song_header__bottom {
+  grid-area: bottom;
+  
+  display: flex;
+  align-items: flex-end;
+}
+
+.song_header__waveform {
+  height: 100px;
+  width: 100%;
+  border: 1px solid red; 
+}
+
+
+
+
+/* RIGHT */
+.song_header__right {
+  grid-area: right;
+  height: 348px;
+  
+  /* background-color: gray; */
+}
+
+.song_header__right > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,4 +1,5 @@
 const express = require('express');
+const { generateUploadURL } = require('../s3');
 
 const router = express.Router();
 const apiRouter = require('./api');
@@ -6,6 +7,12 @@ const apiRouter = require('./api');
 router.use('/api', apiRouter);
 
 // ROUTES ***********************************************************
+// GENERATE S3 URL TO SEND BACK TO CLIENT
+router.get('/s3URL', async (req, res) => {
+  const url = await generateUploadURL();
+  res.send({ url })
+});
+
 // Add a XSRF-TOKEN cookie in development
 if (process.env.NODE_ENV !== 'production') {
   router.get('/api/csrf/restore', (req, res) => {
@@ -13,7 +20,6 @@ if (process.env.NODE_ENV !== 'production') {
     return res.json({});
   });
 }
-
 
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
