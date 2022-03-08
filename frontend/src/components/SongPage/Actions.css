@@ -1,0 +1,37 @@
+.actions_container {
+  height: 100%;
+  padding: 0 16px;
+  border-bottom: 1px solid #535353;
+}
+
+
+/* COMMENT **********************************/
+.write_comment {
+  display: flex;
+  align-items: center;
+  height: 50%;
+  margin: 0 auto;
+}
+
+.write_comment img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.comment_form {
+  width: 100%;
+  padding: 0 16px;
+}
+
+
+
+/* BUTTONS ****************************************/
+.actions_container .bottom__buttons {
+  width: 550px;
+  height: 50%;
+  gap: 0;
+  
+  align-items: center;
+  justify-content: flex;
+}
