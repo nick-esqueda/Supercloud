@@ -3,7 +3,7 @@ import Modal from '.';
 import SongForm from '../SongForm';
 
 
-export default function EditSongModal() {
+export default function EditSongModal({ song }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function EditSongModal() {
 
       {showModal && (
         <Modal closeModal={() => setShowModal(false)}>
-          <SongForm />
+          <SongForm song={song} />
         </Modal>
       )}
     </>

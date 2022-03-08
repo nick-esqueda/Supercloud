@@ -72,7 +72,7 @@ export default function SongCard({ song }) {
 
             {isArtist && (
               <>
-                <EditSongModal />
+                <EditSongModal song={song} />
               
                 <button className='btn btn--secondary--outline'
                   onClick={e => {
