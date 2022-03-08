@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import HeaderFooter from './components/HeaderFooter';
 import Navigation from './components/Navigation';
 import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
@@ -23,28 +24,29 @@ function App() {
     <>
       {isLoaded ? (
         <>
-          <Navigation />
-          <Switch>
-            <Route exact path="/">
-              <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
-              
-              {songs.map(song => (
-                <SongCard key={songs.id} song={song} />
-              ))}
-            </Route>
+          <HeaderFooter>
+            <Switch>
+              <Route exact path="/">
+                <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
-            <Route exact path="/songs/:songId(\d+)">
-              <SongPage />
-            </Route>
-            
-            <Route exact path="/upload">
-              <UploadSongPage />
-            </Route>            
-            
-            <Route>
-              404 page
-            </Route>
-          </Switch>
+                {songs.map(song => (
+                  <SongCard key={songs.id} song={song} />
+                ))}
+              </Route>
+
+              <Route exact path="/songs/:songId(\d+)">
+                <SongPage />
+              </Route>
+
+              <Route exact path="/upload">
+                <UploadSongPage />
+              </Route>
+
+              <Route>
+                404 page
+              </Route>
+            </Switch>
+          </HeaderFooter>
         </>
 
       ) : (
