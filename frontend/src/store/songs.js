@@ -29,7 +29,7 @@ const removeSong = (songId) => {
   }
 }
 
-const setPlaying = (song) => {
+export const setPlaying = (song) => {
   return {
     type: SET_PLAYING,
     song
