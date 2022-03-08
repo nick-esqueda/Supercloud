@@ -17,7 +17,7 @@ export default function SongPage() {
   
   useEffect(() => {
     dispatch(fetchSong(songId));
-  }, [dispatch]);
+  }, [dispatch, songId]);
   
   return (
     <>

@@ -42,7 +42,7 @@ export const getSongDuration = async (file) => {
     return songDuration;
 
   } else {
-    return ("you didn\'t pass in an audio file!");
+    return ("you didn't pass in an audio file!");
   }
 }
 
