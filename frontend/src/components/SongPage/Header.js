@@ -1,6 +1,6 @@
 import './Header.css';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPlaying } from '../../store/songs';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import { useEffect, useState } from 'react';
@@ -9,7 +9,8 @@ export default function Header({ song, isLoaded }) {
   const dispatch = useDispatch();
   const audioPlayer = useAudioPlayer();
   const [paused, setPaused] = useState(true);
-  
+  const playingSong = useSelector(state => state.songs.playing);
+
   const playSong = async () => {
     await new Promise((resolve, reject) => {
       dispatch(setPlaying(song));
@@ -30,11 +31,11 @@ export default function Header({ song, isLoaded }) {
       <div className="song_header__top">
         <div className="song_header__top_left">
           <div 
-            className={paused ? "song_header__play" : "song_header__play hidden"}
+            className={paused || playingSong.id !== song.id ? "song_header__play" : "song_header__play hidden"}
             onClick={playSong}
           ></div>
           <div 
-            className={!paused ? "song_header__pause" : "song_header__pause hidden"}
+            className={!paused && playingSong.id === song.id ? "song_header__pause" : "song_header__pause hidden"}
             onClick={pauseSong}
           ></div>
           <div className="song_header__song">
