@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import HeaderFooter from './components/HeaderFooter';
-import Navigation from './components/Navigation';
 import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';

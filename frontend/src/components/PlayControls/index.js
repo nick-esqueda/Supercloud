@@ -1,11 +1,12 @@
 import './PlayControls.css';
+import Player from './Player';
 
 export default function PlayControls() {
-
+  // how to know which song is currently playing in order to sync on every page?
 
   return (
     <div className='play_controls'>
-      <audio controls src='' />
+      {/* <Player /> */}
 
       <div className='play_controls__details'>
         <img
