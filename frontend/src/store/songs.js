@@ -61,7 +61,6 @@ export const fetchSongs = (userId, playlistId) => async dispatch => {
   }
 }
 
-// USE csrfFetch for requests other than "GET"
 export const postSong = song => async dispatch => {
   const res = await csrfFetch('/api/songs', {
     method: 'POST',
@@ -69,9 +68,21 @@ export const postSong = song => async dispatch => {
   });
   
   if (res.ok) {
-    const newSong = res.json();
+    const newSong = await res.json();
     dispatch(addSong(newSong));
     return newSong;
+  }
+}
+
+export const deleteSong = id => async dispatch => {
+  const res = await csrfFetch(`/api/songs/${id}`, {
+    method: 'DELETE',
+  });
+  
+  if (res.ok) {
+    const songId = await res.json();
+    dispatch(removeSong(songId));
+    return;
   }
 }
 
