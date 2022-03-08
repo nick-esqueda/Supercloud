@@ -79,7 +79,7 @@ export default function SongForm({ song }) {
     if (validationErrors.length) return setShowErrors(true);
     
     // replace song values here inside original object?
-    const editedSong = {...song, artworkURL //blsdkfnalkds }
+  const editedSong = {...song, artworkURL /* blsdkfnalkds */}
     
     return console.log('inside edit submit');
   }

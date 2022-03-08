@@ -59,7 +59,7 @@ router.put(
     
     song.set({ ...req.body });
     
-    await Song.save();
+    await song.save();
     
     return res.json(song);
   })

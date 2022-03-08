@@ -10,7 +10,7 @@ export default function SongCard({ song }) {
   const user = useSelector(state => state.session.user);
   
   let isArtist = false;
-  if (user) isArtist = user.id === song.User.id;
+  if (user) isArtist = user?.id === song?.User?.id;
 
   return (
     <div className='song_card_container'>
