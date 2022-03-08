@@ -55,12 +55,13 @@ router.put(
   validateSongEdit,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.songId, 10);
-    const song = await Song.findByPk(id);
+    const song = await Song.findByPk(id, {
+      include: { model: User }  
+    });
     
     song.set({ ...req.body });
-    
     await song.save();
-    
+    song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
     return res.json(song);
   })
 )

@@ -8,14 +8,15 @@ export default function SongCard({ song }) {
   const dispatch = useDispatch();
   
   const user = useSelector(state => state.session.user);
+  song = useSelector(state => state.songs[song.id]);
   
   let isArtist = false;
-  if (user) isArtist = user?.id === song?.User?.id;
+  if (user) isArtist = user.id === song.User.id;
 
   return (
     <div className='song_card_container'>
-      <NavLink to={`/songs/${song?.id}`}>
-        <img src={song?.artworkURL
+      <NavLink to={`/songs/${song.id}`}>
+        <img src={song.artworkURL
           ? song.artworkURL
           : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
         }
@@ -27,16 +28,18 @@ export default function SongCard({ song }) {
       <div className='song_card__content'>
         <div className='song_card__top'>
           <div className='top__play'></div>
+          
           <div className='top__title_artist'>
             <NavLink to={`/users/${song.User.id}`}>
-              <small>{song?.User.username}</small>
+              <small>{song.User.username}</small>
             </NavLink>
-            <NavLink to={`/songs/${song?.id}`}>
+            <NavLink to={`/songs/${song.id}`}>
               <span>{song.title}</span>
             </NavLink>
           </div>
+          
           <div className='top__right'>
-            <small>{song?.createdAt}</small>
+            <small>{song.createdAt}</small>
             <span className='genre'>{song.genre}</span>
           </div>
         </div>

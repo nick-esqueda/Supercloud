@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postToS3, getSongDuration, secondsToMSS } from "./utils";
 import './SongForm.css'
-import { postSong } from "../../store/songs";
+import { editSong, postSong } from "../../store/songs";
 
-export default function SongForm({ song }) {
+export default function SongForm({ song, closeModal }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [songURL, setSongURL] = useState('');
@@ -78,10 +78,9 @@ export default function SongForm({ song }) {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
     
-    // replace song values here inside original object?
-  const editedSong = {...song, artworkURL /* blsdkfnalkds */}
-    
-    return console.log('inside edit submit');
+    const editedSong = { ...song, artworkURL, title, genre, description };
+    dispatch(editSong(editedSong));
+    return closeModal();
   }
 
   

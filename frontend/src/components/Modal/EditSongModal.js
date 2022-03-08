@@ -29,7 +29,7 @@ export default function EditSongModal({ song }) {
 
       {showModal && (
         <Modal closeModal={() => setShowModal(false)}>
-          <SongForm song={song} />
+          <SongForm song={song} closeModal={() => setShowModal(false)} />
         </Modal>
       )}
     </>
