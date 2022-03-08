@@ -1,7 +1,13 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import './SongCard.css';
 
 export default function SongCard({ song }) {
+  const user = useSelector(state => state.session.user);
+  
+  let isArtist = false;
+  if (user) isArtist = user.id === song.User.id;
+
   return (
     <div className='song_card_container'>
       <NavLink to={`/songs/${song?.id}`}>
@@ -56,19 +62,26 @@ export default function SongCard({ song }) {
               />
               &nbsp;add to playlist
             </button>
-            <button className='btn btn--secondary--outline'>
-              <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
-                style={{ transform: 'scale(1.0)' }}
-              />
-              &nbsp;edit
-            </button>
-            <button className='btn btn--secondary--outline'>
-              <img src="https://a-v2.sndcdn.com/assets/images/delete-d90bf5e4.svg"
-                style={{ transform: 'scale(1.0)' }}
-              />
-              &nbsp;delete
-            </button>
+
+            {isArtist && (
+              <>
+                <button className='btn btn--secondary--outline'>
+                  <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
+                    style={{ transform: 'scale(1.0)' }}
+                  />
+                  &nbsp;edit
+                </button>
+                <button className='btn btn--secondary--outline'>
+                  <img src="https://a-v2.sndcdn.com/assets/images/delete-d90bf5e4.svg"
+                    style={{ transform: 'scale(1.0)' }}
+                  />
+                  &nbsp;delete
+                </button>
+              </>
+            )}
+            
           </div>
+          
           <div className='bottom__right'>
             <span>▶ {song.plays}</span>
             <span>💬 {"cmnts"}</span>
