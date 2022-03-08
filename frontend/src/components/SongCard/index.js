@@ -1,14 +1,33 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { deleteSong } from '../../store/songs';
+import { useAudioPlayer } from '../../Context/AudioPlayerContext';
+import { deleteSong, setPlaying } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 import './SongCard.css';
 
 export default function SongCard({ song }) {
   const dispatch = useDispatch();
-  
+  const audioPlayer = useAudioPlayer();
+  const [paused, setPaused] = useState(true);
+  const playingSong = useSelector(state => state.songs.playing);
   const user = useSelector(state => state.session.user);
   song = useSelector(state => state.songs[song.id]);
+  
+  const playSong = async () => {
+    await new Promise((resolve, reject) => {
+      dispatch(setPlaying(song));
+      resolve();
+    });  
+    audioPlayer.current.audio.current.play();
+    setPaused(false);
+  }
+  
+  const pauseSong = () => {
+    audioPlayer.current.audio.current.pause();
+    setPaused(true);
+  }
+  
   
   let isArtist = false;
   if (user) isArtist = user.id === song.User.id;
@@ -27,7 +46,14 @@ export default function SongCard({ song }) {
 
       <div className='song_card__content'>
         <div className='song_card__top'>
-          <div className='top__play'></div>
+          <div 
+            className={paused || playingSong.id !== song.id ? "top__play" : "top__play hidden"}
+            onClick={playSong}
+          ></div>
+          <div 
+            className={!paused && playingSong.id === song.id ? "top__pause" : "top__pause hidden"}
+            onClick={pauseSong}
+          ></div>
           
           <div className='top__title_artist'>
             <NavLink to={`/users/${song.User.id}`}>
