@@ -129,6 +129,7 @@
 
 .song_card_small_container {
   height: 64px;
+  width: 100%;
   margin: 12px 0;
 }
 
@@ -146,5 +147,7 @@
 }
 
 .song_card_small__top span {
+  max-width: 280px;
   display: block;
+  word-wrap: break-word;
 }

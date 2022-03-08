@@ -42,4 +42,5 @@
 .song_sidebar {
   grid-area: side;
   height: auto;
+  max-width: 384px;
 }
