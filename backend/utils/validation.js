@@ -80,7 +80,29 @@ const validateSong = [
   handleValidationErrors
 ];
 
+const validateSongEdit = [
+  check('artworkURL')
+    .isURL()
+    .withMessage('your song url is not a valid url'),
+  check('title')
+    .exists({ checkFalsy: true })
+    .withMessage('please enter a title')
+    .isLength({ max: 255 })
+    .withMessage('title must be shorter than 255 characters'),
+  check('genre')
+    .isLength({ max: 25 })
+    .withMessage('genre must be shorter than 25 characters'),
+  check('description')
+    .isLength({ max: 500 })
+    .withMessage('description must be shorter than 500 characters'),
+  handleValidationErrors
+];
+
 
 module.exports = {
-  handleValidationErrors, validateLogin, validateSignup, validateSong
+  handleValidationErrors,
+  validateLogin,
+  validateSignup,
+  validateSong,
+  validateSongEdit,
 };
