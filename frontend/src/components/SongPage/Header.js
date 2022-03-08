@@ -50,8 +50,8 @@ export default function Header({ song, isLoaded }) {
       </div>
       
       <div className="song_header__bottom">
-        <div className="song_header__waveform">
-          {/* <Player song={song} /> */}
+        <div className="song_header__waveform" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {'[ sorry! this feature is currently under construction ]'}
         </div>
       </div>
       

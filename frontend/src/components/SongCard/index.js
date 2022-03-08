@@ -13,22 +13,22 @@ export default function SongCard({ song }) {
   const playingSong = useSelector(state => state.songs.playing);
   const user = useSelector(state => state.session.user);
   song = useSelector(state => state.songs[song.id]);
-  
+
   const playSong = async () => {
     await new Promise((resolve, reject) => {
       dispatch(setPlaying(song));
       resolve();
-    });  
+    });
     audioPlayer.current.audio.current.play();
     setPaused(false);
   }
-  
+
   const pauseSong = () => {
     audioPlayer.current.audio.current.pause();
     setPaused(true);
   }
-  
-  
+
+
   let isArtist = false;
   if (user) isArtist = user.id === song.User.id;
 
@@ -46,15 +46,15 @@ export default function SongCard({ song }) {
 
       <div className='song_card__content'>
         <div className='song_card__top'>
-          <div 
+          <div
             className={paused || playingSong.id !== song.id ? "top__play" : "top__play hidden"}
             onClick={playSong}
           ></div>
-          <div 
+          <div
             className={!paused && playingSong.id === song.id ? "top__pause" : "top__pause hidden"}
             onClick={pauseSong}
           ></div>
-          
+
           <div className='top__title_artist'>
             <NavLink to={`/users/${song.User.id}`}>
               <small>{song.User.username}</small>
@@ -63,15 +63,15 @@ export default function SongCard({ song }) {
               <span>{song.title}</span>
             </NavLink>
           </div>
-          
+
           <div className='top__right'>
             <small>{song.createdAt}</small>
             <span className='genre'>{song.genre}</span>
           </div>
         </div>
 
-        <div className='song_card__waveform'>
-          waveform
+        <div className='song_card__waveform' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {'[ sorry! this feature is currently under construction ]'}
         </div>
 
         <div className='song_card__bottom'>
@@ -102,7 +102,7 @@ export default function SongCard({ song }) {
             {isArtist && (
               <>
                 <EditSongModal song={song} />
-              
+
                 <button className='btn btn--secondary--outline'
                   onClick={e => {
                     if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
@@ -120,9 +120,9 @@ export default function SongCard({ song }) {
                 </button>
               </>
             )}
-            
+
           </div>
-          
+
           <div className='bottom__right'>
             <span>▶ {song.plays}</span>
             <span>💬 {"cmnts"}</span>
