@@ -7,6 +7,14 @@
 
   box-shadow: 8px 8px #535353;
 }
+.form_container h2 {
+  width: 100%;
+  
+  box-sizing: content-box;
+  height: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 form.song_form {
   width: 100%;

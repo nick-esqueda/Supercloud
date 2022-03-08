@@ -24,6 +24,7 @@ export default function SongForm({ song }) {
   // SET SONG DATA TO AUTO-FILL SONG EDIT FORM
   useEffect(() => {
     if (song) {
+      setSongURL(song.songURL);
       setArtworkURL(song.artworkURL);
       setTitle(song.title);
       setGenre(song.genre);
@@ -58,7 +59,7 @@ export default function SongForm({ song }) {
   }
 
   // ON FORM SUBMISSION...
-  const onSubmit = async (e) => {
+  const onUploadSubmit = async (e) => {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
 
@@ -72,14 +73,21 @@ export default function SongForm({ song }) {
 
     return history.push(`/songs/${newSong.id}`);
   }
+  
+  const onEditSubmit = async (e) => {
+    e.preventDefault();
+    if (validationErrors.length) return setShowErrors(true);
+    
+    return console.log('inside edit submit');
+  }
 
   
   // JSX ***************************************************************************
   return (
     <div className="form_container">
-      <h2>upload your song</h2>
+      <h2>{!song ? 'upload your song' : title}</h2>
 
-      <form onSubmit={onSubmit} className="song_form">
+      <form onSubmit={!song ? onUploadSubmit : onEditSubmit} className="song_form">
         <div className="song_form__left">
           <div className="image_preview">
             <img
