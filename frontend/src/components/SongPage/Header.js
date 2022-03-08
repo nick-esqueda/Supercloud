@@ -1,14 +1,22 @@
 import './Header.css';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setPlaying } from '../../store/songs';
 // import Player from '../PlayControls/Player';
 
 export default function Header({ song, isLoaded }) {
+  const dispatch = useDispatch();
+  
+  const playSong = () => {
+    dispatch(setPlaying(song));
+  }
+  
   return isLoaded && (
     <div className='header_container'>
       
       <div className="song_header__top">
         <div className="song_header__top_left">
-          <div className="song_header__play"></div>
+          <div className="song_header__play" onClick={playSong}></div>
           <div className="song_header__song">
             <h2>{song?.title}</h2>
             <NavLink to={'/artist-link-here'}>{song?.User?.username}</NavLink>
