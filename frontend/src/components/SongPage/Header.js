@@ -1,5 +1,6 @@
 import './Header.css';
 import { NavLink } from 'react-router-dom';
+import Player from '../Player';
 
 export default function Header({ song }) {
   return (
@@ -21,7 +22,7 @@ export default function Header({ song }) {
       
       <div className="song_header__bottom">
         <div className="song_header__waveform">
-          waveform here
+          <Player />
         </div>
       </div>
       
