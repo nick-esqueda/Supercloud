@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux';
 import './PlayControls.css';
 import Player from './Player';
 
 export default function PlayControls() {
-  // how to know which song is currently playing in order to sync on every page?
+  const song = useSelector(state => state.songs.playing);
+  console.log(song);
 
   return (
     <div className='play_controls'>
@@ -10,13 +12,13 @@ export default function PlayControls() {
 
       <div className='play_controls__details'>
         <img
-          src="https://i0.wp.com/css-tricks.com/wp-content/uploads/2020/11/css-gradient.png?fit=1200%2C600&ssl=1"
+          src={song?.artworkURL}
           alt=''
         />
 
         <div className='flexColLeft'>
-          <small>artist</small>
-          <span>song name</span>
+          <span style={{ color: '#b3b3b3' }}>{song?.User.username}</span>
+          <span>{song?.title}</span>
         </div>
 
         <div>
