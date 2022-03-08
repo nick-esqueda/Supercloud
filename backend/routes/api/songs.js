@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 const { Song, User } = require('../../db/models');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { getTimeElapsed } = require('../../utils/utils');
-const { validateSong } = require('../../utils/validation');
+const { validateSong, validateSongEdit } = require('../../utils/validation');
 
 const router = express.Router();
 
@@ -43,6 +43,24 @@ router.post(
     const userId = req.user.id
     const song = await Song.create({...req.body, userId});
     // changes createdAt to "x y's ago" format
+    song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+    return res.json(song);
+  })
+)
+
+// PUT /api/songs/:songId - EDIT A SONG
+router.put(
+  '/:songId',
+  requireAuth,
+  validateSongEdit,
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.songId, 10);
+    const song = await Song.findByPk(id, {
+      include: { model: User }  
+    });
+    
+    song.set({ ...req.body });
+    await song.save();
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
     return res.json(song);
   })

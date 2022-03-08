@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { postToS3, getSongDuration, secondsToMSS } from "./utils";
 import './SongForm.css'
-import { postSong } from "../../store/songs";
+import { editSong, postSong } from "../../store/songs";
 
-export default function SongForm() {
+export default function SongForm({ song, closeModal }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [songURL, setSongURL] = useState('');
@@ -21,12 +21,21 @@ export default function SongForm() {
   const artworkInputRef = useRef();
   const artworkPreview = useRef();
 
+  // SET SONG DATA TO AUTO-FILL SONG EDIT FORM
   useEffect(() => {
-    // TODO: write validations
-    // TODO: highlight input fields that don't pass validation, like in signup form
+    if (song) {
+      setSongURL(song.songURL);
+      setArtworkURL(song.artworkURL);
+      setTitle(song.title);
+      setGenre(song.genre);
+      setDescription(song.description)
+    }
+  }, []);
 
+  // FRONTEND ERROR VALIDATIONS
+  useEffect(() => {
     const errors = [];
-    
+
     if (!songURL) errors.push('please upload a song first');
     // TODO: file over 100MB
     if (!title) errors.push('please enter a title');
@@ -36,8 +45,9 @@ export default function SongForm() {
 
     setValidationErrors(errors);
   }, [songURL, artworkURL, title, genre, description]);
-  
-    const s3Upload = async (file, inputName) => {
+
+  // HELPER TO UPLOAD TO S3 onChange OF FILE INPUTS
+  const s3Upload = async (file, inputName) => {
     if (!file) return console.log('upload a file first');
 
     const res = await fetch('/api/s3URL');
@@ -48,26 +58,38 @@ export default function SongForm() {
     if (inputName === 'artwork') return setArtworkURL(fileURL);
   }
 
-  const onSubmit = async (e) => {
+  // ON FORM SUBMISSION...
+  const onUploadSubmit = async (e) => {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
-    
+
     const durationInSeconds = await getSongDuration(audioInputRef.current.files[0]);
     const duration = secondsToMSS(durationInSeconds);
 
     const song = { songURL, artworkURL, title, genre, description, duration };
-    
+
     const newSong = await dispatch(postSong(song));
     console.log('new song from database inside on onSubmit', newSong);
 
     return history.push(`/songs/${newSong.id}`);
   }
 
+  const onEditSubmit = async (e) => {
+    e.preventDefault();
+    if (validationErrors.length) return setShowErrors(true);
+
+    const editedSong = { ...song, artworkURL, title, genre, description };
+    dispatch(editSong(editedSong));
+    return closeModal();
+  }
+
+
+  // JSX ***************************************************************************
   return (
     <div className="form_container">
-      <h2>upload your song</h2>
+      <h2>{!song ? 'upload your song' : title}</h2>
 
-      <form onSubmit={onSubmit} className="song_form">
+      <form onSubmit={!song ? onUploadSubmit : onEditSubmit} className="song_form">
         <div className="song_form__left">
           <div className="image_preview">
             <img
@@ -95,42 +117,44 @@ export default function SongForm() {
             />
           </div>
 
-          <div>
-            <h4 style={{ marginTop: '20px' }}>select song<span style={{ color: 'red' }}>*</span></h4>
-            <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
-              {showErrors && validationErrors.includes('please upload a song first') ? 'please upload a song first' : null}
-            </span>
-
-            <div className="custom_upload_container">
-              <button
-                type="button"
-                id="customUploadButton"
-                className="btn btn--secondary--outline"
-                ref={uploadSongBtn}
-                onClick={e => audioInputRef.current.click()}
-                style={
-                  showErrors && (validationErrors.includes('please upload a song first'))
-                    ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
-                }
-
-              >
-                upload file
-              </button>
-              <span className="custom_file_text">
-                {customFileText}
+          {!song &&
+            <div>
+              <h4 style={{ marginTop: '20px' }}>select song<span style={{ color: 'red' }}>*</span></h4>
+              <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
+                {showErrors && validationErrors.includes('please upload a song first') ? 'please upload a song first' : null}
               </span>
-              <input type="file"
-                accept=".mp3"
-                name="song"
-                ref={audioInputRef}
-                hidden={true}
-                onChange={e => {
-                  setCustomFileText(e.target.files[0].name);
-                  s3Upload(e.target.files[0], e.target.name);
-                }}
-              />
+
+              <div className="custom_upload_container">
+                <button
+                  type="button"
+                  id="customUploadButton"
+                  className="btn btn--secondary--outline"
+                  ref={uploadSongBtn}
+                  onClick={e => audioInputRef.current.click()}
+                  style={
+                    showErrors && (validationErrors.includes('please upload a song first'))
+                      ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+                  }
+
+                >
+                  upload file
+                </button>
+                <span className="custom_file_text">
+                  {customFileText}
+                </span>
+                <input type="file"
+                  accept=".mp3"
+                  name="song"
+                  ref={audioInputRef}
+                  hidden={true}
+                  onChange={e => {
+                    setCustomFileText(e.target.files[0].name);
+                    s3Upload(e.target.files[0], e.target.name);
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          }
 
         </div>
 
@@ -159,7 +183,7 @@ export default function SongForm() {
           <div className="form_group">
             <label htmlFor='genre' style={{ display: 'flex', justifyContent: 'space-between' }}>
               genre
-              
+
               <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
                 {showErrors && validationErrors.includes('genre must be shorter than 25 characters') ? 'genre must be shorter than 25 characters' : null}
               </span>
@@ -176,7 +200,7 @@ export default function SongForm() {
           <div className="form_group">
             <label htmlFor='description' style={{ display: 'flex', justifyContent: 'space-between' }}>
               description
-              
+
               <span style={{ color: 'rgba(253, 69, 69, 1)', fontSize: '12px' }}>
                 {showErrors && validationErrors.includes('description must be shorter than 500 characters') ? 'description must be shorter than 500 characters' : null}
               </span>
@@ -198,8 +222,9 @@ export default function SongForm() {
           <span className="required_label">required fields</span>
           <div className="btn_container">
             <button type="button" className="btn btn--secondary" onClick={e => {
-              if (window.confirm('Are you sure you want to cancel your upload?')) {
-                history.push('/');
+              if (song) closeModal();
+              if (!song && window.confirm('Are you sure you want to cancel your upload?')) {
+                return history.push('/');
               }
             }}
             >
@@ -209,8 +234,8 @@ export default function SongForm() {
               disabled={!songURL ? true : false}
               style={
                 !songURL
-                ? { backgroundColor: '#b3b3b3', borderColor: '#b3b3b3', cursor: 'not-allowed' }
-                : null
+                  ? { backgroundColor: '#b3b3b3', borderColor: '#b3b3b3', cursor: 'not-allowed' }
+                  : null
               }
             >
               save

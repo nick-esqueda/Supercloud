@@ -21,7 +21,7 @@ export default function SongPage() {
     (async () => {
       const { user } = await dispatch(restoreUser());
       const song = await dispatch(fetchSong(songId));
-      if (user.id === song.User.id) setIsArtist(true);
+      if (user?.id === song?.User?.id) setIsArtist(true);
       setIsLoaded(true)
     })()
   }, [dispatch, songId]);

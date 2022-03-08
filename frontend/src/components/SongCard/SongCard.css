@@ -63,11 +63,19 @@
 .top__title_artist {
   height: 100%;
   width: 100%;
+  max-width: 920px;
+  
   text-align: left;
+  
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+}
+.top__title_artist a {
+  max-width: 920px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .top__right {
@@ -129,6 +137,7 @@
 
 .song_card_small_container {
   height: 64px;
+  width: 100%;
   margin: 12px 0;
 }
 
@@ -146,5 +155,7 @@
 }
 
 .song_card_small__top span {
+  max-width: 280px;
   display: block;
+  word-wrap: break-word;
 }

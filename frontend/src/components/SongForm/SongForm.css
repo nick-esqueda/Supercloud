@@ -7,6 +7,16 @@
 
   box-shadow: 8px 8px #535353;
 }
+.form_container h2 {
+  max-width: 700px;
+  
+  box-sizing: content-box;
+  height: 28px;
+  /* word-wrap: break-word; <- USE THIS ON ONE WORD SONG TITLES THAT CARRY OVER TO THE RIGHT */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 form.song_form {
   width: 100%;
