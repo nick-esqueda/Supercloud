@@ -1,8 +1,6 @@
 .song_header {
   width: 100%;
   height: 380px;
-  
-  /* border: 1px solid red; */
 }
 
 .song_main {
@@ -25,13 +23,10 @@
 
 .song__actions {
   grid-area: top;
-  
-  border: 1px solid blue;
 }
 
 .song__profile_card {
   grid-area: left;
-  
 }
 
 .song__description {
