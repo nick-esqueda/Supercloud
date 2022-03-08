@@ -28,10 +28,10 @@
 
 /* BUTTONS ****************************************/
 .actions_container .bottom__buttons {
-  width: 550px;
+  width: 580px;
   height: 50%;
-  gap: 0;
+  /* gap: 0; */
   
   align-items: center;
-  justify-content: flex;
+  justify-content: flex-start;
 }
