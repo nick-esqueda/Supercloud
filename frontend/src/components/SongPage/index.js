@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { restoreUser } from '../../store/session'
 import { fetchSong } from '../../store/songs'
 import Actions from './Actions'
 import ArtistBadge from './ArtistBadge'
@@ -12,18 +13,20 @@ import './SongPage.css'
 export default function SongPage() {
   const { songId } = useParams();
   const dispatch = useDispatch();
-  
   const song = useSelector(state => state.songs[songId]);
-  const user = useSelector(state => state.session.user);
-  
-  let isArtist = false;
-  if (user) isArtist = user?.id === song?.User.id;
-  
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isArtist, setIsArtist] = useState(false);
+
   useEffect(() => {
-    dispatch(fetchSong(songId));
+    (async () => {
+      const { user } = await dispatch(restoreUser());
+      const song = await dispatch(fetchSong(songId));
+      if (user.id === song.User.id) setIsArtist(true);
+      setIsLoaded(true)
+    })()
   }, [dispatch, songId]);
-  
-  return (
+
+  return isLoaded && (
     <>
       <div className='song_header'>
         <Header song={song} />
@@ -35,12 +38,12 @@ export default function SongPage() {
         </div>
 
         <div className='song__profile_card'>
-          <ArtistBadge artist={song?.User} />
+          <ArtistBadge artist={song.User} />
         </div>
 
         <div className='song__body'>
           <div className="song__description">
-            {song?.description}
+            {song.description}
           </div>
           <div className='song__comments'>
             <CommentSection />
@@ -48,7 +51,7 @@ export default function SongPage() {
         </div>
 
         <div className='song_sidebar'>
-          <Sidebar artist={song?.User} />
+          <Sidebar artist={song.User} />
         </div>
 
       </div>
