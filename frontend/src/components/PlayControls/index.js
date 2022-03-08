@@ -1,6 +1,6 @@
 import './PlayControls.css';
 
-const PlayControls = () => {
+export default function PlayControls() {
 
 
   return (
@@ -25,5 +25,3 @@ const PlayControls = () => {
     </div>
   );
 }
-
-export default PlayControls

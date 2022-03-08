@@ -1,15 +1,10 @@
-.play_controls_wrapper {
-  width: 100vw;
-  background-color: #212121;
-  position: sticky;
-  bottom: 0;
-  z-index: 1;
-}
-
 .play_controls {
   width: 1280px;
   height: 46px;
   margin: 0 auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
 
   background-color: #212121;
 
