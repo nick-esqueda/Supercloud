@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { deleteSong } from '../../store/songs';
+import EditSongModal from '../Modal/EditSongModal';
 import './SongCard.css';
 
 export default function SongCard({ song }) {
@@ -71,13 +72,8 @@ export default function SongCard({ song }) {
 
             {isArtist && (
               <>
-                <button className='btn btn--secondary--outline'>
-                  <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
-                    style={{ transform: 'scale(1.0)' }}
-                    alt=''
-                  />
-                  &nbsp;edit
-                </button>
+                <EditSongModal />
+              
                 <button className='btn btn--secondary--outline'
                   onClick={e => {
                     if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
