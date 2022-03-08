@@ -77,6 +77,10 @@ li {
   filter: blur(10px);
 }
 
+.hidden {
+  display: none;
+}
+
 
 /* OOP CLASSES **************************************************************/
 .flexRow {

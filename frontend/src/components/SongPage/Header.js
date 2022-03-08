@@ -3,14 +3,25 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setPlaying } from '../../store/songs';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
+import { useEffect, useState } from 'react';
 
 export default function Header({ song, isLoaded }) {
   const dispatch = useDispatch();
   const audioPlayer = useAudioPlayer();
+  const [paused, setPaused] = useState(true);
   
-  const playSong = () => {
-    dispatch(setPlaying(song));
+  const playSong = async () => {
+    await new Promise((resolve, reject) => {
+      dispatch(setPlaying(song));
+      resolve();
+    });  
     audioPlayer.current.audio.current.play();
+    setPaused(false);
+  }
+  
+  const pauseSong = () => {
+    audioPlayer.current.audio.current.pause();
+    setPaused(true);
   }
   
   return isLoaded && (
@@ -18,7 +29,14 @@ export default function Header({ song, isLoaded }) {
       
       <div className="song_header__top">
         <div className="song_header__top_left">
-          <div className="song_header__play" onClick={playSong}></div>
+          <div 
+            className={paused ? "song_header__play" : "song_header__play hidden"}
+            onClick={playSong}
+          ></div>
+          <div 
+            className={!paused ? "song_header__pause" : "song_header__pause hidden"}
+            onClick={pauseSong}
+          ></div>
           <div className="song_header__song">
             <h2>{song?.title}</h2>
             <NavLink to={'/artist-link-here'}>{song?.User?.username}</NavLink>
