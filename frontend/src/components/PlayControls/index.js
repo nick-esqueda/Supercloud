@@ -6,7 +6,7 @@ export default function PlayControls() {
 
   return (
     <div className='play_controls'>
-      {/* <Player /> */}
+      <Player />
 
       <div className='play_controls__details'>
         <img
