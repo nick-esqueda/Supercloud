@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { deleteSong } from '../../store/songs';
 import './SongCard.css';
 
 export default function SongCard({ song }) {
   const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
   
   let isArtist = false;
   if (user) isArtist = user.id === song.User.id;
@@ -71,7 +73,15 @@ export default function SongCard({ song }) {
                   />
                   &nbsp;edit
                 </button>
-                <button className='btn btn--secondary--outline'>
+                <button className='btn btn--secondary--outline'
+                  onClick={e => {
+                    if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
+                      if (window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
+                        dispatch(deleteSong(song.id));
+                      }
+                    }
+                  }}
+                >
                   <img src="https://a-v2.sndcdn.com/assets/images/delete-d90bf5e4.svg"
                     style={{ transform: 'scale(1.0)' }}
                   />
