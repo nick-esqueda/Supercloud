@@ -1,7 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import { deleteSong } from '../../store/songs';
 import './Actions.css';
 
-export default function Actions() {
+export default function Actions({ song, isArtist }) {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   return (
     <div className='actions_container'>
       <div className='write_comment'>
@@ -51,20 +56,34 @@ export default function Actions() {
           &nbsp;add to playlist
         </button>
 
-        <button className='btn btn--secondary--outline'>
-          <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
-            style={{ transform: 'scale(1.0)' }}
-            alt=''
-          />
-          &nbsp;edit
-        </button>
-        <button className='btn btn--secondary--outline'>
-          <img src="https://a-v2.sndcdn.com/assets/images/delete-d90bf5e4.svg"
-            style={{ transform: 'scale(1.0)' }}
-            alt=''
-          />
-          &nbsp;delete
-        </button>
+        {isArtist && (
+          <>
+            <button className='btn btn--secondary--outline'>
+              <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
+                style={{ transform: 'scale(1.0)' }}
+                alt=''
+              />
+              &nbsp;edit
+            </button>
+            
+            <button className='btn btn--secondary--outline'
+              onClick={e => {
+                if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
+                  if (window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
+                    dispatch(deleteSong(song.id));
+                    return history.push('/');
+                  }
+                }
+              }}
+            >
+              <img src="https://a-v2.sndcdn.com/assets/images/delete-d90bf5e4.svg"
+                style={{ transform: 'scale(1.0)' }}
+                alt=''
+              />
+              &nbsp;delete
+            </button>
+          </>
+        )}
 
       </div>
     </div>

@@ -14,6 +14,10 @@ export default function SongPage() {
   const dispatch = useDispatch();
   
   const song = useSelector(state => state.songs[songId]);
+  const user = useSelector(state => state.session.user);
+  
+  let isArtist = false;
+  if (user) isArtist = user?.id === song?.User.id;
   
   useEffect(() => {
     dispatch(fetchSong(songId));
@@ -27,7 +31,7 @@ export default function SongPage() {
 
       <div className='song_main'>
         <div className='song__actions'>
-          <Actions />
+          <Actions song={song} isArtist={isArtist} />
         </div>
 
         <div className='song__profile_card'>

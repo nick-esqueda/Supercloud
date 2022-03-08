@@ -4,8 +4,9 @@ import { deleteSong } from '../../store/songs';
 import './SongCard.css';
 
 export default function SongCard({ song }) {
-  const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  
+  const user = useSelector(state => state.session.user);
   
   let isArtist = false;
   if (user) isArtist = user.id === song.User.id;
