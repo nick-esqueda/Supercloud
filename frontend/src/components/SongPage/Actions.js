@@ -14,13 +14,13 @@ export default function Actions() {
             <input type="text"
               id="comment"
               placeholder='write a comment'
-              // value={title}
-              // onChange={e => setTitle(e.target.value)}
+              // value={}
+              // onChange={}
               className="form_input"
-            // style={
-            //   showErrors && (validationErrors.includes('please enter a title'))
-            //     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
-            // }
+              // style={
+              //   showErrors && (validationErrors.includes('please enter a title'))
+              //     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+              // }
 
             />
           </div>
@@ -39,7 +39,7 @@ export default function Actions() {
             style={{ height: '16px' }}
           />
           &nbsp;
-          <NavLink to={`/users/`}>artist profile</NavLink>
+          <NavLink to={`/users/COME-BACK-AND-MAKE-DYNAMIC`}>artist profile</NavLink>
         </button>
         <button className='btn btn--secondary--outline'>
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTIgNmgxMHYxMEgyeiIvPgogICAgICAgIDxwYXRoIGZpbGwtb3BhY2l0eT0iLjciIGQ9Ik01IDJoMTF2MTBoLTJWNEg1eiIvPgogICAgPC9nPgo8L3N2Zz4K"
