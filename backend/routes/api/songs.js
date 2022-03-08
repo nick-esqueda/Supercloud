@@ -48,6 +48,17 @@ router.post(
   })
 )
 
+// DELETE /api/songs/:songId - DELETE A SONG
+router.delete(
+  '/:songId(\\d+)',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const id = +req.params.songId;
+    await Song.destroy({ where: { id } });
+    return res.json(id);
+  })
+)
+
 
 
 module.exports = router;
