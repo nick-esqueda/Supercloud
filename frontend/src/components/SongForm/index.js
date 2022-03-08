@@ -31,7 +31,7 @@ export default function SongForm({ song, closeModal }) {
       setDescription(song.description)
     }
   }, []);
-  
+
   // FRONTEND ERROR VALIDATIONS
   useEffect(() => {
     const errors = [];
@@ -73,17 +73,17 @@ export default function SongForm({ song, closeModal }) {
 
     return history.push(`/songs/${newSong.id}`);
   }
-  
+
   const onEditSubmit = async (e) => {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
-    
+
     const editedSong = { ...song, artworkURL, title, genre, description };
     dispatch(editSong(editedSong));
     return closeModal();
   }
 
-  
+
   // JSX ***************************************************************************
   return (
     <div className="form_container">
@@ -222,8 +222,9 @@ export default function SongForm({ song, closeModal }) {
           <span className="required_label">required fields</span>
           <div className="btn_container">
             <button type="button" className="btn btn--secondary" onClick={e => {
-              if (window.confirm('Are you sure you want to cancel your upload?')) {
-                history.push('/');
+              if (song) closeModal();
+              if (!song && window.confirm('Are you sure you want to cancel your upload?')) {
+                return history.push('/');
               }
             }}
             >
