@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchSong } from '../../store/songs'
+import Actions from './Actions'
 import ArtistBadge from './ArtistBadge'
 import CommentSection from './CommentSection'
 import Header from './Header'
@@ -26,7 +27,7 @@ export default function SongPage() {
 
       <div className='song_main'>
         <div className='song__actions'>
-          actions
+          <Actions />
         </div>
 
         <div className='song__profile_card'>
