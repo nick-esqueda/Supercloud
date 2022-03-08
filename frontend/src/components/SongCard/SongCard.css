@@ -63,11 +63,19 @@
 .top__title_artist {
   height: 100%;
   width: 100%;
+  max-width: 920px;
+  
   text-align: left;
+  
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+}
+.top__title_artist a {
+  max-width: 920px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .top__right {
