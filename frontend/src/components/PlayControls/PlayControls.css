@@ -1,0 +1,43 @@
+.play_controls {
+  width: 1280px;
+  height: 54px;
+  margin: 0 auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+
+  background-color: #212121;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+
+/* CURRENT SONG DETAILS */
+.play_controls__details {
+  height: 100%;
+  width: 350px;
+  max-width: 350px;
+  
+  font-size: 12px;
+  
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+
+.play_controls__details img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+  object-fit: cover;
+}
+
+.play_controls__details span {
+  width: 220px;
+  
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

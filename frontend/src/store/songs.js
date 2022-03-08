@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const ADD_SONG = 'songs/ADD_SONG';
 const ADD_SONGS = 'songs/ADD_SONGS'
 const REMOVE_SONG = 'songs/REMOVE_SONG';
+const SET_PLAYING = 'songs/SET_PLAYING';
 
 
 // ACTION CREATORS ****************************************
@@ -25,6 +26,13 @@ const removeSong = (songId) => {
   return {
     type: REMOVE_SONG,
     songId
+  }
+}
+
+export const setPlaying = (song) => {
+  return {
+    type: SET_PLAYING,
+    song
   }
 }
 
@@ -101,7 +109,8 @@ export const deleteSong = id => async dispatch => {
 
 
 // REDUCER ************************************************
-const songsReducer = (state = {}, action) => {
+const initialState = { playing: null };
+const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     
@@ -124,6 +133,12 @@ const songsReducer = (state = {}, action) => {
     case REMOVE_SONG: {
       newState = {...state};
       delete newState[action.songId];
+      return newState;
+    }
+    
+    case SET_PLAYING: {
+      newState = {...state};
+      newState.playing = action.song;
       return newState;
     }
     

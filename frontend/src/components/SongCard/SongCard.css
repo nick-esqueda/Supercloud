@@ -32,7 +32,8 @@
 }
 /* TOP *****************************************/
 
-.top__play {
+.top__play,
+.top__pause {
   height: 40px;
   min-width: 40px;
   margin-right: 8px;
@@ -48,15 +49,15 @@
   position: relative;
   right: -2px;
 }
-.top__play::after {
-  /* content: '||'; */
+.top__pause::before {
+  content: '||';
   color: #212121;
   font-weight: bold;
   font-size: 24px;
-  letter-spacing: -4px;
+  letter-spacing: -5px;
   
   position: relative;
-  left: -1.8px;
+  left: -2px;
   bottom: -1px;
 }
 
@@ -99,7 +100,7 @@
   height: 80px;
   width: 100%;
   padding: 16px;
-  border: 1px solid red;
+  border: 1px solid #535353;
 }
 
 

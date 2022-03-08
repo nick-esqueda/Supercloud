@@ -2,10 +2,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import Navigation from './components/Navigation';
+import HeaderFooter from './components/HeaderFooter';
 import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';
+import AudioPlayerProvider from './Context/AudioPlayerContext';
 import { restoreUser } from './store/session';
 import { fetchSongs } from './store/songs';
 
@@ -22,30 +23,31 @@ function App() {
   return (
     <>
       {isLoaded ? (
-        <>
-          <Navigation />
-          <Switch>
-            <Route exact path="/">
-              <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
-              
-              {songs.map(song => (
-                <SongCard key={songs.id} song={song} />
-              ))}
-            </Route>
+        <AudioPlayerProvider>
+          <HeaderFooter>
+            <Switch>
+              <Route exact path="/">
+                <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
-            <Route exact path="/songs/:songId(\d+)">
-              <SongPage />
-            </Route>
-            
-            <Route exact path="/upload">
-              <UploadSongPage />
-            </Route>            
-            
-            <Route>
-              404 page
-            </Route>
-          </Switch>
-        </>
+                {songs.map(song => (
+                  <SongCard key={songs.id} song={song} />
+                ))}
+              </Route>
+
+              <Route exact path="/songs/:songId(\d+)">
+                <SongPage />
+              </Route>
+
+              <Route exact path="/upload">
+                <UploadSongPage />
+              </Route>
+
+              <Route>
+                404 page
+              </Route>
+            </Switch>
+          </HeaderFooter>
+        </AudioPlayerProvider>
 
       ) : (
         <h4>loading...</h4>
