@@ -1,0 +1,39 @@
+.play_controls_wrapper {
+  width: 100vw;
+  background-color: #212121;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+.play_controls {
+  width: 1280px;
+  height: 46px;
+  margin: 0 auto;
+
+  background-color: #212121;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.play_controls audio {
+  width: 900px;
+  height: 100%;
+}
+
+
+/* CURRENT SONG DETAILS */
+.play_controls__details {
+  height: 100%;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+
+.play_controls__details img {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+}
