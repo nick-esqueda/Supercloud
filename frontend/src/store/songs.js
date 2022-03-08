@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 // ACTION VARIABLES ***************************************
 const ADD_SONG = 'songs/ADD_SONG';
 const ADD_SONGS = 'songs/ADD_SONGS'
+const REMOVE_SONG = 'songs/REMOVE_SONG';
 
 
 // ACTION CREATORS ****************************************
@@ -17,6 +18,13 @@ const addSongs = (songs) => {
   return {
     type: ADD_SONGS,
     songs
+  }
+}
+
+const removeSong = (songId) => {
+  return {
+    type: REMOVE_SONG,
+    songId
   }
 }
 
@@ -72,11 +80,13 @@ export const postSong = song => async dispatch => {
 const songsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
+    
     case ADD_SONG: {
       newState = {...state};
       newState[action.song.id] = action.song;
       return newState;
     }
+    
     case ADD_SONGS: {
       const newSongs = {};
       action.songs.forEach(song => {
@@ -86,8 +96,17 @@ const songsReducer = (state = {}, action) => {
       });
       return {...state, ...newSongs}
     }
-    default:
+    
+    case REMOVE_SONG: {
+      newState = {...state};
+      delete newState[action.songId];
+      return newState;
+    }
+    
+    default: {
       return state;
+    }
+    
   }
 };
 
