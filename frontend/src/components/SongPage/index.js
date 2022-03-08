@@ -29,7 +29,7 @@ export default function SongPage() {
   return isLoaded && (
     <>
       <div className='song_header'>
-        <Header song={song} />
+        <Header song={song} isLoaded={isLoaded} />
       </div>
 
       <div className='song_main'>
