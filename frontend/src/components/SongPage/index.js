@@ -38,12 +38,12 @@ export default function SongPage() {
         </div>
 
         <div className='song__profile_card'>
-          <ArtistBadge artist={song.User} />
+          <ArtistBadge artist={song?.User} />
         </div>
 
         <div className='song__body'>
           <div className="song__description">
-            {song.description}
+            {song?.description}
           </div>
           <div className='song__comments'>
             <CommentSection />
@@ -51,7 +51,7 @@ export default function SongPage() {
         </div>
 
         <div className='song_sidebar'>
-          <Sidebar artist={song.User} />
+          <Sidebar artist={song?.User} />
         </div>
 
       </div>

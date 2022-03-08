@@ -1,19 +1,19 @@
 import AudioPlayer from 'react-h5-audio-player';
 import { useSelector } from 'react-redux';
-import 'react-h5-audio-player/lib/styles.css';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
+import 'react-h5-audio-player/lib/styles.css';
 
 export default function Player() {
   const song = useSelector(state => state.songs.playing);
-  const audioPlayer = useAudioPlayer();
+  const { audioPlayer, setPaused } = useAudioPlayer();
 
   return (
     <>
       <AudioPlayer
         autoPlay
         src={song?.songURL}
-        onPlay={e => console.log("onPlay")}
-        onPause={e => console.log('onPause')}
+        onPlay={e => setPaused(false)}
+        onPause={e => setPaused(true)}
         ref={audioPlayer}
         // other props here
         layout='horizontal-reverse'
@@ -23,7 +23,6 @@ export default function Player() {
         style={{
           backgroundColor: '#212121',
           paddingLeft: '0',
-
         }}
       />
       

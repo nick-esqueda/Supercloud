@@ -8,11 +8,10 @@ import './SongCard.css';
 
 export default function SongCard({ song }) {
   const dispatch = useDispatch();
-  const audioPlayer = useAudioPlayer();
-  const [paused, setPaused] = useState(true);
+  const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
   const user = useSelector(state => state.session.user);
-  song = useSelector(state => state.songs[song.id]);
+  song = useSelector(state => state.songs[song?.id]);
 
   const playSong = async () => {
     await new Promise((resolve, reject) => {
@@ -30,13 +29,13 @@ export default function SongCard({ song }) {
 
 
   let isArtist = false;
-  if (user) isArtist = user.id === song.User.id;
+  if (user) isArtist = user?.id === song?.User?.id;
 
   return (
     <div className='song_card_container'>
-      <NavLink to={`/songs/${song.id}`}>
-        <img src={song.artworkURL
-          ? song.artworkURL
+      <NavLink to={`/songs/${song?.id}`}>
+        <img src={song?.artworkURL
+          ? song?.artworkURL
           : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
         }
           alt="artwork"
@@ -47,26 +46,26 @@ export default function SongCard({ song }) {
       <div className='song_card__content'>
         <div className='song_card__top'>
           <div
-            className={paused || playingSong.id !== song.id ? "top__play" : "top__play hidden"}
+            className={paused || playingSong?.id !== song?.id ? "top__play" : "top__play hidden"}
             onClick={playSong}
           ></div>
           <div
-            className={!paused && playingSong.id === song.id ? "top__pause" : "top__pause hidden"}
+            className={!paused && playingSong?.id === song?.id ? "top__pause" : "top__pause hidden"}
             onClick={pauseSong}
           ></div>
 
           <div className='top__title_artist'>
-            <NavLink to={`/users/${song.User.id}`}>
-              <small>{song.User.username}</small>
+            <NavLink to={`/users/${song?.User.id}`}>
+              <small>{song?.User.username}</small>
             </NavLink>
-            <NavLink to={`/songs/${song.id}`}>
-              <span>{song.title}</span>
+            <NavLink to={`/songs/${song?.id}`}>
+              <span>{song?.title}</span>
             </NavLink>
           </div>
 
           <div className='top__right'>
-            <small>{song.createdAt}</small>
-            <span className='genre'>{song.genre}</span>
+            <small>{song?.createdAt}</small>
+            <span className='genre'>{song?.genre}</span>
           </div>
         </div>
 
@@ -89,7 +88,7 @@ export default function SongCard({ song }) {
                 alt=''
               />
               &nbsp;
-              <NavLink to={`/users/${song.User.id}`}>artist profile</NavLink>
+              <NavLink to={`/users/${song?.User.id}`}>artist profile</NavLink>
             </button>
             <button className='btn btn--secondary--outline'>
               <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTIgNmgxMHYxMEgyeiIvPgogICAgICAgIDxwYXRoIGZpbGwtb3BhY2l0eT0iLjciIGQ9Ik01IDJoMTF2MTBoLTJWNEg1eiIvPgogICAgPC9nPgo8L3N2Zz4K"
@@ -107,7 +106,7 @@ export default function SongCard({ song }) {
                   onClick={e => {
                     if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
                       if (window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
-                        dispatch(deleteSong(song.id));
+                        dispatch(deleteSong(song?.id));
                       }
                     }
                   }}
@@ -124,7 +123,7 @@ export default function SongCard({ song }) {
           </div>
 
           <div className='bottom__right'>
-            <span>▶ {song.plays}</span>
+            <span>▶ {song?.plays}</span>
             <span>💬 {"cmnts"}</span>
           </div>
         </div>
