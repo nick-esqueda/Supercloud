@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Modal from '.';
+import SongForm from '../SongForm';
 
 
 export default function EditSongModal() {
@@ -28,7 +29,7 @@ export default function EditSongModal() {
 
       {showModal && (
         <Modal closeModal={() => setShowModal(false)}>
-          bruh
+          <SongForm />
         </Modal>
       )}
     </>
