@@ -26,7 +26,6 @@ export default function Actions({ song, isArtist }) {
               //   showErrors && (validationErrors.includes('please enter a title'))
               //     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
               // }
-
             />
           </div>
         </form>
