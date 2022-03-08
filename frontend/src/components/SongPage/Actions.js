@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteSong } from '../../store/songs';
+import EditSongModal from '../Modal/EditSongModal';
 import './Actions.css';
 
 export default function Actions({ song, isArtist }) {
@@ -22,10 +23,10 @@ export default function Actions({ song, isArtist }) {
               // value={}
               // onChange={}
               className="form_input"
-              // style={
-              //   showErrors && (validationErrors.includes('please enter a title'))
-              //     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
-              // }
+            // style={
+            //   showErrors && (validationErrors.includes('please enter a title'))
+            //     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+            // }
             />
           </div>
         </form>
@@ -57,14 +58,8 @@ export default function Actions({ song, isArtist }) {
 
         {isArtist && (
           <>
-            <button className='btn btn--secondary--outline'>
-              <img src="https://a-v2.sndcdn.com/assets/images/edit-2fe52d66.svg"
-                style={{ transform: 'scale(1.0)' }}
-                alt=''
-              />
-              &nbsp;edit
-            </button>
-            
+            <EditSongModal song={song} />
+
             <button className='btn btn--secondary--outline'
               onClick={e => {
                 if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
