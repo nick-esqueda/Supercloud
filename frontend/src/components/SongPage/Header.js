@@ -2,13 +2,15 @@ import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setPlaying } from '../../store/songs';
-// import Player from '../PlayControls/Player';
+import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 
 export default function Header({ song, isLoaded }) {
   const dispatch = useDispatch();
+  const audioPlayer = useAudioPlayer();
   
   const playSong = () => {
     dispatch(setPlaying(song));
+    audioPlayer.current.audio.current.play();
   }
   
   return isLoaded && (

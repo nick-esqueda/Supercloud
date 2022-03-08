@@ -6,6 +6,7 @@ import HeaderFooter from './components/HeaderFooter';
 import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';
+import AudioPlayerProvider from './Context/AudioPlayerContext';
 import { restoreUser } from './store/session';
 import { fetchSongs } from './store/songs';
 
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
       {isLoaded ? (
-        <>
+        <AudioPlayerProvider>
           <HeaderFooter>
             <Switch>
               <Route exact path="/">
@@ -46,7 +47,7 @@ function App() {
               </Route>
             </Switch>
           </HeaderFooter>
-        </>
+        </AudioPlayerProvider>
 
       ) : (
         <h4>loading...</h4>

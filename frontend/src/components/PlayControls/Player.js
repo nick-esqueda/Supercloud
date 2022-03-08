@@ -2,25 +2,27 @@ import AudioPlayer from 'react-h5-audio-player';
 import { useSelector } from 'react-redux';
 import 'react-h5-audio-player/lib/styles.css';
 import { useEffect, useRef } from 'react';
+import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 
 export default function Player() {
   const song = useSelector(state => state.songs.playing);
   
-  const player = useRef();
+  // const player = useRef();
+  const audioPlayer = useAudioPlayer();
 
-  const clickPlay = () => player.current.audio.current.play();
-  const clickPause = () => player.current.audio.current.pause();
+  // const clickPlay = () => audioPlayer.current.audio.current.play();
+  const clickPause = () => audioPlayer.current.audio.current.pause();
 
   return (
     <>
-      <button onClick={clickPlay}>play test</button>
+      {/* <button onClick={clickPlay}>play test</button> */}
       <button onClick={clickPause}>pause test</button>
       <AudioPlayer
         autoPlay
         src={song?.songURL}
         onPlay={e => console.log("onPlay")}
         onPause={e => console.log('onPause')}
-        ref={player}
+        ref={audioPlayer}
         // other props here
         layout='horizontal-reverse'
         showSkipControls={true}
