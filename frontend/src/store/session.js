@@ -37,7 +37,7 @@ export const restoreUser = () => async dispatch => {
   const res = await csrfFetch('/api/session');
   const data = await res.json();
   dispatch(setUser(data.user));
-  return res;
+  return data; // this was originally "return res;" in the reading - why?
 };
 
 export const signupUser = (user) => async (dispatch) => {

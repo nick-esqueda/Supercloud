@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 // ACTION VARIABLES ***************************************
 const ADD_SONG = 'songs/ADD_SONG';
 const ADD_SONGS = 'songs/ADD_SONGS'
+const REMOVE_SONG = 'songs/REMOVE_SONG';
 
 
 // ACTION CREATORS ****************************************
@@ -17,6 +18,13 @@ const addSongs = (songs) => {
   return {
     type: ADD_SONGS,
     songs
+  }
+}
+
+const removeSong = (songId) => {
+  return {
+    type: REMOVE_SONG,
+    songId
   }
 }
 
@@ -53,7 +61,6 @@ export const fetchSongs = (userId, playlistId) => async dispatch => {
   }
 }
 
-// USE csrfFetch for requests other than "GET"
 export const postSong = song => async dispatch => {
   const res = await csrfFetch('/api/songs', {
     method: 'POST',
@@ -61,9 +68,21 @@ export const postSong = song => async dispatch => {
   });
   
   if (res.ok) {
-    const newSong = res.json();
+    const newSong = await res.json();
     dispatch(addSong(newSong));
     return newSong;
+  }
+}
+
+export const deleteSong = id => async dispatch => {
+  const res = await csrfFetch(`/api/songs/${id}`, {
+    method: 'DELETE',
+  });
+  
+  if (res.ok) {
+    const songId = await res.json();
+    dispatch(removeSong(songId));
+    return;
   }
 }
 
@@ -72,11 +91,13 @@ export const postSong = song => async dispatch => {
 const songsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
+    
     case ADD_SONG: {
       newState = {...state};
       newState[action.song.id] = action.song;
       return newState;
     }
+    
     case ADD_SONGS: {
       const newSongs = {};
       action.songs.forEach(song => {
@@ -86,8 +107,17 @@ const songsReducer = (state = {}, action) => {
       });
       return {...state, ...newSongs}
     }
-    default:
+    
+    case REMOVE_SONG: {
+      newState = {...state};
+      delete newState[action.songId];
+      return newState;
+    }
+    
+    default: {
       return state;
+    }
+    
   }
 };
 
