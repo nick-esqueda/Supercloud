@@ -33,6 +33,7 @@ export default function Actions({ song, isArtist }) {
       </div>
 
       <div className='bottom__buttons'>
+        {/* <div></div> */}
         <button className='btn btn--secondary--outline'>
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEwLjgwNSAzQzguNzg1IDMgOCA1LjM0NSA4IDUuMzQ1UzcuMjE0IDMgNS4xOTcgM0MzLjQ5NCAzIDEuNzQ4IDQuMDk2IDIuMDMgNi41MTRjLjM0NCAyLjk1MyA1LjcyNSA2LjQ4IDUuOTYzIDYuNDg3LjIzOC4wMSA1LjczOC0zLjcyIDUuOTg4LTYuNS4yMDgtMi4zLTEuNDczLTMuNS0zLjE3NS0zLjV6Ii8+Cjwvc3ZnPgo="
             style={{ transform: 'scale(1.2)' }}
@@ -79,6 +80,11 @@ export default function Actions({ song, isArtist }) {
           </>
         )}
 
+        <div className='bottom__right'>
+          <span>▶ {song?.plays}</span>
+          <span>💬 {"cmnts"}</span>
+        </div>
+        
       </div>
     </div>
   )
