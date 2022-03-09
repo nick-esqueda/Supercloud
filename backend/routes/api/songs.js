@@ -71,7 +71,7 @@ router.delete(
   '/:songId(\\d+)',
   requireAuth,
   asyncHandler(async (req, res) => {
-    const id = +req.params.songId;
+    const id = parseInt(req.params.songId, 10);
     await Song.destroy({ where: { id } });
     return res.json(id);
   })

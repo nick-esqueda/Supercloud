@@ -16,11 +16,11 @@ router.get(
     const likes = await Like.findAll({
       where: { userId }
     });
-    
+
     likes.forEach(like => {
       like.dataValues.createdAt = getTimeElapsed(like.dataValues.createdAt);
     });
-  
+
     return res.json(likes);
   })
 )
@@ -37,6 +37,16 @@ router.post(
   })
 )
 
+// DELETE /api/likes/:likeId - DELETE A LIKE
+router.delete(
+  '/:likeId',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.likeId, 10);
+    await Like.destroy({ where: { id } });
+    res.json(id);
+  })
+)
 
 
 module.exports = router;
