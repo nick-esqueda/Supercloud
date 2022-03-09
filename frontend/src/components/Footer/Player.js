@@ -1,9 +1,9 @@
 import AudioPlayer from 'react-h5-audio-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
-import 'react-h5-audio-player/lib/styles.css';
 import { useEffect, useState } from 'react';
 import { editSong } from '../../store/songs';
+import 'react-h5-audio-player/lib/styles.css';
 
 export default function Player() {
   const dispatch = useDispatch();
@@ -36,21 +36,23 @@ export default function Player() {
       <AudioPlayer
         autoPlay
         src={song?.songURL}
-        onPlay={e => {
-          onPlay()
-        }}
-        onPause={e => {
-          onPause()
-        }}
+        onPlay={e => onPlay()}
+        onPause={e => onPause()}
         ref={audioPlayer}
         // other props here
         layout='horizontal-reverse'
-        showSkipControls={true}
+        showSkipControls={false}
         showJumpControls={false}
         customAdditionalControls={[]}
         style={{
-          backgroundColor: '#212121',
+          backgroundColor: 'transparent',
+          color: 'white',
           paddingLeft: '0',
+          fontSize: '1px',
+          width: '800px',
+        }}
+        customIcons={{
+          // play: '▶',
         }}
       />
 
