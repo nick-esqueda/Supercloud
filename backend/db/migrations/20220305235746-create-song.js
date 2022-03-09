@@ -16,7 +16,6 @@ module.exports = {
       songURL: {
         allowNull: false,
         type: Sequelize.TEXT,
-        unique: true,
       },
       artworkURL: {
         type: Sequelize.TEXT,
@@ -31,10 +30,10 @@ module.exports = {
       description: {
         type: Sequelize.STRING(500)
       },
-      duration: {
-        allowNull: false,
-        type: Sequelize.STRING(5)
-      },
+      // duration: {
+      //   allowNull: false,
+      //   type: Sequelize.STRING(5)
+      // },
       plays: {
         allowNull: false,
         type: Sequelize.INTEGER,

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { logoutUser } from '../../store/session';
 
 function ProfileNavButton({ user }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -30,6 +31,7 @@ function ProfileNavButton({ user }) {
 
   const logout = (e) => {
     dispatch(logoutUser());
+    history.push('/');
   };
 
   return (

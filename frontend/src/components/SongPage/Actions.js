@@ -33,6 +33,7 @@ export default function Actions({ song, isArtist }) {
       </div>
 
       <div className='bottom__buttons'>
+        {/* <div></div> */}
         <button className='btn btn--secondary--outline'>
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEwLjgwNSAzQzguNzg1IDMgOCA1LjM0NSA4IDUuMzQ1UzcuMjE0IDMgNS4xOTcgM0MzLjQ5NCAzIDEuNzQ4IDQuMDk2IDIuMDMgNi41MTRjLjM0NCAyLjk1MyA1LjcyNSA2LjQ4IDUuOTYzIDYuNDg3LjIzOC4wMSA1LjczOC0zLjcyIDUuOTg4LTYuNS4yMDgtMi4zLTEuNDczLTMuNS0zLjE3NS0zLjV6Ii8+Cjwvc3ZnPgo="
             style={{ transform: 'scale(1.2)' }}
@@ -46,9 +47,9 @@ export default function Actions({ song, isArtist }) {
             alt=''
           />
           &nbsp;
-          <NavLink to={`/users/COME-BACK-AND-MAKE-DYNAMIC`}>artist profile</NavLink>
+          <NavLink to={`/users/${song.User.id}`} onClick={() => alert('Sorry! This feature is currently under construction')}>artist profile</NavLink>
         </button>
-        <button className='btn btn--secondary--outline'>
+        <button className='btn btn--secondary--outline' onClick={() => alert('Sorry! This feature is currently under construction')}>
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTIgNmgxMHYxMEgyeiIvPgogICAgICAgIDxwYXRoIGZpbGwtb3BhY2l0eT0iLjciIGQ9Ik01IDJoMTF2MTBoLTJWNEg1eiIvPgogICAgPC9nPgo8L3N2Zz4K"
             style={{ transform: 'scale(1.0)' }}
             alt=''
@@ -79,6 +80,11 @@ export default function Actions({ song, isArtist }) {
           </>
         )}
 
+        <div className='bottom__right'>
+          <span>▶ {song?.plays}</span>
+          <span>💬 {"cmnts"}</span>
+        </div>
+        
       </div>
     </div>
   )

@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux';
 import SongCardSmall from "../SongCard/SongCardSmall";
 import "./Sidebar.css";
 
 export default function Sidebar({ artist }) {
+  const songsObj = useSelector(state => state.songs.songs);
+  const artistsSongs = Object.values(songsObj).filter(song => artist.id === song.User.id);
+  
   return (
     <div className="sidebar_container">
       <span className='inner_section_header'>
@@ -18,9 +22,8 @@ export default function Sidebar({ artist }) {
       </span>
 
       <ul className="songs">
-        {/* render out song card (small) component (limit 3(?)) */}
-        {artist?.Songs?.map((song, i) => (
-          <li key={song.id}><SongCardSmall artist={artist} index={i} /></li>
+        {artistsSongs.map((song, i) => (
+          <li key={song.id}><SongCardSmall artist={artist} song={song} index={i} /></li>
         ))}
       </ul>
     </div>
