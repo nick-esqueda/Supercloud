@@ -111,6 +111,7 @@
 }
 
 .bottom__buttons {
+  height: 24px;
   display: flex;
   justify-content: space-around;
   gap: 8px;
@@ -119,8 +120,15 @@
 .bottom__buttons button {
   font-size: 11px;
 }
-.bottom__buttons button:hover {
-  background-color: #FFFF5D;
+.bottom__buttons button a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: background .05s, color .05s;
+}
+.bottom__buttons button:hover,
+.bottom__buttons a:hover {
+  background: #FFFF5D;
   border-color: transparent;
   color: black;
   font-weight: 400;
