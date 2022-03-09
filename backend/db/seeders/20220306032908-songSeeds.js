@@ -146,7 +146,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/14/audio_765bb2a81b.mp3?filename=yesterday-extended-version-14197.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'dedicated',
         genre: 'Non Music',
         description: 'Non repudiandae repellendus hic qui nisi consequatur unde cumque eos.',
@@ -158,7 +158,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/23/audio_64fe965d5a.mp3?filename=out-of-time-15474.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'esse',
         genre: 'Classical',
         description: 'Et quis quo rerum itaque excepturi.',
@@ -170,7 +170,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2020/11/10/audio_547ebbf828.mp3?filename=cancion-triste-1502.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'occaecati',
         genre: 'Folk',
         description: 'Et a placeat accusantium modi officiis aliquid.',
@@ -182,7 +182,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/09/06/audio_14fb3b6893.mp3?filename=battle-of-the-dragons-8037.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Developer Shirt seize',
         genre: 'Rock',
         description: 'Aliquid impedit quae placeat qui veniam et enim.',
@@ -194,7 +194,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/08/08/audio_c9a4a1d834.mp3?filename=the-way-home-6674.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'quo',
         genre: 'Folk',
         description: 'Alias enim rerum ipsum.',
@@ -206,7 +206,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/31/audio_02256acb02.mp3?filename=voices-16032.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'sensor',
         genre: 'World',
         description: 'Et magni enim dignissimos omnis aut aliquid corporis molestiae nobis.',
@@ -218,7 +218,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/02/audio_42464b52c7.mp3?filename=indeterminate-16298.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Supervisor',
         genre: 'Metal',
         description: 'Atque fugit voluptas aliquid aspernatur atque voluptates et qui.',
@@ -230,7 +230,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/05/audio_2622ebc59b.mp3?filename=come-on-16497.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'et',
         genre: 'World',
         description: 'Dolorem est nihil soluta error occaecati voluptatem et autem eum.',
@@ -242,7 +242,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/06/audio_7aa5783676.mp3?filename=cinematic-jazz-16587.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'in',
         genre: 'Country',
         description: 'Harum sapiente deserunt veritatis et et accusamus.',
@@ -254,7 +254,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/06/audio_a8bcef877c.mp3?filename=bamboo-shoots-16598.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Enterprise-wide Computer Chicken',
         genre: 'Metal',
         description: 'Voluptate recusandae explicabo esse dolorem.',
@@ -266,7 +266,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/06/audio_9a207faca5.mp3?filename=future-hip-hop-beat-16600.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'open-source',
         genre: 'Folk',
         description: 'Aut nesciunt et ut deserunt et ut tempore.',
@@ -278,7 +278,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/06/audio_6e51455439.mp3?filename=mystique-16608.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'est',
         genre: 'Rap',
         description: 'Quos distinctio ullam voluptates quam quis non dolorum mollitia.',
@@ -290,7 +290,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_25d05c7a95.mp3?filename=black-coffee-18302.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Identity',
         genre: 'Stage And Screen',
         description: 'Quis sed et quia vel eveniet unde.',
@@ -302,7 +302,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_a52a7d58a5.mp3?filename=candy-rain-18303.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'magnam',
         genre: 'Rap',
         description: 'Repudiandae iste quasi incidunt in maiores illum quam.',
@@ -314,7 +314,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_f972decc9f.mp3?filename=every-morning-18304.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'autem',
         genre: 'Rap',
         description: 'Necessitatibus quis cumque.',
@@ -326,7 +326,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_62f03d7168.mp3?filename=one-in-a-million-18314.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'e-commerce',
         genre: 'Folk',
         description: 'Quas quam non blanditiis sint iste impedit consectetur velit eveniet.',
@@ -338,7 +338,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_31f9462bd0.mp3?filename=dynamic-world-18380.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'quidem',
         genre: 'Reggae',
         description: 'Nostrum fugit est consequatur sequi nemo ipsum tempore.',
@@ -350,7 +350,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/09/audio_e23ba8161d.mp3?filename=suicide-doors-18507.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'mollitia',
         genre: 'Hip Hop',
         description: 'Excepturi porro dolor impedit aliquid dignissimos.',
@@ -362,7 +362,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/09/audio_a5fd62ae62.mp3?filename=soft-daydream-18538.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'moratorium Tools',
         genre: 'Jazz',
         description: 'Omnis iste rerum id.',
@@ -374,7 +374,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/09/audio_a7782a9765.mp3?filename=days-to-remember-18539.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'vel',
         genre: 'Country',
         description: 'Sunt ratione perferendis et sunt aliquid dignissimos nisi.',
@@ -386,7 +386,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/12/audio_c75e0ea1cf.mp3?filename=hurricane-20762.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'USB',
         genre: 'Latin',
         description: 'Nostrum accusantium rerum.',
@@ -398,7 +398,7 @@ module.exports = {
       {
         userId: 45,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/14/audio_0b9adc96f2.mp3?filename=desitalk-exclusive-life-is-strange-early-flute-and-guitar-mix-20834.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Officer generation networks',
         genre: 'Jazz',
         description: 'Rerum ullam quia reprehenderit autem enim.',
@@ -410,7 +410,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/15/audio_1cb86bd4bc.mp3?filename=white-stripe-20904.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'amet',
         genre: 'Rock',
         description: 'Nesciunt velit veritatis minus.',
@@ -422,7 +422,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/15/audio_305f127ddf.mp3?filename=battleground-20929.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'corrupti',
         genre: 'Reggae',
         description: 'Velit rem voluptas aspernatur laudantium nostrum et qui.',
@@ -434,7 +434,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/15/audio_ccbea44f70.mp3?filename=goat-20930.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'uniform Extended',
         genre: 'World',
         description: 'In nihil sequi quia consequatur maiores cumque sint ratione.',
@@ -446,7 +446,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/15/audio_5d8da956cd.mp3?filename=lose-my-mind-20931.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Garden',
         genre: 'Country',
         description: 'Est illum illo sed.',
@@ -458,7 +458,7 @@ module.exports = {
       {
         userId: 45,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/16/audio_01d6b9086e.mp3?filename=always-with-me-always-with-you-main-20984.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'porro',
         genre: 'Electronic',
         description: 'Quia facilis odit.',
@@ -470,7 +470,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/17/audio_bf67faa82f.mp3?filename=space-lullaby-21066.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'silver Hat envisioneer',
         genre: 'Electronic',
         description: 'Saepe totam magnam quas et aut occaecati minus architecto.',
@@ -482,7 +482,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/18/audio_b3c6f0c96f.mp3?filename=always-with-me-always-with-you-long-21256.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'dolore',
         genre: 'Reggae',
         description: 'Eos harum rerum ipsa non aut repudiandae porro totam.',
@@ -494,7 +494,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/18/audio_bf80c561fe.mp3?filename=always-with-me-always-with-you-piano-long-21257.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'autem',
         genre: 'Hip Hop',
         description: 'Non ut pariatur ad commodi.',
@@ -506,7 +506,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/22/audio_15ba243025.mp3?filename=sad-21403.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Account',
         genre: 'Country',
         description: 'Ut non dicta.',
@@ -518,7 +518,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/03/audio_dc8c2f8c86.mp3?filename=again-21975.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'iure',
         genre: 'Non Music',
         description: 'Dolore laudantium voluptates quidem modi vel.',
@@ -530,7 +530,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/05/audio_73cac1580b.mp3?filename=same-set-22066.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'eos',
         genre: 'Reggae',
         description: 'Velit voluptatem nostrum ut maiores odio accusamus.',
@@ -542,7 +542,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/05/audio_51a45ed622.mp3?filename=no-calls-22064.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'high-level quantify',
         genre: 'Reggae',
         description: 'Velit non in at nemo dolor.',
@@ -554,7 +554,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/07/audio_98ef028923.mp3?filename=aerial-22166.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'omnis',
         genre: 'Funk',
         description: 'Perspiciatis deserunt eius cumque nesciunt quos pariatur.',
@@ -566,7 +566,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/07/audio_de56f243db.mp3?filename=better-with-you-22167.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'USB',
         genre: 'World',
         description: 'Quam corrupti beatae quas odit qui voluptatem necessitatibus quaerat.',
@@ -578,7 +578,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/07/audio_48408439d8.mp3?filename=mindfulness-relaxation-amp-meditation-music-22174.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Wyoming Junction Idaho',
         genre: 'Folk',
         description: 'Consequatur modi dolores animi nostrum fugit nulla.',
@@ -590,7 +590,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/08/audio_d8bef44fd9.mp3?filename=cloudmcfox-120bpmem-22181.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'voluptas',
         genre: 'Reggae',
         description: 'Vitae voluptatem dolores architecto sed ex vero ea.',
@@ -602,7 +602,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/08/audio_aea834092e.mp3?filename=fractal-splasha92bpm-22182.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'qui',
         genre: 'Folk',
         description: 'Amet nihil facere eaque explicabo.',
@@ -614,7 +614,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/08/audio_d4e40d0fb3.mp3?filename=porcelain-god-81bpma-22185.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'digital Plastic violet',
         genre: 'Classical',
         description: 'Velit quo porro.',
@@ -626,7 +626,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2020/08/30/audio_be9f2675c8.mp3?filename=modular-ambient-01-789.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Turkey',
         genre: 'Metal',
         description: 'Quis laudantium dolorum et nihil voluptate eius officia porro.',
@@ -638,7 +638,7 @@ module.exports = {
       {
         userId: 45,
         songURL: "https://cdn.pixabay.com/download/audio/2020/08/30/audio_926fbf0b66.mp3?filename=modular-ambient-04-792.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'quo',
         genre: 'Non Music',
         description: 'Culpa enim atque soluta blanditiis laboriosam.',
@@ -650,7 +650,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2020/10/11/audio_99ef3e6f9b.mp3?filename=wataboi-flavour-1164.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Movies Rubber pixel',
         genre: 'Non Music',
         description: 'Quod qui omnis et.',
@@ -662,7 +662,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2020/10/11/audio_a4d4d462c3.mp3?filename=u-said-it-v13-1167.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'ea',
         genre: 'Reggae',
         description: 'Necessitatibus et omnis quam eveniet corporis iure voluptatem ea.',
@@ -674,7 +674,7 @@ module.exports = {
       {
         userId: 45,
         songURL: "https://cdn.pixabay.com/download/audio/2020/10/11/audio_fe4d3bcac9.mp3?filename=cali-1171.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'repellendus',
         genre: 'Blues',
         description: 'Voluptatem nobis maxime est iusto.',
@@ -686,7 +686,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2021/02/08/audio_7ac09a1714.mp3?filename=background-loop-melodic-techno-03-2691.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'up',
         genre: 'Electronic',
         description: 'Laborum et aut et itaque.',
@@ -698,7 +698,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/23/audio_15e5f8466c.mp3?filename=christmas-cinematic-dream-piano-9784.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'commodi',
         genre: 'Country',
         description: 'Velit omnis corporis dignissimos.',
@@ -710,7 +710,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/23/audio_fa974e579a.mp3?filename=cinematic-melody-main-9785.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'quisquam',
         genre: 'Electronic',
         description: 'Sit quasi reprehenderit rerum.',
@@ -722,7 +722,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2021/07/22/audio_c53c82ad19.mp3?filename=happy-at-home-background-music-for-videos-5607.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Keyboard Barbados utilisation',
         genre: 'Rap',
         description: 'Repudiandae reprehenderit iure facilis quis libero accusamus libero ea eum.',
@@ -734,7 +734,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/25/audio_f7f75a3ad5.mp3?filename=motivational-inspiring-piano-9837.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'a',
         genre: 'Rap',
         description: 'Eligendi molestias assumenda.',
@@ -746,7 +746,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/01/audio_17df2b9593.mp3?filename=for-me-10168.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Djibouti',
         genre: 'World',
         description: 'Asperiores eos eos.',
@@ -758,7 +758,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/11/audio_0ad0f9e437.mp3?filename=we-confidently-go-to-victory-12006.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Ramp withdrawal',
         genre: 'Hip Hop',
         description: 'Enim et porro repellendus fuga iusto commodi delectus magnam.',
@@ -770,7 +770,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/10/audio_8d8aafb23d.mp3?filename=hidden-place-extended-version-13891.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'deserunt',
         genre: 'Electronic',
         description: 'Aut ea ipsa nihil tempore vel aut qui tempora.',
@@ -782,7 +782,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_dcb90a7b04.mp3?filename=the-future-bass-15017.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'ipsam',
         genre: 'Country',
         description: 'Sunt voluptatem error magni repudiandae.',
@@ -794,7 +794,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2020/11/10/audio_547ebbf828.mp3?filename=cancion-triste-1502.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Pataca Philippine Bacon',
         genre: 'Country',
         description: 'Vel nihil qui voluptatem quasi omnis.',
@@ -806,7 +806,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/27/audio_c7b62310bd.mp3?filename=the-epic-trailer-12955.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Table',
         genre: 'Classical',
         description: 'Rerum qui ea velit in suscipit earum temporibus.',
@@ -818,7 +818,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/23/audio_64fe965d5a.mp3?filename=out-of-time-15474.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'quam',
         genre: 'Pop',
         description: 'Ea ad rerum debitis cumque vel ducimus voluptas.',
@@ -830,7 +830,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/17/audio_bf677c5f9d.mp3?filename=sensei-21145.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'forecast Accountability Gorgeous',
         genre: 'Blues',
         description: 'Eaque animi et beatae et similique.',
@@ -842,7 +842,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/04/07/audio_8ed06844ef.mp3?filename=nightlife-michael-kobrin-95bpm-3783.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'sit',
         genre: 'Jazz',
         description: 'Doloremque omnis aut ex veritatis debitis ut aspernatur.',
@@ -854,7 +854,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/04/07/audio_d5755615b6.mp3?filename=under-pressure-michael-kobrin-105bpm-3781.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'labore',
         genre: 'Electronic',
         description: 'Repellendus alias voluptates corporis maxime aperiam in.',
@@ -866,7 +866,7 @@ module.exports = {
       {
         userId: 45,
         songURL: "https://cdn.pixabay.com/download/audio/2021/05/20/audio_cb31fe8a54.mp3?filename=fluidity-100-ig-edit-4558.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Locks',
         genre: 'Reggae',
         description: 'Et est qui tempora.',
@@ -878,7 +878,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/07/27/audio_202082aa0b.mp3?filename=in-the-forest-ambient-acoustic-guitar-instrumental-background-music-for-videos-5718.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'et',
         genre: 'Rock',
         description: 'Occaecati id rerum facere iure reiciendis eligendi aperiam.',
@@ -890,7 +890,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/07/27/audio_6623aaf984.mp3?filename=chilled-acoustic-indie-folk-instrumental-background-music-for-videos-5720.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'ab',
         genre: 'Country',
         description: 'Et quia quo modi saepe voluptatem.',
@@ -902,7 +902,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2021/08/08/audio_6eb9c39740.mp3?filename=my-life-main-6670.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'web-enabled orange',
         genre: 'Funk',
         description: 'Consequatur corrupti asperiores alias sint a nam quas ea.',
@@ -914,7 +914,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2021/08/08/audio_6eb9c39740.mp3?filename=my-life-main-6670.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'quidem',
         genre: 'Folk',
         description: 'Itaque corporis fugiat dolore molestiae quidem.',
@@ -926,7 +926,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2021/08/08/audio_6e054b59f6.mp3?filename=triumphant-long-6673.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'moderator',
         genre: 'Classical',
         description: 'Sit reprehenderit vel officiis.',
@@ -938,7 +938,7 @@ module.exports = {
       {
         userId: 49,
         songURL: "https://cdn.pixabay.com/download/audio/2021/08/08/audio_c9a4a1d834.mp3?filename=the-way-home-6674.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Configuration',
         genre: 'Country',
         description: 'Et repellendus dolores deserunt natus.',
@@ -950,7 +950,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/08/08/audio_dc39bde808.mp3?filename=cinematic-chillhop-main-6676.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'distinctio',
         genre: 'Rap',
         description: 'Natus sint dignissimos.',
@@ -962,7 +962,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/09/06/audio_14fb3b6893.mp3?filename=battle-of-the-dragons-8037.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'pariatur',
         genre: 'Pop',
         description: 'Officia reprehenderit sit tempora iusto mollitia.',
@@ -974,7 +974,7 @@ module.exports = {
       {
         userId: 10,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/15/audio_2320f2b0bc.mp3?filename=epic-hollywood-trailer-9489.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Cotton Investment',
         genre: 'Electronic',
         description: 'Aperiam voluptas sed.',
@@ -986,7 +986,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/25/audio_47edc456e3.mp3?filename=simple-piano-melody-9834.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Refined',
         genre: 'Soul',
         description: 'Pariatur in numquam quia ad.',
@@ -998,7 +998,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/25/audio_05570f2464.mp3?filename=piano-moment-9835.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'veritatis',
         genre: 'Non Music',
         description: 'Dolorum ut est nihil atque sit enim.',
@@ -1010,7 +1010,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/25/audio_b3ada93101.mp3?filename=melodic-techno-03-extended-version-moogify-9867.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Executive Paradigm Oregon',
         genre: 'Metal',
         description: 'Reprehenderit ipsum rem sint magni deserunt excepturi voluptate voluptatem.',
@@ -1022,7 +1022,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/07/audio_35719208a2.mp3?filename=leonell-cassio-the-sapphire-city-10450.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'vel',
         genre: 'Rap',
         description: 'Et pariatur facere magnam.',
@@ -1034,7 +1034,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/01/audio_67c5757bac.mp3?filename=watr-fluid-10149.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'exercitationem',
         genre: 'Metal',
         description: 'Saepe aperiam dolorem consectetur quaerat quo dicta.',
@@ -1046,7 +1046,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2021/10/25/audio_b3ada93101.mp3?filename=melodic-techno-03-extended-version-moogify-9867.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Beauty',
         genre: 'Reggae',
         description: 'Consequuntur beatae fugiat.',
@@ -1058,7 +1058,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/05/audio_b66e48cda5.mp3?filename=caves-of-dawn-10376.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'mollitia',
         genre: 'Stage And Screen',
         description: 'Id provident autem est.',
@@ -1070,7 +1070,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/23/audio_035a943c87.mp3?filename=cinematic-dramatic-11120.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'culpa',
         genre: 'Latin',
         description: 'Nulla accusamus blanditiis velit vitae.',
@@ -1082,7 +1082,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/23/audio_64b2dd1bce.mp3?filename=just-relax-11157.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'withdrawal Home Associate',
         genre: 'Jazz',
         description: 'Laboriosam optio sed beatae soluta porro beatae ut delectus.',
@@ -1094,7 +1094,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/24/audio_c3dfe250e3.mp3?filename=sexy-fashion-beats-11176.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'dolor',
         genre: 'Latin',
         description: 'Est aperiam laudantium ipsam reprehenderit unde.',
@@ -1106,7 +1106,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2021/11/25/audio_91b32e02f9.mp3?filename=jazzy-abstract-beat-11254.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Berkshire',
         genre: 'Non Music',
         description: 'Odit illo nihil minus eveniet maxime occaecati.',
@@ -1118,7 +1118,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/01/audio_6d87e99a12.mp3?filename=watr-double-overhead-11517.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'neural transition',
         genre: 'Classical',
         description: 'Fuga est aut culpa nihil modi quidem.',
@@ -1130,7 +1130,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/13/audio_b9c0dc9e48.mp3?filename=chill-abstract-12099.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'eius',
         genre: 'Non Music',
         description: 'Aliquam omnis optio accusamus ea id quaerat dolor animi.',
@@ -1142,7 +1142,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/16/audio_e7d0534280.mp3?filename=ever-flowing-12277.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'qui',
         genre: 'Classical',
         description: 'Ex sunt qui eius voluptatem.',
@@ -1154,7 +1154,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/16/audio_232a4bdedf.mp3?filename=let-it-go-12279.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Street',
         genre: 'Stage And Screen',
         description: 'Quod velit nulla fugit fuga nemo et sapiente.',
@@ -1166,7 +1166,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/17/audio_93d90514a5.mp3?filename=this-minimal-technology-12327.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Berkshire',
         genre: 'Soul',
         description: 'Ut quia cupiditate commodi dignissimos et maiores.',
@@ -1178,7 +1178,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2021/12/22/audio_9da2a60074.mp3?filename=penguinmusic-modern-chillout-12641.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'animi',
         genre: 'Country',
         description: 'Harum in in.',
@@ -1190,7 +1190,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/04/audio_76201dc554.mp3?filename=far-from-home-acoustic-version-13463.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'interactive primary',
         genre: 'Hip Hop',
         description: 'Exercitationem quia cumque facere error dolor.',
@@ -1202,7 +1202,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/11/audio_b21d9d6fa6.mp3?filename=moment-14023.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'laboriosam',
         genre: 'Non Music',
         description: 'Recusandae sequi autem quia in rerum eveniet cum voluptas.',
@@ -1214,7 +1214,7 @@ module.exports = {
       {
         userId: 30,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/12/audio_45cacdef8f.mp3?filename=both-of-us-14037.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'non',
         genre: 'Hip Hop',
         description: 'Et harum non inventore quia aut vel nihil.',
@@ -1226,7 +1226,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_ea75bab6d8.mp3?filename=morning-garden-acoustic-chill-15013.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Chair',
         genre: 'Pop',
         description: 'Molestiae voluptas dignissimos est aut eum quae quidem error.',
@@ -1238,7 +1238,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=electronic-rock-king-around-here-15045.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'in',
         genre: 'Reggae',
         description: 'Tenetur sunt eius rerum aut aperiam eius amet magnam doloribus.',
@@ -1250,7 +1250,7 @@ module.exports = {
       {
         userId: 20,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/20/audio_743615ade2.mp3?filename=everything-feels-new-15241.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'facere',
         genre: 'World',
         description: 'Provident magnam voluptatem ducimus voluptatibus nostrum unde sed.',
@@ -1262,7 +1262,7 @@ module.exports = {
       {
         userId: 25,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/21/audio_31743c58bd.mp3?filename=spirit-blossom-15285.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Home implement',
         genre: 'Hip Hop',
         description: 'Ut nulla aut molestiae sequi.',
@@ -1274,7 +1274,7 @@ module.exports = {
       {
         userId: 45,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/26/audio_d0c6ff1bdd.mp3?filename=the-cradle-of-your-soul-15700.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'ea',
         genre: 'Latin',
         description: 'Rerum officia eum dolorum nesciunt quisquam voluptas consequatur rerum quos.',
@@ -1286,7 +1286,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/01/31/audio_0f2416122a.mp3?filename=dont-you-think-lose-16073.mp3",
-        artworkURL: 'http://placeimg.com/640/480/abstract',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Metical',
         genre: 'World',
         description: 'Dolor placeat veniam et nihil laborum quo qui sint.',
@@ -1298,7 +1298,7 @@ module.exports = {
       {
         userId: 15,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/10/audio_fc48af67b2.mp3?filename=relax-and-sleep-18565.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'Music Arizona',
         genre: 'Hip Hop',
         description: 'Rerum quaerat sunt qui ex tempora ea quisquam sit.',
@@ -1310,7 +1310,7 @@ module.exports = {
       {
         userId: 40,
         songURL: "https://cdn.pixabay.com/download/audio/2022/02/15/audio_1e79dbf2b9.mp3?filename=into-the-night-20928.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'eligendi',
         genre: 'Classical',
         description: 'Provident quaerat quidem quia.',
@@ -1322,7 +1322,7 @@ module.exports = {
       {
         userId: 35,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/07/audio_79bd0ad83e.mp3?filename=cinematic-atmosphere-score-2-22136.mp3",
-        artworkURL: 'http://placeimg.com/640/480/city',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'sequi',
         genre: 'Reggae',
         description: 'Veniam voluptatibus ut.',
@@ -1334,7 +1334,7 @@ module.exports = {
       {
         userId: 5,
         songURL: "https://cdn.pixabay.com/download/audio/2022/03/07/audio_20d7e20318.mp3?filename=another-day-22168.mp3",
-        artworkURL: 'http://placeimg.com/640/480/animals',
+        artworkURL: `https://source.unsplash.com/random/800x800?sig=${~~((Math.random() * Math.random() * 1000) * Math.random())}`,
         title: 'engage Accountability',
         genre: 'Non Music',
         description: 'Totam officia modi.',
