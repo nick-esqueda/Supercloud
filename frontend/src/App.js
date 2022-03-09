@@ -12,7 +12,7 @@ import { fetchSongs } from './store/songs';
 
 function App() {
   const dispatch = useDispatch();
-  const songs = useSelector(state => Object.values(state.songs));
+  const songs = useSelector(state => Object.values(state.songs.songs));
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -29,9 +29,12 @@ function App() {
               <Route exact path="/">
                 <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
-                {songs.map(song => (
-                  <SongCard key={songs.id} song={song} />
-                ))}
+                <ul style={{ width: '100%' }}>
+                  {songs.map(song => (
+                    <SongCard key={song.id} song={song} />
+                  ))}
+
+                </ul>
               </Route>
 
               <Route exact path="/songs/:songId(\d+)">

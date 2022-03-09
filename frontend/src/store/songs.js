@@ -109,30 +109,30 @@ export const deleteSong = id => async dispatch => {
 
 
 // REDUCER ************************************************
-const initialState = { playing: null };
+const initialState = { songs: {}, playing: null };
 const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     
     case ADD_SONG: {
       newState = {...state};
-      newState[action.song.id] = action.song;
+      newState.songs[action.song.id] = action.song;
       return newState;
     }
     
     case ADD_SONGS: {
       const newSongs = {};
       action.songs.forEach(song => {
-        if (!state[song.id]) {
+        if (!state.songs[song.id]) {
           newSongs[song.id] = song;
         }
       });
-      return {...state, ...newSongs}
+      return { ...state, songs: {...newSongs} }
     }
     
     case REMOVE_SONG: {
       newState = {...state};
-      delete newState[action.songId];
+      delete newState.songs[action.songId];
       return newState;
     }
     
