@@ -22,7 +22,7 @@ const Navigation = () => {
         <ProfileNavButton user={user} />
 
         <div className="header__about">
-          <NavLink to="/about">
+          <NavLink to="/" onClick={() => alert('Sorry! This feature is currently under construction')}>
             about
           </NavLink>
         </div>
@@ -49,7 +49,7 @@ const Navigation = () => {
         </div>
 
         <div className="header__about">
-          <NavLink to="/about">
+          <NavLink to="/" onClick={() => alert('Sorry! This feature is currently under construction')}>
             about
           </NavLink>
         </div>
@@ -64,8 +64,12 @@ const Navigation = () => {
         <NavLink to="/" className="header__logo">cloud</NavLink>
         <nav className="nav_links">
           <NavLink exact to="/" activeStyle={{ backgroundColor: '#191414' }}>home</NavLink>
-          <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#191414' }} >likes</NavLink>
-          <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#191414' }} >random</NavLink>
+          <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#191414' }}
+            onClick={() => alert('Sorry! This feature is currently under construction')}  
+          >likes</NavLink>
+          <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#191414' }}
+            onClick={() => alert('Sorry! This feature is currently under construction')}
+          >random</NavLink>
         </nav>
       </div>
 

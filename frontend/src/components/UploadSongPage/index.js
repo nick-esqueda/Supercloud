@@ -6,11 +6,8 @@ import './UploadSongPage.css'
 
 export default function UploadSongPage() {
   const user = useSelector(state => state.session.user);
-  const history = useHistory();
   
-  useEffect(() => {
-    if (!user) return history.push('/');
-  }, [user])
+  if (!user) return <h2 style={{ height: '100vh' }}>{"you're not supposed to be here."}</h2>
   
   return user && (
     <div className='upload_page'>
