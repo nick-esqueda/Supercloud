@@ -38,7 +38,7 @@ function App() {
 
                 <ul style={{ width: '100%' }}>
                   {songs.map(song => (
-                    <SongCard key={song.id} song={song} isLiked={likes[song.id] ? true : false} />
+                    <SongCard key={song.id} song={song} like={likes[song.id]} />
                   ))}
 
                 </ul>
