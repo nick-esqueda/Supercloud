@@ -1,13 +1,22 @@
-
+import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
 const ADD_LIKES = 'likes/ADD_LIKES';
+const ADD_LIKE = 'likes/ADD_LIKE';
+
 
 // ACTION CREATORS ****************************************
 const addLikes = (likes) => {
   return {
     type: ADD_LIKES,
     likes
+  }
+}
+
+const addLike = (like) => {
+  return {
+    type: ADD_LIKE,
+    like
   }
 }
 
@@ -19,6 +28,19 @@ export const fetchLikes = userId => async dispatch => {
   if (res.ok) {
     const likes = await res.json();
     dispatch(addLikes(likes));
+  }
+}
+
+export const postLike = (userId, songId) => async dispatch => {
+  const res = await csrfFetch(`/api/likes`, {
+    method: 'POST',
+    body: JSON.stringify({ userId, songId })
+  });
+  
+  if (res.ok) {
+    const like = await res.json();
+    dispatch(addLike(like));
+    return like;
   }
 }
 
@@ -34,6 +56,12 @@ const likesReducer = (state = {}, action) => {
           newState[like.songId] = like;
         }
       });
+      return newState;
+    }
+    
+    case ADD_LIKE: {
+      newState = {...state};
+      newState[action.like.songId] = action.like;
       return newState;
     }
     
