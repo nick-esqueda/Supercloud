@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { fetchLikes } from '../../store/likes';
+import { fetchLikes, postLike } from '../../store/likes';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 
@@ -18,6 +18,8 @@ export default function Actions({ song, isArtist }) {
   useEffect(() => {
     dispatch(fetchLikes(userId));
   }, [])
+  
+  const likeSong = (e) => dispatch(postLike(userId, song.id));
 
   return (
     <div className='actions_container'>
@@ -50,7 +52,7 @@ export default function Actions({ song, isArtist }) {
             &nbsp;{'# of likes'}
           </button>
         ) : (
-          <button className='btn btn--secondary--outline'>
+          <button onClick={likeSong} className='btn btn--secondary--outline'>
             <FontAwesomeIcon icon={faHeart} style={{ color: '#535353', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
             &nbsp;{'# of likes'}
           </button>)
