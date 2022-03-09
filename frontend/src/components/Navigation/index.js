@@ -2,9 +2,11 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LoginModal from "../Modal/LoginModal";
 import SignupModal from "../Modal/SignupModal";
+import ProfileNavButton from "./ProfileNavButton";
 
 import './Navigation.css';
-import ProfileNavButton from "./ProfileNavButton";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Navigation = () => {
   const user = useSelector(state => state.session.user);
@@ -17,7 +19,7 @@ const Navigation = () => {
           <NavLink to="/upload">upload</NavLink>
         </div>
 
-        <ProfileNavButton user={user}/>
+        <ProfileNavButton user={user} />
 
         <div className="header__about">
           <NavLink to="/about">
@@ -40,7 +42,7 @@ const Navigation = () => {
         </div>
 
         <div className="header__upload">
-          <a 
+          <a
             style={{ cursor: 'pointer' }}
             onClick={e => alert('Please log in or create an account before uploading a song.')}
           >upload</a>
@@ -57,6 +59,7 @@ const Navigation = () => {
 
   return (
     <header>
+
       <div className="header__left flexRow">
         <NavLink to="/" className="header__logo">cloud</NavLink>
         <nav className="nav_links">
@@ -69,7 +72,9 @@ const Navigation = () => {
       <div className="header__middle">
         <form className="header__searchForm">
           <input type="text" placeholder="search" className="header__searchInput" />
-          <button>search</button>
+          <button type="submit" className="btn btn--secondary" style={{ boxShadow: "none" }}>
+            <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', transform: 'scale(1.2)' }}></FontAwesomeIcon>
+          </button>
         </form>
       </div>
 
