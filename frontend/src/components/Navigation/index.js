@@ -63,9 +63,9 @@ const Navigation = () => {
       <div className="header__left flexRow">
         <NavLink to="/" className="header__logo">cloud</NavLink>
         <nav className="nav_links">
-          <NavLink exact to="/">home</NavLink>
-          <NavLink to="/">likes</NavLink>
-          <NavLink to="/">random</NavLink>
+          <NavLink exact to="/" activeStyle={{ backgroundColor: '#191414' }}>home</NavLink>
+          <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#191414' }} >likes</NavLink>
+          <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#191414' }} >random</NavLink>
         </nav>
       </div>
 

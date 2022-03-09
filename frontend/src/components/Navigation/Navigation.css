@@ -15,6 +15,9 @@ header {
   display: flex;
   justify-content: space-around;
 }
+header a:hover {
+  font-weight: 300;
+}
 
 /* HEADER LEFT *****************************************************/
 .header__left {
