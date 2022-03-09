@@ -8,6 +8,7 @@ import EditSongModal from '../Modal/EditSongModal';
 import './SongCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { postLike } from '../../store/likes';
 
 export default function SongCard({ song, isLiked }) {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ export default function SongCard({ song, isLiked }) {
     audioPlayer.current.audio.current.pause();
     setPaused(true);
   }
+  
+  const likeSong = (e) => dispatch(postLike(user.id, song.id));
 
   let isArtist = false;
   if (user) isArtist = user?.id === song?.User?.id;
@@ -83,7 +86,7 @@ export default function SongCard({ song, isLiked }) {
                 &nbsp;{'# of likes'}
               </button>
             ) : (
-              <button className='btn btn--secondary--outline'>
+              <button onClick={likeSong} className='btn btn--secondary--outline'>
                 <FontAwesomeIcon icon={faHeart} style={{ color: '#535353', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
                 &nbsp;{'# of likes'}
               </button>)
