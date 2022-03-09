@@ -11,7 +11,7 @@ export default function SongCard({ song }) {
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
   const user = useSelector(state => state.session.user);
-  song = useSelector(state => state.songs[song?.id]);
+  song = useSelector(state => state.songs.songs[song?.id]);
 
   const playSong = async () => {
     await new Promise((resolve, reject) => {

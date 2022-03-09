@@ -13,7 +13,7 @@ import './SongPage.css'
 export default function SongPage() {
   const { songId } = useParams();
   const dispatch = useDispatch();
-  const song = useSelector(state => state.songs[songId]);
+  const song = useSelector(state => state.songs.songs[songId]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isArtist, setIsArtist] = useState(false);
 

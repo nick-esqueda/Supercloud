@@ -4,7 +4,6 @@ import Player from './Player';
 
 export default function PlayControls() {
   const song = useSelector(state => state.songs.playing);
-  console.log(song);
 
   return (
     <div className='play_controls'>

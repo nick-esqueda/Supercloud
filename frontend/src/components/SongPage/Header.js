@@ -2,20 +2,12 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlaying } from '../../store/songs';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
-import { useEffect, useState } from 'react';
 import './Header.css';
 
 export default function Header({ song, isLoaded }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
-
-  useEffect(() => {
-    if (playingSong?.id === song?.id && !paused) {
-      setPaused(false);
-      console.log('INSIDE IF!!!!!!');
-    }
-  }, []);
 
   const playSong = async () => {
     await new Promise((resolve, reject) => {
