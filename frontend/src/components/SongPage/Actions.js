@@ -7,7 +7,7 @@ import EditSongModal from '../Modal/EditSongModal';
 
 import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function Actions({ song, isArtist }) {
   const history = useHistory();
