@@ -16,7 +16,7 @@ router.get(
     const likes = await Like.findAll({
       where: { userId }
     });
-    console.log(JSON.stringify(likes, null, 2), 'THIS IS FROM THE LIKE.FINDALL()');
+    
     likes.forEach(like => {
       like.dataValues.createdAt = getTimeElapsed(like.dataValues.createdAt);
     });
@@ -31,7 +31,7 @@ router.post(
   requireAuth,
   asyncHandler(async (req, res) => {
     const like = await Like.create(req.body);
-    console.log(like);
+    
     like.dataValues.createdAt = getTimeElapsed(like.dataValues.createdAt);
     return res.json(like);
   })
@@ -43,9 +43,9 @@ router.delete(
   requireAuth,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.likeId, 10);
-    console.log(id);
-    await Like.destroy({ where: { id } });
-    res.json(id);
+    const like = await Like.findByPk(id);
+    await like.destroy();
+    res.json(like.songId);
   })
 )
 

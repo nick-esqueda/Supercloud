@@ -53,7 +53,6 @@ export const postLike = (userId, songId) => async dispatch => {
 }
 
 export const deleteLike = like => async dispatch => {
-  console.log(like);
   const res = await csrfFetch(`/api/likes/${like.id}`, {
     method: 'DELETE'
   });
@@ -73,7 +72,6 @@ const likesReducer = (state = {}, action) => {
     case ADD_LIKES: {
       newState = {...state};
       action.likes.forEach(like => {
-        console.log('like inside of the foreach', like);
         if (!state[like.songId]) {
           newState[like.songId] = like;
         }
@@ -82,10 +80,8 @@ const likesReducer = (state = {}, action) => {
     }
     
     case ADD_LIKE: {
-      // console.log(action.like);
       newState = {...state};
       newState[action.like.songId] = action.like;
-      // console.log(newState);
       return newState;
     }
     

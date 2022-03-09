@@ -17,7 +17,7 @@ export default function Actions({ song, isArtist }) {
 
   useEffect(() => {
     dispatch(fetchLikes(userId));
-  }, [])
+  }, [dispatch, userId])
   
   const likeSong = (e) => dispatch(postLike(userId, song.id));
   const unLikeSong = (e) => dispatch(deleteLike(like));
