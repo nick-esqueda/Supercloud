@@ -2,33 +2,45 @@ import AudioPlayer from 'react-h5-audio-player';
 import { useSelector } from 'react-redux';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import 'react-h5-audio-player/lib/styles.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Player() {
   const song = useSelector(state => state.songs.playing);
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
+  
+  const [timer, setTimer] = useState();
 
-  let timeout;
   const onPlay = () => {
-    // clearTimeout(timeout);
-    // console.log('timer started...');
-    // timeout = setTimeout(() => {
-    //   console.log('BRUH!!!!!!!!');
-    // }, 5000)
-    
+    console.log(timer);
+
     setPaused(false);
     console.log('on play');
   }
   const onPause = () => {
-    clearTimeout(timeout);
+    // clearTimeout(timeout);
     setPaused(true);
     console.log('on pause');
   }
-  
-  useEffect(() => {
 
-    console.log('inside use effect', paused);
-  })
+  useEffect(() => {
+    console.log('inside U E');
+    
+    if (!paused) {
+      clearTimeout(timer);
+      console.log('TIMER SET...');
+      setTimer(setTimeout(() => {
+        console.log('BRUH!!!!!!!!');
+      }, 5000))
+      
+      return;
+    }
+    
+    console.log('CLEARING TIMER.');
+    clearTimeout(timer);
+    
+  }, [paused]);
+  
+  
   return (
     <>
       <AudioPlayer
