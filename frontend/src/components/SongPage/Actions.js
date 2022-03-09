@@ -1,5 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { fetchLikes } from '../../store/likes';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 import './Actions.css';
@@ -7,6 +9,13 @@ import './Actions.css';
 export default function Actions({ song, isArtist }) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.session.user.id);
+  const like = useSelector(state => state.likes[song.id]);
+  console.log(like, 'LIKE INSIDE ACTIONS COMPONENT');
+  
+  useEffect(() => {
+    dispatch(fetchLikes(userId));
+  }, [])
 
   return (
     <div className='actions_container'>

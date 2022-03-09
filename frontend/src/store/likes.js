@@ -14,7 +14,7 @@ const addLikes = (likes) => {
 
 // THUNK ACTION CREATORS **********************************
 export const fetchLikes = userId => async dispatch => {
-  const res = await fetch('/api/likes');
+  const res = await fetch(`/api/likes/${userId}`);
   
   if (res.ok) {
     const likes = await res.json();
