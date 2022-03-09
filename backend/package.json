@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^6.0.0-beta.0",
     "aws-sdk": "^2.1087.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -33,7 +34,6 @@
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.0.0-beta.0",
     "dotenv-cli": "^5.0.0",
     "nodemon": "^2.0.15"
   }
