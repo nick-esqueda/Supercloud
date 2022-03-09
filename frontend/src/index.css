@@ -182,9 +182,10 @@ li {
 
 /* "liked" button */
 .btn--liked {
-  border: 1px solid #FFFF64;
+  border: 1px solid #d73543;
   color: #ffffff;
-  background-color: transparent;
+  /* background: linear-gradient(rgba(168, 58, 131, 0.212), rgba(228, 51, 78, 0.233), #fb624044); */
+  background: transparent;
   transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
