@@ -43,9 +43,8 @@ router.delete(
   requireAuth,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.likeId, 10);
-    const like = await Like.findByPk(id);
-    await like.destroy();
-    res.json(like.songId);
+    await Like.destroy({ where: { id } });
+    res.json(req.body.songId);
   })
 )
 

@@ -54,7 +54,8 @@ export const postLike = (userId, songId) => async dispatch => {
 
 export const deleteLike = like => async dispatch => {
   const res = await csrfFetch(`/api/likes/${like.id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    body: JSON.stringify(like)
   });
   
   if (res.ok) {
