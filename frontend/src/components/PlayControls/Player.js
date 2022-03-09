@@ -8,38 +8,26 @@ export default function Player() {
   const song = useSelector(state => state.songs.playing);
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   
-  const [timer, setTimer] = useState();
-
-  const onPlay = () => {
-    console.log(timer);
-
-    setPaused(false);
-    console.log('on play');
-  }
-  const onPause = () => {
-    // clearTimeout(timeout);
-    setPaused(true);
-    console.log('on pause');
-  }
+  const [timer, setTimer] = useState('');
 
   useEffect(() => {
-    console.log('inside U E');
-    
-    if (!paused) {
-      clearTimeout(timer);
-      console.log('TIMER SET...');
-      setTimer(setTimeout(() => {
-        console.log('BRUH!!!!!!!!');
-      }, 5000))
-      
-      return;
-    }
-    
     console.log('CLEARING TIMER.');
     clearTimeout(timer);
-    
   }, [paused]);
+
+  const onPlay = () => {
+    clearTimeout(timer);
+    setTimer(setTimeout(() => {
+      console.log('TIMER DONE! HERE IS SONG TITLE...', song.title);
+    }, 5000))
+
+    setPaused(false);
+  }
   
+  const onPause = () => {
+    clearTimeout(timer);
+    setPaused(true);
+  }
   
   return (
     <>
