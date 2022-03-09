@@ -74,9 +74,9 @@ const validateSong = [
   check('description')
     .isLength({ max: 500 })
     .withMessage('description must be shorter than 500 characters'),
-  check('duration')
-    .isLength({ max: 5 })
-    .withMessage('song duration is messed up - check helper functions'),
+  // check('duration')
+  //   .isLength({ max: 5 })
+  //   .withMessage('song duration is messed up - check helper functions'),
   handleValidationErrors
 ];
 

@@ -1,19 +1,8 @@
 const { faker } = require('@faker-js/faker');
 const bcrypt = require('bcryptjs');
 
-// const randomNumber = num => Math.floor(Math.random) * Math.floor(num) +
-
-const fakeDate = () => {
-  const date = faker.date.past();
-
-  return `${date}`
-}
-
-// fakeDate();
-
 const seedUsers = num => {
   let i = 0;
-  
   
   while (i < num) {
     let username;
@@ -33,13 +22,45 @@ const seedUsers = num => {
       location: `${faker.address.city()}, ${faker.address.state()}`,
       profileImageURL: faker.image.avatar(),
       bannerImageURL: faker.image.imageUrl(),
-      createdAt: faker.date.past(),
-      updatedAt: faker.date.past(),
+      // createdAt: faker.date.past(),
+      // updatedAt: faker.date.past(),
     }
     console.log(user, ',')
     i++
   }
-
 }
 
-seedUsers(50);
+// seedUsers(50);
+
+const seedSongs = num => {
+  for (let i = 0; i < num; i++) {
+    let image;
+    let word;
+    if (i % 5 === 0) {
+      image = faker.image.abstract();
+      word = faker.random.word();
+    } else if (i % 3 === 0) {
+      image = faker.image.animals();
+      word = faker.random.words();
+    } else {
+      image = faker.image.city();
+      word = faker.lorem.word();
+    }
+
+    
+    const user = {
+      userId: (~~(Math.random() * 10)) * 5,
+      // songURL: ,
+      artworkURL: image,
+      title: word,
+      genre: faker.music.genre(),
+      description: faker.lorem.sentence(),
+      // duration: ,
+      plays: faker.datatype.number(),
+    }
+    
+    console.log(user, ',');
+  }
+}
+seedSongs(100)
+// console.log((~~(Math.random() * 10)) * 5);

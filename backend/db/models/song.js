@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     songURL: {
       allowNull: false,
       type: DataTypes.TEXT,
-      unique: true,
       validate: {
         notEmpty: true,
       }
@@ -36,14 +35,14 @@ module.exports = (sequelize, DataTypes) => {
         max: 255
       },
     },
-    duration: {
-      allowNull: false,
-      type: DataTypes.STRING(5),
-      validate: {
-        max: 5,
-        notEmpty: true,
-      }
-    },
+    // duration: {
+    //   allowNull: false,
+    //   type: DataTypes.STRING(5),
+    //   validate: {
+    //     max: 5,
+    //     notEmpty: true,
+    //   }
+    // },
     plays: {
       allowNull: false,
       type: DataTypes.INTEGER,
