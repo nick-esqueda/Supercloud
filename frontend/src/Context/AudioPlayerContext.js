@@ -6,7 +6,7 @@ export const useAudioPlayer = () => useContext(AudioPlayerContext);
 
 export default function AudioPlayerProvider(props) {
   const audioPlayer = useRef(null);
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
   
   return (
     <AudioPlayerContext.Provider value={{ audioPlayer, paused, setPaused }}>
