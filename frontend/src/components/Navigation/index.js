@@ -40,7 +40,10 @@ const Navigation = () => {
         </div>
 
         <div className="header__upload">
-          <NavLink to="/upload">upload</NavLink>
+          <a 
+            style={{ cursor: 'pointer' }}
+            onClick={e => alert('Please log in or create an account before uploading a song.')}
+          >upload</a>
         </div>
 
         <div className="header__about">
