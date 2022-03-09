@@ -25,6 +25,17 @@ router.get(
   })
 )
 
+// POST /api/likes - CREATE A LIKE
+router.post(
+  '/',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const like = await Like.create(req.body);
+    console.log(like);
+    like.dataValues.createdAt = getTimeElapsed(like.dataValues.createdAt);
+    return res.json(like);
+  })
+)
 
 
 
