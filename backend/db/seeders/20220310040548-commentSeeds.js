@@ -333,7 +333,7 @@ module.exports = {
       },
       {
         content: 'Delectus et vel voluptatem expedita doloremque rerum quia.',
-        userId: 0,
+        userId: 1,
         songId: 47,
         createdAt: "2021-03-18T12:40:02.570Z",
         updatedAt: "2021-12-22T20:41:37.578Z",
@@ -466,7 +466,7 @@ module.exports = {
       },
       {
         content: 'Ratione praesentium non sit. Impedit iste voluptatem eaque tempore voluptatibus.',
-        userId: 0,
+        userId: 1,
         songId: 62,
         createdAt: "2021-07-27T02:47:43.473Z",
         updatedAt: "2021-11-02T03:47:13.538Z",
@@ -1019,7 +1019,7 @@ module.exports = {
       },
       {
         content: 'Corporis neque repudiandae inventore esse.',
-        userId: 0,
+        userId: 1,
         songId: 22,
         createdAt: "2022-02-11T03:47:11.601Z",
         updatedAt: "2021-07-25T00:38:49.241Z",

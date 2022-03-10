@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     content: {
+      allowNull: false,
       type: DataTypes.STRING(255),
       validate: {
         notEmpty: true,
