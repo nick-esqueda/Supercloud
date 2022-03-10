@@ -24,6 +24,8 @@ export default function SongCard({ song, user }) {
       const like = user?.Likes?.find(like => like.songId === song.id);
       if (like) setIsLiked(true);
       else setIsLiked(false);
+    } else {
+      setIsLiked(false);
     }
   }, [song, user])
     
