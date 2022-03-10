@@ -20,11 +20,12 @@ function App() {
 
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true))
-    dispatch(fetchSongs())
+    dispatch(fetchSongs());
+    dispatch(fetchLikes());
   }, [dispatch]);
   
   useEffect(() => {
-    if (user) dispatch(fetchLikes(user.id));
+    // if (user) dispatch(fetchLikes(user.id));
   }, [user])
 
   return (
@@ -38,7 +39,7 @@ function App() {
 
                 <ul style={{ width: '100%' }}>
                   {songs.map(song => (
-                    <SongCard key={song.id} song={song} like={likes[song.id]} />
+                    <SongCard key={song.id} song={song} like={user.Likes.find(like => song.id === like.songId)} />
                   ))}
 
                 </ul>
