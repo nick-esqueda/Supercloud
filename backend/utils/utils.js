@@ -8,11 +8,22 @@ const getTimeElapsed = createdAt => {
   const monthsAgo = Math.floor(daysAgo / 30);
   const yearsAgo = Math.floor(daysAgo / 365);
 
-  if (minutesAgo < 1) return secondsAgo + ' seconds ago';
-  if (hoursAgo < 1) return minutesAgo + ' minutes ago';
-  if (daysAgo < 1) return hoursAgo + ' hours ago';
-  if (monthsAgo < 1) return daysAgo + ' days ago'
-  if (yearsAgo < 1) return monthsAgo + ' months ago';
+  if (secondsAgo === 1) return '1 second ago';
+  else if (minutesAgo < 1) return secondsAgo + ' seconds ago';
+  
+  if (minutesAgo === 1) return '1 minute ago';
+  else if (hoursAgo < 1) return minutesAgo + ' minutes ago';
+  
+  if (hoursAgo === 1) return '1 hour ago';
+  else if (daysAgo < 1) return hoursAgo + ' hours ago';
+  
+  if (daysAgo === 1) return '1 day ago';
+  else if (monthsAgo < 1) return daysAgo + ' days ago'
+  
+  if (monthsAgo === 1) return '1 month ago';
+  else if (yearsAgo < 1) return monthsAgo + ' months ago';
+  
+  if (yearsAgo === 1) return '1 year ago';
   else return yearsAgo + ' years ago';
 }
 

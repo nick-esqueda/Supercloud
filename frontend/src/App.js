@@ -7,19 +7,23 @@ import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';
 import AudioPlayerProvider from './Context/AudioPlayerContext';
+import { fetchLikes } from './store/likes';
 import { restoreUser } from './store/session';
 import { fetchSongs } from './store/songs';
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const songs = useSelector(state => Object.values(state.songs.songs));
+  const likes = useSelector(state => state.likes);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(restoreUser()).then(() => setIsLoaded(true));
+    dispatch(restoreUser()).then(() => setIsLoaded(true))
     dispatch(fetchSongs());
+    dispatch(fetchLikes());
   }, [dispatch]);
-
+  
   return (
     <>
       {isLoaded ? (
@@ -31,7 +35,7 @@ function App() {
 
                 <ul style={{ width: '100%' }}>
                   {songs.map(song => (
-                    <SongCard key={song.id} song={song} />
+                    <SongCard key={song.id} song={song} like={user.Likes.find(like => song.id === like.songId)} />
                   ))}
 
                 </ul>

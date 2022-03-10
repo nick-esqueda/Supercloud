@@ -1,12 +1,29 @@
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { deleteLike, fetchLikes, postLike } from '../../store/likes';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
+
 import './Actions.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function Actions({ song, isArtist }) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
+  const likeCount = useSelector(state => Object.values(state.likes).filter(like => like.songId === song.id).length);
+  const [like, setLike] = useState(user.Likes.find(like => like.songId === song.id));
+
+  const likeSong = async (e) => {
+    const like = await dispatch(postLike(user.id, song.id));
+    setLike(like);
+  }
+  const unLikeSong = async (e) => {
+    await dispatch(deleteLike(like));
+    setLike(null); 
+  }
 
   return (
     <div className='actions_container'>
@@ -33,14 +50,18 @@ export default function Actions({ song, isArtist }) {
       </div>
 
       <div className='bottom__buttons'>
-        {/* <div></div> */}
-        <button className='btn btn--secondary--outline'>
-          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEwLjgwNSAzQzguNzg1IDMgOCA1LjM0NSA4IDUuMzQ1UzcuMjE0IDMgNS4xOTcgM0MzLjQ5NCAzIDEuNzQ4IDQuMDk2IDIuMDMgNi41MTRjLjM0NCAyLjk1MyA1LjcyNSA2LjQ4IDUuOTYzIDYuNDg3LjIzOC4wMSA1LjczOC0zLjcyIDUuOTg4LTYuNS4yMDgtMi4zLTEuNDczLTMuNS0zLjE3NS0zLjV6Ii8+Cjwvc3ZnPgo="
-            style={{ transform: 'scale(1.2)' }}
-            alt=''
-          />
-          &nbsp;{'# of likes'}
-        </button>
+        {like ? (
+          <button onClick={unLikeSong} className='btn btn--liked'>
+            <FontAwesomeIcon icon={faHeart} style={{ color: '#d73543', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
+            &nbsp;{likeCount}
+          </button>
+        ) : (
+          <button onClick={likeSong} className='btn btn--secondary--outline'>
+            <FontAwesomeIcon icon={faHeart} style={{ color: '#535353', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
+            &nbsp;{likeCount}
+          </button>)
+        }
+
         <button className='btn btn--secondary--outline'>
           <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyLjEgMTEuODZjLS44MjUtLjQxOC0xLjI0My0xLjUzNi0xLjI0My0yLjMyIDAtLjQuMjY4LS43MzUuNTA3LTEuMDA3LjY0OC0uNzQzIDEuMTU0LTEuNjI0IDEuMTU0LTMuNTA3QzEyLjUxOCAyLjI1IDEwLjg1OCAxIDguOTg4IDFjLTEuODcgMC0zLjUzIDEuMjUtMy41MyA0LjAyNiAwIDEuODgzLjUwNSAyLjc2NCAxLjE1MyAzLjUwNy4yNC4yNzIuNTEuNjA3LjUxIDEuMDA2IDAgLjc4NC0uNDIgMS45MDItMS4yNDYgMi4zMi0xLjI0NC42My0zLjQyMyAxLjE2Ny00LjM2NSAxLjg4Qy4yNSAxNC42OTUgMCAxNyAwIDE3aDE4cy0uMjc3LTIuMzA2LTEuNTM0LTMuMjZjLS45NDItLjcxMy0zLjEyLTEuMjUtNC4zNjUtMS44OHoiLz4KPC9zdmc+Cg=="
             style={{ height: '16px' }}
@@ -84,7 +105,7 @@ export default function Actions({ song, isArtist }) {
           <span>▶ {song?.plays}</span>
           <span>💬 {"cmnts"}</span>
         </div>
-        
+
       </div>
     </div>
   )

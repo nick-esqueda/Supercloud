@@ -170,7 +170,6 @@ li {
 }
 /* white outlined button skin */
 .btn--secondary--outline {
-  /* font-size: 14px; */
   border: 1px solid #b3b3b3;
   color: #ffffff;
   background-color: transparent;
@@ -179,6 +178,15 @@ li {
 /* white buttons when clicked */
 .btn--secondary--outline:active {
   border-color: #b3b3b36e;
+}
+
+/* "liked" button */
+.btn--liked {
+  border: 1px solid #d73543;
+  color: #ffffff;
+  /* background: linear-gradient(rgba(168, 58, 131, 0.212), rgba(228, 51, 78, 0.233), #fb624044); */
+  background: transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 
 
