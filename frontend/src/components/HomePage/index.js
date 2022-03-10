@@ -1,19 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongCard from '../SongCard';
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  console.log(user);
   const songs = useSelector(state => Object.values(state.songs.songs));
-  // const likes = useSelector(state => state.likes);
 
   useEffect(() => {
     dispatch(fetchSongs());
-    dispatch(fetchLikes());
   }, [dispatch])
   
   return (!songs || !user) ? <h2>loading...</h2> : (

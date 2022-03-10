@@ -8,7 +8,7 @@ import EditSongModal from '../Modal/EditSongModal';
 import './SongCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { deleteLike, fetchSongsLikes, postLike, postSongLike } from '../../store/likes';
+import { deleteLike, postLike } from '../../store/likes';
 
 export default function SongCard({ song, user }) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function SongCard({ song, user }) {
     const like = user.Likes.find(like => like.songId === song.id);
     if (like) setIsLiked(true);
     else setIsLiked(false);
-  }, [])
+  }, [song, user])
     
   const playSong = async () => {
     await new Promise((resolve, reject) => {
