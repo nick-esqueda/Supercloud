@@ -16,34 +16,30 @@ function App() {
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true))
   }, [dispatch]);
-  
-  return (
-    <>
-      {!isLoaded ? <h4>loading...</h4> : (
-        <AudioPlayerProvider>
-          <HeaderFooter>
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
 
-              <Route exact path="/songs/:songId(\d+)">
-                <SongPage />
-              </Route>
+  return !isLoaded ? <h4>loading...</h4> : (
+    <AudioPlayerProvider>
+      <HeaderFooter>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
 
-              <Route exact path="/upload">
-                <UploadSongPage />
-              </Route>
+          <Route exact path="/songs/:songId(\d+)">
+            <SongPage />
+          </Route>
 
-              <Route>
-                404 page
-              </Route>
-            </Switch>
-          </HeaderFooter>
-        </AudioPlayerProvider>
-      )}
-    </>
-  );
+          <Route exact path="/upload">
+            <UploadSongPage />
+          </Route>
+
+          <Route>
+            404 page
+          </Route>
+        </Switch>
+      </HeaderFooter>
+    </AudioPlayerProvider>
+  )
 }
 
 export default App;

@@ -74,7 +74,7 @@ export const postSong = song => async dispatch => {
     method: 'POST',
     body: JSON.stringify(song)
   });
-  
+
   if (res.ok) {
     const newSong = await res.json();
     dispatch(addSong(newSong));
@@ -87,7 +87,7 @@ export const editSong = song => async dispatch => {
     method: "PUT",
     body: JSON.stringify(song)
   });
-  
+
   if (res.ok) {
     const editedSong = await res.json();
     dispatch(addSong(editedSong));
@@ -99,7 +99,7 @@ export const deleteSong = id => async dispatch => {
   const res = await csrfFetch(`/api/songs/${id}`, {
     method: 'DELETE',
   });
-  
+
   if (res.ok) {
     const songId = await res.json();
     dispatch(removeSong(songId));
@@ -113,39 +113,37 @@ const initialState = { songs: {}, playing: null };
 const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    
+
     case ADD_SONG: {
-      newState = {...state};
+      newState = { ...state };
       newState.songs[action.song.id] = action.song;
       return newState;
     }
-    
+
     case ADD_SONGS: {
       const newSongs = {};
       action.songs.forEach(song => {
-        if (!state.songs[song.id]) {
-          newSongs[song.id] = song;
-        }
+        newSongs[song.id] = song;
       });
-      return { ...state, songs: {...newSongs} }
+      return { ...state, songs: newSongs }
     }
-    
+
     case REMOVE_SONG: {
-      newState = {...state};
+      newState = { ...state };
       delete newState.songs[action.songId];
       return newState;
     }
-    
+
     case SET_PLAYING: {
-      newState = {...state};
+      newState = { ...state };
       newState.playing = action.song;
       return newState;
     }
-    
+
     default: {
       return state;
     }
-    
+
   }
 };
 
