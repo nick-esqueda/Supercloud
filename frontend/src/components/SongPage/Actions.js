@@ -13,7 +13,6 @@ export default function Actions({ song, user }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
-  console.log("CURRENT SONG'S LIKES INSIDE THE COMPONENT", songsLikes);
   const isLiked = songsLikes?.find(like => like.userId === user.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
