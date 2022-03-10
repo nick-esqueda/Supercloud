@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { deleteLike, fetchLikes, postLike } from '../../store/likes';
+import { deleteLike, postLike } from '../../store/likes';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 
@@ -9,22 +9,24 @@ import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function Actions({ song, isArtist }) {
+export default function Actions({ song, user }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
-  const likeCount = useSelector(state => Object.values(state.likes).filter(like => like.songId === song.id).length);
-  const [like, setLike] = useState(user.Likes.find(like => like.songId === song.id));
+  const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
+  console.log("CURRENT SONG'S LIKES INSIDE THE COMPONENT", songsLikes);
+  const isLiked = songsLikes?.find(like => like.userId === user.id);
+  const likeCount = !songsLikes ? 0 : songsLikes.length;
+  const isArtist = song.User.id === user?.id;
 
-  const likeSong = async (e) => {
-    const like = await dispatch(postLike(user.id, song.id));
-    setLike(like);
+  const likeSong = (e) => {
+    if (!user) return document.getElementById('login_button').click();
+    dispatch(postLike(user.id, song.id));
   }
-  const unLikeSong = async (e) => {
-    await dispatch(deleteLike(like));
-    setLike(null); 
+  const unLikeSong = (e) => {
+    if (!user) return document.getElementById('login_button').click();
+    dispatch(deleteLike(user.id, song.id));
   }
-
+  
   return (
     <div className='actions_container'>
       <div className='write_comment'>
@@ -50,7 +52,7 @@ export default function Actions({ song, isArtist }) {
       </div>
 
       <div className='bottom__buttons'>
-        {like ? (
+        {isLiked ? (
           <button onClick={unLikeSong} className='btn btn--liked'>
             <FontAwesomeIcon icon={faHeart} style={{ color: '#d73543', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
             &nbsp;{likeCount}
