@@ -24,10 +24,6 @@ function App() {
     dispatch(fetchLikes());
   }, [dispatch]);
   
-  useEffect(() => {
-    // if (user) dispatch(fetchLikes(user.id));
-  }, [user])
-
   return (
     <>
       {isLoaded ? (

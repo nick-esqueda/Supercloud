@@ -10,12 +10,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { deleteLike, postLike } from '../../store/likes';
 
-export default function SongCard({ song, like }) {
+export default function SongCard({ song }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
   const user = useSelector(state => state.session.user);
   song = useSelector(state => state.songs.songs[song?.id]);
+  const likeCount = useSelector(state => Object.values(state.likes).filter(like => like.songId === song.id).length);
+  const [like, setLike] = useState(user.Likes.find(like => like.songId === song.id));
   
   const playSong = async () => {
     await new Promise((resolve, reject) => {
@@ -31,8 +33,14 @@ export default function SongCard({ song, like }) {
     setPaused(true);
   }
   
-  const likeSong = (e) => dispatch(postLike(user.id, song.id));
-  const unLikeSong = (e) => dispatch(deleteLike(like));
+  const likeSong = async (e) => {
+    const like = await dispatch(postLike(user.id, song.id));
+    setLike(like);
+  }
+  const unLikeSong = async (e) => {
+    await dispatch(deleteLike(like));
+    setLike(null); 
+  }
 
   let isArtist = false;
   if (user) isArtist = user?.id === song?.User?.id;
@@ -84,12 +92,12 @@ export default function SongCard({ song, like }) {
             {like ? (
               <button onClick={unLikeSong} className='btn btn--liked'>
                 <FontAwesomeIcon icon={faHeart} style={{ color: '#d73543', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
-                &nbsp;{'# of likes'}
+                &nbsp;{likeCount}
               </button>
             ) : (
               <button onClick={likeSong} className='btn btn--secondary--outline'>
                 <FontAwesomeIcon icon={faHeart} style={{ color: '#535353', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
-                &nbsp;{'# of likes'}
+                &nbsp;{likeCount}
               </button>)
             }
             

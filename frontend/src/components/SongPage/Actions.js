@@ -21,7 +21,7 @@ export default function Actions({ song, isArtist }) {
     setLike(like);
   }
   const unLikeSong = async (e) => {
-    dispatch(deleteLike(like));
+    await dispatch(deleteLike(like));
     setLike(null); 
   }
 
