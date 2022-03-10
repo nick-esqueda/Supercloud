@@ -12,7 +12,7 @@ export default function HomePage() {
     dispatch(fetchSongs());
   }, [dispatch])
   
-  return (!songs || !user) ? <h2>loading...</h2> : (
+  return !songs ? <h2>loading...</h2> : (
     <div>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 

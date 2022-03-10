@@ -16,6 +16,7 @@ function LoginModal() {
   return (
     <>
       <button
+        id='login_button'
         className="btn btn--secondary--outline"
         onClick={() => setShowModal(true)}
       >

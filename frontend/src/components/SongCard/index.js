@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import { deleteSong, setPlaying } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
@@ -17,12 +17,14 @@ export default function SongCard({ song, user }) {
   
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(song.Likes.length);
-  const isArtist = song.User.id === user.id;
+  const isArtist = song.User.id === user?.id;
   
   useEffect(() => {
-    const like = user.Likes.find(like => like.songId === song.id);
-    if (like) setIsLiked(true);
-    else setIsLiked(false);
+    if (user) {
+      const like = user?.Likes?.find(like => like.songId === song.id);
+      if (like) setIsLiked(true);
+      else setIsLiked(false);
+    }
   }, [song, user])
     
   const playSong = async () => {
@@ -40,11 +42,13 @@ export default function SongCard({ song, user }) {
   }
   
   const likeSong = async (e) => {
+    if (!user) return document.getElementById('login_button').click();
     await dispatch(postLike(user.id, song.id));
     setLikeCount(prevState => prevState + 1);
     setIsLiked(true);
   }
   const unLikeSong = async (e) => {
+    if (!user) return document.getElementById('login_button').click();
     await dispatch(deleteLike(user.id, song.id));
     setLikeCount(prevState => prevState - 1);
     setIsLiked(false); 
