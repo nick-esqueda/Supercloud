@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { fetchComments } from '../../store/comments'
 import { restoreUser } from '../../store/session'
 import { fetchSong } from '../../store/songs'
 import Actions from './Actions'
@@ -16,11 +17,20 @@ export default function SongPage() {
   const song = useSelector(state => state.songs.songs[songId]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isArtist, setIsArtist] = useState(false);
-
+  const [songComments, setSongComments] = useState([]);
+  console.log(songComments);
+  
   useEffect(() => {
     (async () => {
       const { user } = await dispatch(restoreUser());
+      
       const song = await dispatch(fetchSong(songId));
+      
+      const commentsObj = await dispatch(fetchComments());
+      const commentsArr = Object.values(commentsObj);
+      const songComments = commentsArr.filter(comment => comment.songId === +songId);
+      setSongComments(songComments);
+      
       if (user?.id === song?.User?.id) setIsArtist(true);
       setIsLoaded(true)
     })()
@@ -46,7 +56,7 @@ export default function SongPage() {
             {song?.description}
           </div>
           <div className='song__comments'>
-            <CommentSection />
+            <CommentSection /*comments={songComments}*/ />
           </div>
         </div>
 
