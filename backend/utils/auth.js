@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User } = require('../db/models');
+const { User, Like, Song } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -41,7 +41,9 @@ const restoreUser = (req, res, next) => {
     try {
       // pin the user (might not exist) on the request obj
       const { id } = jwtPayload.data;
-      req.user = await User.scope('currentUser').findByPk(id);
+      req.user = await User.scope('currentUser').findByPk(id, {
+        include: [{ model: Like }, { model: Song }]
+      });
     } catch (e) {
       // if sequelize error, delete whatever token the client had
       res.clearCookie('token');
