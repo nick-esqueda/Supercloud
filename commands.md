@@ -7,6 +7,9 @@ npx sequelize model:generate --name Song --attributes userId:integer,songURL:tex
 ## generate Like model/migration
 npx sequelize model:generate --name Like --attributes userId:integer,songId:integer
 
+## generate Comment model/migration
+npx sequelize model:generate --name Comment --attributes userId:integer,songId:integer,content:string
+
 
 ## REBUILD
 npx dotenv sequelize db:seed:undo:all && npx dotenv sequelize db:migrate:undo:all && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all
