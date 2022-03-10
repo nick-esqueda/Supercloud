@@ -9,24 +9,22 @@ import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function Actions({ song, isArtist }) {
+export default function Actions({ song, user }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.session.user);
-  const [isLiked, setIsLiked] = useState(user.Likes.find(like => like.songId === song.id));
-  const [likeCount, setLikeCount] = useState(song.Likes.length);
+  const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
+  console.log("CURRENT SONG'S LIKES INSIDE THE COMPONENT", songsLikes);
+  const isLiked = songsLikes?.find(like => like.userId === user.id);
+  const likeCount = !songsLikes ? 0 : songsLikes.length;
+  const isArtist = song.User.id === user?.id;
 
-  const likeSong = async (e) => {
+  const likeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
-    await dispatch(postLike(user.id, song.id));
-    setLikeCount(prevState => prevState + 1);
-    setIsLiked(true);
+    dispatch(postLike(user.id, song.id));
   }
-  const unLikeSong = async (e) => {
+  const unLikeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
-    await dispatch(deleteLike(user.id, song.id));
-    setLikeCount(prevState => prevState - 1);
-    setIsLiked(false); 
+    dispatch(deleteLike(user.id, song.id));
   }
   
   return (

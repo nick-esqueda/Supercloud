@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { fetchLikes } from '../../store/likes'
 import { restoreUser } from '../../store/session'
 import { fetchSong } from '../../store/songs'
 import Actions from './Actions'
@@ -19,6 +20,7 @@ export default function SongPage() {
 
   useEffect(() => {
     dispatch(fetchSong(songId));
+    dispatch(fetchLikes());
   }, [dispatch]);
   
   return !song ? <h2>loading...</h2> : (
@@ -29,7 +31,7 @@ export default function SongPage() {
 
       <div className='song_main'>
         <div className='song__actions'>
-          <Actions song={song} isArtist={isArtist} />
+          <Actions song={song} user={user} />
         </div>
 
         <div className='song__profile_card'>

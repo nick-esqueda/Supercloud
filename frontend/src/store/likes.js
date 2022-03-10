@@ -88,24 +88,27 @@ const likesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case LOAD_LIKES: {
-      newState = { ...state };
+      const allLikes = {};
+      const songsLikes = {};
+      const usersLikes = {};
+      
       action.likes.forEach(like => {
-        newState.allLikes[like.id] = like;
+        allLikes[like.id] = like;
         
-        if (!newState.songsLikes[like.songId]) {
-          newState.songsLikes[like.songId] = [like];
+        if (!songsLikes[like.songId]) {
+          songsLikes[like.songId] = [like];
         } else {
-          newState.songsLikes[like.songId].push(like);
+          songsLikes[like.songId].push(like);
         }
         
-        if (!newState.usersLikes[like.userId]) {
-          newState.usersLikes[like.userId] = [like];
+        if (!usersLikes[like.userId]) {
+          usersLikes[like.userId] = [like];
         } else {
-          newState.usersLikes[like.userId].push(like);
+          usersLikes[like.userId].push(like);
         }
         
       });
-      return newState;
+      return { allLikes, songsLikes, usersLikes };
     }
 
     case LOAD_SONGS_LIKES: {
@@ -131,15 +134,22 @@ const likesReducer = (state = initialState, action) => {
       } else {
         newState.usersLikes[action.like.userId].push(action.like);
       }
-      
+      console.log('ADD_LIKE INSIDE REDUCER SWITCH CASE', newState.songsLikes[action.like.songId]);
       return newState;
     }
 
     case REMOVE_LIKE: {
       newState = { ...state };
       delete newState.allLikes[action.like.id];
-      delete newState.songsLikes[action.like.songId];
-      delete newState.usersLikes[action.like.userId];
+      
+      // delete newState.songsLikes[action.like.songId];
+      const newSongsLikes = newState.songsLikes[action.like.songId].filter(like => like.id !== action.like.id);
+      newState.songsLikes[action.like.songId] = newSongsLikes;
+      
+      // delete newState.usersLikes[action.like.userId];
+      const newUsersLikes = newState.usersLikes[action.like.userId].filter(like => like.id !== action.like.id);
+      newState.usersLikes[action.like.userId] = newUsersLikes;
+      
       return newState;
     }
 
