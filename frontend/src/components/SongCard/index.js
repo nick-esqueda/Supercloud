@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
@@ -8,17 +8,23 @@ import EditSongModal from '../Modal/EditSongModal';
 import './SongCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { deleteLike, postLike } from '../../store/likes';
+import { deleteLike, fetchSongsLikes, postLike, postSongLike } from '../../store/likes';
 
-export default function SongCard({ song }) {
+export default function SongCard({ song, user }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
-  const user = useSelector(state => state.session.user);
-  song = useSelector(state => state.songs.songs[song?.id]);
-  const likeCount = useSelector(state => Object.values(state.likes).filter(like => like.songId === song.id).length);
-  const [like, setLike] = useState(user.Likes.find(like => like.songId === song.id));
   
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(song.Likes.length);
+  const isArtist = song.User.id === user.id;
+  
+  useEffect(() => {
+    const like = user.Likes.find(like => like.songId === song.id);
+    if (like) setIsLiked(true);
+    else setIsLiked(false);
+  }, [])
+    
   const playSong = async () => {
     await new Promise((resolve, reject) => {
       dispatch(setPlaying(song));
@@ -34,16 +40,15 @@ export default function SongCard({ song }) {
   }
   
   const likeSong = async (e) => {
-    const like = await dispatch(postLike(user.id, song.id));
-    setLike(like);
+    await dispatch(postLike(user.id, song.id));
+    setLikeCount(prevState => prevState + 1);
+    setIsLiked(true);
   }
   const unLikeSong = async (e) => {
-    await dispatch(deleteLike(like));
-    setLike(null); 
+    await dispatch(deleteLike(user.id, song.id));
+    setLikeCount(prevState => prevState - 1);
+    setIsLiked(false); 
   }
-
-  let isArtist = false;
-  if (user) isArtist = user?.id === song?.User?.id;
 
   return (
     <div className='song_card_container'>
@@ -89,7 +94,7 @@ export default function SongCard({ song }) {
 
         <div className='song_card__bottom'>
           <div className='bottom__buttons'>
-            {like ? (
+            {isLiked ? (
               <button onClick={unLikeSong} className='btn btn--liked'>
                 <FontAwesomeIcon icon={faHeart} style={{ color: '#d73543', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
                 &nbsp;{likeCount}

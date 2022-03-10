@@ -38,6 +38,18 @@ router.get(
   })
 )
 
+// GET /api/likes/:songId - GET ALL OF A SONG'S LIKES
+router.get(
+  '/:songId',
+  asyncHandler(async (req, res) => {
+    const songId = parseInt(req.params.songId, 10);
+    const likes = await Like.findAll({
+      where: { songId }
+    });
+    return res.json(likes);
+  })
+)
+
 // POST /api/likes - CREATE A LIKE
 router.post(
   '/',
@@ -50,14 +62,19 @@ router.post(
   })
 )
 
-// DELETE /api/likes/:likeId - DELETE A LIKE
+
+// DELETE /api/likes/:userId/:songId - DELETE A LIKE
 router.delete(
-  '/:likeId',
+  '/:userId/:songId',
   requireAuth,
   asyncHandler(async (req, res) => {
-    const id = parseInt(req.params.likeId, 10);
-    await Like.destroy({ where: { id } });
-    return res.json(id);
+    const userId = parseInt(req.params.userId, 10);
+    const songId = parseInt(req.params.songId, 10);
+    const like = await Like.findOne({
+      where: { userId, songId }
+    })
+    await like.destroy();
+    return res.json(like);
   })
 )
 
