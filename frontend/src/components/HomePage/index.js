@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongCard from '../SongCard';
 
@@ -10,6 +11,7 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(fetchSongs());
+    dispatch(fetchLikes());
   }, [dispatch])
   
   return !songs ? <h2>loading...</h2> : (

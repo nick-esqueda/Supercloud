@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import { deleteSong, setPlaying } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
@@ -14,20 +14,10 @@ export default function SongCard({ song, user }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
-  
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(song.Likes.length);
+  const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
+  const isLiked = songsLikes?.find(like => like.userId === user.id);
+  const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
-  
-  useEffect(() => {
-    if (user) {
-      const like = user?.Likes?.find(like => like.songId === song.id);
-      if (like) setIsLiked(true);
-      else setIsLiked(false);
-    } else {
-      setIsLiked(false);
-    }
-  }, [song, user])
     
   const playSong = async () => {
     await new Promise((resolve, reject) => {
@@ -37,7 +27,7 @@ export default function SongCard({ song, user }) {
     audioPlayer.current.audio.current.play();
     setPaused(false);
   }
-
+  
   const pauseSong = () => {
     audioPlayer.current.audio.current.pause();
     setPaused(true);
@@ -45,15 +35,11 @@ export default function SongCard({ song, user }) {
   
   const likeSong = async (e) => {
     if (!user) return document.getElementById('login_button').click();
-    await dispatch(postLike(user.id, song.id));
-    setLikeCount(prevState => prevState + 1);
-    setIsLiked(true);
+    dispatch(postLike(user.id, song.id));
   }
   const unLikeSong = async (e) => {
     if (!user) return document.getElementById('login_button').click();
-    await dispatch(deleteLike(user.id, song.id));
-    setLikeCount(prevState => prevState - 1);
-    setIsLiked(false); 
+    dispatch(deleteLike(user.id, song.id));
   }
 
   return (

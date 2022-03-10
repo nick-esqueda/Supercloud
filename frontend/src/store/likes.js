@@ -91,8 +91,19 @@ const likesReducer = (state = initialState, action) => {
       newState = { ...state };
       action.likes.forEach(like => {
         newState.allLikes[like.id] = like;
-        newState.songsLikes[like.userId] = like;
-        newState.usersLikes[like.songId] = like;
+        
+        if (!newState.songsLikes[like.songId]) {
+          newState.songsLikes[like.songId] = [like];
+        } else {
+          newState.songsLikes[like.songId].push(like);
+        }
+        
+        if (!newState.usersLikes[like.userId]) {
+          newState.usersLikes[like.userId] = [like];
+        } else {
+          newState.usersLikes[like.userId].push(like);
+        }
+        
       });
       return newState;
     }
@@ -108,16 +119,27 @@ const likesReducer = (state = initialState, action) => {
     case ADD_LIKE: {
       newState = { ...state };
       newState.allLikes[action.like.id] = action.like;
-      newState.songsLikes[action.like.userId] = action.like
-      newState.usersLikes[action.like.songId] = action.like;
+      
+      if (!newState.songsLikes[action.like.songId]) {
+        newState.songsLikes[action.like.songId] = [action.like];
+      } else {
+        newState.songsLikes[action.like.songId].push(action.like);
+      }
+      
+      if (!newState.usersLikes[action.like.userId]) {
+        newState.usersLikes[action.like.userId] = [action.like];
+      } else {
+        newState.usersLikes[action.like.userId].push(action.like);
+      }
+      
       return newState;
     }
 
     case REMOVE_LIKE: {
       newState = { ...state };
       delete newState.allLikes[action.like.id];
-      delete newState.songsLikes[action.like.userId];
-      delete newState.usersLikes[action.like.songId];
+      delete newState.songsLikes[action.like.songId];
+      delete newState.usersLikes[action.like.userId];
       return newState;
     }
 
