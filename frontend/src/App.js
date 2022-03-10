@@ -7,7 +7,7 @@ import SongCard from './components/SongCard';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';
 import AudioPlayerProvider from './Context/AudioPlayerContext';
-import { fetchLikes } from './store/likes';
+import { fetchAllLikes, fetchLikes } from './store/likes';
 import { restoreUser } from './store/session';
 import { fetchSongs } from './store/songs';
 
@@ -16,16 +16,19 @@ function App() {
   const user = useSelector(state => state.session.user);
   const songs = useSelector(state => Object.values(state.songs.songs));
   const likes = useSelector(state => state.likes);
+  // const userLikes = likes[user?.id];
+  // console.log(userLikes);
   const [isLoaded, setIsLoaded] = useState(false);
-
+  
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true))
     dispatch(fetchSongs())
+    dispatch(fetchAllLikes());
   }, [dispatch]);
   
-  useEffect(() => {
-    if (user) dispatch(fetchLikes(user.id));
-  }, [user])
+  // useEffect(() => {
+  //   if (user) dispatch(fetchLikes(user.id));
+  // }, [user])
 
   return (
     <>

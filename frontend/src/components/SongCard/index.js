@@ -16,6 +16,7 @@ export default function SongCard({ song, like }) {
   const playingSong = useSelector(state => state.songs.playing);
   const user = useSelector(state => state.session.user);
   song = useSelector(state => state.songs.songs[song?.id]);
+  // const isLiked = 
 
   const playSong = async () => {
     await new Promise((resolve, reject) => {

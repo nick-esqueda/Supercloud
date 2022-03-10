@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { deleteLike, fetchLikes, postLike } from '../../store/likes';
+import { deleteLike, fetchAllLikes, fetchLikes, postLike } from '../../store/likes';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 
@@ -14,10 +14,11 @@ export default function Actions({ song, isArtist }) {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.session.user.id);
   const like = useSelector(state => state.likes[song.id]);
+  const likeCount = useSelector(state => Object.values(state.likes).filter(like => like.songId === song.id).length);
 
   useEffect(() => {
-    dispatch(fetchLikes(userId));
-  }, [dispatch, userId])
+    dispatch(fetchAllLikes());
+  }, [dispatch])
   
   const likeSong = (e) => dispatch(postLike(userId, song.id));
   const unLikeSong = (e) => dispatch(deleteLike(like));
@@ -50,12 +51,12 @@ export default function Actions({ song, isArtist }) {
         {like ? (
           <button onClick={unLikeSong} className='btn btn--liked'>
             <FontAwesomeIcon icon={faHeart} style={{ color: '#d73543', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{'# of likes'}
+            &nbsp;{likeCount}
           </button>
         ) : (
           <button onClick={likeSong} className='btn btn--secondary--outline'>
             <FontAwesomeIcon icon={faHeart} style={{ color: '#535353', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{'# of likes'}
+            &nbsp;{likeCount}
           </button>)
         }
 

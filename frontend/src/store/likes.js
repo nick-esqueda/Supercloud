@@ -39,6 +39,15 @@ export const fetchLikes = userId => async dispatch => {
   }
 }
 
+export const fetchAllLikes = () => async dispatch => {
+  const res = await fetch(`/api/likes`);
+  
+  if (res.ok) {
+    const likes = await res.json();
+    dispatch(addLikes(likes));
+  }
+}
+
 export const postLike = (userId, songId) => async dispatch => {
   const res = await csrfFetch(`/api/likes`, {
     method: 'POST',
@@ -73,10 +82,13 @@ const likesReducer = (state = {}, action) => {
     case ADD_LIKES: {
       newState = {...state};
       action.likes.forEach(like => {
-        if (!state[like.songId]) {
-          newState[like.songId] = like;
+        if (!newState[like.songId]) {
+          newState[like.songId] = [like];
+        } else {
+          newState[like.songId].push(like);
         }
       });
+      console.log('NEW STATE IN REDUCER',newState);
       return newState;
     }
     
