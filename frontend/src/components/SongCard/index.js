@@ -8,6 +8,7 @@ import './SongCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { deleteLike, postLike } from '../../store/likes';
+import { useEffect, useState } from 'react';
 
 export default function SongCard({ song, user }) {
   const dispatch = useDispatch();
@@ -18,7 +19,27 @@ export default function SongCard({ song, user }) {
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const commentCount = !song.Comments ? 0 : song.Comments.length;
   const isArtist = song.User.id === user?.id;
-
+  const [tick, setTick] = useState(+(song.createdAt.split(' ')[0]) + 1);
+  
+  useEffect(() => {
+    let timer;
+    
+    if (tick === 59) {
+      timer = setTimeout(() => {
+        song.createdAt = '1 minute ago';
+        setTick(60);
+      }, 1000);
+      return;
+    }
+    
+    if (song.createdAt.endsWith('seconds ago') || song.createdAt.endsWith('second ago')) {
+      timer = setTimeout(() => setTick(prev => prev + 1), 1000);
+      song.createdAt = `${tick + 1} seconds ago`;
+    }
+    
+    return () => clearTimeout(timer);
+  }, [song, tick])
+  
   const playSong = async () => {
     await new Promise((resolve, reject) => {
       dispatch(setPlaying(song));
