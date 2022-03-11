@@ -11,7 +11,7 @@ function ProfileNavButton({ user }) {
   const openMenu = () => {
     if (showMenu) return;
     document.querySelector('.header__profileNavBtn')
-      .style.backgroundColor = '#191414';
+      .style.backgroundColor = '#111213';
     setShowMenu(true);
   };
 
