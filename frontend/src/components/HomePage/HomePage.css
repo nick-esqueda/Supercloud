@@ -21,9 +21,6 @@
   margin: 0;
 }
 
-/* #home ul {
-  width: 100%;
-} */
 .badge_grid1h { grid-area: h1 }
 .badge_grid2h { grid-area: h2 }
 .badge_grid3h { grid-area: h3 }
@@ -62,6 +59,23 @@
 /* SIDEBAR *******************************************************/
 .home__sidebar {
   grid-area: side;
-  border: 1px solid red;
+  
+  padding: 16px 24px;
+  border-left: 1px solid #b3b3b3;
   min-height: 800px;
+  
+}
+
+.greeting {
+  font-style: italic;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.greeting a {
+  margin: 32px 0;
+  padding: 24px;
+  font-size: 16px;
+  font-style: normal;
 }

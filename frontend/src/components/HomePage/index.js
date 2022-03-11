@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongBadge from '../SongBadge/SongBadge';
@@ -11,6 +12,8 @@ export default function HomePage() {
   const user = useSelector(state => state.session.user);
   const songs = useSelector(state => Object.values(state.songs.songs));
   const [isLoaded, setIsLoaded] = useState(false);
+  let usersPlayCount = 0;
+  user.Songs.forEach(song => usersPlayCount += song.plays);
 
   useEffect(() => {
     (async () => {
@@ -61,7 +64,15 @@ export default function HomePage() {
 
 
       <div className='home__sidebar'>
+        <div className='greeting'>
+          <h3>hi {user.username}, you've gotten</h3>
+          <h3 style={{ margin: '24px 0', fontWeight: '400', fontSize: '32px', fontStyle: 'normal' }}>{usersPlayCount} plays</h3>
+          <h3>in total since you joined.</h3>
 
+          <NavLink to={`/users/${user.id}`} className='btn btn--primary--outline'
+            onClick={() => alert('Sorry! This feature is currently under construction')}
+          >view your profile</NavLink>
+        </div>
 
       </div>
 

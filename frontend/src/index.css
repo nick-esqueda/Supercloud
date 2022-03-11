@@ -31,7 +31,7 @@ h1, h2 {
   padding: .5em 1em;
 
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 5px;
 
   display: inline-block;
@@ -153,9 +153,14 @@ li {
 }
 /* yellow outlined button skin */
 .btn--primary--outline {
-  border-color: #FFFF64;
+  border: 2px solid #FFFF64;
   color: #FFFF64;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn--primary--outline:hover {
+  background-color: #FFFF5D;
+  color: black;
+  font-weight: 400;
 }
 .btn--primary:active,
 .btn--primary--outline:active {
