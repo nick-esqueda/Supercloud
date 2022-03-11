@@ -54,5 +54,16 @@ router.post(
   })
 )
 
+// DELETE /api/comments/:commentId - DELETE A COMMENT
+router.delete(
+  '/:commentId',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.commentId, 10);
+    await Comment.destroy({ where: { id } });
+    return res.json(id);
+  })
+)
+
 
 module.exports = router;

@@ -39,8 +39,8 @@ export const setPlaying = (song) => {
 
 
 // THUNK ACTION CREATORS **********************************
-export const fetchSong = id => async dispatch => {
-  const res = await fetch(`/api/songs/${id}`);
+export const fetchSong = songId => async dispatch => {
+  const res = await fetch(`/api/songs/${songId}`);
 
   if (res.ok) {
     const song = await res.json();
@@ -115,9 +115,9 @@ const songsReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case ADD_SONG: {
-      newState = { ...state };
-      newState.songs[action.song.id] = action.song;
-      return newState;
+      const songs = { ...state.songs };
+      songs[action.song.id] = action.song;
+      return { ...state, songs};
     }
 
     case ADD_SONGS: {

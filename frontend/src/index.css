@@ -6,7 +6,7 @@
 
 body {
   max-width: 1280px;
-  margin: 46px auto 0;
+  margin: 46px auto 64px;
 
   font-family: 'Roboto Mono', monospace;
   font-size: 14px;

@@ -55,7 +55,7 @@ export default function SongPage() {
         </div>
 
         <div className='song_sidebar'>
-          <Sidebar artist={song?.User} />
+          <Sidebar artist={song.User} />
         </div>
 
       </div>
