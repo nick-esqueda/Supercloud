@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_COMMENT = 'songs/ADD_COMMENT';
 const LOAD_COMMENTS = 'songs/LOAD_COMMENTS';
 const LOAD_SONGS_COMMENTS = 'songs/LOAD_SONGS_COMMENTS';
+const ADD_COMMENT = 'songs/ADD_COMMENT';
 
 // ACTION CREATORS ****************************************
 const loadComment = (comment) => {
@@ -27,6 +28,7 @@ const loadSongsComments = (comments) => {
   }
 }
 
+
 // THUNK ACTION CREATORS **********************************
 export const fetchComments = () => async dispatch => {
   const res = await fetch(`/api/comments`);
@@ -48,6 +50,19 @@ export const fetchSongsComments = songId => async dispatch => {
   }
 }
 
+export const postComment = comment => async dispatch => {
+  const res = await csrfFetch(`/api/comments`, {
+    method: 'POST',
+    body: JSON.stringify(comment)
+  });
+  
+  if (res.ok) {
+    const comment = await res.json();
+    dispatch(loadComment(comment));
+    return comment;
+  }
+}
+
 // REDUCER ************************************************
 const commentsReducer = (state = {}, action) => {
   let newState;
@@ -55,7 +70,7 @@ const commentsReducer = (state = {}, action) => {
 
     case LOAD_COMMENT: {
       newState = { ...state };
-      newState[action.song.id] = action.comment;
+      newState[action.comment.id] = action.comment;
       return newState;
     }
 

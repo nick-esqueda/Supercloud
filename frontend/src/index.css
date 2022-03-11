@@ -213,6 +213,7 @@ li {
 
 /* form input */
 .form_input {
+  height: 26px;
   margin: 6px 0;
   padding: 2px 8px;
 

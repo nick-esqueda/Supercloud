@@ -30,12 +30,27 @@ router.get(
     const songId = parseInt(req.params.songId, 10);
     const comments = await Comment.findAll({
       where: { songId },
-      include: [{ model: User }, { model: Song }]
+      include: [{ model: User }, { model: Song }],
+      order: [['createdAt', 'DESC']]
     });
     comments.forEach(comment => {
       comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
     });  
     return res.json(comments);
+  })
+)
+
+// POST /api/comments - CREATE A COMMENT
+router.post(
+  '/',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const createdComment = await Comment.create(req.body);
+    const comment = await Comment.findByPk(createdComment.id, {
+      include: [{ model: User }, { model: Song }]
+    });
+    comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
+    return res.json(comment);
   })
 )
 
