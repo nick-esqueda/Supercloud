@@ -5,3 +5,29 @@
 #home ul {
   width: 100%;
 }
+
+.badge_grid {
+  height: 320px;
+  width: 1280px;
+  
+  overflow-x: scroll;
+  overflow-y: hidden;
+  
+  display: grid;
+  grid-template-columns: repeat(10, 256px);
+  justify-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #535353;
+}

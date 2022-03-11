@@ -24,13 +24,18 @@ export default function HomePage() {
     <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
-      <ul>
-        <SongBadge />
+      {/* <ul>
         {songs.map(song => (
           <SongCard key={song.id} song={song} user={user} />
         ))}
 
-      </ul>
+      </ul> */}
+      
+      <div className='badge_grid'>
+        {songs.map(song => (
+          <SongBadge song={song} />
+        ))}
+      </div>
     </div>
   )
 }
