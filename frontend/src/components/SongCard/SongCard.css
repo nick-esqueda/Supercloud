@@ -78,6 +78,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.song_badge_container .top__title_artist a {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
 
 .top__right {
   width: 160px;

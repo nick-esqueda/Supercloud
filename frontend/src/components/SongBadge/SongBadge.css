@@ -1,9 +1,8 @@
 .song_badge_container {
   width: 196px;
-  height: 260px;
+  height: 290px;
   margin: 16px;
   padding: 8px;
-  border: 1px solid blue;
 }
 
 .song_badge__art {
@@ -21,7 +20,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1;
 }
 
 .hallway {

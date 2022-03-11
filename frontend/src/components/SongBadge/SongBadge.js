@@ -1,5 +1,7 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import './SongBadge.css'
+import '../SongCard/SongCard.css'
 
 export default function SongBadge() {
   return (
@@ -11,6 +13,16 @@ export default function SongBadge() {
         <div className='hallway'></div>
 
       </div>
+
+      <div className='top__title_artist'>
+        <NavLink to={`/songs/song?.id`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}>
+          <span>really long and drawn out song title here sdfgasdf </span>
+        </NavLink>
+        <NavLink to={`/users/song?.User.id`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}>
+          <small>song?.User.username asd fadsf asdf as ad fad  asdf asd fssd fad fasdf as</small>
+        </NavLink>
+      </div>
+
     </div>
   )
 }
