@@ -1,0 +1,39 @@
+.song_badge_container {
+  width: 196px;
+  height: 260px;
+  margin: 16px;
+  padding: 8px;
+  border: 1px solid blue;
+}
+
+.song_badge__art {
+  width: 196px;
+  height: 196px;
+  position: relative;
+}
+
+.song_badge__art img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.hallway {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+
+  border-radius: 10px;
+  background-color: #535353;
+  box-shadow: 10px 10px 0 0 #212121 ;
+  
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
