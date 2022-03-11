@@ -1,6 +1,5 @@
 .actions_container {
   height: 100%;
-  padding: 0 16px;
   border-bottom: 1px solid #535353;
 }
 
@@ -36,6 +35,9 @@
 }
 .comment_form input {
   width: 91%;
+  background-color: #191414;
+  border-color: #191414;
+  font-weight: 400;
 }
 
 
