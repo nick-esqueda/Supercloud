@@ -1,16 +1,17 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteComment } from '../../store/comments';
+
 import './CommentCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faMessage } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
-import { deleteComment } from '../../store/comments';
 
 
 export default function CommentCard({ comment }) {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
 
-  const deleteComment = () => {
+  const commentDelete = () => {
     if (window.confirm(`Are you sure you want to delete your comment? This cannot be undone`)) {
       return dispatch(deleteComment(comment)); 
     }
@@ -39,7 +40,7 @@ export default function CommentCard({ comment }) {
           </div>
         ) : (
           <div className='comment__right'>
-            <button className='btn btn--secondary' onClick={deleteComment}>
+            <button className='btn btn--secondary' onClick={commentDelete}>
               <FontAwesomeIcon icon={faTrashCan} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
             </button>
           </div>
