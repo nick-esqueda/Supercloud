@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import Backdrop from './components/Backdrop';
 import HeaderFooter from './components/HeaderFooter';
 import HomePage from './components/HomePage';
 import SongPage from './components/SongPage';
@@ -20,6 +21,8 @@ function App() {
   return !isLoaded ? null : (
     <AudioPlayerProvider>
       <HeaderFooter>
+        <Backdrop />
+        
         <Switch>
           <Route exact path="/">
             <HomePage />

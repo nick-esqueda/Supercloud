@@ -1,5 +1,7 @@
 #home {
   width: 100%;
+  z-index: 1;
+  background-color: #191414ad;
 }
 
 #home ul {
