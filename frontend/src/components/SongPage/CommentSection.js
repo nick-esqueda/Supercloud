@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import CommentCard from '../CommentCard';
 import './CommentSection.css';
 
 export default function CommentSection({ comments }) {
@@ -6,7 +7,7 @@ export default function CommentSection({ comments }) {
   console.log(comments);
   
   
-  return (
+  return !comments ? <small>seems lonely here... how about leaving a comment?</small> : (
     <div className='comment_section'>
 
       <span className='inner_section_header'>
@@ -18,17 +19,9 @@ export default function CommentSection({ comments }) {
       </span>
 
       <ul className='comments'>
-        {/* map through comments and render out comment component */}
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
-        <li>comment placeholder</li>
+        {comments.map(comment => (
+          <li key={comment.id}><CommentCard /></li>
+        ))}
       </ul>
 
 
