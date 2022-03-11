@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
+import SongBadge from '../SongBadge/SongBadge';
 import SongCard from '../SongCard';
 import './HomePage.css';
 
@@ -24,6 +25,7 @@ export default function HomePage() {
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
       <ul>
+        <SongBadge />
         {songs.map(song => (
           <SongCard key={song.id} song={song} user={user} />
         ))}
