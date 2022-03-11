@@ -138,7 +138,7 @@ const likesReducer = (state = initialState, action) => {
         newUsersLikes[action.like.userId] = [...newUsersLikes[action.like.userId], action.like];
       }
       
-      return { allLikes: newAllLikes, songsLikes: newSongsLikes, UsersLikes: newUsersLikes };
+      return { allLikes: newAllLikes, songsLikes: newSongsLikes, usersLikes: newUsersLikes };
     }
 
     case REMOVE_LIKE: {
