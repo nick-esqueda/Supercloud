@@ -120,40 +120,42 @@ const likesReducer = (state = initialState, action) => {
     }
 
     case ADD_LIKE: {
-      const newAllLikes = { ...state.allLikes };
-      const newSongsLikes = { ...state.songsLikes };
-      const newUsersLikes = { ...state.usersLikes };
+      const allLikes = { ...state.allLikes };
+      const songsLikes = { ...state.songsLikes };
+      const usersLikes = { ...state.usersLikes };
+      const like = action.like;
       
-      newAllLikes[action.like.id] = action.like;
+      allLikes[like.id] = like;
       
-      if (!newSongsLikes[action.like.songId]) {
-        newSongsLikes[action.like.songId] = [action.like];
+      if (!songsLikes[like.songId]) {
+        songsLikes[like.songId] = [like];
       } else {
-        newSongsLikes[action.like.songId] = [...newSongsLikes[action.like.songId], action.like]
+        songsLikes[like.songId] = [...songsLikes[like.songId], like]
       }
       
-      if (!newUsersLikes[action.like.userId]) {
-        newUsersLikes[action.like.userId] = [action.like];
+      if (!usersLikes[like.userId]) {
+        usersLikes[like.userId] = [like];
       } else {
-        newUsersLikes[action.like.userId] = [...newUsersLikes[action.like.userId], action.like];
+        usersLikes[like.userId] = [...usersLikes[like.userId], like];
       }
       
-      return { allLikes: newAllLikes, songsLikes: newSongsLikes, usersLikes: newUsersLikes };
+      return { allLikes, songsLikes, usersLikes };
     }
 
     case REMOVE_LIKE: {
-      newState = { ...state };
+      const newState = {...state};
+      const songsLikes = { ...state.songsLikes };
+      const usersLikes = { ...state.usersLikes };
+      
       delete newState.allLikes[action.like.id];
       
-      // delete newState.songsLikes[action.like.songId];
-      const newSongsLikes = newState.songsLikes[action.like.songId].filter(like => like.id !== action.like.id);
-      newState.songsLikes[action.like.songId] = newSongsLikes;
+      const newSongsLikes = songsLikes[action.like.songId].filter(like => like.id !== action.like.id);
+      songsLikes[action.like.songId] = newSongsLikes;
       
-      // delete newState.usersLikes[action.like.userId];
-      const newUsersLikes = newState.usersLikes[action.like.userId].filter(like => like.id !== action.like.id);
-      newState.usersLikes[action.like.userId] = newUsersLikes;
+      const newUsersLikes = usersLikes[action.like.userId].filter(like => like.id !== action.like.id);
+      usersLikes[action.like.userId] = newUsersLikes;
       
-      return newState;
+      return { ...newState, songsLikes, usersLikes };
     }
 
     default: {
