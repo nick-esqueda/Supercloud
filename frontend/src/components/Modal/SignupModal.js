@@ -16,7 +16,10 @@ export default function SignupModal() {
     <>
       <button
         className="btn btn--primary"
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          window.scrollTo(0, 0);
+          setShowModal(true); 
+        }}
       >
         create account
       </button>

@@ -44,6 +44,7 @@ function LoginForm() {
   const demoLogin = (e) => {
     setCredential('Demo User');
     setPassword('password');
+    window.scrollTo(0, 0);
     return dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
       .catch(async (res) => {
         const data = await res.json();

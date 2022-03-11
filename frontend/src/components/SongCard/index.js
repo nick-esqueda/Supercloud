@@ -65,7 +65,7 @@ export default function SongCard({ song, user }) {
 
   return (
     <div className='song_card_container'>
-      <NavLink to={`/songs/${song?.id}`}>
+      <NavLink to={`/songs/${song?.id}`} onClick={() => window.scrollTo(0, 0)}>
         <img src={song?.artworkURL
           ? song?.artworkURL
           : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
@@ -87,10 +87,10 @@ export default function SongCard({ song, user }) {
           ></div>
 
           <div className='top__title_artist'>
-            <NavLink to={`/users/${song?.User.id}`}>
+            <NavLink to={`/users/${song?.User.id}`} onClick={() => window.scrollTo(0, 0)}>
               <small>{song?.User.username}</small>
             </NavLink>
-            <NavLink to={`/songs/${song?.id}`}>
+            <NavLink to={`/songs/${song?.id}`} onClick={() => window.scrollTo(0, 0)}>
               <span>{song?.title}</span>
             </NavLink>
           </div>

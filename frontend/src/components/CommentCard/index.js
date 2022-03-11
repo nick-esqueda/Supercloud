@@ -52,7 +52,7 @@ export default function CommentCard({ comment }) {
         <span>{comment.content}</span>
       </div>
 
-      {isHovered && comment.userId === user.id
+      {isHovered && comment.userId === user?.id
         ? (
           <div className='comment__right'>
             <button className='btn btn--secondary' onClick={commentDelete}>

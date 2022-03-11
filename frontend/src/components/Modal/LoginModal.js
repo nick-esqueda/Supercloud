@@ -18,7 +18,10 @@ function LoginModal() {
       <button
         id='login_button'
         className="btn btn--secondary--outline"
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          window.scrollTo(0, 0)
+          setShowModal(true)
+        }}
       >
         log in
       </button>
