@@ -3,11 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setPlaying } from '../../store/songs';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import './Header.css';
+import { useEffect, useState } from 'react';
 
 export default function Header({ song }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
+  const [tick, setTick] = useState(+(song.createdAt.split(' ')[0]) + 1);
+
+  useEffect(() => {
+    let timer;
+    
+    if (tick === 59) {
+      timer = setTimeout(() => {
+        song.createdAt = '1 minute ago';
+        setTick(60);
+      }, 1000);
+      return;
+    }
+    
+    if (song.createdAt.endsWith('seconds ago') || song.createdAt.endsWith('second ago')) {
+      timer = setTimeout(() => setTick(prev => prev + 1), 1000);
+      song.createdAt = `${tick + 1} seconds ago`;
+    }
+    
+    return () => clearTimeout(timer);
+  }, [song, tick]);
 
   const playSong = async () => {
     await new Promise((resolve, reject) => {

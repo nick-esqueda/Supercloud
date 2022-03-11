@@ -30,9 +30,11 @@ function ProfileNavButton({ user }) {
   }, [showMenu]);
 
   const logout = (e) => {
-    dispatch(logoutUser());
-    window.scrollTo(0, 0);
-    return history.push('/');
+    if (window.confirm('Are you sure you want to log out?')) {
+      dispatch(logoutUser());
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
+      return history.push('/');
+    }
   };
 
   return (

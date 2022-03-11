@@ -31,6 +31,7 @@ function LoginForm() {
 
     setValidationErrors([]);
 
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
     return dispatch(loginUser({ credential, password }))
       .catch(async (res) => {
         const data = await res.json();
@@ -44,7 +45,7 @@ function LoginForm() {
   const demoLogin = (e) => {
     setCredential('Demo User');
     setPassword('password');
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
     return dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
       .catch(async (res) => {
         const data = await res.json();
@@ -92,7 +93,7 @@ function LoginForm() {
         </div>
 
         <div className='login_btn_container'>
-          <button type="submit" onClick={demoLogin} className='btn btn--secondary--outline'>demo user</button>
+          <button type="button" onClick={demoLogin} className='btn btn--secondary--outline'>demo user</button>
           <button type="submit" className='btn btn--primary'>log in</button>
         </div>
       </form>

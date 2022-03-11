@@ -19,7 +19,7 @@ function LoginModal() {
         id='login_button'
         className="btn btn--secondary--outline"
         onClick={() => {
-          window.scrollTo(0, 0)
+          window.scrollTo({ top: 0, left: 0, });
           setShowModal(true)
         }}
       >
