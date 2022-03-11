@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import { useEffect, useState } from 'react';
 import { editSong } from '../../store/songs';
-import 'react-h5-audio-player/lib/styles.css';
+import './Player.css';
 
 export default function Player() {
   const dispatch = useDispatch();
@@ -46,13 +46,9 @@ export default function Player() {
         customAdditionalControls={[]}
         style={{
           backgroundColor: 'transparent',
-          color: 'white',
-          paddingLeft: '0',
-          fontSize: '1px',
-          width: '800px',
         }}
         customIcons={{
-          // play: '▶',
+          play: '▶',
         }}
       />
 

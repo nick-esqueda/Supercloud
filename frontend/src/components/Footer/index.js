@@ -10,7 +10,10 @@ export default function Footer() {
   return (
     <div id='footer'>
       <div className='play_controls'>
-        <Player />
+        <div className='player_wrapper'>
+
+          <Player />
+        </div>
 
         <div className='play_controls__details'>
           <img

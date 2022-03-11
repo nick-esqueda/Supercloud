@@ -18,6 +18,12 @@
   justify-content: space-between;
 }
 
+.player_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
 
 /* CURRENT SONG DETAILS */
 .play_controls__details {
