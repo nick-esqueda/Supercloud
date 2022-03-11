@@ -1,33 +1,67 @@
 #home {
-  width: 100%;
-}
-
-#home ul {
-  width: 100%;
-}
-
-.badge_grid {
-  height: 320px;
   width: 1280px;
+  margin: 32px 0;
   
+  display: grid;
+  grid-template-columns: 70% auto;
+  grid-template-rows: 40px 320px 40px 320px 40px 320px 40px 320px;
+  gap: 32px;
+  grid-template-areas: 
+    "h1 side"
+    "g1 side"
+    "h2 side"
+    "g2 side"
+    "h3 side"
+    "g3 side"
+    "h4 side"
+    "g4 side";
+}
+#home h2 {
+  text-align: left;
+  margin: 0;
+}
+
+/* #home ul {
+  width: 100%;
+} */
+.badge_grid1h { grid-area: h1 }
+.badge_grid2h { grid-area: h2 }
+.badge_grid3h { grid-area: h3 }
+.badge_grid4h { grid-area: h4 }
+
+.badge_grid__g1 { grid-area: g1 }
+.badge_grid__g2 { grid-area: g2 }
+.badge_grid__g3 { grid-area: g3 }
+.badge_grid__g4 { grid-area: g4 }
+
+.badge_grid__g1,
+.badge_grid__g2,
+.badge_grid__g3,
+.badge_grid__g4 {
   overflow-x: scroll;
   overflow-y: hidden;
   
   display: grid;
   grid-template-columns: repeat(10, 256px);
+  grid-template-rows: 1fr;
   justify-items: center;
 }
-
 ::-webkit-scrollbar {
   width: 12px;
 }
-
 ::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: #212121;
 }
-
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background-color: #535353;
+}
+
+
+/* SIDEBAR *******************************************************/
+.home__sidebar {
+  grid-area: side;
+  border: 1px solid red;
+  min-height: 800px;
 }

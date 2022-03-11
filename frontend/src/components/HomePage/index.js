@@ -19,10 +19,10 @@ export default function HomePage() {
       setIsLoaded(true);
     })()
   }, [dispatch])
-  
+
   return !isLoaded ? <h2>loading...</h2> : (
     <div id='home'>
-      <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
+      {/* <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1> */}
 
       {/* <ul>
         {songs.map(song => (
@@ -30,12 +30,41 @@ export default function HomePage() {
         ))}
 
       </ul> */}
-      
-      <div className='badge_grid'>
+
+      <h2 className='badge_grid1h'>hot tracks</h2>
+      <div className='badge_grid__g1'>
         {songs.map(song => (
-          <SongBadge song={song} />
+          <SongBadge key={song.id} song={song} />
         ))}
       </div>
+
+      <h2 className='badge_grid2h'>your favorite tracks</h2>
+      <div className='badge_grid__g2'>
+        {songs.map(song => (
+          <SongBadge key={song.id} song={song} />
+        ))}
+      </div>
+
+      <h2 className='badge_grid3h'>recent tracks</h2>
+      <div className='badge_grid__g3'>
+        {songs.map(song => (
+          <SongBadge key={song.id} song={song} />
+        ))}
+      </div>
+
+      <h2 className='badge_grid4hc'>artist's you might like</h2>
+      <div className='badge_grid__g4'>
+        {songs.map(song => (
+          <SongBadge key={song.id} song={song} />
+        ))}
+      </div>
+
+
+      <div className='home__sidebar'>
+
+
+      </div>
+
     </div>
   )
 }
