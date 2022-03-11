@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../store/comments';
 
 import './CommentCard.css'
@@ -9,10 +9,11 @@ import { faTrashCan, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 export default function CommentCard({ comment }) {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const [isHovered, setIsHovered] = useState(false);
 
   const commentDelete = () => {
-    if (window.confirm(`Are you sure you want to delete your comment? This cannot be undone`)) {
+    if (window.confirm(`Are you sure you want to delete your comment? This cannot be undone.`)) {
       return dispatch(deleteComment(comment)); 
     }
   }
@@ -31,18 +32,18 @@ export default function CommentCard({ comment }) {
         <span>{comment.content}</span>
       </div>
 
-      {!isHovered
+      {isHovered && comment.userId === user.id
         ? (
-          <div className='comment__right'>
-            <span style={{ color: '#b3b3b3' }}>
-              {comment.createdAt}
-            </span>
-          </div>
-        ) : (
           <div className='comment__right'>
             <button className='btn btn--secondary' onClick={commentDelete}>
               <FontAwesomeIcon icon={faTrashCan} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
             </button>
+          </div>
+        ) : (
+          <div className='comment__right'>
+            <span style={{ color: '#b3b3b3' }}>
+              {comment.createdAt}
+            </span>
           </div>
         )
       }
