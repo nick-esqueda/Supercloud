@@ -1,3 +1,4 @@
+import { getTimeElapsed } from "../utils";
 import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
@@ -90,6 +91,7 @@ const commentsReducer = (state = {}, action) => {
 
     case LOAD_COMMENT: {
       newState = { ...state };
+      action.comment.createdAt = getTimeElapsed(action.comment.createdAt);
       newState[action.comment.id] = action.comment;
       return newState;
     }
@@ -97,6 +99,7 @@ const commentsReducer = (state = {}, action) => {
     case LOAD_COMMENTS: {
       newState = { ...state };
       action.comments.forEach(comment => {
+        comment.createdAt = getTimeElapsed(comment.createdAt);
         newState[comment.id] = comment;
       });
       return newState;
@@ -105,6 +108,7 @@ const commentsReducer = (state = {}, action) => {
     case LOAD_SONGS_COMMENTS: {
       newState = {};
       action.comments.forEach(comment => {
+        comment.createdAt = getTimeElapsed(comment.createdAt);
         newState[comment.id] = comment;
       });
       return newState;

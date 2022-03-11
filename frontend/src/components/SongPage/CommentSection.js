@@ -2,6 +2,8 @@ import CommentCard from '../CommentCard';
 import './CommentSection.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { useEffect } from 'react';
+import { getTimeElapsed } from '../../utils';
 
 export default function CommentSection({ comments }) {
 
