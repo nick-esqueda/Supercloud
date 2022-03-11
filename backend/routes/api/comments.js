@@ -16,9 +16,6 @@ router.get(
     const comments = await Comment.findAll({
       include: [{ model: User }, { model: Song }]
     });
-    // comments.forEach(comment => {
-    //   comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
-    // });  
     return res.json(comments);
   })
   )
@@ -33,9 +30,6 @@ router.get(
       include: [{ model: User }, { model: Song }],
       order: [['createdAt', 'DESC']]
     });
-    // comments.forEach(comment => {
-    //   comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
-    // });  
     return res.json(comments);
   })
 )
@@ -49,7 +43,6 @@ router.post(
     const comment = await Comment.findByPk(createdComment.id, {
       include: [{ model: User }, { model: Song }]
     });
-    // comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
     return res.json(comment);
   })
 )
