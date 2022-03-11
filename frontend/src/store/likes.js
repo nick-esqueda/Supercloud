@@ -120,22 +120,25 @@ const likesReducer = (state = initialState, action) => {
     }
 
     case ADD_LIKE: {
-      newState = { ...state };
-      newState.allLikes[action.like.id] = action.like;
+      const newAllLikes = { ...state.allLikes };
+      const newSongsLikes = { ...state.songsLikes };
+      const newUsersLikes = { ...state.usersLikes };
       
-      if (!newState.songsLikes[action.like.songId]) {
-        newState.songsLikes[action.like.songId] = [action.like];
+      newAllLikes[action.like.id] = action.like;
+      
+      if (!newSongsLikes[action.like.songId]) {
+        newSongsLikes[action.like.songId] = [action.like];
       } else {
-        newState.songsLikes[action.like.songId].push(action.like);
+        newSongsLikes[action.like.songId] = [...newSongsLikes[action.like.songId], action.like]
       }
       
-      if (!newState.usersLikes[action.like.userId]) {
-        newState.usersLikes[action.like.userId] = [action.like];
+      if (!newUsersLikes[action.like.userId]) {
+        newUsersLikes[action.like.userId] = [action.like];
       } else {
-        newState.usersLikes[action.like.userId].push(action.like);
+        newUsersLikes[action.like.userId] = [...newUsersLikes[action.like.userId], action.like];
       }
-      console.log('ADD_LIKE INSIDE REDUCER SWITCH CASE', newState.songsLikes[action.like.songId]);
-      return newState;
+      
+      return { allLikes: newAllLikes, songsLikes: newSongsLikes, UsersLikes: newUsersLikes };
     }
 
     case REMOVE_LIKE: {

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { fetchLikes } from '../../store/likes'
-import { restoreUser } from '../../store/session'
 import { fetchSong } from '../../store/songs'
 import Actions from './Actions'
 import ArtistBadge from './ArtistBadge'
@@ -16,7 +15,6 @@ export default function SongPage() {
   const dispatch = useDispatch();
   const song = useSelector(state => state.songs.songs[songId]);
   const user = useSelector(state => state.session.user);
-  const isArtist = song?.User.id === user?.id;
 
   useEffect(() => {
     dispatch(fetchSong(songId));
