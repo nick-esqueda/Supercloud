@@ -1,10 +1,10 @@
 import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
-const LOAD_COMMENT = 'songs/ADD_COMMENT';
-const LOAD_COMMENTS = 'songs/LOAD_COMMENTS';
-const LOAD_SONGS_COMMENTS = 'songs/LOAD_SONGS_COMMENTS';
-const ADD_COMMENT = 'songs/ADD_COMMENT';
+const LOAD_COMMENT = 'comments/ADD_COMMENT';
+const LOAD_COMMENTS = 'comments/LOAD_COMMENTS';
+const LOAD_SONGS_COMMENTS = 'comments/LOAD_SONGS_COMMENTS';
+const REMOVE_COMMENT = 'comments/REMOVE_COMMENT';
 
 // ACTION CREATORS ****************************************
 const loadComment = (comment) => {
@@ -25,6 +25,13 @@ const loadSongsComments = (comments) => {
   return {
     type: LOAD_SONGS_COMMENTS,
     comments
+  }
+}
+
+const removeComment = (id) => {
+  return {
+    type: REMOVE_COMMENT,
+    id
   }
 }
 
@@ -63,6 +70,19 @@ export const postComment = comment => async dispatch => {
   }
 }
 
+export const deleteComment = comment => async dispatch => {
+  const res = await csrfFetch(`/api/comments/${comment.id}`, {
+    method: 'DELETE'
+  });
+  
+  if (res.ok) {
+    const id = await res.json();
+    dispatch(removeComment(id));
+    return id;
+  }
+}
+
+
 // REDUCER ************************************************
 const commentsReducer = (state = {}, action) => {
   let newState;
@@ -87,6 +107,12 @@ const commentsReducer = (state = {}, action) => {
       action.comments.forEach(comment => {
         newState[comment.id] = comment;
       });
+      return newState;
+    }
+    
+    case REMOVE_COMMENT: {
+      const newState = { ...state };
+      delete newState[action.id];
       return newState;
     }
 
