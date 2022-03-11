@@ -1,5 +1,6 @@
 .comment__wrapper {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -8,10 +9,12 @@
 .comment__left {
   height: 100%;
   width: 100%;
+  
   text-align: left;
   
   display: grid;
   grid-template-columns: 48px auto;
+  grid-template-rows: 18px auto;
   grid-template-areas: 
     'left top'
     'left bottom';

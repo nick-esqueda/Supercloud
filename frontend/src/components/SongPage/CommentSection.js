@@ -15,7 +15,9 @@ export default function CommentSection({ comments }) {
           style={{ transform: 'scale(1.5)', position: 'relative', bottom: '-4px' }}
           alt=''
         />
-        &nbsp;69 comments
+        &nbsp;{comments.length === 1
+          ? comments.length + ' comment'
+          : comments.length + ' comments'} 
       </span>
 
       <ul className='comments'>

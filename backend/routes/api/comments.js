@@ -16,12 +16,15 @@ router.get(
     const comments = await Comment.findAll({
       include: [{ model: User }, { model: Song }]
     });
+    comments.forEach(comment => {
+      comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
+    });  
     return res.json(comments);
   })
-)
-
-// GET /api/comments/:songId - GET ALL OF A SONG'S COMMENTS
-router.get(
+  )
+  
+  // GET /api/comments/:songId - GET ALL OF A SONG'S COMMENTS
+  router.get(
   '/:songId',
   asyncHandler(async (req, res) => {
     const songId = parseInt(req.params.songId, 10);
@@ -29,6 +32,9 @@ router.get(
       where: { songId },
       include: [{ model: User }, { model: Song }]
     });
+    comments.forEach(comment => {
+      comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
+    });  
     return res.json(comments);
   })
 )
