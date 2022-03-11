@@ -30,7 +30,7 @@ router.get(
 // GET /api/songs - GET ALL SONGS
 router.get('/', asyncHandler(async (req, res) => {
   const songs = await Song.findAll({
-    include: [{ model: User }, { model: Like }],
+    include: [{ model: User }, { model: Like }, { model: Comment }],
   });
   songs.forEach(song => {
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
