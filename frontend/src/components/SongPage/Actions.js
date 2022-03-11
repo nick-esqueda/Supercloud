@@ -106,7 +106,7 @@ export default function Actions({ song, user }) {
           <span>▶ {song?.plays}</span>
           <span>
             <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{song.Comments.length}
+            &nbsp;{song.Comments?.length}
           </span>
         </div>
 
