@@ -68,7 +68,7 @@ const commentsReducer = (state = {}, action) => {
     }
 
     case LOAD_SONGS_COMMENTS: {
-      newState = { ...state };
+      newState = {};
       action.comments.forEach(comment => {
         newState[comment.id] = comment;
       });

@@ -17,14 +17,18 @@ export default function SongPage() {
   const user = useSelector(state => state.session.user);
   const song = useSelector(state => state.songs.songs[songId]);
   const comments = useSelector(state => state.comments);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchSong(songId));
-    dispatch(fetchSongsComments(songId))
-    dispatch(fetchLikes());
+    (async () => {
+      await dispatch(fetchSong(songId));
+      await dispatch(fetchSongsComments(songId))
+      await dispatch(fetchLikes());
+      setIsLoaded(true);
+    })();
   }, [dispatch]);
   
-  return !song ? <h2>loading...</h2> : (
+  return !isLoaded ? <h2>loading...</h2> : (
     <>
       <div className='song_header'>
         <Header song={song} />
