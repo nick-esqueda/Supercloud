@@ -39,5 +39,15 @@ router.get(
   })
 )
 
+// POST /api/comments - CREATE A COMMENT
+router.post(
+  '/',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const comment = await Comment.create(req.body);
+    return res.json(comment);
+  })
+)
+
 
 module.exports = router;
