@@ -58,35 +58,35 @@ const Navigation = () => {
   }
 
   return (
-    <header>
+    <div id="header">
+      <div className="navbar">
+        <div className="header__left flexRow">
+          <NavLink to="/" className="header__logo">cloud</NavLink>
+          <nav className="nav_links">
+            <NavLink exact to="/" activeStyle={{ backgroundColor: '#191414' }}>home</NavLink>
+            <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#191414' }}
+              onClick={() => alert('Sorry! This feature is currently under construction')}
+            >likes</NavLink>
+            <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#191414' }}
+              onClick={() => alert('Sorry! This feature is currently under construction')}
+            >random</NavLink>
+          </nav>
+        </div>
 
-      <div className="header__left flexRow">
-        <NavLink to="/" className="header__logo">cloud</NavLink>
-        <nav className="nav_links">
-          <NavLink exact to="/" activeStyle={{ backgroundColor: '#191414' }}>home</NavLink>
-          <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#191414' }}
-            onClick={() => alert('Sorry! This feature is currently under construction')}  
-          >likes</NavLink>
-          <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#191414' }}
-            onClick={() => alert('Sorry! This feature is currently under construction')}
-          >random</NavLink>
-        </nav>
+        <div className="header__middle">
+          <form className="header__searchForm">
+            <input type="text" placeholder="search" className="header__searchInput" />
+            <button type="submit" className="btn btn--secondary" style={{ boxShadow: "none" }}>
+              <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', transform: 'scale(1.2)' }}></FontAwesomeIcon>
+            </button>
+          </form>
+        </div>
+
+        <div className="header__right flexRow">
+          {sessionLinks}
+        </div>
       </div>
-
-      <div className="header__middle">
-        <form className="header__searchForm">
-          <input type="text" placeholder="search" className="header__searchInput" />
-          <button type="submit" className="btn btn--secondary" style={{ boxShadow: "none" }}>
-            <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', transform: 'scale(1.2)' }}></FontAwesomeIcon>
-          </button>
-        </form>
-      </div>
-
-      <div className="header__right flexRow">
-        {sessionLinks}
-      </div>
-
-    </header>
+    </div>
   );
 };
 

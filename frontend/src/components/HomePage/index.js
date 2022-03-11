@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongCard from '../SongCard';
+import './HomePage.css';
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -19,15 +20,15 @@ export default function HomePage() {
   }, [dispatch])
   
   return !isLoaded ? <h2>loading...</h2> : (
-    <>
+    <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
-      <ul style={{ width: '100%' }}>
+      <ul>
         {songs.map(song => (
           <SongCard key={song.id} song={song} user={user} />
         ))}
 
       </ul>
-    </>
+    </div>
   )
 }
