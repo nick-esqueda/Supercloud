@@ -63,14 +63,11 @@ export default function SongForm({ song, closeModal }) {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
 
-    // const durationInSeconds = await getSongDuration(audioInputRef.current.files[0]);
-    // const duration = secondsToMSS(durationInSeconds);
-
-    const song = { songURL, artworkURL, title, genre, description, /* duration */ };
+    const song = { songURL, artworkURL, title, genre, description, };
 
     const newSong = await dispatch(postSong(song));
-    console.log('new song from database inside on onSubmit', newSong);
 
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     return history.push(`/songs/${newSong.id}`);
   }
 
@@ -80,6 +77,7 @@ export default function SongForm({ song, closeModal }) {
 
     const editedSong = { ...song, artworkURL, title, genre, description };
     dispatch(editSong(editedSong));
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     return closeModal();
   }
 

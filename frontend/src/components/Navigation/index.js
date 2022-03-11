@@ -16,7 +16,8 @@ const Navigation = () => {
     sessionLinks = (
       <>
         <div className="header__upload">
-          <NavLink to="/upload">upload</NavLink>
+          <NavLink to="/upload" onClick={() => window.scrollTo({ top: 100, left: 100, behavior: 'smooth' })}
+          >upload</NavLink>
         </div>
 
         <ProfileNavButton user={user} />
@@ -61,13 +62,15 @@ const Navigation = () => {
     <div id="header">
       <div className="navbar">
         <div className="header__left flexRow">
-          <NavLink to="/" className="header__logo">cloud</NavLink>
+          <NavLink to="/" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+            className="header__logo">cloud</NavLink>
           <nav className="nav_links">
-            <NavLink exact to="/" activeStyle={{ backgroundColor: '#191414' }}>home</NavLink>
-            <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#191414' }}
+            <NavLink exact to="/" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+              activeStyle={{ backgroundColor: '#111213' }}>home</NavLink>
+            <NavLink exact to="/wip/likes" activeStyle={{ backgroundColor: '#111213' }}
               onClick={() => alert('Sorry! This feature is currently under construction')}
             >likes</NavLink>
-            <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#191414' }}
+            <NavLink exact to="/wip/random" activeStyle={{ backgroundColor: '#111213' }}
               onClick={() => alert('Sorry! This feature is currently under construction')}
             >random</NavLink>
           </nav>

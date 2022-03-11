@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../store/comments';
 
@@ -11,6 +11,26 @@ export default function CommentCard({ comment }) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [isHovered, setIsHovered] = useState(false);
+  const [tick, setTick] = useState(+(comment.createdAt.split(' ')[0]) + 1);
+  
+  useEffect(() => {
+    let timer;
+    
+    if (tick === 59) {
+      timer = setTimeout(() => {
+        comment.createdAt = '1 minute ago';
+        setTick(60);
+      }, 1000);
+      return;
+    }
+    
+    if (comment.createdAt.endsWith('seconds ago') || comment.createdAt.endsWith('second ago')) {
+      timer = setTimeout(() => setTick(prev => prev + 1), 1000);
+      comment.createdAt = `${tick + 1} seconds ago`;
+    }
+    
+    return () => clearTimeout(timer);
+  }, [comment, tick])
 
   const commentDelete = () => {
     if (window.confirm(`Are you sure you want to delete your comment? This cannot be undone.`)) {
@@ -32,7 +52,7 @@ export default function CommentCard({ comment }) {
         <span>{comment.content}</span>
       </div>
 
-      {isHovered && comment.userId === user.id
+      {isHovered && comment.userId === user?.id
         ? (
           <div className='comment__right'>
             <button className='btn btn--secondary' onClick={commentDelete}>
@@ -40,7 +60,7 @@ export default function CommentCard({ comment }) {
             </button>
           </div>
         ) : (
-          <div className='comment__right'>
+          <div className='comment__right createdAt'>
             <span style={{ color: '#b3b3b3' }}>
               {comment.createdAt}
             </span>

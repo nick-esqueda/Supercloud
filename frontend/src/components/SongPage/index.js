@@ -27,7 +27,7 @@ export default function SongPage() {
       setIsLoaded(true);
     })();
   }, [dispatch]);
-  
+
   return !isLoaded ? <h2>loading...</h2> : (
     <>
       <div className='song_header'>

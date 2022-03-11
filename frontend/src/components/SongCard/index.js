@@ -8,6 +8,7 @@ import './SongCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { deleteLike, postLike } from '../../store/likes';
+import { useEffect, useState } from 'react';
 
 export default function SongCard({ song, user }) {
   const dispatch = useDispatch();
@@ -18,7 +19,27 @@ export default function SongCard({ song, user }) {
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const commentCount = !song.Comments ? 0 : song.Comments.length;
   const isArtist = song.User.id === user?.id;
-
+  const [tick, setTick] = useState(+(song.createdAt.split(' ')[0]) + 1);
+  
+  useEffect(() => {
+    let timer;
+    
+    if (tick === 59) {
+      timer = setTimeout(() => {
+        song.createdAt = '1 minute ago';
+        setTick(60);
+      }, 1000);
+      return;
+    }
+    
+    if (song.createdAt.endsWith('seconds ago') || song.createdAt.endsWith('second ago')) {
+      timer = setTimeout(() => setTick(prev => prev + 1), 1000);
+      song.createdAt = `${tick + 1} seconds ago`;
+    }
+    
+    return () => clearTimeout(timer);
+  }, [song, tick]);
+  
   const playSong = async () => {
     await new Promise((resolve, reject) => {
       dispatch(setPlaying(song));
@@ -44,7 +65,7 @@ export default function SongCard({ song, user }) {
 
   return (
     <div className='song_card_container'>
-      <NavLink to={`/songs/${song?.id}`}>
+      <NavLink to={`/songs/${song?.id}`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})}>
         <img src={song?.artworkURL
           ? song?.artworkURL
           : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
@@ -66,10 +87,10 @@ export default function SongCard({ song, user }) {
           ></div>
 
           <div className='top__title_artist'>
-            <NavLink to={`/users/${song?.User.id}`}>
+            <NavLink to={`/users/${song?.User.id}`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})}>
               <small>{song?.User.username}</small>
             </NavLink>
-            <NavLink to={`/songs/${song?.id}`}>
+            <NavLink to={`/songs/${song?.id}`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})}>
               <span>{song?.title}</span>
             </NavLink>
           </div>
@@ -121,8 +142,8 @@ export default function SongCard({ song, user }) {
 
                 <button className='btn btn--secondary--outline'
                   onClick={e => {
-                    if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
-                      if (window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
+                    if (() => window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
+                      if (() => window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
                         dispatch(deleteSong(song?.id));
                       }
                     }
