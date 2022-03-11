@@ -44,7 +44,9 @@ export default function SongPage() {
             {song?.description}
           </div>
           <div className='song__comments'>
-            <CommentSection comments={Object.values(comments)} />
+            {!comments ? <h4>loading comments...</h4> : (
+              <CommentSection comments={Object.values(comments)} />
+            )}
           </div>
         </div>
 

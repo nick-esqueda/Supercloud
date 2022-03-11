@@ -7,7 +7,7 @@ import EditSongModal from '../Modal/EditSongModal';
 
 import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 export default function Actions({ song, user }) {
   const history = useHistory();
@@ -25,7 +25,7 @@ export default function Actions({ song, user }) {
     if (!user) return document.getElementById('login_button').click();
     dispatch(deleteLike(user.id, song.id));
   }
-  
+
   return (
     <div className='actions_container'>
       <div className='write_comment'>
@@ -104,7 +104,10 @@ export default function Actions({ song, user }) {
 
         <div className='bottom__right'>
           <span>▶ {song?.plays}</span>
-          <span>💬 {"cmnts"}</span>
+          <span>
+            <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
+            &nbsp;{song.Comments.length}
+          </span>
         </div>
 
       </div>
