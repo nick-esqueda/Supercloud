@@ -1,20 +1,28 @@
 import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
-const ADD_COMMENT = 'songs/ADD_COMMENT';
-const ADD_COMMENTS = 'songs/ADD_COMMENTS';
+const LOAD_COMMENT = 'songs/ADD_COMMENT';
+const LOAD_COMMENTS = 'songs/LOAD_COMMENTS';
+const LOAD_SONGS_COMMENTS = 'songs/LOAD_SONGS_COMMENTS';
 
 // ACTION CREATORS ****************************************
-const addComment = (comment) => {
+const loadComment = (comment) => {
   return {
-    type: ADD_COMMENT,
+    type: LOAD_COMMENT,
     comment
   }
 }
 
-const addComments = (comments) => {
+const loadComments = (comments) => {
   return {
-    type: ADD_COMMENTS,
+    type: LOAD_COMMENTS,
+    comments
+  }
+}
+
+const loadSongsComments = (comments) => {
+  return {
+    type: LOAD_SONGS_COMMENTS,
     comments
   }
 }
@@ -25,7 +33,17 @@ export const fetchComments = () => async dispatch => {
 
   if (res.ok) {
     const comments = await res.json();
-    dispatch(addComments(comments));
+    dispatch(loadComments(comments));
+    return comments;
+  }
+}
+
+export const fetchSongsComments = songId => async dispatch => {
+  const res = await fetch(`/api/comments/${songId}`);
+
+  if (res.ok) {
+    const comments = await res.json();
+    dispatch(loadSongsComments(comments));
     return comments;
   }
 }
@@ -35,18 +53,24 @@ const commentsReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
 
-    case ADD_COMMENT: {
+    case LOAD_COMMENT: {
       newState = { ...state };
       newState[action.song.id] = action.comment;
       return newState;
     }
 
-    case ADD_COMMENTS: {
+    case LOAD_COMMENTS: {
       newState = { ...state };
       action.comments.forEach(comment => {
-        if (!state[comment.id]) {
-          newState[comment.id] = comment;
-        }
+        newState[comment.id] = comment;
+      });
+      return newState;
+    }
+
+    case LOAD_SONGS_COMMENTS: {
+      newState = { ...state };
+      action.comments.forEach(comment => {
+        newState[comment.id] = comment;
       });
       return newState;
     }

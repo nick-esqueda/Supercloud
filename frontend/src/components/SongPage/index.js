@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { fetchSongsComments } from '../../store/comments'
 import { fetchLikes } from '../../store/likes'
 import { fetchSong } from '../../store/songs'
 import Actions from './Actions'
@@ -18,6 +19,7 @@ export default function SongPage() {
 
   useEffect(() => {
     dispatch(fetchSong(songId));
+    dispatch(fetchSongsComments(songId))
     dispatch(fetchLikes());
   }, [dispatch]);
   

@@ -18,5 +18,15 @@ router.get(
   })
 )
 
+// GET /api/comments/:songId - GET ALL OF A SONG'S COMMENTS
+router.get(
+  '/:songId',
+  asyncHandler(async (req, res) => {
+    const songId = parseInt(req.params.songId, 10);
+    const comments = await Comment.findAll({ where: { songId } });
+    return res.json(comments);
+  })
+)
+
 
 module.exports = router;
