@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteLike, postLike } from '../../store/likes';
@@ -15,6 +16,15 @@ export default function Actions({ song, user }) {
   const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
+  const [content, setContent] = useState('');
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [showErrors, setShowErrors] = useState(false);
+
+  useState(() => {
+    const errors = [];
+    if (content.length > 255) errors.push('comments must be under 255 characters');
+    setValidationErrors(errors);
+  }, [content]);
 
   const likeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
@@ -25,6 +35,18 @@ export default function Actions({ song, user }) {
     dispatch(deleteLike(user.id, song.id));
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (content.length === 0) {
+      validationErrors.push('please type someting before sending comment');
+      return setShowErrors(true);
+    }
+
+    // dispatch thunk here
+    return console.log('bruh');
+  }
+
   return (
     <div className='actions_container'>
       <div className='write_comment'>
@@ -32,20 +54,19 @@ export default function Actions({ song, user }) {
           alt='profile'
         />
 
-        <form className="comment_form">
-          <div className="form_group" style={{ width: '100%' }}>
+        <form className="comment_form" onSubmit={onSubmit}>
+          <div className="form_group">
             <input type="text"
               id="comment"
-              placeholder='write a comment'
-              // value={}
-              // onChange={}
+              placeholder='write a comment...'
+              value={content}
+              onChange={e => setContent(e.target.value)}
               className="form_input"
-            // style={
-            //   showErrors && (validationErrors.includes('please enter a title'))
-            //     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
-            // }
+              style={showErrors ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
             />
+            <button type="submit" className='btn btn--primary'>send</button>
           </div>
+          
         </form>
       </div>
 

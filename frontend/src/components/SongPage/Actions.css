@@ -20,8 +20,22 @@
 }
 
 .comment_form {
+  height: 40px;
+  background-color: #212121;
   width: 100%;
   padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+.comment_form .form_group {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment_form input {
+  width: 91%;
 }
 
 
