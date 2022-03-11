@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
@@ -7,7 +6,7 @@ import EditSongModal from '../Modal/EditSongModal';
 
 import './SongCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { deleteLike, postLike } from '../../store/likes';
 
 export default function SongCard({ song, user }) {
@@ -17,8 +16,9 @@ export default function SongCard({ song, user }) {
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
   const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
+  const commentCount = !song.Comments ? 0 : song.Comments.length;
   const isArtist = song.User.id === user?.id;
-    
+
   const playSong = async () => {
     await new Promise((resolve, reject) => {
       dispatch(setPlaying(song));
@@ -27,12 +27,12 @@ export default function SongCard({ song, user }) {
     audioPlayer.current.audio.current.play();
     setPaused(false);
   }
-  
+
   const pauseSong = () => {
     audioPlayer.current.audio.current.pause();
     setPaused(true);
   }
-  
+
   const likeSong = async (e) => {
     if (!user) return document.getElementById('login_button').click();
     dispatch(postLike(user.id, song.id));
@@ -97,7 +97,7 @@ export default function SongCard({ song, user }) {
                 &nbsp;{likeCount}
               </button>)
             }
-            
+
             <NavLink to={`/users/${song?.User.id}`} className='btn btn--secondary--outline' onClick={() => alert('Sorry! This feature is currently under construction')}>
               <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEyLjEgMTEuODZjLS44MjUtLjQxOC0xLjI0My0xLjUzNi0xLjI0My0yLjMyIDAtLjQuMjY4LS43MzUuNTA3LTEuMDA3LjY0OC0uNzQzIDEuMTU0LTEuNjI0IDEuMTU0LTMuNTA3QzEyLjUxOCAyLjI1IDEwLjg1OCAxIDguOTg4IDFjLTEuODcgMC0zLjUzIDEuMjUtMy41MyA0LjAyNiAwIDEuODgzLjUwNSAyLjc2NCAxLjE1MyAzLjUwNy4yNC4yNzIuNTEuNjA3LjUxIDEuMDA2IDAgLjc4NC0uNDIgMS45MDItMS4yNDYgMi4zMi0xLjI0NC42My0zLjQyMyAxLjE2Ny00LjM2NSAxLjg4Qy4yNSAxNC42OTUgMCAxNyAwIDE3aDE4cy0uMjc3LTIuMzA2LTEuNTM0LTMuMjZjLS45NDItLjcxMy0zLjEyLTEuMjUtNC4zNjUtMS44OHoiLz4KPC9zdmc+Cg=="
                 style={{ height: '16px' }}
@@ -106,7 +106,7 @@ export default function SongCard({ song, user }) {
               &nbsp;
               artist profile
             </NavLink>
-            
+
             <button className='btn btn--secondary--outline' onClick={() => alert('Sorry! This feature is currently under construction')}>
               <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTIgNmgxMHYxMEgyeiIvPgogICAgICAgIDxwYXRoIGZpbGwtb3BhY2l0eT0iLjciIGQ9Ik01IDJoMTF2MTBoLTJWNEg1eiIvPgogICAgPC9nPgo8L3N2Zz4K"
                 style={{ transform: 'scale(1.0)' }}
@@ -140,8 +140,15 @@ export default function SongCard({ song, user }) {
           </div>
 
           <div className='bottom__right'>
-            <span>▶ {song?.plays}</span>
-            <span>💬 {"cmnts"}</span>
+            <span style={{ color: '#b3b3b3' }}>
+              ▶
+              <span style={{ color: 'white', marginLeft: '6px' }}>{song.plays}</span>
+            </span>
+
+            <span>
+              <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
+              &nbsp;{commentCount}
+            </span>
           </div>
         </div>
 

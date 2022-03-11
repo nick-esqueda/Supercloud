@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteLike, postLike } from '../../store/likes';
@@ -7,13 +6,13 @@ import EditSongModal from '../Modal/EditSongModal';
 
 import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 export default function Actions({ song, user }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
-  const isLiked = songsLikes?.find(like => like.userId === user.id);
+  const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
 
@@ -25,7 +24,7 @@ export default function Actions({ song, user }) {
     if (!user) return document.getElementById('login_button').click();
     dispatch(deleteLike(user.id, song.id));
   }
-  
+
   return (
     <div className='actions_container'>
       <div className='write_comment'>
@@ -104,7 +103,10 @@ export default function Actions({ song, user }) {
 
         <div className='bottom__right'>
           <span>▶ {song?.plays}</span>
-          <span>💬 {"cmnts"}</span>
+          <span>
+            <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
+            &nbsp;{song.Comments?.length}
+          </span>
         </div>
 
       </div>

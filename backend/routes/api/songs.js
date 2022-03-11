@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { Song, User, Like } = require('../../db/models');
+const { Song, User, Like, Comment } = require('../../db/models');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { getTimeElapsed } = require('../../utils/utils');
 const { validateSong, validateSongEdit } = require('../../utils/validation');
@@ -15,7 +15,11 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const id = +req.params.songId;
     const song = await Song.findByPk(id, {
-      include: [{ model: User, include: { model: Song } }, { model: Like }]
+      include: [
+        { model: User, include: { model: Song } },
+        { model: Like },
+        { model: Comment },
+      ]
     });
     // changes createdAt to "x y's ago" format
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
@@ -26,7 +30,7 @@ router.get(
 // GET /api/songs - GET ALL SONGS
 router.get('/', asyncHandler(async (req, res) => {
   const songs = await Song.findAll({
-    include: [{ model: User }, { model: Like }],
+    include: [{ model: User }, { model: Like }, { model: Comment }],
   });
   songs.forEach(song => {
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);

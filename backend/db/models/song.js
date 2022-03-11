@@ -57,6 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     //   otherKey: 'userId',
     // });
     Song.hasMany(models.Like, { foreignKey: 'songId' });
+    Song.hasMany(models.Comment, { foreignKey: 'songId' });
   };
   return Song;
 };

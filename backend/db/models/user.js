@@ -73,6 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     //   otherKey: 'songId',
     // });
     User.hasMany(models.Like, { foreignKey: 'userId' });
+    User.hasMany(models.Comment, { foreignKey: 'userId' });
   };
   User.prototype.toSafeObject = function () { // remember, this cannot be an arrow function
     const { id, username, email, bio, location, profileImageURL, bannerImageURL, Likes, Songs } = this; // context will be the User instance

@@ -85,4 +85,29 @@ const seedLikes = num => {
   }
 }
 
-seedLikes(500);
+// seedLikes(500);
+
+
+const seedComments = num => {
+  for (let i = 0; i < num; i++) {
+    const songId = ~~(Math.random() * 112);
+    const userId = ~~(Math.random() * 51);
+    if (songId >= 112 || songId === 0) break;
+    if (userId >= 51 || songId === 0) break;
+    let content;
+    if (i % 2 === 0) content = faker.lorem.sentence();
+    else content = faker.lorem.sentences(2);
+
+    const like = {
+      content,
+      userId,
+      songId,
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.past(),
+    }
+    
+    console.log(like, ',');
+  }
+
+}
+seedComments(500);
