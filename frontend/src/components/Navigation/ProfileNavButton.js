@@ -31,7 +31,7 @@ function ProfileNavButton({ user }) {
 
   const logout = (e) => {
     dispatch(logoutUser());
-    history.push('/');
+    return history.push('/');
   };
 
   return (

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { fetchComments } from '../../store/comments'
-import { restoreUser } from '../../store/session'
+import { fetchLikes } from '../../store/likes'
 import { fetchSong } from '../../store/songs'
 import Actions from './Actions'
 import ArtistBadge from './ArtistBadge'
@@ -15,36 +14,22 @@ export default function SongPage() {
   const { songId } = useParams();
   const dispatch = useDispatch();
   const song = useSelector(state => state.songs.songs[songId]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isArtist, setIsArtist] = useState(false);
-  const [songComments, setSongComments] = useState([]);
-  console.log(songComments);
-  
-  useEffect(() => {
-    (async () => {
-      const { user } = await dispatch(restoreUser());
-      
-      const song = await dispatch(fetchSong(songId));
-      
-      const commentsObj = await dispatch(fetchComments());
-      const commentsArr = Object.values(commentsObj);
-      const songComments = commentsArr.filter(comment => comment.songId === +songId);
-      setSongComments(songComments);
-      
-      if (user?.id === song?.User?.id) setIsArtist(true);
-      setIsLoaded(true)
-    })()
-  }, [dispatch, songId]);
+  const user = useSelector(state => state.session.user);
 
-  return isLoaded && (
+  useEffect(() => {
+    dispatch(fetchSong(songId));
+    dispatch(fetchLikes());
+  }, [dispatch]);
+  
+  return !song ? <h2>loading...</h2> : (
     <>
       <div className='song_header'>
-        <Header song={song} isLoaded={isLoaded} />
+        <Header song={song} />
       </div>
 
       <div className='song_main'>
         <div className='song__actions'>
-          <Actions song={song} isArtist={isArtist} />
+          <Actions song={song} user={user} />
         </div>
 
         <div className='song__profile_card'>

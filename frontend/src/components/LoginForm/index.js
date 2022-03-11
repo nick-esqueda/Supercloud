@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { loginUser } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginForm() {
@@ -44,7 +44,14 @@ function LoginForm() {
   const demoLogin = (e) => {
     setCredential('Demo User');
     setPassword('password');
-    return;
+    return dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setValidationErrors(data.errors);
+          setShowErrors(true);
+        }
+      });
   }
 
   return (
