@@ -13,7 +13,7 @@ export default function Actions({ song, user }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
-  const isLiked = songsLikes?.find(like => like.userId === user.id);
+  const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
 
