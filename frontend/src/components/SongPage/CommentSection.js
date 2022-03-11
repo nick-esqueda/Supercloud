@@ -20,7 +20,7 @@ export default function CommentSection({ comments }) {
 
       <ul className='comments'>
         {comments.map(comment => (
-          <li key={comment.id}><CommentCard /></li>
+          <li key={comment.id}><CommentCard comment={comment} /></li>
         ))}
       </ul>
 

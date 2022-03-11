@@ -13,7 +13,9 @@ const router = express.Router();
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const comments = await Comment.findAll();
+    const comments = await Comment.findAll({
+      include: [{ model: User }, { model: Song }]
+    });
     return res.json(comments);
   })
 )
@@ -23,7 +25,10 @@ router.get(
   '/:songId',
   asyncHandler(async (req, res) => {
     const songId = parseInt(req.params.songId, 10);
-    const comments = await Comment.findAll({ where: { songId } });
+    const comments = await Comment.findAll({
+      where: { songId },
+      include: [{ model: User }, { model: Song }]
+    });
     return res.json(comments);
   })
 )

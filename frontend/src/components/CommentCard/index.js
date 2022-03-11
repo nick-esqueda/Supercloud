@@ -1,6 +1,6 @@
 import './CommentCard.css'
 
-export default function CommentCard() {
+export default function CommentCard({ comment }) {
   return (
     <div className='comment__wrapper'>
       <div className='comment__left'>
@@ -8,7 +8,7 @@ export default function CommentCard() {
           alt=""
         />
 
-        <span style={{ color: '#b3b3b3' }}>username</span>
+        <span style={{ color: '#b3b3b3' }}>{comment.User.username}</span>
         <span>comment content</span>
       </div>
       
