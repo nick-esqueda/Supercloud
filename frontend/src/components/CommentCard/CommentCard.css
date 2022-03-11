@@ -1,0 +1,32 @@
+.comment__wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.comment__left {
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-template-areas: 
+    'left top'
+    'left bottom';
+}
+.comment__left img {
+  grid-area: left;
+  
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+
+.comment__right {
+  width: 100px;
+  text-align: right;
+}
