@@ -15,7 +15,7 @@ export default function SongCard({ song, user }) {
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
-  const isLiked = songsLikes?.find(like => like.userId === user.id);
+  const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
     
