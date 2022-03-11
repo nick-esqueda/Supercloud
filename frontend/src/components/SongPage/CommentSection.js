@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 export default function CommentSection({ comments }) {
-  console.log(comments);
 
 
   return !comments ? <small>seems lonely here... how about leaving a comment?</small> : (

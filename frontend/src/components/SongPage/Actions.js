@@ -8,6 +8,7 @@ import EditSongModal from '../Modal/EditSongModal';
 import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { postComment } from '../../store/comments';
 
 export default function Actions({ song, user }) {
   const history = useHistory();
@@ -19,6 +20,13 @@ export default function Actions({ song, user }) {
   const [content, setContent] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);
   const [showErrors, setShowErrors] = useState(false);
+  
+  
+  
+  useSelector(state => state.comments);
+  
+  
+  
 
   useState(() => {
     const errors = [];
@@ -43,8 +51,8 @@ export default function Actions({ song, user }) {
       return setShowErrors(true);
     }
 
-    // dispatch thunk here
-    return console.log('bruh');
+    dispatch(postComment({ content, songId: song.id, userId: user.id }));
+    setContent('');
   }
 
   return (

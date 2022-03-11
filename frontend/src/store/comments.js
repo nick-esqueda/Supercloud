@@ -70,7 +70,7 @@ const commentsReducer = (state = {}, action) => {
 
     case LOAD_COMMENT: {
       newState = { ...state };
-      newState[action.song.id] = action.comment;
+      newState[action.comment.id] = action.comment;
       return newState;
     }
 
