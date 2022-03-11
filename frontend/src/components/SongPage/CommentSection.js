@@ -2,8 +2,9 @@ import { useSelector } from 'react-redux';
 import './CommentSection.css';
 
 export default function CommentSection({ comments }) {
-  
   const song = useSelector(state => state.songs.songs);
+  console.log(comments);
+  
   
   return (
     <div className='comment_section'>

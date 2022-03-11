@@ -14,8 +14,9 @@ import './SongPage.css'
 export default function SongPage() {
   const { songId } = useParams();
   const dispatch = useDispatch();
-  const song = useSelector(state => state.songs.songs[songId]);
   const user = useSelector(state => state.session.user);
+  const song = useSelector(state => state.songs.songs[songId]);
+  const comments = useSelector(state => state.comments);
 
   useEffect(() => {
     dispatch(fetchSong(songId));
@@ -43,7 +44,7 @@ export default function SongPage() {
             {song?.description}
           </div>
           <div className='song__comments'>
-            <CommentSection /*comments={songComments}*/ />
+            <CommentSection comments={Object.values(comments)} />
           </div>
         </div>
 
