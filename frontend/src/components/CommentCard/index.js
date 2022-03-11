@@ -2,10 +2,19 @@ import { useState } from 'react';
 import './CommentCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { deleteComment } from '../../store/comments';
 
 
 export default function CommentCard({ comment }) {
+  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
+
+  const deleteComment = () => {
+    if (window.confirm(`Are you sure you want to delete your comment? This cannot be undone`)) {
+      return dispatch(deleteComment(comment)); 
+    }
+  }
 
   return (
     <div className='comment__wrapper' onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
@@ -30,15 +39,7 @@ export default function CommentCard({ comment }) {
           </div>
         ) : (
           <div className='comment__right'>
-            <button className='btn btn--secondary'
-              onClick={e => {
-                if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
-                  if (window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
-                    // dispatch(deleteSong(song?.id));
-                  }
-                }
-              }}
-            >
+            <button className='btn btn--secondary' onClick={deleteComment}>
               <FontAwesomeIcon icon={faTrashCan} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
             </button>
           </div>
