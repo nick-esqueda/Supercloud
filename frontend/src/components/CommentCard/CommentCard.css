@@ -34,4 +34,8 @@
   min-width: 100px;
   display: flex;
   justify-content: right;
+  align-items: center;
+}
+.comment__right.createdAt {
+  align-items: flex-start;
 }

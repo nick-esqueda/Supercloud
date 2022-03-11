@@ -19,6 +19,6 @@ ul.comments {
 }
 
 ul.comments li {
-  margin: 10px 0;
-  min-height: 60px;
+  margin: 16px 0;
+  min-height: 40px;
 }

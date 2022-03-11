@@ -51,6 +51,7 @@ export default function Actions({ song, user }) {
       return setShowErrors(true);
     }
 
+    setShowErrors(false);
     dispatch(postComment({ content, songId: song.id, userId: user.id }));
     setContent('');
   }
