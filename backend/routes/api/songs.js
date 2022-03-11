@@ -13,7 +13,7 @@ const router = express.Router();
 router.get(
   '/:songId(\\d+)',
   asyncHandler(async (req, res, next) => {
-    const id = +req.params.songId;
+    const id = parseInt(req.params.songId, 10);
     const song = await Song.findByPk(id, {
       include: [
         { model: User, include: { model: Song } },
@@ -30,7 +30,11 @@ router.get(
 // GET /api/songs - GET ALL SONGS
 router.get('/', asyncHandler(async (req, res) => {
   const songs = await Song.findAll({
-    include: [{ model: User }, { model: Like }, { model: Comment }],
+    include: [
+      { model: User, include: { model: Song } },
+      { model: Like },
+      { model: Comment },
+    ],
   });
   songs.forEach(song => {
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
@@ -63,7 +67,11 @@ router.put(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.songId, 10);
     const song = await Song.findByPk(id, {
-      include: [{ model: User }, { model: Like }, { model: Comment }],
+      include: [
+        { model: User, include: { model: Song } },
+        { model: Like },
+        { model: Comment }
+      ],
     });
     song.set({ ...req.body });
     await song.save();
