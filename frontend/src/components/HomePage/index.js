@@ -15,14 +15,22 @@ import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 export default function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  const songs = useSelector(state => Object.values(state.songs.songs));
+  const allSongs = useSelector(state => state.songs.songs);
+  const songsArr = Object.values(allSongs);
+  const usersPlayCount = user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays;
   const [isLoaded, setIsLoaded] = useState(false);
-  let usersPlayCount = 0;
-  user.Songs.forEach(song => usersPlayCount += song.plays);
+
+
+  // get user's liked songs from store
+  const songsUserLikes = user.Likes.slice(0, 3).map(like => allSongs[like.Song.id])
+  // get 'hot tracks' - order by listens
   
-  // order user's likes by createdAt and limit 3 for sidebar
-  console.log(user);
-  
+  // get 'favorite tracks' - users likes ordered by listens
+
+  // get 'recent tracks' - order by createdAt
+
+  // get artists of songs that user likes
+
   useEffect(() => {
     (async () => {
       await dispatch(fetchSongs());
@@ -44,28 +52,28 @@ export default function HomePage() {
 
       <h2 className='badge_grid1h'>hot tracks</h2>
       <div className='badge_grid__g1'>
-        {songs.map(song => (
+        {songsArr.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
 
       <h2 className='badge_grid2h'>your favorite tracks</h2>
       <div className='badge_grid__g2'>
-        {songs.map(song => (
+        {songsArr.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
 
       <h2 className='badge_grid3h'>recent tracks</h2>
       <div className='badge_grid__g3'>
-        {songs.map(song => (
+        {songsArr.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
 
       <h2 className='badge_grid4hc'>artist's you might like</h2>
       <div className='badge_grid__g4'>
-        {songs.map(song => (
+        {songsArr.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
@@ -82,22 +90,25 @@ export default function HomePage() {
           >view your profile</NavLink>
         </div>
 
-        <h4 className='flexRowBetween'>
-          <div className='alignItems'>
-            <FontAwesomeIcon icon={faHeart} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>
-            &nbsp;songs you liked
-          </div>
 
-          <NavLink to={`/users/${user.id}/likes`} className="italic">view all</NavLink>
-        </h4>
+        <div className='sidebar_container'>
+          <h4 className='flexRowBetween'>
+            <div className='alignItems'>
+              <FontAwesomeIcon icon={faHeart} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>
+              &nbsp;songs you liked
+            </div>
+
+            <NavLink to={`/users/${user.id}/likes`} className="italic">view all</NavLink>
+          </h4>
+
+          <ul className="songs">
+            {songsUserLikes.map((song) => (
+              <li key={song.id}><SongCardSmall song={song} artist={song.User} /></li>
+            ))}
+          </ul>
+        </div>
+
       </div>
-
-      <ul className="songs">
-        {/* {user.Likes.map((song) => (
-          <li key={song.id}><SongCardSmall artist={song.User} song={song} /></li>
-        ))} */}
-      </ul>
-
     </div>
   )
 }

@@ -1,3 +1,8 @@
+.sidebar_container {
+  position: sticky;
+  top: 50px; right: 0;
+}
+
 ul.songs li {
   height: auto;
   padding: 0;

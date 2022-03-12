@@ -43,7 +43,7 @@ const restoreUser = (req, res, next) => {
       const { id } = jwtPayload.data;
       req.user = await User.scope('currentUser').findByPk(id, {
         include: [
-          { model: Like, include: { model: User } },
+          { model: Like, include: { model: Song, include: User } },
           { model: Song, include: { model: Comment } },
           { model: Comment, include: { model: Song } }
         ],

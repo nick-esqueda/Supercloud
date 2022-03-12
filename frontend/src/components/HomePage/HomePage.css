@@ -62,7 +62,6 @@
   
   padding: 16px 24px;
   border-left: 1px solid #b3b3b3;
-  min-height: 800px;
 }
 
 .greeting {
@@ -82,8 +81,4 @@
 .home__sidebar h4 {
   padding: 8px 0;
   border-bottom: 1px solid #535353;
-  
-  position: sticky;
-  top: 56px;
-  right: 0;
 }
