@@ -1,8 +1,16 @@
 // ACTION VARIABLES ***************************************
+const LOAD_ARTIST = 'session/LOAD_ARTIST';
 const LOAD_ARTISTS = 'session/LOAD_ARTISTS';
 
 
 // ACTION CREATORS ****************************************
+const loadArtist = (artist) => {
+  return {
+    type: LOAD_ARTIST,
+    artist
+  }
+}
+
 const loadArtists = (artists) => {
   return {
     type: LOAD_ARTISTS,
@@ -14,6 +22,16 @@ const loadArtists = (artists) => {
 
 
 // THUNK ACTION CREATORS **********************************
+export const fetchArtist = (userId) => async dispatch => {
+  const res = await fetch(`/api/users/${userId}`);
+
+  if (res.ok) {
+    const artist = await res.json();
+    dispatch(loadArtist(artist))
+    return artist;
+  }
+}
+
 export const fetchArtists = () => async dispatch => {
   const res = await fetch(`/api/users`);
 
@@ -33,6 +51,12 @@ const artistsReducer = (state = {}, action) => {
     case LOAD_ARTISTS: {
       newState = { ...state };
       action.artists.forEach(artist => newState[artist.id] = artist);
+      return newState;
+    }
+    
+    case LOAD_ARTIST: {
+      newState = { ...state };
+      newState[action.artist.id] = action.artist;
       return newState;
     }
 

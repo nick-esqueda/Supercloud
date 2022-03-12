@@ -4,10 +4,8 @@ import SongCardSmall from "../SongCard/SongCardSmall";
 import "./Sidebar.css";
 
 export default function Sidebar({ artist }) {
-  const allSongs = useSelector(state => state.songs.songs);
-  const artistsSongs = artist.Songs.map(song => allSongs[song.id]);
   
-  
+
   return !artist ? null : (
     <div className="sidebar_container">
       <span className='inner_section_header'>
@@ -23,7 +21,7 @@ export default function Sidebar({ artist }) {
       </span>
 
       <ul className="songs">
-        {artistsSongs.map((song, i) => (
+        {artist.Songs.slice(0,3).map((song, i) => (
           <li key={i}><SongCardSmall song={song} /></li>
         ))}
       </ul>

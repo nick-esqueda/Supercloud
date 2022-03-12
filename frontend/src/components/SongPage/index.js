@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { fetchArtist } from '../../store/artists'
 import { fetchSongsComments } from '../../store/comments'
 import { fetchLikes } from '../../store/likes'
 import { fetchSong } from '../../store/songs'
@@ -15,15 +16,18 @@ export default function SongPage() {
   const { songId } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  const song = useSelector(state => state.songs.songs[songId]);
+  const song = useSelector(state => state.songs.songs)[songId];
   const comments = useSelector(state => state.comments);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [artist, setArtist] = useState('');
 
   useEffect(() => {
     (async () => {
-      await dispatch(fetchSong(songId));
+      const song = await dispatch(fetchSong(songId));
       await dispatch(fetchSongsComments(songId))
       await dispatch(fetchLikes());
+      const artist = await dispatch(fetchArtist(song.userId));
+      setArtist(artist);
       setIsLoaded(true);
     })();
   }, [dispatch]);
@@ -55,7 +59,7 @@ export default function SongPage() {
         </div>
 
         <div className='song_sidebar'>
-          <Sidebar artist={song.User} />
+          <Sidebar artist={artist} />
         </div>
 
       </div>

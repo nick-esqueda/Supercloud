@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const { User, Song } = require('../../db/models');
+const { User, Song, Comment, Like } = require('../../db/models');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { validateSignup } = require('../../utils/validation');
 
@@ -18,6 +18,21 @@ router.get(
       include: { model: Song, right: true }
     })
     return res.json(artists);
+  })
+)
+
+// GET /api/users/:userId - GET AN ARTIST
+router.get(
+  '/:userId',
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.userId, 10);
+    const artist = await User.findByPk(id, {
+      include: [{
+        model: Song, include: [{ model: User }, { model: Comment }, { model: Like }]
+      }]
+    });
+    
+    return res.json(artist);
   })
 )
 
