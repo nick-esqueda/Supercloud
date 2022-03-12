@@ -41,13 +41,14 @@ export default function SongCard({ song, user }) {
   }, [song, tick]);
   
   const playSong = async () => {
-    await new Promise((resolve, reject) => {
-      dispatch(setPlaying(song));
+    await new Promise(async (resolve, reject) => {
+      await dispatch(setPlaying(song));
       resolve();
     });
     audioPlayer.current.audio.current.play();
     setPaused(false);
   }
+
 
   const pauseSong = () => {
     audioPlayer.current.audio.current.pause();

@@ -14,8 +14,8 @@ export default function SongBadge({ song }) {
 
 
   const playSong = async () => {
-    await new Promise((resolve, reject) => {
-      dispatch(setPlaying(song));
+    await new Promise(async (resolve, reject) => {
+      await dispatch(setPlaying(song));
       resolve();
     });
     audioPlayer.current.audio.current.play();

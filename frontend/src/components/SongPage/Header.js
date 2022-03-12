@@ -31,8 +31,8 @@ export default function Header({ song }) {
   }, [song, tick]);
 
   const playSong = async () => {
-    await new Promise((resolve, reject) => {
-      dispatch(setPlaying(song));
+    await new Promise(async (resolve, reject) => {
+      await dispatch(setPlaying(song));
       resolve();
     });
     audioPlayer.current.audio.current.play();

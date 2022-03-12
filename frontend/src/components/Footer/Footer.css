@@ -52,3 +52,8 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
+
+.like_button_footer:hover {
+  cursor: pointer;
+}
