@@ -10,6 +10,7 @@ import * as sessionActions from './store/session';
 import * as songsActions from './store/songs';
 import * as likesActions from './store/likes';
 import * as commentsActions from './store/comments';
+import * as artistsActions from './store/artists';
 import App from './App';
 
 const store = configureStore();
@@ -23,6 +24,7 @@ if (process.env.NODE_ENV !== 'production') {
   window.songsActions = songsActions;
   window.likesActions = likesActions;
   window.commentsActions = commentsActions;
+  window.artistsActions = artistsActions;
 }
 
 function Root() {
