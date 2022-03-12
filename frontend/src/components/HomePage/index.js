@@ -45,7 +45,7 @@ export default function HomePage() {
 
   return !isLoaded ? <h2>loading...</h2> : (
     <div id='home'>
-      {/* <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1> */}
+      <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
       <h2 className='badge_grid1h'>hot tracks</h2>
       <div className='badge_grid__g1'>
@@ -74,7 +74,6 @@ export default function HomePage() {
           <ArtistBadge key={artist.id} artist={artists[artist.id]} />
         ))}
       </div>
-
 
       <HomeSidebar user={user} usersPlayCount={usersPlayCount} usersLikedSongs={usersLikedSongs} />
     </div>

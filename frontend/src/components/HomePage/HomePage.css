@@ -4,9 +4,10 @@
   
   display: grid;
   grid-template-columns: 70% auto;
-  grid-template-rows: 40px 320px 40px 320px 40px 320px 40px 320px;
+  grid-template-rows: 76px 40px 320px 40px 320px 40px 320px 40px 320px;
   gap: 32px;
   grid-template-areas: 
+    "top side"
     "h1 side"
     "g1 side"
     "h2 side"
@@ -16,6 +17,21 @@
     "h4 side"
     "g4 side";
 }
+h1 {
+  grid-area: top;
+  text-align: right;
+  border-bottom: 1px solid #FFFF5d;
+  margin: 0 0;
+  animation: h1-border-color 5s infinite;
+}
+@keyframes h1-border-color {
+  0% { border-color: #8945B6 }
+  25% { border-color: #de3333 }
+  50% { border-color: #ffff5dcb }
+  75% { border-color: #DE3351 }
+  100% { border-color: #8945B6 }
+}
+
 #home h2 {
   text-align: left;
   margin: 0;
