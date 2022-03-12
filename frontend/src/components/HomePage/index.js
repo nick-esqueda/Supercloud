@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongBadge from '../SongBadge/SongBadge';
@@ -13,6 +13,7 @@ import { fetchArtists } from '../../store/artists';
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector(state => state.session.user);
   const songs = useSelector(state => state.songs.songs);
   const artists = useSelector(state => state.artists);
@@ -42,14 +43,16 @@ export default function HomePage() {
       const suggestedArtistIds = user.Likes.slice(0, 5).map(like => like.Song.User.id);
       const uniqueArtistIds = [...new Set(suggestedArtistIds)];
       setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
-
+      
       setIsPopulated(true);
     } else {
       setIsPopulated(false);
     }
   }
-
+  
   useEffect(() => {
+    if (user === undefined) return history.push('/splash');
+    
     (async () => {
       await dispatch(fetchSongs());
       await dispatch(fetchLikes());
