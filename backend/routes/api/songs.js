@@ -29,17 +29,28 @@ router.get(
 
 // GET /api/songs - GET ALL SONGS
 router.get('/', asyncHandler(async (req, res) => {
-  const songs = await Song.findAll({
+  const orderByPlays = await Song.findAll({
     include: [
       { model: User, include: { model: Song } },
       { model: Like },
       { model: Comment },
     ],
+    order: [['plays', 'DESC']],
+    limit: 10,
   });
-  songs.forEach(song => {
-    song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+  const orderByRecent = await Song.findAll({
+    include: [
+      { model: User, include: { model: Song } },
+      { model: Like },
+      { model: Comment },
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 10
   });
-  return res.json(songs);
+  // songs.forEach(song => {
+  //   song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+  // });
+  return res.json({ orderByPlays, orderByRecent });
 }));
 
 // POST /api/songs - CREATE A SONG

@@ -16,15 +16,15 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const allSongs = useSelector(state => state.songs.songs);
-  const songsArr = Object.values(allSongs);
-  const usersPlayCount = user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays;
+  const popularSongs = useSelector(state => state.songs.popularSongs);
+  const recentSongs = useSelector(state => state.songs.recentSongs);
   const [isLoaded, setIsLoaded] = useState(false);
-
-
-  // get user's liked songs from store
-  const songsUserLikes = user.Likes.slice(0, 3).map(like => allSongs[like.Song.id])
-  // get 'hot tracks' - order by listens
   
+  const usersPlayCount = user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays;
+  const songsArr = Object.values(allSongs);
+  const songsUserLikes = user.Likes.slice(0, 3).map(like => allSongs[like.Song.id])
+
+
   // get 'favorite tracks' - users likes ordered by listens
 
   // get 'recent tracks' - order by createdAt
@@ -43,16 +43,9 @@ export default function HomePage() {
     <div id='home'>
       {/* <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1> */}
 
-      {/* <ul>
-        {songs.map(song => (
-          <SongCard key={song.id} song={song} user={user} />
-        ))}
-
-      </ul> */}
-
       <h2 className='badge_grid1h'>hot tracks</h2>
       <div className='badge_grid__g1'>
-        {songsArr.map(song => (
+        {popularSongs.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
@@ -66,7 +59,7 @@ export default function HomePage() {
 
       <h2 className='badge_grid3h'>recent tracks</h2>
       <div className='badge_grid__g3'>
-        {songsArr.map(song => (
+        {recentSongs.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
