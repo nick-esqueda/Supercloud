@@ -2,6 +2,8 @@ import { NavLink } from 'react-router-dom';
 import './ArtistBadge.css';
 
 export default function ArtistBadge({ artist }) {
+  
+  
   return (
     <div className='artist_badge'>
       <NavLink to="/artists-profile-page">

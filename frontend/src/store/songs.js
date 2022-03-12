@@ -2,7 +2,9 @@ import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
 const ADD_SONG = 'songs/ADD_SONG';
-const ADD_SONGS = 'songs/ADD_SONGS'
+const ADD_SONGS = 'songs/ADD_SONGS';
+const ADD_POPULAR_SONGS = 'songs/ADD_POPULAR_SONGS';
+const ADD_RECENT_SONGS = 'songs/ADD_RECENT_SONGS';
 const REMOVE_SONG = 'songs/REMOVE_SONG';
 const SET_PLAYING = 'songs/SET_PLAYING';
 
@@ -18,6 +20,20 @@ const addSong = (song) => {
 const addSongs = (songs) => {
   return {
     type: ADD_SONGS,
+    songs
+  }
+}
+
+const addPopularSongs = (songs) => {
+  return {
+    type: ADD_POPULAR_SONGS,
+    songs
+  }
+}
+
+const addRecentSongs = (songs) => {
+  return {
+    type: ADD_RECENT_SONGS,
     songs
   }
 }
@@ -49,24 +65,17 @@ export const fetchSong = songId => async dispatch => {
   }
 }
 
-export const fetchSongs = (userId, playlistId) => async dispatch => {
-  if (userId) {
-    console.log('pass in userId arg to get here');
+export const fetchSongs = () => async dispatch => {
+  const res = await fetch(`/api/songs`);
+
+  if (res.ok) {
+    const { orderByPlays, orderByRecent } = await res.json();
+    dispatch(addSongs(orderByPlays));
+    dispatch(addPopularSongs(orderByPlays));
+    dispatch(addRecentSongs(orderByRecent));
+    return { orderByPlays, orderByRecent };
   }
 
-  if (playlistId) {
-    console.log('pass in null arg, then playlistId arg to get here');
-  }
-
-  else {
-    const res = await fetch(`/api/songs`);
-
-    if (res.ok) {
-      const songs = await res.json();
-      dispatch(addSongs(songs));
-      return songs;
-    }
-  }
 }
 
 export const postSong = song => async dispatch => {
@@ -109,7 +118,7 @@ export const deleteSong = id => async dispatch => {
 
 
 // REDUCER ************************************************
-const initialState = { songs: {}, playing: null };
+const initialState = { songs: {}, recentSongs: [], popularSongs: [], playing: null };
 const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -117,15 +126,26 @@ const songsReducer = (state = initialState, action) => {
     case ADD_SONG: {
       const songs = { ...state.songs };
       songs[action.song.id] = action.song;
-      return { ...state, songs};
+      return { ...state, songs };
     }
 
     case ADD_SONGS: {
-      const newSongs = {};
+      const songs = {};
       action.songs.forEach(song => {
-        newSongs[song.id] = song;
+        songs[song.id] = song;
       });
-      return { ...state, songs: newSongs }
+      return { ...state, songs };
+    }
+    
+    case ADD_POPULAR_SONGS: {
+      const popularSongs = [...action.songs];
+      return { ...state, popularSongs }
+    }
+    
+    case ADD_RECENT_SONGS: {
+      const recentSongs = [...action.songs];
+      return { ...state, recentSongs }
+      
     }
 
     case REMOVE_SONG: {

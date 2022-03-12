@@ -31,7 +31,7 @@ h1, h2 {
   padding: .5em 1em;
 
   font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 5px;
 
   display: inline-block;
@@ -46,6 +46,9 @@ h3, h4 {
 a {
   text-decoration: none;
   color: white;
+}
+a:hover {
+  font-weight: 300;
 }
 
 small {
@@ -90,6 +93,13 @@ li {
   align-items: center;
 }
 
+.flexRowBetween {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .flexCol {
   display: flex;
   flex-direction: column;
@@ -108,6 +118,19 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.alignItems {
+  display: flex;
+  align-items: center;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.textAlignLeft {
+  text-align: left;
 }
 
 
@@ -153,9 +176,14 @@ li {
 }
 /* yellow outlined button skin */
 .btn--primary--outline {
-  border-color: #FFFF64;
+  border: 2px solid #FFFF64;
   color: #FFFF64;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn--primary--outline:hover {
+  background-color: #FFFF5D;
+  color: black;
+  font-weight: 400;
 }
 .btn--primary:active,
 .btn--primary--outline:active {

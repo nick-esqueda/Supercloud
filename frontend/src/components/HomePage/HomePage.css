@@ -1,7 +1,131 @@
 #home {
-  width: 100%;
+  width: 1280px;
+  margin: 32px 0;
+  
+  display: grid;
+  grid-template-columns: 70% auto;
+  grid-template-rows: 76px 60px 340px 60px 340px 60px 340px 60px 340px;
+  gap: 16px 32px;
+  grid-template-areas: 
+    "top side"
+    "h1 side"
+    "g1 side"
+    "h2 side"
+    "g2 side"
+    "h3 side"
+    "g3 side"
+    "h4 side"
+    "g4 side";
+}
+h1 {
+  grid-area: top;
+  text-align: right;
+  border-bottom: 1px solid #FFFF5d;
+  margin: 0 0;
+  animation: h1-border-color 5s infinite;
+}
+@keyframes h1-border-color {
+  0% { border-color: #8945B6 }
+  25% { border-color: #de3333 }
+  50% { border-color: #ffff5dcb }
+  75% { border-color: #DE3351 }
+  100% { border-color: #8945B6 }
 }
 
-#home ul {
+#home h2, h4 {
   width: 100%;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.badge_grid1h { grid-area: h1 }
+.badge_grid2h { grid-area: h2 }
+.badge_grid3h { grid-area: h3 }
+.badge_grid4h { grid-area: h4 }
+
+.badge_grid1h,
+.badge_grid2h,
+.badge_grid3h,
+.badge_grid4h {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.badge_grid__g1 { grid-area: g1 }
+.badge_grid__g2 { grid-area: g2 }
+.badge_grid__g3 { grid-area: g3 }
+.badge_grid__g4 { grid-area: g4 }
+
+.badge_grid__g1,
+.badge_grid__g2,
+.badge_grid__g3,
+.badge_grid__g4 {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  margin-bottom: 20px;
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 256px);
+  grid-auto-flow: column;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 14px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #212121;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #535353;
+}
+
+.badge_grid__g4 .artist_badge {
+  width: 150px;
+  height: 220px;
+  
+  display: flex;
+  justify-content: space-between;
+}
+/* .artist_badge .badge__info {
+  height: 20px;
+} */
+.badge_grid__g4 .artist_badge a img {
+  width: 150px;
+  height: 150px;
+}
+
+
+
+/* SIDEBAR *******************************************************/
+.home__sidebar {
+  grid-area: side;
+  
+  padding: 16px 24px;
+  border-left: 1px solid #535353;
+}
+
+.greeting {
+  font-style: italic;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.greeting a {
+  margin: 32px 0;
+  padding: 24px;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.home__sidebar h4 {
+  padding: 8px 0;
+  border-bottom: 1px solid #535353;
 }
