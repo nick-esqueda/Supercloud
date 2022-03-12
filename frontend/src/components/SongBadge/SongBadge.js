@@ -28,7 +28,7 @@ export default function SongBadge({ song }) {
   }
 
 
-  return (
+  return !song ? null : (
     <div className='song_badge'>
       <div
         className='song_badge__art'

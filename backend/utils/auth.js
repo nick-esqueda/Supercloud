@@ -43,11 +43,11 @@ const restoreUser = (req, res, next) => {
       const { id } = jwtPayload.data;
       req.user = await User.scope('currentUser').findByPk(id, {
         include: [
-          { model: Like, include: { model: Song, include: User } },
+          { model: Like, include: { model: Song, include: [{ model: User }, { model: Like }] } },
           { model: Song, include: { model: Comment } },
           { model: Comment, include: { model: Song } }
         ],
-        order: [[{ model: Like }, "createdAt", "DESC"]] 
+        order: [[{ model: Like }, "createdAt", "DESC"]]
       });
     } catch (e) {
       // if sequelize error, delete whatever token the client had

@@ -17,8 +17,8 @@ router.get(
     const song = await Song.findByPk(id, {
       include: [
         { model: User, include: { model: Song } },
-        { model: Like },
-        { model: Comment },
+        { model: Like, include: { model: User } },
+        { model: Comment, include: { model: User } },
       ]
     });
     // changes createdAt to "x y's ago" format
@@ -36,7 +36,7 @@ router.get('/', asyncHandler(async (req, res) => {
       { model: Comment },
     ],
     order: [['plays', 'DESC']],
-    limit: 10,
+    limit: 50,
   });
   const orderByRecent = await Song.findAll({
     include: [

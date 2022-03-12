@@ -130,7 +130,7 @@ const songsReducer = (state = initialState, action) => {
     }
 
     case ADD_SONGS: {
-      const songs = {};
+      const songs = { ...state.songs };
       action.songs.forEach(song => {
         songs[song.id] = song;
       });
@@ -156,6 +156,7 @@ const songsReducer = (state = initialState, action) => {
 
     case SET_PLAYING: {
       newState = { ...state };
+      console.log('akjsdfliwuaerbrjewnhivbsfk',action.song);
       newState.playing = action.song;
       return newState;
     }

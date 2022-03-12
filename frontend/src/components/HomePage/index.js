@@ -23,7 +23,14 @@ export default function HomePage() {
 
   const usersPlayCount = user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays;
   const usersLikedSongs = user.Likes.slice(0, 3).map(like => songs[like.Song.id])
-  const usersPopularLikes = user.Likes.sort((likeA, likeB) => likeA.Song.plays - likeB.Song.plays < 0 ? 1 : -1).slice(0, 10);
+  const usersPopularLikedSongs = user.Likes
+    .sort((likeA, likeB) => likeA.Song.plays - likeB.Song.plays < 0 ? 1 : -1)
+    .slice(0, 10)
+    // this map might return a value of undefined for songs that are 
+    // in the user's likes array, but not in allSongs slice of state
+    .map(like => songs[like.Song.id]);
+  console.log(usersPopularLikedSongs);
+  
 
   useEffect(() => {
     (async () => {
@@ -50,7 +57,7 @@ export default function HomePage() {
         <h4>songs that are stuck on repeat worldwide</h4>
       </div>
       <div className='badge_grid__g1'>
-        {popularSongs.map(song => (
+        {popularSongs.slice(0,10).map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
@@ -60,8 +67,8 @@ export default function HomePage() {
         <h4>songs you like that are on everybody's mind</h4>
       </div>
       <div className='badge_grid__g2'>
-        {usersPopularLikes.map(like => (
-          <SongBadge key={like.id} song={like.Song} />
+        {usersPopularLikedSongs.map((song, i) => (
+          <SongBadge key={i} song={song} />
         ))}
       </div>
 
