@@ -49,6 +49,7 @@ export default function Player() {
         }}
         customIcons={{
           play: '▶',
+          pause: '||'
         }}
       />
 

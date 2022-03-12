@@ -161,9 +161,14 @@
 }
 
 .rhap_play-pause-button {
-  font-size: 28px;
   width: 40px;
   height: 40px;
+  font-size: 24px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  
+  position: relative;
+  top: -2px;
 }
 
 .rhap_volume-controls {
@@ -269,7 +274,7 @@
   cursor: pointer;
 }
 .rhap_button-clear:hover {
-  opacity: 0.9;
+  opacity: 0.7;
   transition-duration: 0.2s;
 }
 .rhap_button-clear:active {
