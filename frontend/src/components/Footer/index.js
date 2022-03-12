@@ -15,12 +15,12 @@ export default function Footer() {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    if (playingSong) {
+    if (user && playingSong) {
       const liked = playingSong.Likes.find(like => like.userId === user.id);
       if (liked) setIsLiked(true);
       else setIsLiked(false);
     }
-  }, [user, playingSong])
+  }, [user, playingSong]);
 
   const likeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();

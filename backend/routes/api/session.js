@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { User } = require('../../db/models');
+const { User, Like, Song, Comment } = require('../../db/models');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { validateLogin } = require('../../utils/validation');
 
@@ -15,7 +15,16 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const { credential, password } = req.body;
 
-    const user = await User.login({ credential, password });
+    const userLogin = await User.login({ credential, password });
+    
+    const user = await User.findByPk(userLogin.id, {
+      include: [
+        { model: Like, include: { model: Song, include: [{ model: User }, { model: Like }] } },
+        { model: Song, include: { model: Comment } },
+        { model: Comment, include: { model: Song } }
+      ],
+      order: [[{ model: Like }, "createdAt", "DESC"]]
+    })
 
     if (!user) {
       const err = new Error('Login failed');
@@ -44,14 +53,17 @@ router.delete(
   }
 );
 
-// GET /api/users - RESTORE USER SESSION/GET USER
+// GET /api/session - RESTORE USER SESSION/GET USER
 router.get(
   '/',
   restoreUser,
   (req, res) => {
     const { user } = req;
-
-    if (user) return res.json({ user: user.toSafeObject() });
+    
+    if (user) {
+      // return res.json({ user: user.toSafeObject() });      
+      return res.json({ user })
+    }
     else return res.json({});
   }
 );

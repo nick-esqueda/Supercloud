@@ -33,7 +33,7 @@ function ProfileNavButton({ user }) {
     if (window.confirm('Are you sure you want to log out?')) {
       dispatch(logoutUser());
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
-      return history.push('/');
+      return history.push('/splash');
     }
   };
 
