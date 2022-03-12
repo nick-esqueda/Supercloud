@@ -21,6 +21,7 @@ export default function HomePage() {
   user.Songs.forEach(song => usersPlayCount += song.plays);
   
   // order user's likes by createdAt and limit 3 for sidebar
+  console.log(user);
   
   useEffect(() => {
     (async () => {

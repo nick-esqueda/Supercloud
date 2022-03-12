@@ -46,7 +46,8 @@ const restoreUser = (req, res, next) => {
           { model: Like, include: { model: User } },
           { model: Song, include: { model: Comment } },
           { model: Comment, include: { model: Song } }
-        ]
+        ],
+        order: [[{ model: Like }, "createdAt", "DESC"]] 
       });
     } catch (e) {
       // if sequelize error, delete whatever token the client had
