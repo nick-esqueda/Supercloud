@@ -18,7 +18,7 @@ function App() {
     dispatch(restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return !isLoaded ? null : (
+  return !isLoaded ? <h2>one second please...</h2> : (
     <AudioPlayerProvider>
       <HeaderFooter>
         <Switch>

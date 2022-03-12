@@ -9,8 +9,6 @@ import './HomePage.css';
 import ArtistBadge from '../SongPage/ArtistBadge';
 import HomeSidebar from './HomeSidebar';
 import { fetchArtists } from '../../store/artists';
-import SplashPage from './SplashPage';
-import { restoreUser } from '../../store/session';
 
 
 export default function HomePage() {
@@ -27,18 +25,8 @@ export default function HomePage() {
   const [usersLikedSongs, setUsersLikedSongs] = useState([]);
   const [usersPopularLikedSongs, setUsersPopularLikedSongs] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      // await dispatch(restoreUser());
-      await dispatch(fetchSongs());
-      await dispatch(fetchLikes());
-      await dispatch(fetchArtists());
-      setIsLoaded(true);
-    })()
-  }, [dispatch])
-
-  useEffect(() => {
-    if (isLoaded && user && (user.Songs || user.Likes)) { console.log('AHHHHHH',user);
+  const populate = () => {
+    if (user && (user.Songs || user.Likes)) {
       // USER'S PLAY COUNT
       setUsersPlayCount(user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays);
       // USER'S LIKED SONGS
@@ -54,15 +42,28 @@ export default function HomePage() {
       const suggestedArtistIds = user.Likes.slice(0, 5).map(like => like.Song.User.id);
       const uniqueArtistIds = [...new Set(suggestedArtistIds)];
       setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
-      
+
       setIsPopulated(true);
+    } else {
+      setIsPopulated(false);
     }
-    
-    console.log('bruh....?');
-  }, [user, artists, isLoaded]);
+  }
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(fetchSongs());
+      await dispatch(fetchLikes());
+      await dispatch(fetchArtists());
+      setIsLoaded(true);
+    })()
+  }, [dispatch]);
+  
+  useEffect(() => {
+    if (isLoaded) populate();
+  }, [isLoaded]);
 
 
-  return !isLoaded && !isPopulated ? <h2>loading...</h2> : (
+  return !isLoaded || !isPopulated ? <h2>loading...</h2> : (
     <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
@@ -102,7 +103,7 @@ export default function HomePage() {
       </div>
       <div className='badge_grid__g4'>
         {usersSuggestedArtists.map(artist => (
-          <ArtistBadge key={artist.id} artist={artists[artist.id]} />
+          <ArtistBadge key={artist?.id} artist={artists[artist.id]} />
         ))}
       </div>
 
