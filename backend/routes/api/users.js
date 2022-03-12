@@ -1,11 +1,25 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { User } = require('../../db/models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const { User, Song } = require('../../db/models');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
 const { validateSignup } = require('../../utils/validation');
 
 const router = express.Router();
+
+// ROUTES ************************************************************************
+// GET /api/users - GET ARTISTS
+router.get(
+  '/',
+  asyncHandler(async (req, res) => {
+    const artists = await User.findAll({
+      include: { model: Song, right: true }
+    })
+    return res.json(artists);
+  })
+)
 
 // POST /api/users - SIGN UP NEW USER
 router.post(
