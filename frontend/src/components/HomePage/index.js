@@ -9,6 +9,7 @@ import './HomePage.css';
 import ArtistBadge from '../SongPage/ArtistBadge';
 import HomeSidebar from './HomeSidebar';
 import { fetchArtists } from '../../store/artists';
+import SplashPage from './SplashPage';
 
 
 export default function HomePage() {
@@ -19,18 +20,10 @@ export default function HomePage() {
   const popularSongs = useSelector(state => state.songs.popularSongs);
   const recentSongs = useSelector(state => state.songs.recentSongs);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [usersSuggestedArtists, setUsersSuggestedArtists] = useState('');
-
-  const usersPlayCount = user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays;
-  const usersLikedSongs = user.Likes.slice(0, 3).map(like => songs[like.Song.id])
-  const usersPopularLikedSongs = user.Likes
-    .sort((likeA, likeB) => likeA.Song.plays - likeB.Song.plays < 0 ? 1 : -1)
-    .slice(0, 10)
-    // this map might return a value of undefined for songs that are 
-    // in the user's likes array, but not in allSongs slice of state
-    .map(like => songs[like.Song.id]);
-  console.log(usersPopularLikedSongs);
-  
+  const [usersSuggestedArtists, setUsersSuggestedArtists] = useState([]);
+  const [usersPlayCount, setUsersPlayCount] = useState(0);
+  const [usersLikedSongs, setUsersLikedSongs] = useState([]);
+  const [usersPopularLikedSongs, setUsersPopularLikedSongs] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -42,13 +35,27 @@ export default function HomePage() {
   }, [dispatch])
 
   useEffect(() => {
-    const suggestedArtistIds = user.Likes.slice(0, 5).map(like => like.Song.User.id);
-    const uniqueArtistIds = [...new Set(suggestedArtistIds)];
-    setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
-  }, [artists])
+    if (user) {
+      // USER'S PLAY COUNT
+      setUsersPlayCount(user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays);
+      // USER'S LIKED SONGS
+      setUsersLikedSongs(user.Likes.slice(0, 3).map(like => songs[like.Song.id]));
+      // POPULAR SONGS THAT USER LIKED
+      const popLiked = user.Likes
+        .sort((likeA, likeB) => likeA.Song.plays - likeB.Song.plays < 0 ? 1 : -1)
+        .slice(0, 10)
+        // map might put undefined in an index for songs that are in user's likes array but not in songs slice of state
+        .map(like => songs[like.Song.id]);
+      setUsersPopularLikedSongs(popLiked);
+      // ARTISTS OF SONGS THAT USER HAS LIKED
+      const suggestedArtistIds = user.Likes.slice(0, 5).map(like => like.Song.User.id);
+      const uniqueArtistIds = [...new Set(suggestedArtistIds)];
+      setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
+    }
+  }, [artists]);
 
 
-  return !isLoaded ? <h2>loading...</h2> : (
+  return !isLoaded ? <h2>loading...</h2> : !user ? <SplashPage /> : (
     <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
@@ -57,7 +64,7 @@ export default function HomePage() {
         <h4>songs that are stuck on repeat worldwide</h4>
       </div>
       <div className='badge_grid__g1'>
-        {popularSongs.slice(0,10).map(song => (
+        {popularSongs.slice(0, 10).map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
