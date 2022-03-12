@@ -10,7 +10,7 @@ export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
     <div className='home__sidebar'>
       <div className='greeting'>
         <h3>hi {user.username}, you've gotten</h3>
-        <h3 style={{ margin: '24px 0', fontWeight: '400', fontSize: '32px', fontStyle: 'normal' }}>\
+        <h3 style={{ margin: '24px 0', fontWeight: '400', fontSize: '32px', fontStyle: 'normal' }}>
           {usersPlayCount} plays
         </h3>
         <h3>in total since you joined.</h3>

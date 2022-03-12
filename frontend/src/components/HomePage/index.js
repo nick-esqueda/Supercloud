@@ -10,28 +10,38 @@ import SongCardSmall from '../SongCard/SongCardSmall'
 import './HomePage.css';
 import ArtistBadge from '../SongPage/ArtistBadge';
 import HomeSidebar from './HomeSidebar';
+import { fetchArtists } from '../../store/artists';
 
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const songs = useSelector(state => state.songs.songs);
+  const artists = useSelector(state => state.artists);
   const popularSongs = useSelector(state => state.songs.popularSongs);
   const recentSongs = useSelector(state => state.songs.recentSongs);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [usersSuggestedArtists, setUsersSuggestedArtists] = useState('');
   
   const usersPlayCount = user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays;
   const usersLikedSongs = user.Likes.slice(0, 3).map(like => songs[like.Song.id])
   const usersPopularLikes = user.Likes.sort((likeA, likeB) => likeA.Song.plays - likeB.Song.plays < 0 ? 1 : -1).slice(0, 10);
-  const usersSuggestedArtists = user.Likes.slice(0, 5).map(like => like.Song.User);
-
+  
+  
   useEffect(() => {
     (async () => {
       await dispatch(fetchSongs());
       await dispatch(fetchLikes());
+      await dispatch(fetchArtists());
       setIsLoaded(true);
     })()
   }, [dispatch])
+  
+  useEffect(() => {
+    const suggestedArtistIds = user.Likes.slice(0, 5).map(like => like.Song.User.id);
+    const uniqueArtistIds = [...new Set(suggestedArtistIds)];
+    setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
+  }, [artists])
 
   return !isLoaded ? <h2>loading...</h2> : (
     <div id='home'>
@@ -58,12 +68,12 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* <h2 className='badge_grid4hc'>artists you might like</h2>
+      <h2 className='badge_grid4hc'>artists you might like</h2>
       <div className='badge_grid__g4'>
         {usersSuggestedArtists.map(artist => (
-          <ArtistBadge key={artist.id} artist={artist} />
+          <ArtistBadge key={artist.id} artist={artists[artist.id]} />
         ))}
-      </div> */}
+      </div>
 
 
       <HomeSidebar user={user} usersPlayCount={usersPlayCount} usersLikedSongs={usersLikedSongs} />

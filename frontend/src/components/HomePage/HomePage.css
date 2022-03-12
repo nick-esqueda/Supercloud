@@ -42,6 +42,7 @@
   grid-template-columns: repeat(10, 256px);
   grid-template-rows: 1fr;
   justify-items: center;
+  align-items: center;
 }
 ::-webkit-scrollbar {
   width: 12px;
@@ -54,6 +55,22 @@
   border-radius: 8px;
   background-color: #535353;
 }
+
+.badge_grid__g4 .artist_badge {
+  width: 150px;
+  height: 220px;
+  
+  display: flex;
+  justify-content: space-between;
+}
+/* .artist_badge .badge__info {
+  height: 20px;
+} */
+.badge_grid__g4 .artist_badge a img {
+  width: 150px;
+  height: 150px;
+}
+
 
 
 /* SIDEBAR *******************************************************/
