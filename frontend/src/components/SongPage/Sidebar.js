@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import SongCardSmall from "../SongCard/SongCardSmall";
 import "./Sidebar.css";
 
 export default function Sidebar({ artist }) {
+  const allSongs = useSelector(state => state.songs.songs);
+  const artistsSongs = artist.Songs.map(song => allSongs[song.id]);
   
   
   return !artist ? null : (
@@ -20,8 +23,8 @@ export default function Sidebar({ artist }) {
       </span>
 
       <ul className="songs">
-        {artist.Songs.map((song) => (
-          <li key={song.id}><SongCardSmall artist={artist} song={song} /></li>
+        {artistsSongs.map((song, i) => (
+          <li key={i}><SongCardSmall song={song} /></li>
         ))}
       </ul>
     </div>

@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 
-export default function SongCardSmall({ song, artist }) {
+export default function SongCardSmall({ song }) {
+  if (!song) return null;
   const commentCount = !song.Comments ? 0 : song.Comments.length;
   const likeCount = !song.Likes ? 0 : song.Likes.length;
   
@@ -25,8 +26,8 @@ export default function SongCardSmall({ song, artist }) {
           {/* <div className='top__play'></div> */}
 
           <div className='top__title_artist'>
-            <NavLink to={`/users/${artist.id}`}>
-              <span style={{ color: '#b3b3b3' }}>{artist.username}</span>
+            <NavLink to={`/users/${song.User.id}`}>
+              <span style={{ color: '#b3b3b3' }}>{song.User.username}</span>
             </NavLink>
             <NavLink to={`/songs/${song.id}`}>
               <span>{song.title}</span>
