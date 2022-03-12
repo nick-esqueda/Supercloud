@@ -4,8 +4,8 @@
   
   display: grid;
   grid-template-columns: 70% auto;
-  grid-template-rows: 76px 40px 320px 40px 320px 40px 320px 40px 320px;
-  gap: 32px;
+  grid-template-rows: 76px 60px 340px 60px 340px 60px 340px 60px 340px;
+  gap: 16px 32px;
   grid-template-areas: 
     "top side"
     "h1 side"
@@ -32,15 +32,26 @@ h1 {
   100% { border-color: #8945B6 }
 }
 
-#home h2 {
+#home h2, h4 {
+  width: 100%;
   text-align: left;
   margin: 0;
+  padding: 0;
 }
 
 .badge_grid1h { grid-area: h1 }
 .badge_grid2h { grid-area: h2 }
 .badge_grid3h { grid-area: h3 }
 .badge_grid4h { grid-area: h4 }
+
+.badge_grid1h,
+.badge_grid2h,
+.badge_grid3h,
+.badge_grid4h {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
 .badge_grid__g1 { grid-area: g1 }
 .badge_grid__g2 { grid-area: g2 }
@@ -53,15 +64,18 @@ h1 {
 .badge_grid__g4 {
   overflow-x: scroll;
   overflow-y: hidden;
+  margin-bottom: 20px;
   
   display: grid;
-  grid-template-columns: repeat(10, 256px);
+  grid-template-columns: repeat(auto-fit, 256px);
+  grid-auto-flow: column;
   grid-template-rows: 1fr;
   justify-items: center;
   align-items: center;
 }
 ::-webkit-scrollbar {
   width: 12px;
+  height: 14px;
 }
 ::-webkit-scrollbar-track {
   border-radius: 8px;

@@ -129,6 +129,10 @@ li {
   font-style: italic;
 }
 
+.textAlignLeft {
+  text-align: left;
+}
+
 
 /* BUTTONS *****************************************************************/
 
