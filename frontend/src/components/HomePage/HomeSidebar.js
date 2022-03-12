@@ -32,9 +32,9 @@ export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
         </h4>
 
         <ul className="songs">
-          {usersLikedSongs.map((song) => (
+          {/* {usersLikedSongs.map((song) => (
             <li key={song.id}><SongCardSmall song={song} artist={song.User} /></li>
-          ))}
+          ))} */}
         </ul>
       </div>
 
