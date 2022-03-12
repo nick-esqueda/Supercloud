@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import HeaderFooter from './components/HeaderFooter';
 import HomePage from './components/HomePage';
+import SplashPage from './components/HomePage/SplashPage';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';
 import AudioPlayerProvider from './Context/AudioPlayerContext';
@@ -21,6 +22,10 @@ function App() {
     <AudioPlayerProvider>
       <HeaderFooter>
         <Switch>
+          <Route exact path="/splash">
+            <SplashPage />
+          </Route>
+
           <Route exact path="/">
             <HomePage />
           </Route>

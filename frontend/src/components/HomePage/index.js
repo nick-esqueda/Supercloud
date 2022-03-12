@@ -21,6 +21,7 @@ export default function HomePage() {
   const popularSongs = useSelector(state => state.songs.popularSongs);
   const recentSongs = useSelector(state => state.songs.recentSongs);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPopulated, setIsPopulated] = useState(false);
   const [usersSuggestedArtists, setUsersSuggestedArtists] = useState([]);
   const [usersPlayCount, setUsersPlayCount] = useState(0);
   const [usersLikedSongs, setUsersLikedSongs] = useState([]);
@@ -28,7 +29,7 @@ export default function HomePage() {
 
   useEffect(() => {
     (async () => {
-      await dispatch(restoreUser());
+      // await dispatch(restoreUser());
       await dispatch(fetchSongs());
       await dispatch(fetchLikes());
       await dispatch(fetchArtists());
@@ -37,7 +38,7 @@ export default function HomePage() {
   }, [dispatch])
 
   useEffect(() => {
-    if (isLoaded && user && user.Songs && user.Likes) { console.log('AHHHHHH',user);
+    if (isLoaded && user && (user.Songs || user.Likes)) { console.log('AHHHHHH',user);
       // USER'S PLAY COUNT
       setUsersPlayCount(user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays);
       // USER'S LIKED SONGS
@@ -53,11 +54,15 @@ export default function HomePage() {
       const suggestedArtistIds = user.Likes.slice(0, 5).map(like => like.Song.User.id);
       const uniqueArtistIds = [...new Set(suggestedArtistIds)];
       setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
+      
+      setIsPopulated(true);
     }
+    
+    console.log('bruh....?');
   }, [user, artists, isLoaded]);
 
 
-  return !isLoaded ? <h2>loading...</h2> : !user ? <SplashPage /> : (
+  return !isLoaded && !isPopulated ? <h2>loading...</h2> : (
     <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 

@@ -6,6 +6,7 @@ import './LoginForm.css';
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
 
   const [credential, setCredential] = useState('');
@@ -24,15 +25,15 @@ function LoginForm() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (validationErrors.length) return setShowErrors(true);
 
     setValidationErrors([]);
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
-    return dispatch(loginUser({ credential, password }))
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    await dispatch(loginUser({ credential, password }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -40,13 +41,14 @@ function LoginForm() {
           setShowErrors(true);
         }
       });
+    history.push('/');
   }
 
-  const demoLogin = (e) => {
+  const demoLogin = async (e) => {
     setCredential('Demo User');
     setPassword('password');
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
-    return dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    await dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -54,6 +56,7 @@ function LoginForm() {
           setShowErrors(true);
         }
       });
+    history.push('/');
   }
 
   return (
