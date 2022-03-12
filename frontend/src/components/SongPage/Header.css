@@ -37,6 +37,7 @@
 }
 .song_header__play,
 .song_header__pause {
+  width: 60px;
   min-width: 60px;
   height: 60px;
   
