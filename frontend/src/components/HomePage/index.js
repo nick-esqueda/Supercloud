@@ -5,7 +5,12 @@ import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongBadge from '../SongBadge/SongBadge';
 import SongCard from '../SongCard';
+import SongCardSmall from '../SongCard/SongCardSmall'
+
 import './HomePage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -14,7 +19,9 @@ export default function HomePage() {
   const [isLoaded, setIsLoaded] = useState(false);
   let usersPlayCount = 0;
   user.Songs.forEach(song => usersPlayCount += song.plays);
-
+  
+  // order user's likes by createdAt and limit 3 for sidebar
+  
   useEffect(() => {
     (async () => {
       await dispatch(fetchSongs());
@@ -74,7 +81,21 @@ export default function HomePage() {
           >view your profile</NavLink>
         </div>
 
+        <h4 className='flexRowBetween'>
+          <div className='alignItems'>
+            <FontAwesomeIcon icon={faHeart} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>
+            &nbsp;songs you liked
+          </div>
+
+          <NavLink to={`/users/${user.id}/likes`} className="italic">view all</NavLink>
+        </h4>
       </div>
+
+      <ul className="songs">
+        {/* {user.Likes.map((song) => (
+          <li key={song.id}><SongCardSmall artist={song.User} song={song} /></li>
+        ))} */}
+      </ul>
 
     </div>
   )

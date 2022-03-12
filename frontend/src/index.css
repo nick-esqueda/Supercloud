@@ -47,6 +47,9 @@ a {
   text-decoration: none;
   color: white;
 }
+a:hover {
+  font-weight: 300;
+}
 
 small {
   color: #b3b3b3;
@@ -90,6 +93,13 @@ li {
   align-items: center;
 }
 
+.flexRowBetween {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .flexCol {
   display: flex;
   flex-direction: column;
@@ -108,6 +118,15 @@ li {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.alignItems {
+  display: flex;
+  align-items: center;
+}
+
+.italic {
+  font-style: italic;
 }
 
 
