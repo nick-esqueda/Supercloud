@@ -10,6 +10,7 @@ import ArtistBadge from '../SongPage/ArtistBadge';
 import HomeSidebar from './HomeSidebar';
 import { fetchArtists } from '../../store/artists';
 import SplashPage from './SplashPage';
+import { restoreUser } from '../../store/session';
 
 
 export default function HomePage() {
@@ -27,6 +28,7 @@ export default function HomePage() {
 
   useEffect(() => {
     (async () => {
+      await dispatch(restoreUser());
       await dispatch(fetchSongs());
       await dispatch(fetchLikes());
       await dispatch(fetchArtists());
@@ -35,7 +37,7 @@ export default function HomePage() {
   }, [dispatch])
 
   useEffect(() => {
-    if (user) {
+    if (isLoaded && user && user.Songs && user.Likes) { console.log('AHHHHHH',user);
       // USER'S PLAY COUNT
       setUsersPlayCount(user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays);
       // USER'S LIKED SONGS
@@ -52,7 +54,7 @@ export default function HomePage() {
       const uniqueArtistIds = [...new Set(suggestedArtistIds)];
       setUsersSuggestedArtists(uniqueArtistIds.map(artistId => artists[artistId]));
     }
-  }, [artists]);
+  }, [user, artists, isLoaded]);
 
 
   return !isLoaded ? <h2>loading...</h2> : !user ? <SplashPage /> : (
