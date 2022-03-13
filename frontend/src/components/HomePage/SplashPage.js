@@ -10,16 +10,14 @@ import './SplashPage.css';
 export default function SplashPage() {
   const dispatch = useDispatch();
   const popularSongs = useSelector(state => state.songs.popularSongs);
-  
+
   useEffect(() => {
     (async () => {
       await dispatch(fetchSongs());
       await dispatch(fetchLikes());
-      // await dispatch(fetchArtists());
-      // setIsLoaded(true);
     })()
   }, [dispatch]);
-  
+
   console.log(popularSongs);
 
   return (
@@ -39,20 +37,27 @@ export default function SplashPage() {
         <LoginModal />
         <SignupModal />
       </div>
-      
+
       <h2 style={{ borderBottom: '1px solid #535353', margin: '10px' }}>hear what's trending right now on supercloud</h2>
-      
+
       <div className='splash__grid'>
-        {popularSongs.splice(0,10).map(song => (
+        {popularSongs.splice(0, 10).map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
 
       {/* <h2 style={{ borderBottom: '1px solid #535353', margin: '10px' }}>hear what's trending right now on supercloud</h2> */}
-      
+
       <div className='cta'>
         <h2>thanks for listening. now join in.</h2>
         <h3>create an account to save tracks, share your music, and join the conversation. all for free.</h3>
+        <SignupModal />
+        <div className='flexRow' >
+          already have an account? 
+          <LoginModal />
+        </div>
+        
+
       </div>
 
     </div>
