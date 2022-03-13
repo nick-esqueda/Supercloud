@@ -27,9 +27,10 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.userId, 10);
     const artist = await User.findByPk(id, {
-      include: [{
-        model: Song, include: [{ model: User }, { model: Comment }, { model: Like }]
-      }]
+      include: [
+        { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
+        { model: Like, include: { model: User } }
+      ]
     });
     
     return res.json(artist);
