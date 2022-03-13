@@ -23,8 +23,6 @@ export default function SongCardSmall({ song }) {
 
       <div className='song_card_small__content'>
         <div className='song_card_small__top'>
-          {/* <div className='top__play'></div> */}
-
           <div className='top__title_artist'>
             <NavLink to={`/users/${song.User.id}`}>
               <span style={{ color: '#b3b3b3' }}>{song.User.username}</span>

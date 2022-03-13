@@ -15,7 +15,6 @@ export default function ProfilePage() {
   const sessionUser = useSelector(state => state.session.user);
   const [artist, setArtist] = useState('');
 
-
   useEffect(() => {
     if (sessionUser.id === userId) {
       setArtist(sessionUser);
@@ -73,8 +72,8 @@ export default function ProfilePage() {
           </h4>
 
           <ul className="songs">
-            {artist.Likes.slice(0, 3).map((song, i) => (
-              <li key={song.id}><SongCardSmall song={song} /></li>
+            {artist.Likes.slice(0, 3).map((like, i) => (
+              <li key={like.Song.id}><SongCardSmall song={like.Song} /></li>
             ))}
           </ul>
         </div>

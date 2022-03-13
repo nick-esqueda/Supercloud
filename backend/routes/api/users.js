@@ -30,7 +30,7 @@ router.get(
     const artist = await User.findByPk(id, {
       include: [
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
-        { model: Like, include: [{ model: User }, { model: Song }] },
+        { model: Like, include: [{ model: User }, { model: Song, include: { model: User } }] },
         { model: Comment, include: [{ model: User }, { model: Song }] }
       ]
     });
