@@ -14,7 +14,8 @@
 
 #modal_content {
   min-width: 500px;
-  background-color: rgba(0, 0, 0, 0.5);
+  max-width: 600px;
+  background-color: #070707;
   padding: 16px;
   border: 1px solid #535353;
 
