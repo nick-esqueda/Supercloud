@@ -8,24 +8,6 @@ const { getTimeElapsed } = require('../../utils/utils');
 const router = express.Router();
 
 // ROUTES **********************************************************
-// // GET /api/likes/:userId - GET ALL OF A USER'S LIKES 
-// router.get(
-//   '/:userId',
-//   asyncHandler(async (req, res) => {
-//     const userId = parseInt(req.params.userId, 10);
-//     const likes = await Like.findAll({
-//       where: { userId }
-//     });
-    
-//     likes.forEach(like => {
-//       like.dataValues.createdAt = getTimeElapsed(like.dataValues.createdAt);
-//     });
-
-//     return res.json(likes);
-//   })
-// )
-
-
 // GET /api/likes/ - GET ALL LIKES 
 router.get(
   '/',
