@@ -46,7 +46,7 @@ export default function ProfileBody() {
         className={activeTab === 3 ? 'active_content content comments_tab' : 'inactive content comments_tab'}
       >
         {user.Comments.map(comment => (
-          <CommentCard key={comment.id} comment={comment} />
+          <CommentCard key={comment.id} comment={comment} on={comment.Song} />
         ))}
       </div>
     </div>

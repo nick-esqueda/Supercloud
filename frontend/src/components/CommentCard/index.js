@@ -5,17 +5,18 @@ import { deleteComment } from '../../store/comments';
 import './CommentCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faMessage } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 
-export default function CommentCard({ comment }) {
+export default function CommentCard({ comment, on }) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [isHovered, setIsHovered] = useState(false);
   const [tick, setTick] = useState(+(comment.createdAt.split(' ')[0]) + 1);
-  
+
   useEffect(() => {
     let timer;
-    
+
     if (tick === 59) {
       timer = setTimeout(() => {
         comment.createdAt = '1 minute ago';
@@ -23,18 +24,18 @@ export default function CommentCard({ comment }) {
       }, 1000);
       return;
     }
-    
+
     if (comment.createdAt.endsWith('seconds ago') || comment.createdAt.endsWith('second ago')) {
       timer = setTimeout(() => setTick(prev => prev + 1), 1000);
       comment.createdAt = `${tick + 1} seconds ago`;
     }
-    
+
     return () => clearTimeout(timer);
   }, [comment, tick])
 
   const commentDelete = () => {
     if (window.confirm(`Are you sure you want to delete your comment? This cannot be undone.`)) {
-      return dispatch(deleteComment(comment)); 
+      return dispatch(deleteComment(comment));
     }
   }
 
@@ -48,7 +49,17 @@ export default function CommentCard({ comment }) {
           alt=""
         />
 
-        <span style={{ color: '#b3b3b3' }}>{comment.User.username}</span>
+        {on ?
+          <span style={{ color: '#b3b3b3' }}> on
+            <NavLink to={`/songs/${on.id}`}
+              style={{ color: '#FFFF5D' }}
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+            >&nbsp;{on.title}</NavLink>
+          </span>
+          : 
+          <span style={{ color: '#b3b3b3' }}>{comment.User.username}</span>
+        }
+
         <span>{comment.content}</span>
       </div>
 
