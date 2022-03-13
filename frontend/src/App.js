@@ -49,7 +49,7 @@ function App() {
           </Route>
 
           <Route>
-            404 page
+            <h2>sorry! we couldn't find the page you were looking for</h2>
           </Route>
         </Switch>
       </HeaderFooter>
