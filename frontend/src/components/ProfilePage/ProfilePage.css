@@ -6,7 +6,7 @@
   grid-template-areas: 
     "top top"
     "left right";
-  gap: 16px 32px;
+  gap: 16px 16px;
 }
 
 .profile__header {
@@ -82,8 +82,20 @@
 
 
 
-
-/* LOWER **********************************************/
 .profile__body {
   grid-area: left;
+}
+
+
+/* SIDEBAR **********************************************/
+.profile__sidebar .sidebar_container {
+  width: 100%;
+  min-height: 400px;
+  padding: 16px;
+  border-left: 1px solid #535353;
+  
+}
+.profile__sidebar .sidebar_container h4 {
+  padding: 8px 0;
+  border-bottom: 1px solid #535353;
 }
