@@ -2,6 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const Sequelize = require('sequelize');
+const { getTimeElapsed } = require('../../utils/utils');
 const Op = Sequelize.Op;
 const { User, Song, Comment, Like } = require('../../db/models');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
@@ -30,10 +31,12 @@ router.get(
       include: [
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
         { model: Like, include: { model: User } },
-        { model: Comment, include: { model: User } }
+        { model: Comment, include: [{ model: User }, { model: Song }] }
       ]
     });
-
+    artist.Comments.forEach(comment => {
+      comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
+    })
     return res.json(artist);
   })
 )
