@@ -3,10 +3,10 @@ const LOAD_SEARCH = 'session/LOAD_SEARCH';
 
 
 // ACTION CREATORS ****************************************
-const loadSearch = (artist) => {
+const loadSearch = (results) => {
   return {
     type: LOAD_SEARCH,
-    artist
+    results
   }
 }
 
@@ -14,13 +14,13 @@ const loadSearch = (artist) => {
 
 
 // THUNK ACTION CREATORS **********************************
-export const fetchQuery = (userId) => async dispatch => {
-  const res = await fetch(`/api/users/${userId}`);
+export const fetchQuery = query => async dispatch => {
+  const res = await fetch(`/api/search/${query}`);
 
   if (res.ok) {
-    const artist = await res.json();
-    dispatch(loadSearch(artist))
-    return artist;
+    const results = await res.json();
+    dispatch(loadSearch(results));
+    return results;
   }
 }
 
@@ -31,8 +31,8 @@ const searchReducer = (state = [], action) => {
   let newState;
   switch (action.type) {
     case LOAD_SEARCH: {
-      newState = { ...state };
-      action.artists.forEach(artist => newState[artist.id] = artist);
+      newState = [ ...state ];
+      action.results.forEach(result => newState.push(result));
       return newState;
     }
 
