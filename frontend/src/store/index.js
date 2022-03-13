@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import artistsReducer from './artists';
 import commentsReducer from './comments';
 import likesReducer from './likes';
+import searchReducer from './search';
 
 import sessionReducer from './session';
 import songsReducer from './songs';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   likes: likesReducer,
   comments: commentsReducer,
   artists: artistsReducer,
+  search: searchReducer,
 });
 
 let enhancer;
