@@ -1,28 +1,35 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { fetchQuery } from '../../store/search';
 import './Search.css';
 
 export default function Search() {
+  const dispatch = useDispatch();
   const allSongs = useSelector(state => state.songs.popularSongs);
-  // const artists = useSelector(state => state.artists);
+  const dbResults = useSelector(state => state.search);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
-  // const searchRef = useRef();
-
 
   useEffect(() => {
     if (!query) return;
 
-    // const timer = setTimeout(() => /* dispatch here */, 1000);
-
     const filtered = allSongs.filter(song => song.title.toLowerCase().includes(query.toLowerCase()));
     setResults(filtered);
 
-    // return () => clearTimeout(timer);
+    let timer;
+    if (results.length < 30) {
+      timer = setTimeout(async () => {
+        setResults([]);
+        const dbResults = await dispatch(fetchQuery(query));
+        setResults([...filtered, ...dbResults]);
+      }, 500);
+    }
+
+    return () => clearTimeout(timer);
   }, [query]);
 
   const closeMenu = (e) => {
@@ -55,7 +62,7 @@ export default function Search() {
                   <NavLink to={`/songs/${song.id}`}>
                     <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
                     {song.title}
-                    {/* <NavLink to={`/songs/${song.id}`} style={{ fontStyle: 'italic', color: '#b3b3b3' }}>&nbsp;by {song.User.username}</NavLink> */}
+                    <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {song.User.username}</span>
                   </NavLink>
                 </li>
               ))}
