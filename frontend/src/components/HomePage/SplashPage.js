@@ -1,14 +1,26 @@
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLikes } from '../../store/likes';
+import { fetchSongs } from '../../store/songs';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
+import SongBadge from '../SongBadge/SongBadge';
 import './SplashPage.css';
 
 export default function SplashPage() {
-  const history = useHistory();
-  const user = useSelector(state => state.session.user);
-
-  // if (user) history.push('/');
+  const dispatch = useDispatch();
+  const popularSongs = useSelector(state => state.songs.popularSongs);
+  
+  useEffect(() => {
+    (async () => {
+      await dispatch(fetchSongs());
+      await dispatch(fetchLikes());
+      // await dispatch(fetchArtists());
+      // setIsLoaded(true);
+    })()
+  }, [dispatch]);
+  
+  console.log(popularSongs);
 
   return (
     <div className='splash_container'>
@@ -21,13 +33,26 @@ export default function SplashPage() {
           <span className='greeting__left'>looking for music? <br /> you're in the right place.</span>
           <span className='greeting__right'>super<span style={{ textDecoration: 'overline', textDecorationColor: '#FFFF5d' }}>cloud</span></span>
         </div>
-
-
       </div>
 
       <div className='splash_buttons'>
         <LoginModal />
         <SignupModal />
+      </div>
+      
+      <h2 style={{ borderBottom: '1px solid #535353', margin: '10px' }}>hear what's trending right now on supercloud</h2>
+      
+      <div className='splash__grid'>
+        {popularSongs.splice(0,10).map(song => (
+          <SongBadge key={song.id} song={song} />
+        ))}
+      </div>
+
+      {/* <h2 style={{ borderBottom: '1px solid #535353', margin: '10px' }}>hear what's trending right now on supercloud</h2> */}
+      
+      <div className='cta'>
+        <h2>thanks for listening. now join in.</h2>
+        <h3>create an account to save tracks, share your music, and join the conversation. all for free.</h3>
       </div>
 
     </div>
