@@ -45,7 +45,7 @@ const restoreUser = (req, res, next) => {
         include: [
           { model: Like, include: { model: Song, include: [{ model: User }, { model: Like }] } },
           { model: Song, include: [{ model: Comment }, { model: User },  { model: Like }] },
-          { model: Comment, include: { model: Song } }
+          { model: Comment, include: [{ model: Song }, { model: User }] }
         ],
         order: [[{ model: Like }, "createdAt", "DESC"]]
       });

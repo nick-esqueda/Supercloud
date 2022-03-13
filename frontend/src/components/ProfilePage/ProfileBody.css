@@ -43,12 +43,27 @@
   transition: color .4s, border-bottom-color .2s;
 }
 
-
 .active_content { display: block }
-.inactive { display: none }
+.inactive.content { display: none }
 .content {
   margin-top: 16px; 
   padding: 16px 0;
   width: 100%;
   height: 100%;
+}
+
+.likes_tab {
+  max-width: 864px;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 280px);
+  justify-items: center;
+}
+
+.comments_tab > * {
+   padding: 8px;
+   
+   display: flex;
+   align-items: center;
 }

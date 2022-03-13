@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SongCard from '../SongCard';
+import SongBadge from '../SongBadge/SongBadge';
+import CommentCard from '../CommentCard'
 import './ProfileBody.css';
 
 export default function ProfileBody() {
@@ -36,12 +38,16 @@ export default function ProfileBody() {
       <div
         className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'}
       >
-        liwkemfklkfan/lsf s
+        {user.Likes.map(like => (
+          <SongBadge key={like.id} song={like.Song} />
+        ))}
       </div>
       <div
         className={activeTab === 3 ? 'active_content content comments_tab' : 'inactive content comments_tab'}
       >
-        CEAMENTe
+        {user.Comments.map(comment => (
+          <CommentCard key={comment.id} comment={comment} />
+        ))}
       </div>
     </div>
   )

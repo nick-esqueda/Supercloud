@@ -18,11 +18,11 @@ export default function CommentSection({ comments }) {
           : comments.length + ' comments'}
       </span>
 
-      <ul className='comments'>
+      <div className='comments'>
         {comments.map(comment => (
-          <li key={comment.id}><CommentCard comment={comment} /></li>
+          <CommentCard key={comment.id} comment={comment} />
         ))}
-      </ul>
+      </div>
 
 
     </div>

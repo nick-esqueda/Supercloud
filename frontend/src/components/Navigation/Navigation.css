@@ -190,7 +190,7 @@ nav a:hover {
 /* PROFILE NAV DROPDOWN *****************************************************/
 .profile_nav_dropdown {
   position: absolute;
-  top: 33px;
+  top: 32px;
   left: 0;
   width: 140px;
   border: 1px solid #535353;
