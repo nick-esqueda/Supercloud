@@ -54,7 +54,7 @@ export default function ProfilePage() {
 
 
       <div className='profile__body'>
-        <ProfileBody />
+        <ProfileBody user={artist} />
       </div>
 
       <div className='profile__sidebar'>

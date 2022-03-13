@@ -5,10 +5,9 @@ import SongBadge from '../SongBadge/SongBadge';
 import CommentCard from '../CommentCard'
 import './ProfileBody.css';
 
-export default function ProfileBody() {
+export default function ProfileBody({ user }) {
   const [activeTab, setActiveTab] = useState(1);
-  const user = useSelector(state => state.session.user);
-  console.log(user);
+  
 
   return (
     <div className='profile_body_container'>
