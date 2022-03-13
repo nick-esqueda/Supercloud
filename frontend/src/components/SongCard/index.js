@@ -9,16 +9,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 import { deleteLike, postLike } from '../../store/likes';
 import { useEffect, useState } from 'react';
+import { getTimeElapsed } from '../../utils';
 
 export default function SongCard({ song, user }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
+  // REFACTOR LIKES TO JUST USE THE ASSOCIATED DATA OF "SONG"
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
   const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const commentCount = !song.Comments ? 0 : song.Comments.length;
   const isArtist = song.User.id === user?.id;
+  const createdAt = getTimeElapsed(song.createdAt);
   const [tick, setTick] = useState(+(song.createdAt.split(' ')[0]) + 1);
   
   useEffect(() => {
@@ -97,7 +100,7 @@ export default function SongCard({ song, user }) {
           </div>
 
           <div className='top__right'>
-            <small>{song?.createdAt}</small>
+            <small>{createdAt}</small>
             <span className='genre'>{song?.genre}</span>
           </div>
         </div>

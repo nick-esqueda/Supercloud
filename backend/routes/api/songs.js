@@ -60,7 +60,7 @@ router.post(
   validateSong,
   asyncHandler(async (req, res) => {
     const userId = req.user.id
-    const createdSong = await Song.create({...req.body, userId});
+    const createdSong = await Song.create({ ...req.body, userId });
     const song = await Song.findByPk(createdSong.id, {
       include: [{ model: User }, { model: Like }, { model: Comment }],
     })
