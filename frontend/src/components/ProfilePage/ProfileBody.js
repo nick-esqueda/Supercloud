@@ -7,7 +7,7 @@ import './ProfileBody.css';
 
 export default function ProfileBody({ user }) {
   const [activeTab, setActiveTab] = useState(1);
-
+  const usersLikes = useSelector(state => state.likes.usersLikes2);  
 
   return (
     <div className='profile_body_container'>
@@ -44,7 +44,7 @@ export default function ProfileBody({ user }) {
       <div
         className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'}
       >
-        {user.Likes.map(like => (
+        {usersLikes.map(like => (
           <SongBadge key={like.id} song={like.Song} artist={user} />
         ))}
       </div>

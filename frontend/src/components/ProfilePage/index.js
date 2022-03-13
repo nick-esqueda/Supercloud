@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { fetchArtist } from '../../store/artists';
+import { fetchUsersLikes } from '../../store/likes';
 import SongCardSmall from '../SongCard/SongCardSmall';
 import ProfileBody from './ProfileBody';
 import './ProfilePage.css';
@@ -13,19 +14,21 @@ export default function ProfilePage() {
   const { userId } = useParams();
   const sessionUser = useSelector(state => state.session.user);
   const [artist, setArtist] = useState('');
-  
+
+
   useEffect(() => {
     if (sessionUser.id === userId) {
       setArtist(sessionUser);
     } else {
       (async () => {
         const artist = await dispatch(fetchArtist(userId));
-        // fetch user's likes here
+        await dispatch(fetchUsersLikes(userId));
         setArtist(artist);
       })()
     }
   }, [dispatch]);
-
+  
+  
   return !artist ? <h2>loading...</h2> : (
     <div id='profile_page'>
       <div className="profile__header">
@@ -63,14 +66,14 @@ export default function ProfilePage() {
           <h4 className='flexRowBetween'>
             <div className='alignItems'>
               <FontAwesomeIcon icon={faHeart} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>
-              &nbsp;{artist.Likes.length === 1 ? `${artist.Likes.length} like` : `${artist.Likes.length} likes`} 
+              &nbsp;{artist.Likes.length === 1 ? `${artist.Likes.length} like` : `${artist.Likes.length} likes`}
             </div>
 
             <NavLink to={`/users/${artist.id}/likes`} className="italic">view all</NavLink>
           </h4>
 
           <ul className="songs">
-            {artist.Likes.slice(0,3).map((song, i) => (
+            {artist.Likes.slice(0, 3).map((song, i) => (
               <li key={song.id}><SongCardSmall song={song} /></li>
             ))}
           </ul>
