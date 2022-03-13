@@ -22,17 +22,17 @@ export default function ProfileBody() {
       </div>
       
       <div 
-        className={activeTab === 1 ? 'active content songs_tab' : 'inactive content songs_tab'}
+        className={activeTab === 1 ? 'active_content content songs_tab' : 'inactive content songs_tab'}
       >
         songsaksfhoawiefne
       </div>
       <div 
-        className={activeTab === 2 ? 'active content likes_tab' : 'inactive content likes_tab'}
+        className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'}
       >
         liwkemfklkfan/lsf s
       </div>
       <div 
-        className={activeTab === 3 ? 'active content comments_tab' : 'inactive content comments_tab'}
+        className={activeTab === 3 ? 'active_content content comments_tab' : 'inactive content comments_tab'}
       >
         CEAMENTe
       </div>

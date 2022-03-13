@@ -44,7 +44,7 @@
 }
 
 
-.active { display: block }
+.active_content { display: block }
 .inactive { display: none }
 .content {
   margin-top: 16px; 
