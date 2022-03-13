@@ -2,12 +2,13 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { fetchQuery } from '../../store/search';
 import './Search.css';
 
 export default function Search() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const allSongs = useSelector(state => state.songs.popularSongs);
   // const dbResults = useSelector(state => state.search);
   const [query, setQuery] = useState('');
@@ -32,15 +33,27 @@ export default function Search() {
     return () => clearTimeout(timer);
   }, [query]);
 
+  const removeDuplicates = (songs) => {
+    const songIds = songs.map(song => song.id);
+    const uniqueIds = [...new Set(songIds)];
+    return uniqueIds.map(id => songs.find(song => song.id === id));
+  }
+
   const closeMenu = (e) => {
     setShowMenu(false);
     setResults([]);
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setShowMenu(false);
+    return history.push(`/search/${query}`)
+  }
+
 
   return (
     <div className='search'>
-      <form className="header__searchForm">
+      <form className="header__searchForm" onSubmit={onSubmit}>
         <input type="text" placeholder="search"
           className="header__searchInput"
           value={query}

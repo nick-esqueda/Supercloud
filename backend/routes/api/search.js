@@ -35,8 +35,13 @@ router.get(
         ]
       },
       include: { model: User, },
+      order: [
+        ["title"],
+      ],
       limit: 30
     })
+    
+    console.log(JSON.stringify(results, null, 2));
 
     return res.json(results);
   })
