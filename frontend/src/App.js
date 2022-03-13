@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import HeaderFooter from './components/HeaderFooter';
 import HomePage from './components/HomePage';
 import SplashPage from './components/HomePage/SplashPage';
+import ProfilePage from './components/ProfilePage';
 import SearchPage from './components/SearchPage';
 import SongPage from './components/SongPage';
 import UploadSongPage from './components/UploadSongPage';
@@ -37,6 +38,10 @@ function App() {
 
           <Route exact path="/songs/:songId(\d+)">
             <SongPage />
+          </Route>
+          
+          <Route exact path="/users/:userId(\d+)">
+            <ProfilePage />
           </Route>
 
           <Route exact path="/upload">
