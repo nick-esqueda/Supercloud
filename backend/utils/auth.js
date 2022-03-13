@@ -44,7 +44,7 @@ const restoreUser = (req, res, next) => {
       req.user = await User.scope('currentUser').findByPk(id, {
         include: [
           { model: Like, include: { model: Song, include: [{ model: User }, { model: Like }] } },
-          { model: Song, include: { model: Comment } },
+          { model: Song, include: [{ model: Comment }, { model: User },  { model: Like }] },
           { model: Comment, include: { model: Song } }
         ],
         order: [[{ model: Like }, "createdAt", "DESC"]]

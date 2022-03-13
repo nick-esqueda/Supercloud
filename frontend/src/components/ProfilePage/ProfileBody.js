@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import SongCard from '../SongCard';
 import './ProfileBody.css';
 
 export default function ProfileBody() {
   const [activeTab, setActiveTab] = useState(1);
+  const user = useSelector(state => state.session.user);
+  console.log(user);
 
   return (
     <div className='profile_body_container'>
@@ -20,18 +24,21 @@ export default function ProfileBody() {
           onClick={() => setActiveTab(3)}
         >cements</div>
       </div>
-      
-      <div 
+
+      <div
         className={activeTab === 1 ? 'active_content content songs_tab' : 'inactive content songs_tab'}
       >
-        songsaksfhoawiefne
+        {user.Songs.map(song => (
+          <SongCard key={song.id} song={song} user={user} />
+        ))}
+
       </div>
-      <div 
+      <div
         className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'}
       >
         liwkemfklkfan/lsf s
       </div>
-      <div 
+      <div
         className={activeTab === 3 ? 'active_content content comments_tab' : 'inactive content comments_tab'}
       >
         CEAMENTe
