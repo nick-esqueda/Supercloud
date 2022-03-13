@@ -24,13 +24,13 @@ router.get(
 
 // GET /api/users/:userId - GET AN ARTIST
 router.get(
-  '/:userId',
+  '/:userId(\\d+)',
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.userId, 10);
     const artist = await User.findByPk(id, {
       include: [
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
-        { model: Like, include: { model: User } },
+        { model: Like, include: [{ model: User }, { model: Song }] },
         { model: Comment, include: [{ model: User }, { model: Song }] }
       ]
     });
@@ -38,6 +38,21 @@ router.get(
       comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
     })
     return res.json(artist);
+  })
+)
+
+// GET api/users/:userId/likes - GET A USER'S LIKES
+router.get(
+  '/:userId(\\d+)/likes',
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.userId, 10);
+    const likes = await Like.findAll({
+      where: { userId },
+      include: [{ model: Song, include: { model: User } }],
+      order: [["createdAt", "DESC"]]
+    })
+    
+    return res.json(likes);
   })
 )
 

@@ -20,6 +20,7 @@ export default function ProfilePage() {
     } else {
       (async () => {
         const artist = await dispatch(fetchArtist(userId));
+        // fetch user's likes here
         setArtist(artist);
       })()
     }
@@ -62,7 +63,7 @@ export default function ProfilePage() {
           <h4 className='flexRowBetween'>
             <div className='alignItems'>
               <FontAwesomeIcon icon={faHeart} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>
-              &nbsp;songs you liked
+              &nbsp;{artist.Likes.length === 1 ? `${artist.Likes.length} like` : `${artist.Likes.length} likes`} 
             </div>
 
             <NavLink to={`/users/${artist.id}/likes`} className="italic">view all</NavLink>
@@ -70,7 +71,7 @@ export default function ProfilePage() {
 
           <ul className="songs">
             {artist.Likes.slice(0,3).map((song, i) => (
-              <li key={i}><SongCardSmall song={song} /></li>
+              <li key={song.id}><SongCardSmall song={song} /></li>
             ))}
           </ul>
         </div>

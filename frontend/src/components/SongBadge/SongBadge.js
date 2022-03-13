@@ -12,7 +12,9 @@ export default function SongBadge({ song }) {
   const playingSong = useSelector(state => state.songs.playing);
   const [isHovered, setIsHovered] = useState(false);
 
-
+  // !!! BUG - when hitting play from the profile likes tab, the song provided to
+  // setPlaying() action does not have all of the associated data it needs
+  
   const playSong = async () => {
     await new Promise(async (resolve, reject) => {
       await dispatch(setPlaying(song));
