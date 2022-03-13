@@ -63,13 +63,17 @@ const Navigation = () => {
       <div className="navbar">
         
         <div className="header__left flexRow">
-          <NavLink to="/" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+          <NavLink exact to={user ? "/" : "/splash"}
+            onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
             className="header__logo"
           >cloud</NavLink>
             
           <nav className="nav_links">
-            <NavLink exact to="/" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-              activeStyle={{ backgroundColor: '#111213' }}>home</NavLink>
+            <NavLink to={user ? "/" : "/splash"} 
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+              activeStyle={{ backgroundColor: '#111213' }}>
+                home
+            </NavLink>
             <NavLink exact to="/likes" activeStyle={{ backgroundColor: '#111213' }}
               onClick={() => alert('Sorry! This feature is currently under construction')}
             >likes</NavLink>
