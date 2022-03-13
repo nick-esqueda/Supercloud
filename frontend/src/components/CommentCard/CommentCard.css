@@ -34,10 +34,6 @@
   object-fit: cover;
   border-radius: 100%;
 }
-.comment__left span {
-  
-}
-
 
 .comment__right {
   min-width: 140px;

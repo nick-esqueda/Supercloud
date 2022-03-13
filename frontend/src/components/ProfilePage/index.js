@@ -37,6 +37,10 @@ export default function ProfilePage() {
       <div className='profile__body'>
         <ProfileBody />
       </div>
+      
+      <div className='profile__sidebar'>
+        
+      </div>
     </div>
   )
 }

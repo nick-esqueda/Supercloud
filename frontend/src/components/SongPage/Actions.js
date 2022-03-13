@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { deleteLike, postLike } from '../../store/likes';
@@ -13,21 +13,23 @@ import { postComment } from '../../store/comments';
 export default function Actions({ song, user }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
-  const isLiked = songsLikes?.find(like => like.userId === user?.id);
+  const songsLikes = useSelector(state => state.likes.songsLikes)[song.id];
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user?.id;
+  const [isLiked, setIsLiked] = useState(false);
+  const [commentCount, setCommentCount] = useState(song.Comments ? song.Comments.length : 0);
   const [content, setContent] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);
   const [showErrors, setShowErrors] = useState(false);
   
+  useEffect(() => {
+    if (user && song.Likes.find(like => like.userId === user.id)) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [user, song])
   
-  
-  useSelector(state => state.comments);
-  
-  
-  
-
   useState(() => {
     const errors = [];
     if (content.length > 255) errors.push('comments must be under 255 characters');
@@ -36,10 +38,12 @@ export default function Actions({ song, user }) {
 
   const likeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
+    setIsLiked(true);
     dispatch(postLike(user.id, song.id));
   }
   const unLikeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
+    setIsLiked(false);
     dispatch(deleteLike(user.id, song.id));
   }
 
@@ -53,6 +57,7 @@ export default function Actions({ song, user }) {
 
     setShowErrors(false);
     dispatch(postComment({ content, songId: song.id, userId: user.id }));
+    setCommentCount(prev => prev + 1);
     setContent('');
   }
 
@@ -135,7 +140,7 @@ export default function Actions({ song, user }) {
           <span>▶ {song?.plays}</span>
           <span>
             <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{song.Comments?.length}
+            &nbsp;{commentCount}
           </span>
         </div>
 
