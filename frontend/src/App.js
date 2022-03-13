@@ -31,7 +31,7 @@ function App() {
             <HomePage />
           </Route>
           
-          <Route exact path="/search">
+          <Route exact path="/search/:query">
             <SearchPage />
           </Route>
 

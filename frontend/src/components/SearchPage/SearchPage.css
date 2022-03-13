@@ -1,0 +1,40 @@
+.search_page {
+  width: 100%;
+  padding: 16px
+}
+.search_page h2 {
+  width: 100%;
+  /* margin: 32px 0 0; */
+  padding: 24px 0;
+  border-bottom: 1px solid #535353;
+  text-align: left;
+}
+
+
+.search__main {
+  display: flex;
+}
+
+
+.search__sidebar {
+  width: 20%;
+  min-height: 200px;
+  margin: 32px 0;
+  /* border-right: 1px solid #535353; */
+  
+  text-align: left;
+}
+
+
+
+/* BODY *****************************************/
+.search__body {
+  width: 80%;
+  height: 100%;
+  margin: 0;
+  min-height: 200px;
+  
+} 
+.search__body > * {
+  margin: 32px 0;
+}

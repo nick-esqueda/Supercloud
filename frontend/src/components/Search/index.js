@@ -9,7 +9,7 @@ import './Search.css';
 export default function Search() {
   const dispatch = useDispatch();
   const allSongs = useSelector(state => state.songs.popularSongs);
-  const dbResults = useSelector(state => state.search);
+  // const dbResults = useSelector(state => state.search);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
@@ -25,7 +25,7 @@ export default function Search() {
       timer = setTimeout(async () => {
         setResults([]);
         const dbResults = await dispatch(fetchQuery(query));
-        setResults([...filtered, ...dbResults]);
+        setResults(filtered.concat(dbResults));
       }, 500);
     }
 
@@ -57,7 +57,7 @@ export default function Search() {
           <div id="search_bg" onClick={closeMenu}>
             <ul className='search_filter' onClick={closeMenu}>
               <NavLink to={`/search/${query}`} id="search_message">search for "{query}"...</NavLink>
-              {results.map((song, i) => (
+              {results.sort().map((song, i) => (
                 <li key={i}>
                   <NavLink to={`/songs/${song.id}`}>
                     <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
