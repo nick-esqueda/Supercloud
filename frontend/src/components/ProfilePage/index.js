@@ -19,7 +19,7 @@ export default function ProfilePage() {
   const [artist, setArtist] = useState('');
 
   useEffect(() => {
-    if (sessionUser.id === userId) {
+    if (sessionUser?.id === userId) {
       setArtist(sessionUser);
     } else {
       (async () => {
