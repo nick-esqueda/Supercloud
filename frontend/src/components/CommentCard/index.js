@@ -5,11 +5,12 @@ import { deleteComment } from '../../store/comments';
 import './CommentCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faMessage } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 
 export default function CommentCard({ comment, on }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector(state => state.session.user);
   const [isHovered, setIsHovered] = useState(false);
   const [tick, setTick] = useState(+(comment.createdAt.split(' ')[0]) + 1);
@@ -42,10 +43,16 @@ export default function CommentCard({ comment, on }) {
   return (
     <div className='comment__wrapper' onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className='comment__left'>
-        <img src={comment.User.profileImageURL
-          ? comment.User.profileImageURL
-          : "https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-        }
+        <img
+          src={comment.User.profileImageURL
+            ? comment.User.profileImageURL
+            : "https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+          }
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+            history.push(`/users/${comment.User.id}`)
+          }}
+          style={{ cursor: 'pointer' }}
           alt=""
         />
 
@@ -56,8 +63,8 @@ export default function CommentCard({ comment, on }) {
               onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
             >&nbsp;{on.title}</NavLink>
           </span>
-          : 
-          <span style={{ color: '#b3b3b3' }}>{comment.User.username}</span>
+          :
+          <NavLink to={`/users/${comment.User.id}`} style={{ color: '#b3b3b3' }}>{comment.User.username}</NavLink>
         }
 
         <span className={on ? "line_clamp" : ""}>{comment.content}</span>

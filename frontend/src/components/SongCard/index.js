@@ -12,7 +12,6 @@ import { useEffect, useState } from 'react';
 import { getTimeElapsed } from '../../utils';
 
 export default function SongCard({ song, user }) {
-  console.log('Ssong INSIDE SONGCARD', song);
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
