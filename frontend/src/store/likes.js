@@ -110,6 +110,7 @@ const likesReducer = (state = initialState, action) => {
       const allLikes = {};
       const songsLikes = {};
       const usersLikes = {};
+      const usersLikes2 = [ ...state.usersLikes2 ];
 
       action.likes.forEach(like => {
         allLikes[like.id] = like;
@@ -127,7 +128,8 @@ const likesReducer = (state = initialState, action) => {
         }
 
       });
-      return { allLikes, songsLikes, usersLikes };
+      
+      return { allLikes, songsLikes, usersLikes, usersLikes2 };
     }
 
     case LOAD_SONGS_LIKES: {
@@ -163,7 +165,9 @@ const likesReducer = (state = initialState, action) => {
         usersLikes[like.userId] = [...usersLikes[like.userId], like];
       }
       
+      console.log('ACTION', action.like);
       const usersLikes2 = [ ...state.usersLikes2, action.like ];
+      console.log('USERS LIKES 2', usersLikes2);
 
       return { allLikes, songsLikes, usersLikes, usersLikes2 };
     }
