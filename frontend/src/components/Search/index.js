@@ -22,6 +22,7 @@ export default function Search() {
   const dispatch = useDispatch();
   const history = useHistory();
   const allSongs = useSelector(state => state.songs.popularSongs);
+  const dbQueryResults = useSelector(state => state.search);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [showMenu, setShowMenu] = useState(false);
@@ -29,20 +30,19 @@ export default function Search() {
   useEffect(() => {
     if (!query) return;
     
-    // const filtered = allSongs.filter(song => song.title.toLowerCase().includes(query.toLowerCase()));
-    
-    const fuse = new Fuse(allSongs, options);
-    const results = fuse.search(query);
-    setResults(results);
-
     let timer;
-    if (results.length < 30) {
+    if (dbQueryResults.length < 20 && query.length > 1) {
       timer = setTimeout(async () => {
         const dbResults = await dispatch(fetchQuery(query));
         const fuse = new Fuse(dbResults, options);
-        const results = fuse.search(query);
-        setResults(results);
-      }, 500);
+        const fuseResults = fuse.search(query);
+        setResults(fuseResults.concat(allSongs));
+      }, 400);
+      
+    } else {
+      const fuse = new Fuse(dbQueryResults, options);
+      const fuseResults = fuse.search(query);
+      setResults(fuseResults);
     }
 
     return () => clearTimeout(timer);
@@ -54,11 +54,6 @@ export default function Search() {
   //   return uniqueIds.map(id => songs.find(song => song.id === id));
   // }
   
-  // FUSE******************
-
-  
-  
-
   const closeMenu = (e) => {
     setShowMenu(false);
     setResults([]);

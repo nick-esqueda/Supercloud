@@ -31,8 +31,7 @@ const searchReducer = (state = [], action) => {
   let newState;
   switch (action.type) {
     case LOAD_SEARCH: {
-      newState = [ ...state ];
-      action.results.forEach(result => newState.push(result));
+      newState = [ ...state, ...action.results ];
       return newState;
     }
 
