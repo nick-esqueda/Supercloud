@@ -64,25 +64,25 @@ const Navigation = () => {
   return (
     <div id="header">
       <div className="navbar">
-        
+
         <div className="header__left flexRow">
           <NavLink exact to={user ? "/" : "/splash"}
             onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
             className="header__logo"
           >cloud</NavLink>
-            
+
           <nav className="nav_links">
-            <NavLink exact to={user ? "/" : "/splash"} 
+            <NavLink exact to={user ? "/" : "/splash"}
               onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
               activeStyle={{ backgroundColor: '#111213' }}>
-                home
+              home
             </NavLink>
             <NavLink exact to={`/users/${user.id}`} activeStyle={{ backgroundColor: '#111213' }}
               onClick={() => setActiveTab(2)}
             >likes</NavLink>
-            <NavLink exact to="/random" activeStyle={{ backgroundColor: '#111213' }}
+            <a style={{ cursor: 'pointer' }}
               onClick={() => alert('Sorry! This feature is currently under construction')}
-            >random</NavLink>
+            >random</a>
           </nav>
         </div>
 
@@ -93,7 +93,7 @@ const Navigation = () => {
         <div className="header__right flexRow">
           {sessionLinks}
         </div>
-        
+
       </div>
     </div>
   );

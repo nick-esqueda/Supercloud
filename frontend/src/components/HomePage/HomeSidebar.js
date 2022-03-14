@@ -8,7 +8,7 @@ import { useProfileTab } from '../../Context/ProfileTabContext';
 
 export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
   const { setActiveTab } = useProfileTab();
-  
+
   return (
     <div className='home__sidebar'>
       <div className='greeting'>
@@ -19,7 +19,11 @@ export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
         <h3>in total since you joined.</h3>
 
         <NavLink to={`/users/${user.id}`} className='btn btn--primary--outline'
-          onClick={() => setActiveTab(1)}
+          onClick={() => {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+            setActiveTab(1);
+          }}
+
         >view your profile</NavLink>
       </div>
 
@@ -32,7 +36,10 @@ export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
           </div>
 
           <NavLink to={`/users/${user.id}`} className="italic"
-            onClick={() => setActiveTab(2)}
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+              setActiveTab(2);
+            }}
           >view all</NavLink>
         </h4>
 

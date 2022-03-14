@@ -57,7 +57,6 @@ function App() {
 
             <Route exact path="/random">
               <h2>sorry! this feature is currently under construction</h2>
-              <small>routed here instead of / in order to see navlink activeStyle</small>
             </Route>
 
             <Route>
