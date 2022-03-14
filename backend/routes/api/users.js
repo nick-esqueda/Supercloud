@@ -48,7 +48,7 @@ router.get(
     const userId = parseInt(req.params.userId, 10);
     const likes = await Like.findAll({
       where: { userId },
-      include: [{ model: Song, include: { model: User } }],
+      include: [{ model: Song, include: [{ model: User }, { model: Like }] }],
       order: [["createdAt", "DESC"]]
     })
     

@@ -13,19 +13,19 @@ export default function ProfileBody({ user }) {
   return (
     <div className='profile_body_container'>
       <div className='profile__tabs'>
-        {/* !user.Songs.length ? null : */
+        {
           <div
             className={activeTab === 1 ? 'tab active_tab' : 'tab'}
             onClick={() => setActiveTab(1)}
           >songs</div>
         }
-        {/* !user.Likes.length ? null : */
+        {
           <div
             className={activeTab === 2 ? 'tab active_tab' : 'tab'}
             onClick={() => setActiveTab(2)}
           >likes</div>
         }
-        {/* !user.Comments.length ? null : */
+        {
           <div
             className={activeTab === 3 ? 'tab active_tab' : 'tab'}
             onClick={() => setActiveTab(3)}
