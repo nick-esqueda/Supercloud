@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { Song, User, Like, Comment } = require('../../db/models');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, requireAuthFast } = require('../../utils/auth');
 const { getTimeElapsed } = require('../../utils/utils');
 const { validateSong, validateSongEdit } = require('../../utils/validation');
 
@@ -37,7 +37,7 @@ router.get(
 // POST /api/comments - CREATE A COMMENT
 router.post(
   '/',
-  requireAuth,
+  requireAuthFast,
   asyncHandler(async (req, res) => {
     const createdComment = await Comment.create(req.body);
     const comment = await Comment.findByPk(createdComment.id, {
@@ -50,7 +50,7 @@ router.post(
 // DELETE /api/comments/:commentId - DELETE A COMMENT
 router.delete(
   '/:commentId',
-  requireAuth,
+  requireAuthFast,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.commentId, 10);
     await Comment.destroy({ where: { id } });

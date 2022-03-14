@@ -47,7 +47,7 @@ a {
   text-decoration: none;
   color: white;
 }
-a:hover {
+a:hover:not(.header__logo)  {
   font-weight: 300;
 }
 

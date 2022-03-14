@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const { Song, User, Like, Comment } = require('../../db/models');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, requireAuthFast } = require('../../utils/auth');
 const { getTimeElapsed } = require('../../utils/utils');
 const { validateSong, validateSongEdit } = require('../../utils/validation');
 
@@ -56,7 +56,7 @@ router.get('/', asyncHandler(async (req, res) => {
 // POST /api/songs - CREATE A SONG
 router.post(
   '/',
-  requireAuth,
+  requireAuthFast,
   validateSong,
   asyncHandler(async (req, res) => {
     const userId = req.user.id
@@ -73,17 +73,17 @@ router.post(
 // PUT /api/songs/:songId - EDIT A SONG
 router.put(
   '/:songId',
-  requireAuth,
+  requireAuthFast,
   validateSongEdit,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.songId, 10);
-    const song = await Song.findByPk(id, {
+    const song = await Song.findByPk(id, /*{
       include: [
         { model: User, include: { model: Song } },
         { model: Like },
         { model: Comment }
       ],
-    });
+    }*/);
     song.set({ ...req.body });
     await song.save();
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
@@ -94,7 +94,7 @@ router.put(
 // DELETE /api/songs/:songId - DELETE A SONG
 router.delete(
   '/:songId(\\d+)',
-  requireAuth,
+  requireAuthFast,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.songId, 10);
     await Song.destroy({ where: { id } });

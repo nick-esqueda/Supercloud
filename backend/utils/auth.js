@@ -44,8 +44,8 @@ const restoreUser = (req, res, next) => {
       req.user = await User.scope('currentUser').findByPk(id, {
         include: [
           { model: Like, include: { model: Song, include: [{ model: User }, { model: Like }] } },
-          { model: Song, include: { model: Comment } },
-          { model: Comment, include: { model: Song } }
+          { model: Song, include: [{ model: Comment }, { model: User },  { model: Like }] },
+          { model: Comment, include: [{ model: Song }, { model: User }] }
         ],
         order: [[{ model: Like }, "createdAt", "DESC"]]
       });
@@ -76,4 +76,40 @@ const requireAuth = [
   }
 ];
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+const restoreUserFast = (req, res, next) => {
+  const { token } = req.cookies;
+
+  return jwt.verify(token, secret, null, async (err, jwtPayload) => {
+    if (err) {
+      return next();
+    }
+
+    try {
+      const { id } = jwtPayload.data;
+      req.user = await User.scope('currentUser').findByPk(id);
+    } catch (e) {
+      res.clearCookie('token');
+      return next();
+    }
+
+    if (!req.user) res.clearCookie('token');
+
+    return next();
+  });
+};
+
+const requireAuthFast = [
+  restoreUserFast,
+  function (req, _res, next) {
+    if (req.user) return next();
+
+    const err = new Error('Unauthorized');
+    err.title = 'Unauthorized';
+    err.errors = ['Unauthorized'];
+    err.status = 401;
+    return next(err);
+  }
+]
+
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, requireAuthFast };

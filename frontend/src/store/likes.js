@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 // ACTION VARIABLES ***************************************
 const LOAD_LIKES = 'likes/LOAD_LIKES';
 const LOAD_SONGS_LIKES = 'likes/LOAD_SONGS_LIKES'
+const LOAD_USERS_LIKES = 'likes/LOAD_USERS_LIKES'
 const ADD_LIKE = 'likes/ADD_LIKE';
 const REMOVE_LIKE = 'likes/REMOVE_LIKE';
 
@@ -18,6 +19,13 @@ const loadLikes = (likes) => {
 const loadSongsLikes = (likes) => {
   return {
     type: LOAD_SONGS_LIKES,
+    likes
+  }
+}
+
+const loadUsersLikes = (likes) => {
+  return {
+    type: LOAD_USERS_LIKES,
     likes
   }
 }
@@ -56,6 +64,17 @@ export const fetchSongsLikes = songId => async dispatch => {
   }
 }
 
+export const fetchUsersLikes = userId => async dispatch => {
+  const res = await fetch(`/api/users/${userId}/likes`);
+
+  if (res.ok) {
+    const likes = await res.json();
+    dispatch(loadUsersLikes(likes));
+    return likes;
+  }
+
+}
+
 export const postLike = (userId, songId) => async dispatch => {
   const res = await csrfFetch(`/api/likes`, {
     method: 'POST',
@@ -83,7 +102,7 @@ export const deleteLike = (userId, songId) => async dispatch => {
 
 
 // REDUCER ************************************************
-const initialState = { allLikes: {}, songsLikes: {}, usersLikes: {} }
+const initialState = { allLikes: {}, songsLikes: {}, usersLikes: {}, usersLikes2: [] }
 const likesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -91,32 +110,37 @@ const likesReducer = (state = initialState, action) => {
       const allLikes = {};
       const songsLikes = {};
       const usersLikes = {};
-      
+
       action.likes.forEach(like => {
         allLikes[like.id] = like;
-        
+
         if (!songsLikes[like.songId]) {
           songsLikes[like.songId] = [like];
         } else {
           songsLikes[like.songId].push(like);
         }
-        
+
         if (!usersLikes[like.userId]) {
           usersLikes[like.userId] = [like];
         } else {
           usersLikes[like.userId].push(like);
         }
-        
+
       });
       return { allLikes, songsLikes, usersLikes };
     }
 
     case LOAD_SONGS_LIKES: {
-      newState = { ...state }
+      newState = { ...state };
       action.likes.forEach(like => {
         newState.songsLikes[like.userId] = like;
       });
       return newState;
+    }
+
+    case LOAD_USERS_LIKES: {
+      const usersLikes2 = [...action.likes];
+      return { ...state, usersLikes2 };
     }
 
     case ADD_LIKE: {
@@ -124,37 +148,37 @@ const likesReducer = (state = initialState, action) => {
       const songsLikes = { ...state.songsLikes };
       const usersLikes = { ...state.usersLikes };
       const like = action.like;
-      
+
       allLikes[like.id] = like;
-      
+
       if (!songsLikes[like.songId]) {
         songsLikes[like.songId] = [like];
       } else {
         songsLikes[like.songId] = [...songsLikes[like.songId], like]
       }
-      
+
       if (!usersLikes[like.userId]) {
         usersLikes[like.userId] = [like];
       } else {
         usersLikes[like.userId] = [...usersLikes[like.userId], like];
       }
-      
+
       return { allLikes, songsLikes, usersLikes };
     }
 
     case REMOVE_LIKE: {
-      const newState = {...state};
+      const newState = { ...state };
       const songsLikes = { ...state.songsLikes };
       const usersLikes = { ...state.usersLikes };
-      
+
       delete newState.allLikes[action.like.id];
-      
+
       const newSongsLikes = songsLikes[action.like.songId].filter(like => like.id !== action.like.id);
       songsLikes[action.like.songId] = newSongsLikes;
-      
+
       const newUsersLikes = usersLikes[action.like.userId].filter(like => like.id !== action.like.id);
       usersLikes[action.like.userId] = newUsersLikes;
-      
+
       return { ...newState, songsLikes, usersLikes };
     }
 

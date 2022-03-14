@@ -15,7 +15,7 @@ export default function SongCardSmall({ song }) {
       <NavLink to={`/songs/${song.id}`}>
         <img src={song.artworkURL
           ? song.artworkURL
-          : "https://images.unsplash.com/photo-1477233534935-f5e6fe7c1159?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bXVzaWN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+          : "https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGdyYWRpZW50fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
         }
           alt="artwork"
         />
@@ -23,8 +23,6 @@ export default function SongCardSmall({ song }) {
 
       <div className='song_card_small__content'>
         <div className='song_card_small__top'>
-          {/* <div className='top__play'></div> */}
-
           <div className='top__title_artist'>
             <NavLink to={`/users/${song.User.id}`}>
               <span style={{ color: '#b3b3b3' }}>{song.User.username}</span>

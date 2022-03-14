@@ -1,0 +1,69 @@
+.profile_body_container {
+  width: 100%;
+  padding: 0 16px;
+  min-height: 400px;
+  
+}
+
+
+/* TABS *************************************************/
+
+.profile__tabs {
+  border-bottom: 1px solid #535353;
+  
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 46px;
+}
+
+.tab {
+  width: 100px;
+  height: 50px;
+  border-bottom: 2px solid transparent;
+  border-bottom-color: transparent;
+  
+  cursor: pointer;
+  
+  position: relative;
+  top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .4s, border-bottom-color .2s;
+}
+
+.active_tab {
+  border-bottom: 2px solid #FFFF5D;
+  color: #FFFF5D;
+  transition: color .4s, border-bottom-color .2s;
+}
+
+.active_content { display: block }
+.inactive.content { display: none }
+.content {
+  margin-top: 16px; 
+  padding: 16px 0;
+  width: 100%;
+  height: 100%;
+}
+
+.likes_tab {
+  max-width: 864px;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 280px);
+  justify-items: center;
+}
+
+.comments_tab > * {
+   padding: 8px;
+   
+   display: flex;
+   align-items: center;
+}

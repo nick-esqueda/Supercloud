@@ -2,6 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 
 const Sequelize = require('sequelize');
+const { getTimeElapsed } = require('../../utils/utils');
 const Op = Sequelize.Op;
 const { User, Song, Comment, Like } = require('../../db/models');
 const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
@@ -23,16 +24,35 @@ router.get(
 
 // GET /api/users/:userId - GET AN ARTIST
 router.get(
-  '/:userId',
+  '/:userId(\\d+)',
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.userId, 10);
     const artist = await User.findByPk(id, {
-      include: [{
-        model: Song, include: [{ model: User }, { model: Comment }, { model: Like }]
-      }]
+      include: [
+        { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
+        { model: Like, include: [{ model: User }, { model: Song, include: { model: User } }] },
+        { model: Comment, include: [{ model: User }, { model: Song }] }
+      ]
     });
-    
+    artist.Comments.forEach(comment => {
+      comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
+    })
     return res.json(artist);
+  })
+)
+
+// GET api/users/:userId/likes - GET A USER'S LIKES
+router.get(
+  '/:userId(\\d+)/likes',
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.userId, 10);
+    const likes = await Like.findAll({
+      where: { userId },
+      include: [{ model: Song, include: { model: User } }],
+      order: [["createdAt", "DESC"]]
+    })
+    
+    return res.json(likes);
   })
 )
 
