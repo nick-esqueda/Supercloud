@@ -34,6 +34,10 @@ function LoginForm() {
 
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     await dispatch(loginUser({ credential, password }))
+      .then(res => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        return history.push('/');
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -41,14 +45,17 @@ function LoginForm() {
           setShowErrors(true);
         }
       });
-    history.push('/');
   }
 
-  const demoLogin = async (e) => {
+  const demoLogin = (e) => {
     setCredential('Demo User');
     setPassword('password');
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    await dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
+    dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
+      .then(res => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        return history.push('/');
+      })
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
@@ -56,7 +63,6 @@ function LoginForm() {
           setShowErrors(true);
         }
       });
-    history.push('/');
   }
 
   return (
@@ -79,6 +85,7 @@ function LoginForm() {
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             style={showErrors && validationErrors.includes('please enter your username or email') ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
+            maxLength={256}
           />
         </div>
 
@@ -107,9 +114,9 @@ function LoginForm() {
         ))}
       </ul>
 
-      <small className="login__bottom">
-        bruh
-      </small>
+      <a href='https://github.com/nick-esqueda/supercloud' className="login__bottom">
+        JavaScript | Node.js | Express.js | React.js | Redux | PostgreSQL Sequelize | HTML | CSS | Git | AWS S3
+      </a>
     </div>
   );
 }

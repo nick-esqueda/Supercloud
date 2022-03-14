@@ -1,6 +1,6 @@
 .login_container {
   display: grid;
-  grid-template-rows: 100px 200px 250px 50px;
+  grid-template-rows: 100px 200px 250px 64px;
   grid-template-columns: 42% 56%;
   column-gap: 2%;
   grid-template-areas:
@@ -52,10 +52,17 @@
 
 .login__bottom {
   grid-area: bottom;
+  
+  width: 460px;
   margin: 16px 0 0;
   padding: 10px;
   border-top: 1px solid #535353;
+  
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: #b3b3b3;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }

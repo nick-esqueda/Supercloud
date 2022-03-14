@@ -46,7 +46,6 @@ function ProfileNavButton({ user }) {
         alt="profile-picture"
         className="header__userPfp"
       />
-      {/* TODO: FIX OVERFLOW FOR LONG USERNAMES */}
       <span className="header__username">{user.username}</span>
       {showMenu && (
         <ul className="profile_nav_dropdown">

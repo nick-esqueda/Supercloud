@@ -17,6 +17,14 @@ router.post(
 
     const userLogin = await User.login({ credential, password });
     
+    if (!userLogin) {
+      const err = new Error('Login failed');
+      err.status = 401;
+      err.title = 'Login failed';
+      err.errors = ["your info didn't match an account"];
+      return next(err);
+    }
+    
     const user = await User.findByPk(userLogin.id, {
       include: [
         { model: Like, include: { model: Song, include: [{ model: User }, { model: Like }] } },
@@ -25,14 +33,6 @@ router.post(
       ],
       order: [[{ model: Like }, "createdAt", "DESC"]]
     })
-
-    if (!user) {
-      const err = new Error('Login failed');
-      err.status = 401;
-      err.title = 'Login failed';
-      err.errors = ["your info didn't match an account"];
-      return next(err);
-    }
 
     // setTokenCookie from the walk-through isn't async... should it be?
     // seems to work without async
