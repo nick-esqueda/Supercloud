@@ -39,7 +39,7 @@ export default function SongPage() {
     return window.location.reload();
   }
   
-  return !isLoaded ? <h2>loading...</h2> : (
+  return !isLoaded ? <h2 id='loading'>loading...</h2> : (
     <>
       <div className='song_header'>
         <Header song={song} />
@@ -59,7 +59,7 @@ export default function SongPage() {
             {song?.description}
           </div>
           <div className='song__comments'>
-            {!comments ? <h4>loading comments...</h4> : (
+            {!comments ? <h4 id='loading'>loading comments...</h4> : (
               <CommentSection comments={Object.values(comments)} />
             )}
           </div>
