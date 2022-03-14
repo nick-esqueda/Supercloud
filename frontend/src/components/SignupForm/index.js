@@ -46,6 +46,10 @@ function SignupForm() {
       setValidationErrors([]);
 
       dispatch(signupUser({ email, username, password }))
+        .then(res => {
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          return history.push('/');
+        })
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {
@@ -53,8 +57,6 @@ function SignupForm() {
             setShowErrors(true);
           }
         });
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      return history.push('/');
     } else {
       setShowErrors(true);
       return setValidationErrors(['passwords must match']);
