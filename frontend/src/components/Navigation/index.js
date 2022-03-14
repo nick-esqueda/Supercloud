@@ -77,26 +77,31 @@ const Navigation = () => {
               activeStyle={{ backgroundColor: '#111213' }}>
               home
             </NavLink>
-            
+
             <NavLink exact to={user ? `/users/${user.id}` : `/splash`} activeStyle={user ? { backgroundColor: '#111213' } : null}
-              onClick={user ? () => setActiveTab(2) : () => window.alert('You must be logged in first to see your likes.')}
-            >likes</NavLink>
-            <a style={{ cursor: 'pointer' }}
-              onClick={() => alert('Sorry! This feature is currently under construction')}
-            >random</a>
-          </nav>
-        </div>
-
-        <div className="header__middle">
-          <Search />
-        </div>
-
-        <div className="header__right flexRow">
-          {sessionLinks}
-        </div>
-
+              onClick={user
+                ? () => {
+                  setActiveTab(2);
+                  window.scrollTo(0, 310);
+                }
+                : () => window.alert('You must be logged in first to see your likes.')}
+            > likes</NavLink>
+          <a style={{ cursor: 'pointer' }}
+            onClick={() => alert('Sorry! This feature is currently under construction')}
+          >random</a>
+        </nav>
       </div>
+
+      <div className="header__middle">
+        <Search />
+      </div>
+
+      <div className="header__right flexRow">
+        {sessionLinks}
+      </div>
+
     </div>
+    </div >
   );
 };
 

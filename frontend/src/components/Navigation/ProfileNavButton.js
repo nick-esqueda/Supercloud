@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from "react-router-dom";
+import { useProfileTab } from "../../Context/ProfileTabContext";
 import { logoutUser } from '../../store/session';
 
 function ProfileNavButton({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { setActiveTab } = useProfileTab();
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -32,7 +34,7 @@ function ProfileNavButton({ user }) {
   const logout = (e) => {
     if (window.confirm('Are you sure you want to log out?')) {
       dispatch(logoutUser());
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       return history.push('/splash');
     }
   };
@@ -57,19 +59,14 @@ function ProfileNavButton({ user }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to={`/users/${user.id}/likes`} onClick={() => window.scrollTo(0, 0)}>
+            <NavLink to={`/users/${user.id}`} onClick={() => {
+              setActiveTab(2);
+              window.scrollTo(0, 310);
+            }}>
               <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEwLjgwNSAzQzguNzg1IDMgOCA1LjM0NSA4IDUuMzQ1UzcuMjE0IDMgNS4xOTcgM0MzLjQ5NCAzIDEuNzQ4IDQuMDk2IDIuMDMgNi41MTRjLjM0NCAyLjk1MyA1LjcyNSA2LjQ4IDUuOTYzIDYuNDg3LjIzOC4wMSA1LjczOC0zLjcyIDUuOTg4LTYuNS4yMDgtMi4zLTEuNDczLTMuNS0zLjE3NS0zLjV6Ii8+Cjwvc3ZnPgo="
                 style={{ marginRight: '12px', transform: 'scale(1.2)' }}
               />
               likes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={`/users/${user.id}/playlists`} onClick={() => window.scrollTo(0, 0)}>
-              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTIgNmgxMHYxMEgyeiIvPgogICAgICAgIDxwYXRoIGZpbGwtb3BhY2l0eT0iLjciIGQ9Ik01IDJoMTF2MTBoLTJWNEg1eiIvPgogICAgPC9nPgo8L3N2Zz4K"
-                style={{ marginRight: '10px', transform: 'scale(1.0)' }}
-              />
-              playlists
             </NavLink>
           </li>
           <li onClick={logout}>
