@@ -24,7 +24,7 @@ export default function Search() {
   const allSongs = useSelector(state => state.songs.popularSongs);
   const dbQueryResults = useSelector(state => state.search);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(!allSongs.length ? [] : allSongs);
   const [showMenu, setShowMenu] = useState(false);
   
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Search() {
         const dbResults = await dispatch(fetchQuery(query));
         const fuse = new Fuse(dbResults, options);
         const fuseResults = fuse.search(query);
-        setResults(fuseResults.concat(allSongs));
+        setResults(fuseResults);
       }, 400);
       
     } else {
@@ -87,7 +87,7 @@ export default function Search() {
             <NavLink to={`/search/${query}`} id="search_message">press enter to search for "{query}"...</NavLink>
             {results.map((result, i) => (
               <li key={i}>
-                <NavLink to={`/songs/${result.item.id}`}>
+                <NavLink to={`/songs/${result?.item?.id}`}>
                   <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
                   {result.item.title}
                   <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {result.item?.User?.username}</span>
