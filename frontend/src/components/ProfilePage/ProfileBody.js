@@ -37,7 +37,7 @@ export default function ProfileBody({ user }) {
       <div
         className={activeTab === 1 ? 'active_content content songs_tab' : 'inactive content songs_tab'}
       >
-        {!user.Songs.length ? (<h2 style={{ color: '#535353' }}>this user doesn't have any songs yet.</h2>)
+        {!user.Songs.length ? (<h2 style={{ color: '#535353' }}>this user doesn't have any songs.</h2>)
           :
           user.Songs.map(song => (
             <SongCard key={song.id} song={song} user={user} />

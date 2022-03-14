@@ -122,7 +122,8 @@ export default function Actions({ song, user }) {
                 if (window.confirm(`Are you sure you want to delete your song? This cannot be undone`)) {
                   if (window.confirm(`This is a double check - clicking "OK" will delete your song permanently`)) {
                     dispatch(deleteSong(song.id));
-                    return history.push('/');
+                    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+                    return history.push(`/`);
                   }
                 }
               }}

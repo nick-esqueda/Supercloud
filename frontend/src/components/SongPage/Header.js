@@ -59,12 +59,12 @@ export default function Header({ song }) {
           ></div>
           <div className="song_header__song">
             <h2>{song.title}</h2>
-            <NavLink to={'/artist-link-here'}>{song.User.username}</NavLink>
+            <NavLink to={`/users/${song.User.id}`}>{song.User.username}</NavLink>
           </div>
         </div>
         <div className="song_header__top_right">
           <span>{song.createdAt}</span>
-          <span className='genre'>{song.genre}</span>
+          {song.genre && (<span className='genre'>{song.genre}</span>)}
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import AudioPlayer from 'react-h5-audio-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import { useEffect, useState } from 'react';
-import { editSong } from '../../store/songs';
+import { editSong, editSongPlays } from '../../store/songs';
 import './Player.css';
 
 export default function Player() {
@@ -20,7 +20,7 @@ export default function Player() {
     clearTimeout(timer);
     setTimer(setTimeout(() => {
       song.plays++;
-      dispatch(editSong(song));
+      dispatch(editSongPlays(song));
     }, 5000))
 
     setPaused(false);

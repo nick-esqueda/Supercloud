@@ -31,7 +31,7 @@ export default function ProfilePage() {
   }, [dispatch, userId]);
 
 
-  return !artist ? <h2>loading...</h2> : (
+  return !artist ? <h2 id="loading">loading...</h2> : (
     <div id='profile_page'>
       <div className="profile__header">
         <div className="profile_header__banner">

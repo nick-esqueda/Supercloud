@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { loadingBarReducer } from 'react-redux-loading-bar';
 import thunk from 'redux-thunk';
 import artistsReducer from './artists';
 import commentsReducer from './comments';
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   comments: commentsReducer,
   artists: artistsReducer,
   search: searchReducer,
+  loadingBar: loadingBarReducer
 });
 
 let enhancer;

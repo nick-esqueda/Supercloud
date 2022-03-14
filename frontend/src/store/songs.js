@@ -104,6 +104,19 @@ export const editSong = song => async dispatch => {
   }
 }
 
+export const editSongPlays = song => async dispatch => {
+  const res = await csrfFetch(`/api/songs/${song.id}/plays`, {
+    method: "PUT",
+    body: JSON.stringify(song)
+  });
+
+  if (res.ok) {
+    const editedSong = await res.json();
+    dispatch(addSong(editedSong));
+    return editedSong;
+  }
+}
+
 export const deleteSong = id => async dispatch => {
   const res = await csrfFetch(`/api/songs/${id}`, {
     method: 'DELETE',

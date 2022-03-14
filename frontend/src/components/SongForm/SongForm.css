@@ -6,8 +6,18 @@
   padding: 16px;
 
   box-shadow: 8px 8px #535353;
+  
+  position: relative;
 }
-.form_container h2 {
+.upload_form_container {
+  width: 774px;
+  margin: 0 auto;
+  padding: 16px;
+
+  position: relative;
+}
+.form_container h2,
+.upload_form_container h2 {
   max-width: 700px;
   
   box-sizing: content-box;

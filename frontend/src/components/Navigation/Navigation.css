@@ -144,6 +144,9 @@ nav a:hover {
   width: 110px;
   position: relative;
   text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .login_signup_btn_container {

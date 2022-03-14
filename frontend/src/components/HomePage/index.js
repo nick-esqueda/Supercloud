@@ -68,7 +68,7 @@ export default function HomePage() {
   }, [isLoaded]);
 
 
-  return !isLoaded || !isPopulated ? <h2 className='loading'>loading...</h2> : (
+  return !isLoaded || !isPopulated ? <h2 id='loading'>loading...</h2> : (
     <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
