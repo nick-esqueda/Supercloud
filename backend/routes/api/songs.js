@@ -87,7 +87,7 @@ router.put(
 
 // PUT /api/songs/:songId - EDIT A SONG
 router.put(
-  '/:songId/plays',
+  '/:songId',
   requireAuthFast,
   validateSongEdit,
   asyncHandler(async (req, res) => {
