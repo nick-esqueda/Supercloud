@@ -19,7 +19,7 @@ const Navigation = () => {
     sessionLinks = (
       <>
         <div className="header__upload">
-          <NavLink to="/upload" onClick={() => window.scrollTo({ top: 100, left: 100, behavior: 'smooth' })}
+          <NavLink to="/upload" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
           >upload</NavLink>
         </div>
 

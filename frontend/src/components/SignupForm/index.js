@@ -49,7 +49,7 @@ function SignupForm() {
 
       dispatch(showLoading())
       dispatch(signupUser({ email, username, password }))
-      .then(res => {
+        .then(res => {
           dispatch(hideLoading())
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           return history.push('/');

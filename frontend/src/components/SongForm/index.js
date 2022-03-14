@@ -62,18 +62,26 @@ export default function SongForm({ song, closeModal }) {
     if (inputName === 'song') return setSongURL(fileURL);
     if (inputName === 'artwork') return setArtworkURL(fileURL);
   }
-  
+
   // ON FORM SUBMISSION...
-  const onUploadSubmit = async (e) => {
+  const onUploadSubmit = (e) => {
     e.preventDefault();
     if (validationErrors.length) return setShowErrors(true);
-    
+
     const song = { songURL, artworkURL, title, genre, description, };
-    
-    const newSong = await dispatch(postSong(song));
-    
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    return history.push(`/songs/${newSong.id}`);
+
+    dispatch(postSong(song))
+      .then(async song => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        return history.push(`/songs/${song.id}`);
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setValidationErrors(data.errors);
+          setShowErrors(true);
+        }
+      });
   }
 
   const onEditSubmit = async (e) => {
@@ -90,9 +98,8 @@ export default function SongForm({ song, closeModal }) {
   // JSX ***************************************************************************
   return (
     <>
-
       <div className="form_container">
-        <LoadingBar style={{ backgroundColor: '#FFFF5D', height: '4px', maxWidth: '771px', position: 'absolute', bottom: '0', left: '0' }} updateTime={200} progressIncrease={5} maxProgress={95}  />
+        <LoadingBar style={{ backgroundColor: '#FFFF5D', height: '4px', maxWidth: '771px', position: 'absolute', bottom: '0', left: '0' }} updateTime={200} progressIncrease={5} maxProgress={95} />
         <h2>{!song ? 'upload your song' : title}</h2>
 
         <form onSubmit={!song ? onUploadSubmit : onEditSubmit} className="song_form">
@@ -148,6 +155,7 @@ export default function SongForm({ song, closeModal }) {
                   <span className="custom_file_text">
                     {customFileText}
                   </span>
+
                   <input type="file"
                     accept=".mp3, .wav"
                     name="song"
@@ -159,6 +167,7 @@ export default function SongForm({ song, closeModal }) {
                     }}
                   />
                 </div>
+                <small>*we are only accepting .mp3 and .wav formats at this time.</small>
               </div>
             }
 
@@ -182,7 +191,7 @@ export default function SongForm({ song, closeModal }) {
                   showErrors && (validationErrors.includes('please enter a title'))
                     ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
                 }
-
+                maxLength={255}
               />
             </div>
 
@@ -217,8 +226,9 @@ export default function SongForm({ song, closeModal }) {
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 className="form_input"
-                rows={8}
+                rows={30}
                 maxLength={500}
+                style={{ resize: "vertical" }}
               >
               </textarea>
             </div>
