@@ -18,8 +18,10 @@ const options = {
 }
 
 export default function SearchPage() {
-  const dispatch = useDispatch();
   const { query } = useParams();
+  const [route, setRoute] = useState(query);
+  
+  const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const searchResults = useSelector(state => state.search);
   const [sortedResults, setSortedResults] = useState([]);
@@ -34,7 +36,12 @@ export default function SearchPage() {
     const fuse = new Fuse(searchResults, options);
     const fuseResults = fuse.search(query);
     setSortedResults(fuseResults);
-  }, [searchResults])
+  }, [searchResults]);
+  
+  if (query !== route) {
+    setRoute(query);
+    return window.location.reload();
+  }
 
   return !searchResults ? <h2>sorry, we could't find anything that matches "{query}"</h2> : (
     <div className='search_page'>
