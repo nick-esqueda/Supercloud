@@ -175,8 +175,16 @@ const songsReducer = (state = initialState, action) => {
 
     case REMOVE_SONG: {
       newState = { ...state };
+      const oldRecentSongs = [...state.recentSongs];
+      const oldPopularSongs = [...state.popularSongs];
+      
       delete newState.songs[action.songId];
-      return newState;
+      
+      const recentSongs = oldRecentSongs.filter(song => song.id !== action.id);
+      
+      const popularSongs = oldPopularSongs.filter(song => song.id !== action.id);
+      
+      return { ...newState, recentSongs, popularSongs };
     }
 
     case SET_PLAYING: {
