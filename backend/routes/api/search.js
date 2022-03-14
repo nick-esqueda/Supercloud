@@ -41,8 +41,6 @@ router.get(
       limit: 30
     })
     
-    console.log(JSON.stringify(results, null, 2));
-
     return res.json(results);
   })
 )
