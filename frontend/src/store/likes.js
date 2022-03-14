@@ -165,9 +165,7 @@ const likesReducer = (state = initialState, action) => {
         usersLikes[like.userId] = [...usersLikes[like.userId], like];
       }
       
-      console.log('ACTION', action.like);
       const usersLikes2 = [ ...state.usersLikes2, action.like ];
-      console.log('USERS LIKES 2', usersLikes2);
 
       return { allLikes, songsLikes, usersLikes, usersLikes2 };
     }
