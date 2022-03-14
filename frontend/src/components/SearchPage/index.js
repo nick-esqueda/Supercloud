@@ -27,9 +27,7 @@ export default function SearchPage() {
   const [sortedResults, setSortedResults] = useState([]);
 
   useEffect(() => {
-    if (!searchResults.length) {
-      dispatch(fetchQuery(query));
-    }
+    dispatch(fetchQuery(query)); 
   }, [query])
   
   useEffect(() => {
