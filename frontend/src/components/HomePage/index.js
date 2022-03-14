@@ -97,24 +97,28 @@ export default function HomePage() {
       {!user.Likes || !user.Likes.length ? <h2 style={{ textAlign: 'right', color: '#b3b3b3', padding: '24px 0', margin: '16px 0', borderTop: '1px solid #535353' }}>browse around and like some songs to get some curated suggestions from us!</h2> : (
         <>
           <div className='badge_grid3h'>
-            <h2>popular favorites</h2>
-            <h4>songs you like that are on everybody's mind</h4>
-          </div>
-          <div className='badge_grid__g3'>
-            {usersPopularLikedSongs.map((song, i) => (
-              <SongBadge key={i} song={song} />
-            ))}
-          </div>
-
-          <div className='badge_grid4h'>
             <h2>artists you might like</h2>
             <h4>we've been digging your taste - here are some cool artists we found for you</h4>
           </div>
-          <div className='badge_grid__g4'>
+          <div className='badge_grid__g3'>
             {usersSuggestedArtists.map(artist => (
               <ArtistBadge key={artist?.id} artist={artists[artist.id]} />
             ))}
           </div>
+
+          {usersPopularLikedSongs[0] === undefined && usersPopularLikedSongs.length === 1 ? null : (
+            <>
+              <div className='badge_grid4h'>
+                <h2>popular favorites</h2>
+                <h4>songs you like that are on everybody's mind</h4>
+              </div>
+              <div className='badge_grid__g4'>
+                {usersPopularLikedSongs.map((song, i) => (
+                  <SongBadge key={i} song={song} />
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
 
