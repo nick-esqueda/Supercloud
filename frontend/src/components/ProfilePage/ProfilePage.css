@@ -90,7 +90,7 @@
 /* SIDEBAR **********************************************/
 .profile__sidebar .sidebar_container {
   width: 100%;
-  min-height: 400px;
+  /* min-height: 300px; */
   padding: 16px;
   border-left: 1px solid #535353;
   
@@ -98,4 +98,17 @@
 .profile__sidebar .sidebar_container h4 {
   padding: 8px 0;
   border-bottom: 1px solid #535353;
+}
+
+#sidebar_comments {
+  position: sticky;
+  top: 400px;
+  right: 0;
+}
+
+.line_clamp  {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }

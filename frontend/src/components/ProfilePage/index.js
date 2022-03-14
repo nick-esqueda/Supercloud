@@ -1,10 +1,11 @@
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { fetchArtist } from '../../store/artists';
 import { fetchUsersLikes } from '../../store/likes';
+import CommentCard from '../CommentCard';
 import SongCardSmall from '../SongCard/SongCardSmall';
 import ProfileBody from './ProfileBody';
 import './ProfilePage.css';
@@ -77,6 +78,25 @@ export default function ProfilePage() {
             ))}
           </ul>
         </div>
+        
+        <div className='sidebar_container' id='sidebar_comments'>
+          <h4 className='flexRowBetween'>
+            <div className='alignItems'>
+              <FontAwesomeIcon icon={faComment} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>
+              &nbsp;{artist.Comments.length === 1 ? `${artist.Comments.length} comment` : `${artist.Comments.length} comments`}
+            </div>
+
+            <NavLink to={`/users/${artist.id}/comments`} className="italic">view all</NavLink>
+          </h4>
+
+          <ul className="songs sidebar_comments" >
+            {artist.Comments.slice(0, 3).map((comment, i) => (
+              <li key={comment.id}><CommentCard comment={comment} on={comment.Song} /></li>
+            ))}
+          </ul>
+        </div>
+        
+        
       </div>
 
     </div>

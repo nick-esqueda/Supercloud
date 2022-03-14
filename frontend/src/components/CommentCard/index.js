@@ -60,7 +60,7 @@ export default function CommentCard({ comment, on }) {
           <span style={{ color: '#b3b3b3' }}>{comment.User.username}</span>
         }
 
-        <span>{comment.content}</span>
+        <span className={on ? "line_clamp" : ""}>{comment.content}</span>
       </div>
 
       {isHovered && comment.userId === user?.id

@@ -28,7 +28,7 @@ export default function ProfileBody({ user }) {
           <div
             className={activeTab === 3 ? 'tab active_tab' : 'tab'}
             onClick={() => setActiveTab(3)}
-          >cements</div>
+          >comments</div>
         }
       </div>
 
