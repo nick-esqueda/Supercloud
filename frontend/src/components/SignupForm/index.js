@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { loginUser, signupUser } from "../../store/session";
 import './SignupForm.css';
 
 function SignupForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
   const [demoUser, setDemoUser] = useState(false);
@@ -44,7 +45,7 @@ function SignupForm() {
     if (password === confirmPassword) {
       setValidationErrors([]);
 
-      return dispatch(signupUser({ email, username, password }))
+      dispatch(signupUser({ email, username, password }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {
@@ -52,6 +53,8 @@ function SignupForm() {
             setShowErrors(true);
           }
         });
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return history.push('/');
     } else {
       setShowErrors(true);
       return setValidationErrors(['passwords must match']);
@@ -92,7 +95,7 @@ function SignupForm() {
             maxLength={30}
             style={
               showErrors && (validationErrors.includes('please enter a username') || validationErrors.includes('username must be unique'))
-              ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
+                ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null
             }
 
           />
@@ -121,7 +124,7 @@ function SignupForm() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             style={
               showErrors && (validationErrors.includes('please confirm your password') || validationErrors.includes('passwords must match'))
-              ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
+                ? { borderColor: 'rgba(253, 69, 69, 0.829)' } : null}
           />
         </div>
 
