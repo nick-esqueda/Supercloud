@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
+import { useProfileTab } from '../../Context/ProfileTabContext';
 import { fetchArtist } from '../../store/artists';
 import { fetchUsersLikes } from '../../store/likes';
 import CommentCard from '../CommentCard';
@@ -12,6 +13,7 @@ import './ProfilePage.css';
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
+  const { setActiveTab } = useProfileTab();
   const { userId } = useParams();
   const sessionUser = useSelector(state => state.session.user);
   const [artist, setArtist] = useState('');
@@ -27,8 +29,8 @@ export default function ProfilePage() {
       })()
     }
   }, [dispatch]);
-  
-  
+
+
   return !artist ? <h2>loading...</h2> : (
     <div id='profile_page'>
       <div className="profile__header">
@@ -69,7 +71,10 @@ export default function ProfilePage() {
               &nbsp;{artist.Likes.length === 1 ? `${artist.Likes.length} like` : `${artist.Likes.length} likes`}
             </div>
 
-            <NavLink to={`/users/${artist.id}/likes`} className="italic">view all</NavLink>
+            <NavLink to={`/users/${artist.id}`}
+              className="italic"
+              onClick={() => setActiveTab(2)}
+            >view all</NavLink>
           </h4>
 
           <ul className="songs">
@@ -78,7 +83,7 @@ export default function ProfilePage() {
             ))}
           </ul>
         </div>
-        
+
         <div className='sidebar_container'>
           <h4 className='flexRowBetween'>
             <div className='alignItems'>
@@ -86,7 +91,10 @@ export default function ProfilePage() {
               &nbsp;{artist.Comments.length === 1 ? `${artist.Comments.length} comment` : `${artist.Comments.length} comments`}
             </div>
 
-            <NavLink to={`/users/${artist.id}/comments`} className="italic">view all</NavLink>
+            <NavLink to={`/users/${artist.id}`}
+              className="italic"
+              onClick={() => setActiveTab(3)}
+            >view all</NavLink>
           </h4>
 
           <ul className="songs sidebar_comments" >
@@ -95,8 +103,8 @@ export default function ProfilePage() {
             ))}
           </ul>
         </div>
-        
-        
+
+
       </div>
 
     </div>

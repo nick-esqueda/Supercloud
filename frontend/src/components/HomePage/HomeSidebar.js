@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
 import SongCardSmall from '../SongCard/SongCardSmall';
+import { useProfileTab } from '../../Context/ProfileTabContext';
 
 export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
+  const { setActiveTab } = useProfileTab();
+  
   return (
     <div className='home__sidebar'>
       <div className='greeting'>
@@ -16,7 +19,7 @@ export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
         <h3>in total since you joined.</h3>
 
         <NavLink to={`/users/${user.id}`} className='btn btn--primary--outline'
-          onClick={() => alert('Sorry! This feature is currently under construction')}
+          onClick={() => setActiveTab(1)}
         >view your profile</NavLink>
       </div>
 
@@ -28,7 +31,9 @@ export default function HomeSidebar({ user, usersPlayCount, usersLikedSongs }) {
             &nbsp;songs you liked
           </div>
 
-          <NavLink to={`/users/${user.id}/likes`} className="italic">view all</NavLink>
+          <NavLink to={`/users/${user.id}`} className="italic"
+            onClick={() => setActiveTab(2)}
+          >view all</NavLink>
         </h4>
 
         <ul className="songs">

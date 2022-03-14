@@ -8,8 +8,10 @@ import './Navigation.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Search from "../Search";
+import { useProfileTab } from "../../Context/ProfileTabContext";
 
 const Navigation = () => {
+  const { setActiveTab } = useProfileTab();
   const user = useSelector(state => state.session.user);
 
   let sessionLinks;
@@ -70,13 +72,13 @@ const Navigation = () => {
           >cloud</NavLink>
             
           <nav className="nav_links">
-            <NavLink to={user ? "/" : "/splash"} 
+            <NavLink exact to={user ? "/" : "/splash"} 
               onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
               activeStyle={{ backgroundColor: '#111213' }}>
                 home
             </NavLink>
-            <NavLink exact to="/likes" activeStyle={{ backgroundColor: '#111213' }}
-              onClick={() => alert('Sorry! This feature is currently under construction')}
+            <NavLink exact to={`/users/${user.id}`} activeStyle={{ backgroundColor: '#111213' }}
+              onClick={() => setActiveTab(2)}
             >likes</NavLink>
             <NavLink exact to="/random" activeStyle={{ backgroundColor: '#111213' }}
               onClick={() => alert('Sorry! This feature is currently under construction')}

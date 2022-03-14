@@ -4,9 +4,10 @@ import SongCard from '../SongCard';
 import SongBadge from '../SongBadge/SongBadge';
 import CommentCard from '../CommentCard'
 import './ProfileBody.css';
+import { useProfileTab } from '../../Context/ProfileTabContext';
 
 export default function ProfileBody({ user }) {
-  const [activeTab, setActiveTab] = useState(1);
+  const { activeTab, setActiveTab } = useProfileTab();
   const usersLikes = useSelector(state => state.likes.usersLikes2);
 
   return (
@@ -47,7 +48,7 @@ export default function ProfileBody({ user }) {
       <div
         className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'}
       >
-        {!user.Likes.lenth ? (<h2 style={{ color: '#535353', width: '840px' }}>this user hasn't liked anything yet.</h2>)
+        {!user.Likes.length ? (<h2 style={{ color: '#535353', width: '840px' }}>this user hasn't liked anything yet.</h2>)
           :
           usersLikes.map(like => (
             <SongBadge key={like.id} song={like.Song} artist={user} />
