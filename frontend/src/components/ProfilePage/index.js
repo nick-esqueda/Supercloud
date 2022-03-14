@@ -78,8 +78,9 @@ export default function ProfilePage() {
           </h4>
 
           <ul className="songs">
+            {/* THIS MAP IS RETURNING DUPLICATES SOMETIMES, WHY? */}
             {artist.Likes.slice(0, 3).map((like, i) => (
-              <li key={like.Song.id}><SongCardSmall song={like.Song} /></li>
+              <li key={i}><SongCardSmall song={like.Song} /></li>
             ))}
           </ul>
         </div>
@@ -99,7 +100,7 @@ export default function ProfilePage() {
 
           <ul className="songs sidebar_comments" >
             {artist.Comments.slice(0, 3).map((comment, i) => (
-              <li key={comment.id}><CommentCard comment={comment} on={comment.Song} /></li>
+              <li key={i}><CommentCard comment={comment} on={comment.Song} /></li>
             ))}
           </ul>
         </div>

@@ -15,7 +15,7 @@ export default function Sidebar({ artist }) {
         />
         &nbsp;more songs by the artist
         
-        <NavLink to={'/link-to-artist-page-songs-tab'} 
+        <NavLink to={`/users/${artist.id}`} 
           style={{ position: 'absolute', right: '0', bottom: '6px' }}
         >view all</NavLink>
       </span>

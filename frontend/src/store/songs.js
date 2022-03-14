@@ -169,7 +169,6 @@ const songsReducer = (state = initialState, action) => {
 
     case SET_PLAYING: {
       newState = { ...state };
-      console.log('akjsdfliwuaerbrjewnhivbsfk',action.song);
       newState.playing = action.song;
       return newState;
     }

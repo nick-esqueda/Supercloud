@@ -18,8 +18,7 @@ export default function SplashPage() {
     })()
   }, [dispatch]);
 
-  console.log(popularSongs);
-
+  
   return (
     <div className='splash_container'>
       <div className='splash_header'>
