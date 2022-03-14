@@ -1,7 +1,7 @@
 .signup_container {
   display: grid;
   grid-template-rows: 100px 320px 180px 60px;
-  grid-template-columns: 56% 42%;
+  grid-template-columns: 360px 320px;
   column-gap: 2%;
   grid-template-areas:
   "top top"
@@ -23,7 +23,7 @@
 
 .signup_image {
   grid-area: right;
-  width: 100%;
+  width: 300px;
   height: 100%;
 
   object-fit: cover;
