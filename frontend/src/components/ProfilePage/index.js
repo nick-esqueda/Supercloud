@@ -57,11 +57,11 @@ export default function ProfilePage() {
       </div>
 
 
-      <div className='profile__body'>
+      <div className='profile__body' >
         <ProfileBody user={artist} />
       </div>
 
-      <div className='profile__sidebar'>
+      <div className='profile__sidebar' id='profile_sidebar'>
         <div className='sidebar_container'>
           <h4 className='flexRowBetween'>
             <div className='alignItems'>
@@ -79,7 +79,7 @@ export default function ProfilePage() {
           </ul>
         </div>
         
-        <div className='sidebar_container' id='sidebar_comments'>
+        <div className='sidebar_container'>
           <h4 className='flexRowBetween'>
             <div className='alignItems'>
               <FontAwesomeIcon icon={faComment} style={{ color: '#b3b3b3', transform: 'scale(1.2)', position: 'relative', }}></FontAwesomeIcon>

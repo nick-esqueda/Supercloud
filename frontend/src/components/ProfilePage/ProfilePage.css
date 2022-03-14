@@ -76,7 +76,6 @@
   text-align: left;
   
   background-color: #212121;
-  
 }
 
 
@@ -90,7 +89,6 @@
 /* SIDEBAR **********************************************/
 .profile__sidebar .sidebar_container {
   width: 100%;
-  /* min-height: 300px; */
   padding: 16px;
   border-left: 1px solid #535353;
   
@@ -100,9 +98,12 @@
   border-bottom: 1px solid #535353;
 }
 
-#sidebar_comments {
+
+#profile_sidebar {
+  /* this is too small but allows position sticky to work, overflow is okay */
+  height: 50px;
   position: sticky;
-  top: 400px;
+  top: 50px;
   right: 0;
 }
 
