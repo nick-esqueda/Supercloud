@@ -46,6 +46,11 @@
   align-items: center;
   justify-content: flex-start;
 }
+#search_message:hover {
+  background: #FFFF5D;
+  color: black;
+  font-weight: 500;
+}
 
 
 .search_filter li {

@@ -34,15 +34,13 @@ router.get(
           }
         ]
       },
-      include: { model: User, },
+      include: [{ model: User, }, { model: Like, duplicating: false }],
       order: [
         ["title"],
       ],
       limit: 30
     })
     
-    console.log(JSON.stringify(results, null, 2));
-
     return res.json(results);
   })
 )

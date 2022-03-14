@@ -38,7 +38,7 @@ function App() {
               <SearchPage />
             </Route>
 
-            <Route exact path="/songs/:songId(\d+)">
+            <Route exact path="/songs/:songId(\d+)" /* component={() => <SongPage />} */>
               <SongPage />
             </Route>
 

@@ -16,11 +16,12 @@ export default function SongCard({ song, user }) {
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const playingSong = useSelector(state => state.songs.playing);
   // REFACTOR LIKES TO JUST USE THE ASSOCIATED DATA OF "SONG"
+  // ALSO REFACTOR TO USE A USEEFFECT
   const songsLikes = useSelector(state => state.likes.songsLikes[song.id]);
   const isLiked = songsLikes?.find(like => like.userId === user?.id);
   const likeCount = !songsLikes ? 0 : songsLikes.length;
   const commentCount = !song.Comments ? 0 : song.Comments.length;
-  const isArtist = song.User.id === user?.id;
+  const isArtist = song?.User?.id === user?.id;
   const createdAt = getTimeElapsed(song.createdAt);
   const [tick, setTick] = useState(+(song.createdAt.split(' ')[0]) + 1);
   
@@ -67,7 +68,7 @@ export default function SongCard({ song, user }) {
     dispatch(deleteLike(user.id, song.id));
   }
 
-  return (
+  return !song ? null : (
     <div className='song_card_container'>
       <NavLink to={`/songs/${song?.id}`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})}>
         <img src={song?.artworkURL
