@@ -60,7 +60,7 @@ function App() {
             </Route>
 
             <Route>
-              <h2>sorry! we couldn't find the page you were looking for</h2>
+              <h2>sorry! we couldn't find the page you were looking for.</h2>
             </Route>
           </Switch>
         </HeaderFooter>

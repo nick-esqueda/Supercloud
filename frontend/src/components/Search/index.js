@@ -61,6 +61,7 @@ export default function Search() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (!query) return;
     setShowMenu(false);
     return history.push(`/search/${query}`)
   }
@@ -84,7 +85,7 @@ export default function Search() {
       {showMenu && (
         <div id="search_bg" onClick={closeMenu}>
           <ul className='search_filter' onClick={closeMenu}>
-            <NavLink to={`/search/${query}`} id="search_message">press enter to search for "{query}"...</NavLink>
+            <div style={{ cursor: 'pointer' }} onClick={onSubmit} id="search_message">press enter to search for "{query}"...</div>
             {results.map((result, i) => (
               <li key={i}>
                 <NavLink to={`/songs/${result?.item?.id}`}>
