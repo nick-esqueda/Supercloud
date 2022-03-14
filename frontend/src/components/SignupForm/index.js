@@ -38,8 +38,15 @@ function SignupForm() {
     e.preventDefault();
 
     if (demoUser) {
+      dispatch(showLoading())
       setDemoUser(false);
-      return dispatch(loginUser({ credential: 'Demo User', password: 'password' }));
+      dispatch(loginUser({ credential: 'Demo User', password: 'password' }))
+        .then(() => {
+          dispatch(hideLoading())
+          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          return history.push('/');
+        });
+      return;
     }
 
     if (validationErrors.length) return setShowErrors(true);
