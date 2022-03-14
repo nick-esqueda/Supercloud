@@ -28,7 +28,7 @@ export default function ProfilePage() {
         setArtist(artist);
       })()
     }
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
 
   return !artist ? <h2>loading...</h2> : (

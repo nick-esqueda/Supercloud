@@ -14,13 +14,15 @@ import './SongPage.css'
 
 export default function SongPage() {
   const { songId } = useParams();
+  const [route, setRoute] = useState(songId);
+
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const song = useSelector(state => state.songs.songs)[songId];
   const comments = useSelector(state => state.comments);
   const [isLoaded, setIsLoaded] = useState(false);
   const [artist, setArtist] = useState('');
-
+  
   useEffect(() => {
     (async () => {
       const song = await dispatch(fetchSong(songId));
@@ -30,8 +32,13 @@ export default function SongPage() {
       setArtist(artist);
       setIsLoaded(true);
     })();
-  }, [dispatch]);
-
+  }, [dispatch, songId]);
+  
+  if (songId !== route) {
+    setRoute(songId);
+    return window.location.reload();
+  }
+  
   return !isLoaded ? <h2>loading...</h2> : (
     <>
       <div className='song_header'>
