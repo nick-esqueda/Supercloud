@@ -89,16 +89,26 @@ export default function SongForm({ song, closeModal }) {
     if (validationErrors.length) return setShowErrors(true);
 
     const editedSong = { ...song, artworkURL, title, genre, description };
-    dispatch(editSong(editedSong));
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    return closeModal();
+    dispatch(editSong(editedSong))
+      .then(async song => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        closeModal();
+        return history.push(`/songs/${song.id}`);
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setValidationErrors(data.errors);
+          setShowErrors(true);
+        }
+      });
   }
 
 
   // JSX ***************************************************************************
   return (
     <>
-      <div className="form_container">
+      <div className={!song ? "form_container" : "upload_form_container"}>
         <LoadingBar style={{ backgroundColor: '#FFFF5D', height: '4px', maxWidth: '771px', position: 'absolute', bottom: '0', left: '0' }} updateTime={200} progressIncrease={5} maxProgress={95} />
         <h2>{!song ? 'upload your song' : title}</h2>
 

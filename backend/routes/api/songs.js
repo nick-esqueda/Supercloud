@@ -70,20 +70,35 @@ router.post(
   })
 )
 
-// PUT /api/songs/:songId - EDIT A SONG
+// PUT /api/songs/:songId/plays - INCREMENT A SONG'S PLAYS
 router.put(
-  '/:songId',
+  '/:songId/plays',
   requireAuthFast,
   validateSongEdit,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.songId, 10);
-    const song = await Song.findByPk(id, /*{
+    const song = await Song.findByPk(id);
+    song.set({ ...req.body });
+    await song.save();
+    song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+    return res.json(song);
+  })
+)
+
+// PUT /api/songs/:songId - EDIT A SONG
+router.put(
+  '/:songId/plays',
+  requireAuthFast,
+  validateSongEdit,
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.songId, 10);
+    const song = await Song.findByPk(id, {
       include: [
         { model: User, include: { model: Song } },
         { model: Like },
         { model: Comment }
       ],
-    }*/);
+    });
     song.set({ ...req.body });
     await song.save();
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
