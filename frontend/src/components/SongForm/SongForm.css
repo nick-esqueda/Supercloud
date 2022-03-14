@@ -6,6 +6,8 @@
   padding: 16px;
 
   box-shadow: 8px 8px #535353;
+  
+  position: relative;
 }
 .form_container h2 {
   max-width: 700px;

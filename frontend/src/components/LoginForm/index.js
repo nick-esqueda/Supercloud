@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { loginUser } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import LoadingBar, { showLoading, hideLoading } from 'react-redux-loading-bar'
+import LoadingBar, { showLoading, hideLoading } from 'react-redux-loading-bar';
 import './LoginForm.css';
 
 function LoginForm() {

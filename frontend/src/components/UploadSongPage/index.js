@@ -11,7 +11,7 @@ export default function UploadSongPage() {
   
   return user && (
     <div className='upload_page'>
-      <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
+      <h1 style={{ textAlign: 'left', width: '60%'  }}><span style={{ color: '#FFFF5D', }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 
       <SongForm />
     </div>
