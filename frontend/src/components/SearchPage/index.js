@@ -61,8 +61,9 @@ export default function SearchPage() {
         </div>
 
         <ul className='search__body'>
-          {sortedResults.slice(0, 20).map(result => (
-            <SongCard key={result.item.id} song={result.item} user={user} />
+          {sortedResults.slice(0, 20).map((result, i) => (
+            // REFACTOR: make search results unique and use result.item.id for key prop
+            <SongCard key={i} song={result.item} user={user} />
           ))}
         </ul>
       </div>

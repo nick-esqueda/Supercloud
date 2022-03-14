@@ -34,7 +34,7 @@ router.get(
           }
         ]
       },
-      include: { model: User, },
+      include: [{ model: User, }, { model: Like, duplicating: false }],
       order: [
         ["title"],
       ],
