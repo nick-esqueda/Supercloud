@@ -139,7 +139,19 @@ const songsReducer = (state = initialState, action) => {
     case ADD_SONG: {
       const songs = { ...state.songs };
       songs[action.song.id] = action.song;
-      return { ...state, songs };
+
+      // const oldRecentSongs = [...state.recentSongs];
+      // const oldPopularSongs = [...state.popularSongs];
+
+      // const recentSongs = oldRecentSongs.map(song => {
+      //   if (song.id === action.song.id) return action.song;
+      // });
+
+      // const popularSongs = oldPopularSongs.map(song => {
+      //   if (song.id === action.song.id) return action.song;
+      // });
+
+    return { ...state, songs, /*recentSongs, popularSongs*/ };
     }
 
     case ADD_SONGS: {
@@ -149,16 +161,16 @@ const songsReducer = (state = initialState, action) => {
       });
       return { ...state, songs };
     }
-    
+
     case ADD_POPULAR_SONGS: {
       const popularSongs = [...action.songs];
       return { ...state, popularSongs }
     }
-    
+
     case ADD_RECENT_SONGS: {
       const recentSongs = [...action.songs];
       return { ...state, recentSongs }
-      
+
     }
 
     case REMOVE_SONG: {
