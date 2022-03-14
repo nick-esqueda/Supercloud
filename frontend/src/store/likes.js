@@ -162,14 +162,17 @@ const likesReducer = (state = initialState, action) => {
       } else {
         usersLikes[like.userId] = [...usersLikes[like.userId], like];
       }
+      
+      const usersLikes2 = [ ...state.usersLikes2, action.like ];
 
-      return { allLikes, songsLikes, usersLikes };
+      return { allLikes, songsLikes, usersLikes, usersLikes2 };
     }
 
     case REMOVE_LIKE: {
       const newState = { ...state };
       const songsLikes = { ...state.songsLikes };
       const usersLikes = { ...state.usersLikes };
+      const oldUsersLikes2 = [ ...state.usersLikes2 ];
 
       delete newState.allLikes[action.like.id];
 
@@ -179,7 +182,9 @@ const likesReducer = (state = initialState, action) => {
       const newUsersLikes = usersLikes[action.like.userId].filter(like => like.id !== action.like.id);
       usersLikes[action.like.userId] = newUsersLikes;
 
-      return { ...newState, songsLikes, usersLikes };
+      const usersLikes2 = oldUsersLikes2.filter(like => like.id !== action.like.id);
+      
+      return { ...newState, songsLikes, usersLikes, usersLikes2 };
     }
 
     default: {
