@@ -40,7 +40,7 @@ export default function ProfileBody({ user }) {
         {!user.Songs.length ? (<h2 style={{ color: '#535353' }}>this user doesn't have any songs.</h2>)
           :
           user.Songs.map(song => (
-            <SongCard key={song.id} song={song} user={user} />
+            <SongCard key={song.id} song={song} />
           ))
         }
 

@@ -11,9 +11,10 @@ import { deleteLike, postLike } from '../../store/likes';
 import { useEffect, useState } from 'react';
 import { getTimeElapsed } from '../../utils';
 
-export default function SongCard({ song, user }) {
+export default function SongCard({ song }) {
   const dispatch = useDispatch();
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
+  const user = useSelector(state => state.session.user);
   const playingSong = useSelector(state => state.songs.playing);
   // REFACTOR LIKES TO JUST USE THE ASSOCIATED DATA OF "SONG"
   // ALSO REFACTOR TO USE A USEEFFECT
@@ -141,7 +142,7 @@ export default function SongCard({ song, user }) {
               &nbsp;add to playlist
             </button>
 
-            {isArtist && (
+            {!isArtist ? null : (
               <>
                 <EditSongModal song={song} />
 
