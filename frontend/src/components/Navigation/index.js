@@ -77,8 +77,9 @@ const Navigation = () => {
               activeStyle={{ backgroundColor: '#111213' }}>
               home
             </NavLink>
-            <NavLink exact to={`/users/${user.id}`} activeStyle={{ backgroundColor: '#111213' }}
-              onClick={() => setActiveTab(2)}
+            
+            <NavLink exact to={user ? `/users/${user.id}` : `/splash`} activeStyle={user ? { backgroundColor: '#111213' } : null}
+              onClick={user ? () => setActiveTab(2) : () => window.alert('You must be logged in first to see your likes.')}
             >likes</NavLink>
             <a style={{ cursor: 'pointer' }}
               onClick={() => alert('Sorry! This feature is currently under construction')}
