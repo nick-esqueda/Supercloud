@@ -10,73 +10,73 @@ module.exports = {
       */
     return queryInterface.bulkInsert('Likes', [
       {
-        userId: 2,
+        userId: 1,
         songId: 68,
         createdAt: '2021-07-14T21:49:02.680Z',
         updatedAt: '2021-04-12T10:47:50.985Z'
       },
       {
-        userId: 2,
+        userId: 1,
         songId: 55,
         createdAt: '2022-03-03T02:50:34.832Z',
         updatedAt: '2021-10-06T04:29:07.894Z'
       },
       {
-        userId: 3,
+        userId: 1,
         songId: 52,
         createdAt: '2021-12-17T04:41:40.577Z',
         updatedAt: '2021-06-17T11:43:10.489Z'
       },
       {
-        userId: 3,
-        songId: 111,
+        userId: 1,
+        songId: 12,
         createdAt: '2021-12-29T10:46:15.949Z',
         updatedAt: '2021-10-23T08:33:56.182Z'
       },
       {
-        userId: 4,
+        userId: 1,
         songId: 83,
         createdAt: '2021-07-28T10:12:22.106Z',
         updatedAt: '2022-03-04T09:50:51.674Z'
       },
       {
-        userId: 4,
+        userId: 1,
         songId: 81,
         createdAt: '2021-10-23T03:39:36.274Z',
         updatedAt: '2021-12-31T06:59:16.123Z'
       },
       {
-        userId: 5,
+        userId: 1,
         songId: 71,
         createdAt: '2021-12-28T00:10:01.583Z',
         updatedAt: '2022-02-05T10:42:24.471Z'
       },
       {
-        userId: 5,
+        userId: 2,
         songId: 49,
         createdAt: '2022-01-21T14:13:47.464Z',
         updatedAt: '2021-05-06T17:54:58.109Z'
       },
       {
-        userId: 5,
+        userId: 3,
         songId: 95,
         createdAt: '2022-01-30T07:29:57.559Z',
         updatedAt: '2021-07-24T14:11:57.007Z'
       },
       {
-        userId: 5,
+        userId: 3,
         songId: 16,
         createdAt: '2021-04-14T14:24:01.520Z',
         updatedAt: '2022-02-11T01:35:26.571Z'
       },
       {
-        userId: 5,
+        userId: 4,
         songId: 5,
         createdAt: '2022-02-21T05:27:49.481Z',
         updatedAt: '2021-04-25T05:01:35.813Z'
       },
       {
-        userId: 5,
+        userId: 4,
         songId: 40,
         createdAt: '2022-02-25T02:06:11.879Z',
         updatedAt: '2021-08-16T21:52:48.655Z'
@@ -185,7 +185,7 @@ module.exports = {
       },
       {
         userId: 9,
-        songId: 102,
+        songId: 99,
         createdAt: '2021-12-07T13:20:51.745Z',
         updatedAt: '2021-09-29T15:00:48.676Z'
       },
@@ -305,7 +305,7 @@ module.exports = {
       },
       {
         userId: 14,
-        songId: 110,
+        songId: 24,
         createdAt: '2021-08-05T11:36:08.300Z',
         updatedAt: '2021-04-08T15:39:34.316Z'
       },
@@ -347,7 +347,7 @@ module.exports = {
       },
       {
         userId: 16,
-        songId: 107,
+        songId: 20,
         createdAt: '2021-07-09T01:11:39.906Z',
         updatedAt: '2021-10-21T12:03:09.289Z'
       },
@@ -431,7 +431,7 @@ module.exports = {
       },
       {
         userId: 20,
-        songId: 109,
+        songId: 100,
         createdAt: '2021-07-01T20:49:01.878Z',
         updatedAt: '2021-05-15T08:39:26.874Z'
       },
@@ -449,7 +449,7 @@ module.exports = {
       },
       {
         userId: 21,
-        songId: 109,
+        songId: 99,
         createdAt: '2022-02-19T15:12:21.846Z',
         updatedAt: '2022-01-06T21:44:51.638Z'
       },
@@ -473,7 +473,7 @@ module.exports = {
       },
       {
         userId: 22,
-        songId: 108,
+        songId: 18,
         createdAt: '2021-05-30T18:50:23.909Z',
         updatedAt: '2021-06-10T08:48:17.148Z'
       },
@@ -521,7 +521,7 @@ module.exports = {
       },
       {
         userId: 25,
-        songId: 102,
+        songId: 92,
         createdAt: '2021-05-04T14:16:12.707Z',
         updatedAt: '2022-01-07T08:30:46.621Z'
       },
@@ -611,7 +611,7 @@ module.exports = {
       },
       {
         userId: 30,
-        songId: 111,
+        songId: 53,
         createdAt: '2021-08-20T17:45:00.229Z',
         updatedAt: '2021-12-15T21:28:24.041Z'
       },
@@ -665,7 +665,7 @@ module.exports = {
       },
       {
         userId: 32,
-        songId: 110,
+        songId: 2,
         createdAt: '2021-12-20T13:57:47.195Z',
         updatedAt: '2021-11-21T00:00:02.180Z'
       },
@@ -707,7 +707,7 @@ module.exports = {
       },
       {
         userId: 34,
-        songId: 106,
+        songId: 100,
         createdAt: '2021-09-23T12:12:17.333Z',
         updatedAt: '2021-07-21T21:07:26.326Z'
       },
@@ -743,7 +743,7 @@ module.exports = {
       },
       {
         userId: 35,
-        songId: 109,
+        songId: 19,
         createdAt: '2022-02-25T18:07:11.112Z',
         updatedAt: '2021-04-08T18:25:27.755Z'
       },
@@ -905,7 +905,7 @@ module.exports = {
       },
       {
         userId: 44,
-        songId: 105,
+        songId: 100,
         createdAt: '2021-09-23T04:36:14.987Z',
         updatedAt: '2021-05-05T16:04:01.074Z'
       },
@@ -917,7 +917,7 @@ module.exports = {
       },
       {
         userId: 44,
-        songId: 101,
+        songId: 100,
         createdAt: '2021-08-10T02:18:52.014Z',
         updatedAt: '2021-03-21T03:23:19.330Z'
       },
@@ -947,7 +947,7 @@ module.exports = {
       },
       {
         userId: 46,
-        songId: 108,
+        songId: 99,
         createdAt: '2021-11-29T00:49:09.904Z',
         updatedAt: '2021-07-13T05:36:17.329Z'
       },
@@ -1019,7 +1019,7 @@ module.exports = {
       },
       {
         userId: 48,
-        songId: 107,
+        songId: 100,
         createdAt: '2021-11-15T10:08:46.767Z',
         updatedAt: '2021-11-29T01:17:15.039Z'
       },
@@ -1073,7 +1073,37 @@ module.exports = {
       },
       {
         userId: 50,
-        songId: 103,
+        songId: 100,
+        createdAt: '2022-02-03T22:20:22.187Z',
+        updatedAt: '2021-10-03T05:56:21.614Z'
+      },
+      {
+        userId: 51,
+        songId: 50,
+        createdAt: '2022-02-03T22:20:22.187Z',
+        updatedAt: '2021-10-03T05:56:21.614Z'
+      },
+      {
+        userId: 51,
+        songId: 1,
+        createdAt: '2022-02-03T22:20:22.187Z',
+        updatedAt: '2021-10-03T05:56:21.614Z'
+      },
+      {
+        userId: 51,
+        songId: 2,
+        createdAt: '2022-02-03T22:20:22.187Z',
+        updatedAt: '2021-10-03T05:56:21.614Z'
+      },
+      {
+        userId: 51,
+        songId: 42,
+        createdAt: '2022-02-03T22:20:22.187Z',
+        updatedAt: '2021-10-03T05:56:21.614Z'
+      },
+      {
+        userId: 51,
+        songId: 12,
         createdAt: '2022-02-03T22:20:22.187Z',
         updatedAt: '2021-10-03T05:56:21.614Z'
       }
