@@ -12,7 +12,7 @@ module.exports = {
       */
     return queryInterface.bulkInsert('Songs', [
       {
-        userId: 49,
+        userId: 1,
         songURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/audio-for-song-seeds/amazing-grace-of-christmas-11162.mp3",
         artworkURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/artwork-for-song-seeds/adrianna-geo-1rBg5YSi00c-unsplash.jpg",
         title: 'dedicated',
@@ -23,7 +23,7 @@ module.exports = {
         updatedAt: faker.date.past(),
       },
       {
-        userId: 49,
+        userId: 1,
         songURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/audio-for-song-seeds/ambient-cinematic-hip-hop-22168.mp3",
         artworkURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/artwork-for-song-seeds/alexander-andrews-fsH1KjbdjE8-unsplash.jpg",
         title: 'esse',
@@ -34,7 +34,7 @@ module.exports = {
         updatedAt: faker.date.past(),
       },
       {
-        userId: 15,
+        userId: 1,
         songURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/audio-for-song-seeds/ambient-piano-10781.mp3",
         artworkURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/artwork-for-song-seeds/alexandru-acea-RQgKM1h2agA-unsplash+(1).jpg",
         title: 'occaecati',
@@ -45,7 +45,7 @@ module.exports = {
         updatedAt: faker.date.past(),
       },
       {
-        userId: 30,
+        userId: 1,
         songURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/audio-for-song-seeds/ambient-piano-amp-strings-10711.mp3",
         artworkURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/artwork-for-song-seeds/alexandru-acea-RQgKM1h2agA-unsplash.jpg",
         title: 'Developer Shirt seize',
@@ -56,7 +56,7 @@ module.exports = {
         updatedAt: faker.date.past(),
       },
       {
-        userId: 40,
+        userId: 10,
         songURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/audio-for-song-seeds/angel-piano-main-9625.mp3",
         artworkURL: "https://supercloud-bucket.s3.amazonaws.com/royalty-free-song-seeds/artwork-for-song-seeds/alina-grubnyak-IsxaFsXi2rs-unsplash.jpg",
         title: 'quo',
