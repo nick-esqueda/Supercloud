@@ -16,7 +16,7 @@ JavaScript | Node.js | Express.js | React.js | Redux | PostgreSQL | Sequelize | 
 ![image](https://user-images.githubusercontent.com/93935486/158058517-855f11ca-40d8-441d-a232-fc0307e168b6.png)
 
 ## Cloning the project? Here are some steps: 
-*** DISCLAIMER: you must have be able to create an AWS S3 bucket in order to properly store images/audio files that are uploaded to the site. Upload functinoality will not work without it
+*** DISCLAIMER: you must be able to create an AWS S3 bucket in order to properly store images/audio files that are uploaded to the site. Upload functionality will not work without it
 
 ### 1. Clone the repo.
 * `git clone git@github.com:nick-esqueda/supercloud.git`
