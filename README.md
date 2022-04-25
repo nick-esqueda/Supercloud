@@ -2,6 +2,8 @@
 
 Supercloud is a recreation of the popular music streaming platform "SoundCloud". Users can go to Supercloud to listen and discuss their favorite music, save songs to come back to with likes, and even upload their own music via integrated AWS services.
 
+Live Site: [Supercloud](https://supercloud-app.herokuapp.com/)
+
 
 ![image](https://user-images.githubusercontent.com/93935486/158058934-829430a6-1c85-4c90-8e62-71b7b8bd5678.png)
 
