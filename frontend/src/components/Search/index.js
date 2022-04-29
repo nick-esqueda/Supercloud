@@ -84,7 +84,7 @@ export default function Search() {
 
       {showMenu && (
         <div id="search_bg" onClick={closeMenu}>
-          <ul className='search_filter' onClick={closeMenu}>
+          <ul className='search_filter absolute-center' onClick={closeMenu}>
             <div style={{ cursor: 'pointer' }} onClick={onSubmit} id="search_message">press enter to search for "{query}"...</div>
             {results.map((result, i) => (
               <li key={i}>
