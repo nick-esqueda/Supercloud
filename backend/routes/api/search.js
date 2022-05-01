@@ -20,11 +20,11 @@ router.get(
   asyncHandler(async (req, res) => {
     const query = req.params.query;
 
-    const results = await Song.findAll({
+    const songs = await Song.findAll({
       where: {
         [Op.or]: [
           {
-            title: { [Op.iLike]: `${query}%` }
+            title: { [Op.iLike]: `%${query}%` }
           },
           {
             description: { [Op.iLike]: `%${query}%` }
@@ -39,9 +39,26 @@ router.get(
         ["title"],
       ],
       limit: 30
+    });
+    
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+            username: { [Op.iLike]: `%${query}%` }
+          },
+          {
+            bio: { [Op.iLike]: `%${query}%` }
+          }
+        ]
+      },
+      order: [
+        ["username"]
+      ],
+      limit: 30
     })
     
-    return res.json(results);
+    return res.json([...songs, ...users]);
   })
 )
 
