@@ -12,10 +12,9 @@ const options = {
   findAllMatches: true,
   useExtendedSearch: true,
   keys: [
-    { name: 'title', weight: 0.9 },
-    { name: 'username', weight: 0.5 },
-    { name: 'description', weight: 0.5 },
-    { name: 'bio', weight: 0.3 },
+    { name: 'title', weight: 2 },
+    { name: 'username', weight: 1 },
+    { name: 'description', weight: 0.2 },
   ]
 }
 
@@ -26,50 +25,42 @@ export default function Search() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState(!allSongs.length ? [] : allSongs);
   const [showMenu, setShowMenu] = useState(false);
-  console.log("RESULTS", results);
 
   useEffect(() => {
     if (!query) return;
 
-    const fuse = new Fuse(allSongs, options);
-    const stateResults = fuse.search(query);
-    setResults(stateResults);
 
-    let timer;
-    if (results.length < 20) {
-      timer = setTimeout(async () => {
-        const dbQueryResults = await dispatch(fetchQuery(query));
-        console.log('db query results', dbQueryResults);
+    let timer = setTimeout(async () => {
+      const dbQueryResults = await dispatch(fetchQuery(query.toLowerCase()));
 
-        if (dbQueryResults) {
-          // FOR FILTERING OUT DUPLICATES
-          const songsSet = new Set();
-          const usersSet = new Set();
-          results.forEach(item => {
-            if (item.item.songUrl !== undefined) songsSet.add(item.item.id);
-            if (item.item.username !== undefined) usersSet.add(item.item.id);
-          });
-          const newResults = dbQueryResults.filter(item => {
-            // for songs
-            if (item.songUrl !== undefined) {
-              if (!songsSet.has(item.id)) return true;
-            }
-            // for users
-            if (item.username !== undefined) {
-              if (!usersSet.has(item.id)) return true;
-            }
-          });
+      if (dbQueryResults.length) {
+        // FOR FILTERING OUT DUPLICATES
+        const songsSet = new Set();
+        const usersSet = new Set();
+        results.forEach(item => {
+          if (item.item.songURL !== undefined) songsSet.add(item.item.id);
+          if (item.item.username !== undefined) usersSet.add(item.item.id);
+        });
+        const newResults = dbQueryResults.filter(item => {
+          // for songs
+          if (item.songURL !== undefined) {
+            if (!songsSet.has(item.id)) return true;
+          }
+          // for users
+          if (item.username !== undefined) {
+            if (!usersSet.has(item.id)) return true;
+          }
+        });
 
-          const fuse = new Fuse(newResults, options);
-          const fuseResults = fuse.search(query);
-          console.log('fuse results', fuseResults);
-          setResults(prev => fuseResults.concat(prev));
-        }
-      }, 300);
+        const fuse = new Fuse(newResults.concat(results), options);
+        const fuseResults = fuse.search(query);
+        setResults(prev => fuseResults);
+      }
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
     }
-
-
-    return () => clearTimeout(timer);
   }, [query]);
 
 
@@ -117,7 +108,7 @@ export default function Search() {
                     </NavLink>
                   </li>
                 )
-              } else if (result.item?.songUrl) {
+              } else if (result.item?.songURL) {
                 // for songs
                 return (
                   <li key={i}>

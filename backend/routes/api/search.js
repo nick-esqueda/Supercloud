@@ -19,7 +19,7 @@ router.get(
   '/:query',
   asyncHandler(async (req, res) => {
     const query = req.params.query;
-
+    
     const songs = await Song.findAll({
       where: {
         [Op.or]: [
@@ -50,8 +50,9 @@ router.get(
         ]
       },
       limit: 30
-    })
+    });
     
+    console.log('\n\n\n', songs.length, users.length, '\n\n');
     return res.json([...songs, ...users]);
   })
 )
