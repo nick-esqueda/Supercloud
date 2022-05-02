@@ -35,9 +35,6 @@ router.get(
         ]
       },
       include: [{ model: User, }, { model: Like, duplicating: false }],
-      order: [
-        ["title"],
-      ],
       limit: 30
     });
     
@@ -52,9 +49,6 @@ router.get(
           }
         ]
       },
-      order: [
-        ["username"]
-      ],
       limit: 30
     })
     

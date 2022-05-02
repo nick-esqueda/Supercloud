@@ -12,9 +12,10 @@ const options = {
   findAllMatches: true,
   useExtendedSearch: true,
   keys: [
-    {name: 'title', weight: 0.9},
-    {name: 'User.username', weight: 0.5},
-    {name: 'description', weight: 0.2},
+    { name: 'title', weight: 0.9 },
+    { name: 'username', weight: 0.5 },
+    { name: 'description', weight: 0.5 },
+    { name: 'bio', weight: 0.3 },
   ]
 }
 
@@ -22,38 +23,56 @@ export default function Search() {
   const dispatch = useDispatch();
   const history = useHistory();
   const allSongs = useSelector(state => state.songs.popularSongs);
-  const dbQueryResults = useSelector(state => state.search);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState(!allSongs.length ? [] : allSongs);
   const [showMenu, setShowMenu] = useState(false);
-  
+  console.log("RESULTS", results);
+
   useEffect(() => {
     if (!query) return;
-    
+
+    const fuse = new Fuse(allSongs, options);
+    const stateResults = fuse.search(query);
+    setResults(stateResults);
+
     let timer;
-    if (dbQueryResults.length < 20 && query.length > 1) {
+    if (results.length < 20) {
       timer = setTimeout(async () => {
-        const dbResults = await dispatch(fetchQuery(query));
-        const fuse = new Fuse(dbResults, options);
-        const fuseResults = fuse.search(query);
-        setResults(fuseResults);
-      }, 400);
-      
-    } else {
-      const fuse = new Fuse(dbQueryResults, options);
-      const fuseResults = fuse.search(query);
-      setResults(fuseResults);
+        const dbQueryResults = await dispatch(fetchQuery(query));
+        console.log('db query results', dbQueryResults);
+
+        if (dbQueryResults) {
+          // FOR FILTERING OUT DUPLICATES
+          const songsSet = new Set();
+          const usersSet = new Set();
+          results.forEach(item => {
+            if (item.item.songUrl !== undefined) songsSet.add(item.item.id);
+            if (item.item.username !== undefined) usersSet.add(item.item.id);
+          });
+          const newResults = dbQueryResults.filter(item => {
+            // for songs
+            if (item.songUrl !== undefined) {
+              if (!songsSet.has(item.id)) return true;
+            }
+            // for users
+            if (item.username !== undefined) {
+              if (!usersSet.has(item.id)) return true;
+            }
+          });
+
+          const fuse = new Fuse(newResults, options);
+          const fuseResults = fuse.search(query);
+          console.log('fuse results', fuseResults);
+          setResults(prev => fuseResults.concat(prev));
+        }
+      }, 300);
     }
+
 
     return () => clearTimeout(timer);
   }, [query]);
 
-  // const removeDuplicates = (songs) => {
-  //   const songIds = songs.map(song => song.id);
-  //   const uniqueIds = [...new Set(songIds)];
-  //   return uniqueIds.map(id => songs.find(song => song.id === id));
-  // }
-  
+
   const closeMenu = (e) => {
     setShowMenu(false);
     setResults([]);
@@ -85,17 +104,33 @@ export default function Search() {
         <div id="search_bg" onClick={closeMenu}>
           <ul className='search_filter' onClick={closeMenu}>
             <div style={{ cursor: 'pointer' }} onClick={onSubmit} id="search_message">press enter to search for "{query}"...</div>
-            
-            {results.map((result, i) => (
-              <li key={i}>
-                <NavLink to={`/songs/${result?.item?.id}`}>
-                  <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
-                  {result.item.title}
-                  <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {result.item?.User?.username}</span>
-                </NavLink>
-              </li>
-            ))}
-            
+
+            {results.map((result, i) => {
+              if (result.item?.username !== undefined) {
+                // for users
+                return (
+                  <li key={i}>
+                    <NavLink to={`/songs/${result.item.id}`}>
+                      <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
+                      {result.item.username}
+                      {/* <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {result.item.User.username}</span> */}
+                    </NavLink>
+                  </li>
+                )
+              } else if (result.item?.songUrl) {
+                // for songs
+                return (
+                  <li key={i}>
+                    <NavLink to={`/songs/${result.item.id}`}>
+                      <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
+                      {result.item.title}
+                      <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {result.item.User.username}</span>
+                    </NavLink>
+                  </li>
+                )
+              }
+            })}
+
           </ul>
         </div>
       )}
