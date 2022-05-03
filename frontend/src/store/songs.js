@@ -379,25 +379,31 @@ const songsReducer = (state = initialState, action) => {
 
 
     // LIKES [] -------------------------------------------------
-    // isLiked will pull from this "likes" array, instead of from the session user's "likes" property
-    case LOAD_LIKES: {
-
-    }
-
-    case LOAD_SONGS_LIKES: {
-
-    }
-
-    case LOAD_USERS_LIKES: {
-
-    }
-
+    // isLiked should pull from this "likes" array, instead of from the session user's "likes" property
+    
     case ADD_LIKE: {
-
+      return {
+        ...state,
+        songs: {
+          [action.songId]: {
+            ...state.songs[action.like.songId],
+            Likes: [action.like, ...state.songs[action.like.songId].Likes]
+          }
+        }
+      }  
     }
 
     case REMOVE_LIKE: {
-
+      const arrWithoutLike = state.songs[action.like.songId].Likes.filter(like => like.id !== action.like.id);
+      return {
+        ...state,
+        songs: {
+          [action.like.songId]: {
+            ...state.songs[action.like.songId],
+            Likes: arrWithoutLike
+          }
+        }
+      }
     }
 
 
