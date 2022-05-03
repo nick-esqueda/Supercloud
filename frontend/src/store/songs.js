@@ -2,8 +2,8 @@ import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
 // SONGS -----------------------
-const ADD_SONG = 'songs/ADD_SONG';
-const ADD_SONGS = 'songs/ADD_SONGS';
+const LOAD_SONG = 'songs/LOAD_SONG';
+const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_POPULAR_SONGS = 'songs/ADD_POPULAR_SONGS';
 const ADD_RECENT_SONGS = 'songs/ADD_RECENT_SONGS';
 const REMOVE_SONG = 'songs/REMOVE_SONG';
@@ -26,16 +26,16 @@ const REMOVE_COMMENT = 'comments/REMOVE_COMMENT';
 
 // ACTION CREATORS ****************************************
 // SONGS ----------------------------
-const addSong = (song) => {
+const loadSong = (song) => {
   return {
-    type: ADD_SONG,
+    type: LOAD_SONG,
     song
   }
 }
 
-const addSongs = (songs) => {
+const loadSongs = (songs) => {
   return {
-    type: ADD_SONGS,
+    type: LOAD_SONGS,
     songs
   }
 }
@@ -145,7 +145,7 @@ export const fetchSong = songId => async dispatch => {
 
   if (res.ok) {
     const song = await res.json();
-    dispatch(addSong(song));
+    dispatch(loadSong(song));
     return song;
   }
 }
@@ -155,7 +155,7 @@ export const fetchSongs = () => async dispatch => {
 
   if (res.ok) {
     const { orderByPlays, orderByRecent } = await res.json();
-    dispatch(addSongs(orderByPlays));
+    dispatch(loadSongs(orderByPlays));
     dispatch(addPopularSongs(orderByPlays));
     dispatch(addRecentSongs(orderByRecent));
     return { orderByPlays, orderByRecent };
@@ -171,7 +171,7 @@ export const postSong = song => async dispatch => {
 
   if (res.ok) {
     const newSong = await res.json();
-    dispatch(addSong(newSong));
+    dispatch(loadSong(newSong));
     return newSong;
   }
 }
@@ -184,7 +184,7 @@ export const editSong = song => async dispatch => {
 
   if (res.ok) {
     const editedSong = await res.json();
-    dispatch(addSong(editedSong));
+    dispatch(loadSong(editedSong));
     return editedSong;
   }
 }
@@ -197,7 +197,7 @@ export const editSongPlays = song => async dispatch => {
 
   if (res.ok) {
     const editedSong = await res.json();
-    dispatch(addSong(editedSong));
+    dispatch(loadSong(editedSong));
     return editedSong;
   }
 }
@@ -327,8 +327,8 @@ const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
 
-    // SONGS -------------------------------------------------
-    case ADD_SONG: {
+    // SONGS {} -------------------------------------------------
+    case LOAD_SONG: {
       const songs = { ...state.songs };
       songs[action.song.id] = action.song;
 
@@ -346,7 +346,7 @@ const songsReducer = (state = initialState, action) => {
       return { ...state, songs, /*recentSongs, popularSongs*/ };
     }
 
-    case ADD_SONGS: {
+    case LOAD_SONGS: {
       const songs = { ...state.songs };
       action.songs.forEach(song => {
         songs[song.id] = song;
@@ -386,7 +386,8 @@ const songsReducer = (state = initialState, action) => {
     }
 
     
-    // LIKES -------------------------------------------------
+    // LIKES [] -------------------------------------------------
+      // isLiked will pull from this "likes" array, instead of from the session user's "likes" property
     case LOAD_LIKES: {
       
     }
