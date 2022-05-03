@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 // ACTION VARIABLES ***************************************
+// SONGS -----------------------
 const ADD_SONG = 'songs/ADD_SONG';
 const ADD_SONGS = 'songs/ADD_SONGS';
 const ADD_POPULAR_SONGS = 'songs/ADD_POPULAR_SONGS';
@@ -8,8 +9,23 @@ const ADD_RECENT_SONGS = 'songs/ADD_RECENT_SONGS';
 const REMOVE_SONG = 'songs/REMOVE_SONG';
 const SET_PLAYING = 'songs/SET_PLAYING';
 
+// LIKES -----------------------
+const LOAD_LIKES = 'likes/LOAD_LIKES';
+const LOAD_SONGS_LIKES = 'likes/LOAD_SONGS_LIKES'
+const LOAD_USERS_LIKES = 'likes/LOAD_USERS_LIKES'
+const ADD_LIKE = 'likes/ADD_LIKE';
+const REMOVE_LIKE = 'likes/REMOVE_LIKE';
+
+
+// COMMENTS -----------------------
+const LOAD_COMMENT = 'comments/ADD_COMMENT';
+const LOAD_COMMENTS = 'comments/LOAD_COMMENTS';
+const LOAD_SONGS_COMMENTS = 'comments/LOAD_SONGS_COMMENTS';
+const REMOVE_COMMENT = 'comments/REMOVE_COMMENT';
+
 
 // ACTION CREATORS ****************************************
+// SONGS ----------------------------
 const addSong = (song) => {
   return {
     type: ADD_SONG,
@@ -53,8 +69,77 @@ export const setPlaying = (song) => {
 }
 
 
+// LIKES ----------------------------
+const loadLikes = (likes) => {
+  return {
+    type: LOAD_LIKES,
+    likes
+  }
+}
+
+const loadSongsLikes = (likes) => {
+  return {
+    type: LOAD_SONGS_LIKES,
+    likes
+  }
+}
+
+const loadUsersLikes = (likes) => {
+  return {
+    type: LOAD_USERS_LIKES,
+    likes
+  }
+}
+
+const addLike = (like) => {
+  return {
+    type: ADD_LIKE,
+    like
+  }
+}
+
+const removeLike = (like) => {
+  return {
+    type: REMOVE_LIKE,
+    like
+  }
+}
+
+
+// COMMENTS ----------------------------
+const loadComment = (comment) => {
+  return {
+    type: LOAD_COMMENT,
+    comment
+  }
+}
+
+const loadComments = (comments) => {
+  return {
+    type: LOAD_COMMENTS,
+    comments
+  }
+}
+
+const loadSongsComments = (comments) => {
+  return {
+    type: LOAD_SONGS_COMMENTS,
+    comments
+  }
+}
+
+const removeComment = (id) => {
+  return {
+    type: REMOVE_COMMENT,
+    id
+  }
+}
+
+
+
 
 // THUNK ACTION CREATORS **********************************
+// SONGS ----------------------------
 export const fetchSong = songId => async dispatch => {
   const res = await fetch(`/api/songs/${songId}`);
 
@@ -128,6 +213,112 @@ export const deleteSong = id => async dispatch => {
     return;
   }
 }
+
+
+// LIKES ----------------------------
+export const fetchLikes = () => async dispatch => {
+  const res = await fetch(`/api/likes`);
+
+  if (res.ok) {
+    const likes = await res.json();
+    dispatch(loadLikes(likes));
+  }
+}
+
+export const fetchSongsLikes = songId => async dispatch => {
+  const res = await fetch(`/api/likes/${songId}`);
+
+  if (res.ok) {
+    const likes = await res.json();
+    dispatch(loadSongsLikes(likes));
+  }
+}
+
+export const fetchUsersLikes = userId => async dispatch => {
+  const res = await fetch(`/api/users/${userId}/likes`);
+
+  if (res.ok) {
+    const likes = await res.json();
+    dispatch(loadUsersLikes(likes));
+    return likes;
+  }
+
+}
+
+export const postLike = (userId, songId) => async dispatch => {
+  const res = await csrfFetch(`/api/likes`, {
+    method: 'POST',
+    body: JSON.stringify({ userId, songId })
+  });
+
+  if (res.ok) {
+    const like = await res.json();
+    dispatch(addLike(like));
+    return like;
+  }
+}
+
+export const deleteLike = (userId, songId) => async dispatch => {
+  const res = await csrfFetch(`/api/likes/${userId}/${songId}`, {
+    method: 'DELETE',
+  });
+
+  if (res.ok) {
+    const like = await res.json();
+    dispatch(removeLike(like));
+    return like;
+  }
+}
+
+
+
+// COMMENTS ----------------------------
+export const fetchComments = () => async dispatch => {
+  const res = await fetch(`/api/comments`);
+
+  if (res.ok) {
+    const comments = await res.json();
+    dispatch(loadComments(comments));
+    return comments;
+  }
+}
+
+export const fetchSongsComments = songId => async dispatch => {
+  const res = await fetch(`/api/comments/${songId}`);
+
+  if (res.ok) {
+    const comments = await res.json();
+    dispatch(loadSongsComments(comments));
+    return comments;
+  }
+}
+
+export const postComment = comment => async dispatch => {
+  const res = await csrfFetch(`/api/comments`, {
+    method: 'POST',
+    body: JSON.stringify(comment)
+  });
+  
+  if (res.ok) {
+    const comment = await res.json();
+    dispatch(loadComment(comment));
+    return comment;
+  }
+}
+
+export const deleteComment = comment => async dispatch => {
+  const res = await csrfFetch(`/api/comments/${comment.id}`, {
+    method: 'DELETE'
+  });
+  
+  if (res.ok) {
+    const id = await res.json();
+    dispatch(removeComment(id));
+    return id;
+  }
+}
+
+
 
 
 // REDUCER ************************************************
