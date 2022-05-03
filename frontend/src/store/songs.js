@@ -19,7 +19,7 @@ const REMOVE_LIKE = 'likes/REMOVE_LIKE';
 
 
 // COMMENTS -----------------------
-const LOAD_COMMENT = 'comments/ADD_COMMENT';
+const ADD_COMMENT = 'comments/ADD_COMMENT';
 const LOAD_COMMENTS = 'comments/LOAD_COMMENTS';
 const LOAD_SONGS_COMMENTS = 'comments/LOAD_SONGS_COMMENTS';
 const REMOVE_COMMENT = 'comments/REMOVE_COMMENT';
@@ -108,9 +108,9 @@ const removeLike = (like) => {
 
 
 // COMMENTS ----------------------------
-const loadComment = (comment) => {
+const addComment = (comment) => {
   return {
-    type: LOAD_COMMENT,
+    type: ADD_COMMENT,
     comment
   }
 }
@@ -302,7 +302,7 @@ export const postComment = comment => async dispatch => {
 
   if (res.ok) {
     const comment = await res.json();
-    dispatch(loadComment(comment));
+    dispatch(addComment(comment));
     return comment;
   }
 }
@@ -382,24 +382,28 @@ const songsReducer = (state = initialState, action) => {
     // isLiked should pull from this "likes" array, instead of from the session user's "likes" property
     
     case ADD_LIKE: {
+      const songId = action.like.songId;
+      
       return {
         ...state,
         songs: {
-          [action.songId]: {
-            ...state.songs[action.like.songId],
-            Likes: [action.like, ...state.songs[action.like.songId].Likes]
+          [songId]: {
+            ...state.songs[songId],
+            Likes: [action.like, ...state.songs[songId].Likes]
           }
         }
       }  
     }
 
     case REMOVE_LIKE: {
-      const arrWithoutLike = state.songs[action.like.songId].Likes.filter(like => like.id !== action.like.id);
+      const songId = action.like.songId;
+      const arrWithoutLike = state.songs[songId].Likes.filter(like => like.id !== action.like.id);
+      
       return {
         ...state,
         songs: {
-          [action.like.songId]: {
-            ...state.songs[action.like.songId],
+          [songId]: {
+            ...state.songs[songId],
             Likes: arrWithoutLike
           }
         }
@@ -408,20 +412,33 @@ const songsReducer = (state = initialState, action) => {
 
 
     // COMMENTS -------------------------------------------------
-    case LOAD_COMMENT: {
-
-    }
-
-    case LOAD_COMMENTS: {
-
-    }
-
-    case LOAD_SONGS_COMMENTS: {
-
+    case ADD_COMMENT: {
+      const songId = action.comment.songId
+      
+      return {
+        ...state,
+        songs: {
+          [songId]: {
+            ...state.songs[songId],
+            Comments: [action.comment, ...state.songs[songId].Comments]
+          }
+        }
+      }
     }
 
     case REMOVE_COMMENT: {
-
+      const songId = action.like.songId;
+      const arrWithoutComment = state.songs[songId].Comments.filter(comment => comment.id !== action.comment.id);
+      
+      return {
+        ...state,
+        songs: {
+          [songId]: {
+            ...state.songs[songId],
+            Likes: arrWithoutComment
+          }
+        }
+      }
     }
 
 
