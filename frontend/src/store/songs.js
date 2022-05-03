@@ -1,8 +1,9 @@
 import { csrfFetch } from "./csrf";
+import { normalizeOneLevel } from "./utils";
 
 // ACTION VARIABLES ***************************************
 // SONGS -----------------------
-const LOAD_SONG = 'songs/LOAD_SONG';
+const ADD_SONG = 'songs/ADD_SONG';
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_POPULAR_SONGS = 'songs/ADD_POPULAR_SONGS';
 const ADD_RECENT_SONGS = 'songs/ADD_RECENT_SONGS';
@@ -26,9 +27,9 @@ const REMOVE_COMMENT = 'comments/REMOVE_COMMENT';
 
 // ACTION CREATORS ****************************************
 // SONGS ----------------------------
-const loadSong = (song) => {
+const addSong = (song) => {
   return {
-    type: LOAD_SONG,
+    type: ADD_SONG,
     song
   }
 }
@@ -145,7 +146,7 @@ export const fetchSong = songId => async dispatch => {
 
   if (res.ok) {
     const song = await res.json();
-    dispatch(loadSong(song));
+    dispatch(addSong(song));
     return song;
   }
 }
@@ -171,7 +172,7 @@ export const postSong = song => async dispatch => {
 
   if (res.ok) {
     const newSong = await res.json();
-    dispatch(loadSong(newSong));
+    dispatch(addSong(newSong));
     return newSong;
   }
 }
@@ -184,7 +185,7 @@ export const editSong = song => async dispatch => {
 
   if (res.ok) {
     const editedSong = await res.json();
-    dispatch(loadSong(editedSong));
+    dispatch(addSong(editedSong));
     return editedSong;
   }
 }
@@ -197,7 +198,7 @@ export const editSongPlays = song => async dispatch => {
 
   if (res.ok) {
     const editedSong = await res.json();
-    dispatch(loadSong(editedSong));
+    dispatch(addSong(editedSong));
     return editedSong;
   }
 }
@@ -325,33 +326,27 @@ export const deleteComment = comment => async dispatch => {
 const initialState = { songs: {}, recentSongs: [], popularSongs: [], playing: null };
 const songsReducer = (state = initialState, action) => {
   let newState;
+
   switch (action.type) {
 
     // SONGS {} -------------------------------------------------
-    case LOAD_SONG: {
-      const songs = { ...state.songs };
-      songs[action.song.id] = action.song;
-
-      // const oldRecentSongs = [...state.recentSongs];
-      // const oldPopularSongs = [...state.popularSongs];
-
-      // const recentSongs = oldRecentSongs.map(song => {
-      //   if (song.id === action.song.id) return action.song;
-      // });
-
-      // const popularSongs = oldPopularSongs.map(song => {
-      //   if (song.id === action.song.id) return action.song;
-      // });
-
-      return { ...state, songs, /*recentSongs, popularSongs*/ };
+    case ADD_SONG: {
+      return {
+        ...state,
+        songs: {
+          ...state.songs,
+          [action.song.id]: action.song
+        }
+      };
     }
 
     case LOAD_SONGS: {
-      const songs = { ...state.songs };
-      action.songs.forEach(song => {
-        songs[song.id] = song;
-      });
-      return { ...state, songs };
+      return {
+        ...state,
+        songs: {
+          ...normalizeOneLevel(action.songs)
+        }
+      };
     }
 
     case ADD_POPULAR_SONGS: {
@@ -367,66 +362,63 @@ const songsReducer = (state = initialState, action) => {
 
     case REMOVE_SONG: {
       newState = { ...state };
+      delete newState.songs[action.songId];
+
       const oldRecentSongs = [...state.recentSongs];
       const oldPopularSongs = [...state.popularSongs];
 
-      delete newState.songs[action.songId];
-
       const recentSongs = oldRecentSongs.filter(song => song.id !== action.id);
-
       const popularSongs = oldPopularSongs.filter(song => song.id !== action.id);
 
       return { ...newState, recentSongs, popularSongs };
     }
 
     case SET_PLAYING: {
-      newState = { ...state };
-      newState.playing = action.song;
-      return newState;
+      return { ...state, playing: action.song };
     }
 
-    
+
     // LIKES [] -------------------------------------------------
-      // isLiked will pull from this "likes" array, instead of from the session user's "likes" property
+    // isLiked will pull from this "likes" array, instead of from the session user's "likes" property
     case LOAD_LIKES: {
-      
+
     }
-    
+
     case LOAD_SONGS_LIKES: {
-      
-    } 
-    
+
+    }
+
     case LOAD_USERS_LIKES: {
-      
+
     }
-    
+
     case ADD_LIKE: {
-      
+
     }
-    
+
     case REMOVE_LIKE: {
-      
+
     }
-    
-    
+
+
     // COMMENTS -------------------------------------------------
     case LOAD_COMMENT: {
-      
+
     }
-    
+
     case LOAD_COMMENTS: {
-      
+
     }
-    
+
     case LOAD_SONGS_COMMENTS: {
-      
+
     }
-    
+
     case REMOVE_COMMENT: {
-      
-    } 
-    
-    
+
+    }
+
+
     default: {
       return state;
     }
