@@ -129,10 +129,10 @@ const loadSongsComments = (comments) => {
   }
 }
 
-const removeComment = (id) => {
+const removeComment = (comment) => {
   return {
     type: REMOVE_COMMENT,
-    id
+    comment
   }
 }
 
@@ -313,9 +313,9 @@ export const deleteComment = comment => async dispatch => {
   });
 
   if (res.ok) {
-    const id = await res.json();
-    dispatch(removeComment(id));
-    return id;
+    const comment = await res.json();
+    dispatch(removeComment(comment));
+    return comment;
   }
 }
 
@@ -428,7 +428,7 @@ const songsReducer = (state = initialState, action) => {
     }
 
     case REMOVE_COMMENT: {
-      const songId = action.like.songId;
+      const songId = action.comment.songId;
       const arrWithoutComment = state.songs[songId].Comments.filter(comment => comment.id !== action.comment.id);
       
       return {
@@ -436,7 +436,7 @@ const songsReducer = (state = initialState, action) => {
         songs: {
           [songId]: {
             ...state.songs[songId],
-            Likes: arrWithoutComment
+            Comments: arrWithoutComment
           }
         }
       }
