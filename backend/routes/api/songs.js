@@ -19,6 +19,9 @@ router.get(
         { model: User, include: { model: Song } },
         { model: Like, include: { model: User } },
         { model: Comment, include: { model: User } },
+      ],
+      order: [
+        [{ model: Comment }, 'createdAt', 'DESC']
       ]
     });
     

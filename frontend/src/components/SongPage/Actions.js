@@ -23,7 +23,7 @@ export default function Actions({ song }) {
   const [showErrors, setShowErrors] = useState(false);
   
   
-  useState(() => {
+  useEffect(() => {
     const errors = [];
     if (content.length > 255) errors.push('comments must be under 255 characters');
     setValidationErrors(errors);
@@ -50,9 +50,15 @@ export default function Actions({ song }) {
       return setShowErrors(true);
     }
 
+    const newComment = {
+      content, songId: song.id, userId: user.id
+    }
+    
     setShowErrors(false);
-    dispatch(postComment({ content, songId: song.id, userId: user.id }));
-    setContent('');
+    dispatch(postComment(newComment))
+      .then(_ => {
+        setContent('');
+      })
   }
 
   return (

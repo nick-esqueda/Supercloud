@@ -1,5 +1,5 @@
 import { csrfFetch } from "./csrf";
-import { normalizeOneLevel } from "./utils";
+import { getTimeElapsed, normalizeOneLevel } from "./utils";
 
 // ACTION VARIABLES ***************************************
 // SONGS -----------------------
@@ -413,7 +413,8 @@ const songsReducer = (state = initialState, action) => {
 
     // COMMENTS -------------------------------------------------
     case ADD_COMMENT: {
-      const songId = action.comment.songId
+      const songId = action.comment.songId;
+      action.comment.createdAt = getTimeElapsed(action.comment.createdAt);
       
       return {
         ...state,
