@@ -298,7 +298,7 @@ export const postComment = comment => async dispatch => {
     method: 'POST',
     body: JSON.stringify(comment)
   });
-  
+
   if (res.ok) {
     const comment = await res.json();
     dispatch(loadComment(comment));
@@ -310,7 +310,7 @@ export const deleteComment = comment => async dispatch => {
   const res = await csrfFetch(`/api/comments/${comment.id}`, {
     method: 'DELETE'
   });
-  
+
   if (res.ok) {
     const id = await res.json();
     dispatch(removeComment(id));
@@ -327,6 +327,7 @@ const songsReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
 
+    // SONGS -------------------------------------------------
     case ADD_SONG: {
       const songs = { ...state.songs };
       songs[action.song.id] = action.song;
@@ -342,7 +343,7 @@ const songsReducer = (state = initialState, action) => {
       //   if (song.id === action.song.id) return action.song;
       // });
 
-    return { ...state, songs, /*recentSongs, popularSongs*/ };
+      return { ...state, songs, /*recentSongs, popularSongs*/ };
     }
 
     case ADD_SONGS: {
@@ -368,13 +369,13 @@ const songsReducer = (state = initialState, action) => {
       newState = { ...state };
       const oldRecentSongs = [...state.recentSongs];
       const oldPopularSongs = [...state.popularSongs];
-      
+
       delete newState.songs[action.songId];
-      
+
       const recentSongs = oldRecentSongs.filter(song => song.id !== action.id);
-      
+
       const popularSongs = oldPopularSongs.filter(song => song.id !== action.id);
-      
+
       return { ...newState, recentSongs, popularSongs };
     }
 
@@ -384,6 +385,47 @@ const songsReducer = (state = initialState, action) => {
       return newState;
     }
 
+    
+    // LIKES -------------------------------------------------
+    case LOAD_LIKES: {
+      
+    }
+    
+    case LOAD_SONGS_LIKES: {
+      
+    } 
+    
+    case LOAD_USERS_LIKES: {
+      
+    }
+    
+    case ADD_LIKE: {
+      
+    }
+    
+    case REMOVE_LIKE: {
+      
+    }
+    
+    
+    // COMMENTS -------------------------------------------------
+    case LOAD_COMMENT: {
+      
+    }
+    
+    case LOAD_COMMENTS: {
+      
+    }
+    
+    case LOAD_SONGS_COMMENTS: {
+      
+    }
+    
+    case REMOVE_COMMENT: {
+      
+    } 
+    
+    
     default: {
       return state;
     }
