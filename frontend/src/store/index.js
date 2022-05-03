@@ -12,7 +12,7 @@ import songsReducer from './songs';
 const rootReducer = combineReducers({
   session: sessionReducer,
   songs: songsReducer,
-  likes: likesReducer,
+  // likes: likesReducer,
   comments: commentsReducer,
   artists: artistsReducer,
   search: searchReducer,

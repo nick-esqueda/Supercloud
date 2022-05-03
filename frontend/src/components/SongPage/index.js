@@ -18,7 +18,7 @@ export default function SongPage() {
 
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  const song = useSelector(state => state.songs.songs)[songId];
+  const song = useSelector(state => state.songs.songs[songId]);
   const comments = useSelector(state => state.comments);
   const [isLoaded, setIsLoaded] = useState(false);
   const [artist, setArtist] = useState('');
@@ -27,7 +27,7 @@ export default function SongPage() {
     (async () => {
       const song = await dispatch(fetchSong(songId));
       await dispatch(fetchSongsComments(songId))
-      await dispatch(fetchLikes());
+      // await dispatch(fetchLikes());
       const artist = await dispatch(fetchArtist(song.userId));
       setArtist(artist);
       setIsLoaded(true);
@@ -47,7 +47,7 @@ export default function SongPage() {
 
       <div className='song_main'>
         <div className='song__actions'>
-          <Actions song={song} user={user} />
+          <Actions song={song} />
         </div>
 
         <div className='song__profile_card'>
