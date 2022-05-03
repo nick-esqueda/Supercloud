@@ -7,7 +7,6 @@ import { getTimeElapsed } from '../../utils';
 
 export default function CommentSection({ comments }) {
 
-
   return !comments ? <small>seems lonely here... how about leaving a comment?</small> : (
     <div className='comment_section'>
 

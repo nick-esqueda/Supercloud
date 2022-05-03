@@ -21,8 +21,10 @@ router.get(
         { model: Comment, include: { model: User } },
       ]
     });
+    
     // changes createdAt to "x y's ago" format
     song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
+    song.Comments.forEach(comment => comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt));
     return res.json(song);
   })
 )

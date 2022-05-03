@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   session: sessionReducer,
   songs: songsReducer,
   // likes: likesReducer,
-  comments: commentsReducer,
+  // comments: commentsReducer,
   artists: artistsReducer,
   search: searchReducer,
   loadingBar: loadingBarReducer

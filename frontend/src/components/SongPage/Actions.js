@@ -2,36 +2,26 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { postLike, deleteLike } from '../../store/songs';
+import { postComment } from '../../store/songs';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 
 import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
-import { postComment } from '../../store/comments';
 
 export default function Actions({ song }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
-  // const songsLikes = useSelector(state => state.likes.songsLikes)[song.id];
-  // const likeCount = !songsLikes ? 0 : songsLikes.length;
   const isArtist = song.User.id === user.id;
   const [isLiked, setIsLiked] = useState(song.Likes.find(like => like.userId === user.id));
-  const [commentCount, setCommentCount] = useState(song.Comments ? song.Comments.length : 0);
   
   const [content, setContent] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);
   const [showErrors, setShowErrors] = useState(false);
   
-  // useEffect(() => {
-  //   if (user && song.Likes.find(like => like.userId === user.id)) {
-  //     setIsLiked(true);
-  //   } else {
-  //     setIsLiked(false);
-  //   }
-  // }, [song, user])
   
   useState(() => {
     const errors = [];
@@ -62,7 +52,6 @@ export default function Actions({ song }) {
 
     setShowErrors(false);
     dispatch(postComment({ content, songId: song.id, userId: user.id }));
-    setCommentCount(prev => prev + 1);
     setContent('');
   }
 
@@ -136,10 +125,10 @@ export default function Actions({ song }) {
         )}
 
         <div className='bottom__right'>
-          <span>▶ {song?.plays}</span>
+          <span>▶ {song.plays}</span>
           <span>
             <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{commentCount}
+            &nbsp;{song.Comments.length}
           </span>
         </div>
 
