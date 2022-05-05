@@ -8,7 +8,7 @@ import { useProfileTab } from '../../Context/ProfileTabContext';
 
 export default function ProfileBody({ user }) {
   const { activeTab, setActiveTab } = useProfileTab();
-  const usersLikes = useSelector(state => state.likes.usersLikes2);
+  const artistsSongs = useSelector(state => state.songs.songs);
 
   return (
     <div className='profile_body_container'>
@@ -39,7 +39,7 @@ export default function ProfileBody({ user }) {
       >
         {!user.Songs.length ? (<h2 style={{ color: '#535353' }}>this user doesn't have any songs.</h2>)
           :
-          user.Songs.map(song => (
+          Object.values(artistsSongs).map(song => (
             <SongCard key={song.id} song={song} />
           ))
         }
@@ -50,7 +50,7 @@ export default function ProfileBody({ user }) {
       >
         {!user.Likes.length ? (<h2 style={{ color: '#535353', width: '840px' }}>this user hasn't liked anything yet.</h2>)
           :
-          usersLikes.map(like => (
+          user.Likes.map(like => (
             <SongBadge key={like.id} song={like.Song} artist={user} />
           ))
         }

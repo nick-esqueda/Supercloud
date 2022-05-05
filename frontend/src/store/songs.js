@@ -161,7 +161,15 @@ export const fetchSongs = () => async dispatch => {
     dispatch(addRecentSongs(orderByRecent));
     return { orderByPlays, orderByRecent };
   }
+}
 
+export const fetchArtistsSongs = userId => async dispatch => {
+  const res = await fetch(`/api/users/${userId}/songs`);
+  
+  if (res.ok) {
+    const songs = await res.json();
+    dispatch(loadSongs(songs));
+  }
 }
 
 export const postSong = song => async dispatch => {
@@ -233,17 +241,6 @@ export const fetchSongsLikes = songId => async dispatch => {
     const likes = await res.json();
     dispatch(loadSongsLikes(likes));
   }
-}
-
-export const fetchUsersLikes = userId => async dispatch => {
-  const res = await fetch(`/api/users/${userId}/likes`);
-
-  if (res.ok) {
-    const likes = await res.json();
-    dispatch(loadUsersLikes(likes));
-    return likes;
-  }
-
 }
 
 export const postLike = (userId, songId) => async dispatch => {

@@ -6,16 +6,18 @@ import { NavLink, useParams } from 'react-router-dom';
 import { useProfileTab } from '../../Context/ProfileTabContext';
 import { fetchArtist } from '../../store/artists';
 import { fetchUsersLikes } from '../../store/likes';
+import { fetchArtistsSongs } from '../../store/songs';
 import CommentCard from '../CommentCard';
 import SongCardSmall from '../SongCard/SongCardSmall';
 import ProfileBody from './ProfileBody';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
-  const dispatch = useDispatch();
-  const { setActiveTab } = useProfileTab();
   const { userId } = useParams();
+  const { setActiveTab } = useProfileTab();
+  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
+  
   const [artist, setArtist] = useState('');
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function ProfilePage() {
     } else {
       (async () => {
         const artist = await dispatch(fetchArtist(userId));
-        await dispatch(fetchUsersLikes(userId));
+        await dispatch(fetchArtistsSongs(userId));
         setArtist(artist);
       })()
     }
