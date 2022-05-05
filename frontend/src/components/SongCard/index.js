@@ -4,7 +4,7 @@ import { useAudioPlayer } from '../../Context/AudioPlayerContext';
 import { deleteSong, setPlaying } from '../../store/songs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
-import { deleteLike, postLike } from '../../store/likes';
+import { deleteLike, postLike } from '../../store/songs';
 import { useEffect, useState } from 'react';
 import EditSongModal from '../Modal/EditSongModal';
 
@@ -15,8 +15,8 @@ export default function SongCard({ song }) {
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
   const user = useSelector(state => state.session.user);
   const playingSong = useSelector(state => state.songs.playing);
+  
   const isLiked = song.Likes.find(like => like.userId === user?.id);
-  const commentCount = !song.Comments ? 0 : song.Comments.length;
   const isArtist = song.User.id === user?.id;
   const [tick, setTick] = useState(+(song.createdAt.split(' ')[0]) + 1);
   
@@ -61,7 +61,7 @@ export default function SongCard({ song }) {
     dispatch(deleteLike(user.id, song.id));
   }
 
-  return !song ? null : (
+  return !song ? <span>bruh</span> : (
     <div className='song_card_container'>
       <NavLink to={`/songs/${song.id}`} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth'})}>
         <img src={song.artworkURL
@@ -159,7 +159,7 @@ export default function SongCard({ song }) {
 
             <span>
               <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
-              &nbsp;{commentCount}
+              &nbsp;{song.Comments.length}
             </span>
           </div>
         </div>

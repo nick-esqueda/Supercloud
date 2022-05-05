@@ -384,6 +384,7 @@ const songsReducer = (state = initialState, action) => {
       return {
         ...state,
         songs: {
+          ...state.songs,
           [songId]: {
             ...state.songs[songId],
             Likes: [action.like, ...state.songs[songId].Likes]
@@ -399,6 +400,7 @@ const songsReducer = (state = initialState, action) => {
       return {
         ...state,
         songs: {
+          ...state.songs,
           [songId]: {
             ...state.songs[songId],
             Likes: arrWithoutLike
