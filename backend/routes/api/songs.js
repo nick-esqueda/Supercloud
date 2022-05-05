@@ -36,12 +36,12 @@ router.get(
 router.get('/', asyncHandler(async (req, res) => {
   const orderByPlays = await Song.findAll({
     include: [
-      { model: User, include: { model: Song } },
+      { model: User },
       { model: Like },
       { model: Comment },
     ],
     order: [['plays', 'DESC']],
-    limit: 50,
+    limit: 10,
   });
   const orderByRecent = await Song.findAll({
     include: [
@@ -52,9 +52,7 @@ router.get('/', asyncHandler(async (req, res) => {
     order: [['createdAt', 'DESC']],
     limit: 10
   });
-  // songs.forEach(song => {
-  //   song.dataValues.createdAt = getTimeElapsed(song.dataValues.createdAt);
-  // });
+
   return res.json({ orderByPlays, orderByRecent });
 }));
 

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import SongBadge from '../SongBadge/SongBadge';
 
@@ -57,7 +56,6 @@ export default function HomePage() {
 
     (async () => {
       await dispatch(fetchSongs());
-      await dispatch(fetchLikes());
       await dispatch(fetchArtists());
       setIsLoaded(true);
     })()

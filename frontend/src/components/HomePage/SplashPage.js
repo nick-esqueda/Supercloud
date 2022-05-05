@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLikes } from '../../store/likes';
 import { fetchSongs } from '../../store/songs';
 import LoginModal from '../Modal/LoginModal';
 import SignupModal from '../Modal/SignupModal';
@@ -14,7 +13,6 @@ export default function SplashPage() {
   useEffect(() => {
     (async () => {
       await dispatch(fetchSongs());
-      await dispatch(fetchLikes());
     })()
   }, [dispatch]);
 
@@ -40,7 +38,7 @@ export default function SplashPage() {
       <h2 style={{ borderBottom: '1px solid #535353', margin: '10px' }}>hear what's trending right now on supercloud</h2>
 
       <div className='splash__grid'>
-        {popularSongs.splice(0, 10).map(song => (
+        {popularSongs.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
       </div>
