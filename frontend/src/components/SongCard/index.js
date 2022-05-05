@@ -94,7 +94,7 @@ export default function SongCard({ song }) {
           </div>
 
           <div className='top__right'>
-            <small>{song.createdAt}</small>
+            <small>{song.timeElapsed}</small>
             <span className='genre'>{song.genre}</span>
           </div>
         </div>
