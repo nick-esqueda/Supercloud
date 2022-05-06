@@ -6,7 +6,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import { useProfileTab } from '../../Context/ProfileTabContext';
 import { fetchArtist } from '../../store/artists';
 import { fetchUsersLikes } from '../../store/likes';
-import { fetchArtistsSongs } from '../../store/songs';
+import { fetchArtistsLikedSongs, fetchArtistsSongs } from '../../store/songs';
 import CommentCard from '../CommentCard';
 import SongCardSmall from '../SongCard/SongCardSmall';
 import ProfileBody from './ProfileBody';
@@ -19,7 +19,8 @@ export default function ProfilePage() {
   const sessionUser = useSelector(state => state.session.user);
   
   const [artist, setArtist] = useState('');
-
+  const [artistsLikedSongs, setArtistsLikedSongs] = useState([]);
+  
   useEffect(() => {
     if (sessionUser?.id === userId) {
       setArtist(sessionUser);
@@ -27,6 +28,8 @@ export default function ProfilePage() {
       (async () => {
         const artist = await dispatch(fetchArtist(userId));
         await dispatch(fetchArtistsSongs(userId));
+        const likedSongs = await dispatch(fetchArtistsLikedSongs(userId));
+        setArtistsLikedSongs(likedSongs);
         setArtist(artist);
       })()
     }
@@ -80,9 +83,8 @@ export default function ProfilePage() {
           </h4>
 
           <ul className="songs">
-            {/* THIS MAP IS RETURNING DUPLICATES SOMETIMES, WHY? */}
-            {artist.Likes.slice(0, 3).map((like, i) => (
-              <li key={i}><SongCardSmall song={like.Song} /></li>
+            {artistsLikedSongs.slice(0, 3).map(song => (
+              <li key={song.id}><SongCardSmall song={song} /></li>
             ))}
           </ul>
         </div>

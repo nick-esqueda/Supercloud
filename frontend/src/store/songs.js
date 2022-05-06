@@ -5,6 +5,7 @@ import { getTimeElapsed, normalizeOneLevel } from "./utils";
 // SONGS -----------------------
 const ADD_SONG = 'songs/ADD_SONG';
 const LOAD_SONGS = 'songs/LOAD_SONGS';
+const LOAD_ADDITIONAL_SONGS = 'songs/LOAD_ADDITIONAL_SONGS';
 const ADD_POPULAR_SONGS = 'songs/ADD_POPULAR_SONGS';
 const ADD_RECENT_SONGS = 'songs/ADD_RECENT_SONGS';
 const REMOVE_SONG = 'songs/REMOVE_SONG';
@@ -37,6 +38,13 @@ const addSong = (song) => {
 const loadSongs = (songs) => {
   return {
     type: LOAD_SONGS,
+    songs
+  }
+}
+
+const loadAdditionalSongs = (songs) => {
+  return {
+    type: LOAD_ADDITIONAL_SONGS,
     songs
   }
 }
@@ -169,6 +177,16 @@ export const fetchArtistsSongs = userId => async dispatch => {
   if (res.ok) {
     const songs = await res.json();
     dispatch(loadSongs(songs));
+  }
+}
+
+export const fetchArtistsLikedSongs = userId => async dispatch => {
+  const res = await fetch(`/api/users/${userId}/likes`);
+  
+  if (res.ok) {
+    const songs = await res.json();
+    dispatch(loadAdditionalSongs(songs));
+    return songs;
   }
 }
 
@@ -344,6 +362,16 @@ const songsReducer = (state = initialState, action) => {
           ...normalizeOneLevel(action.songs)
         }
       };
+    }
+    
+    case LOAD_ADDITIONAL_SONGS: {
+      return {
+        ...state,
+        songs: {
+          ...state.songs,
+          ...normalizeOneLevel(action.songs)
+        }
+      }
     }
 
     case ADD_POPULAR_SONGS: {

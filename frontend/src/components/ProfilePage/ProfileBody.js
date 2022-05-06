@@ -8,8 +8,9 @@ import { useProfileTab } from '../../Context/ProfileTabContext';
 
 export default function ProfileBody({ user }) {
   const { activeTab, setActiveTab } = useProfileTab();
-  const artistsSongs = useSelector(state => state.songs.songs);
-
+  const songs = useSelector(state => state.songs.songs);
+  const artistsSongs = Object.values(songs).filter(song => song.userId === user.id);
+  
   return (
     <div className='profile_body_container'>
       <div className='profile__tabs'>

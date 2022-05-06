@@ -5,7 +5,6 @@ import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function SongCardSmall({ song }) {
-  if (!song) return null;
   const commentCount = !song.Comments ? 0 : song.Comments.length;
   const likeCount = !song.Likes ? 0 : song.Likes.length;
   
