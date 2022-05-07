@@ -17,6 +17,27 @@ JavaScript | Node.js | Express.js | React.js | Redux | PostgreSQL | Sequelize | 
 
 ![image](https://user-images.githubusercontent.com/93935486/158058517-855f11ca-40d8-441d-a232-fc0307e168b6.png)
 
+## Features
+
+![image](https://user-images.githubusercontent.com/93935486/167273046-44b7d556-3370-4a67-a5d7-08199bbbe5e9.png)
+
+### Songs
+* Users can listen to songs while navigating the website
+* Users can post a song of theirs with cover art and a title/description
+* Users can edit and delete their songs
+
+![image](https://user-images.githubusercontent.com/93935486/167273031-14819d97-ca53-4be1-8c2f-bc6625bf5141.png)
+
+### Likes
+* Users can like and unlike other user's songs
+
+### Comments
+* Users can comment on songs
+* Users can update and delete their comments on songs
+
+### Search
+* Users can search for songs or other users
+
 ## Cloning the project? Here are some steps: 
 *** DISCLAIMER: you must be able to create an AWS S3 bucket in order to properly store images/audio files that are uploaded to the site. Upload functionality will not work without it
 
