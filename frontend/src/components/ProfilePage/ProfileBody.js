@@ -6,10 +6,11 @@ import CommentCard from '../CommentCard'
 import './ProfileBody.css';
 import { useProfileTab } from '../../Context/ProfileTabContext';
 
-export default function ProfileBody({ user }) {
+export default function ProfileBody({ user, artistsLikedSongs }) {
   const { activeTab, setActiveTab } = useProfileTab();
-  const usersLikes = useSelector(state => state.likes.usersLikes2);
-
+  const songs = useSelector(state => state.songs.songs);
+  const artistsSongs = Object.values(songs).filter(song => song.userId === user.id);
+  
   return (
     <div className='profile_body_container'>
       <div className='profile__tabs'>
@@ -39,7 +40,7 @@ export default function ProfileBody({ user }) {
       >
         {!user.Songs.length ? (<h2 style={{ color: '#535353' }}>this user doesn't have any songs.</h2>)
           :
-          user.Songs.map(song => (
+          Object.values(artistsSongs).map(song => (
             <SongCard key={song.id} song={song} />
           ))
         }
@@ -50,8 +51,8 @@ export default function ProfileBody({ user }) {
       >
         {!user.Likes.length ? (<h2 style={{ color: '#535353', width: '840px' }}>this user hasn't liked anything yet.</h2>)
           :
-          usersLikes.map(like => (
-            <SongBadge key={like.id} song={like.Song} artist={user} />
+          artistsLikedSongs.map(song => (
+            <SongBadge key={song.id} song={song} artist={user} />
           ))
         }
       </div>

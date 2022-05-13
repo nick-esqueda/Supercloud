@@ -8,8 +8,6 @@ import { csrfFetch, restoreCSRF } from './store/csrf';
 import configureStore from './store';
 import * as sessionActions from './store/session';
 import * as songsActions from './store/songs';
-import * as likesActions from './store/likes';
-import * as commentsActions from './store/comments';
 import * as artistsActions from './store/artists';
 import * as searchActions from './store/search';
 import App from './App';
@@ -23,8 +21,6 @@ if (process.env.NODE_ENV !== 'production') {
   window.store = store;
   window.sessionActions = sessionActions;
   window.songsActions = songsActions;
-  window.likesActions = likesActions;
-  window.commentsActions = commentsActions;
   window.artistsActions = artistsActions;
   window.searchActions = searchActions;
 }

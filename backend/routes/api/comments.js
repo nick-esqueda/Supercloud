@@ -53,8 +53,9 @@ router.delete(
   requireAuthFast,
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.commentId, 10);
-    await Comment.destroy({ where: { id } });
-    return res.json(id);
+    const comment = await Comment.findByPk(id);
+    await comment.destroy();
+    return res.json(comment);
   })
 )
 

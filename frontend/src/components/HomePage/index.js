@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { fetchLikes } from '../../store/likes';
-import { fetchSongs } from '../../store/songs';
+import { fetchArtistsLikedSongs, fetchSongs } from '../../store/songs';
 import SongBadge from '../SongBadge/SongBadge';
 
 import './HomePage.css';
@@ -30,8 +29,6 @@ export default function HomePage() {
     if (user && user.Songs && user.Likes) {
       // USER'S PLAY COUNT
       setUsersPlayCount(user.Songs.reduce((acc, song) => ({ plays: acc.plays + song.plays }), { plays: 0 }).plays);
-      // USER'S LIKED SONGS
-      setUsersLikedSongs(user.Likes.slice(0, 3).map(like => songs[like.Song.id]));
       // POPULAR SONGS THAT USER LIKED
       const popLiked = user.Likes
         .sort((likeA, likeB) => likeA.Song.plays - likeB.Song.plays < 0 ? 1 : -1)
@@ -57,8 +54,9 @@ export default function HomePage() {
 
     (async () => {
       await dispatch(fetchSongs());
-      await dispatch(fetchLikes());
       await dispatch(fetchArtists());
+      const likedSongs = await dispatch(fetchArtistsLikedSongs(user.id));
+      setUsersLikedSongs(likedSongs.slice(0, 3));
       setIsLoaded(true);
     })()
   }, [dispatch]);

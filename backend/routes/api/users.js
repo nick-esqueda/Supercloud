@@ -30,7 +30,7 @@ router.get(
     const artist = await User.findByPk(id, {
       include: [
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
-        { model: Like, include: [{ model: User }, { model: Song, include: { model: User } }] },
+        { model: Like },
         { model: Comment, include: [{ model: User }, { model: Song }] }
       ]
     });
@@ -40,6 +40,47 @@ router.get(
     return res.json(artist);
   })
 )
+
+// GET /api/users/:userId/songs - GET AN ARTIST'S SONGS
+router.get(
+  '/:userId/songs',
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.userId, 10);
+    const songs = await Song.findAll({
+      where: { userId },
+      include: [
+        { model: User },
+        { model: Like },
+        { model: Comment },
+      ],
+      order: [["createdAt", "DESC"]]
+    })
+
+    return res.json(songs);
+  })
+)
+
+// GET /api/users/:userId/likes - GET A ARTIST'S LIKED SONGS
+router.get(
+  '/:userId/likes',
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.userId, 10);
+
+    const likes = await Like.findAll({
+      where: { userId },
+      include: [{ model: Song, include: [
+        { model: User },
+        { model: Like },
+        { model: Comment },
+      ], }]
+    });
+    
+    const songs = likes.map(like => like.Song);
+    
+    return res.json(songs);
+  })
+)
+
 
 // GET api/users/:userId/likes - GET A USER'S LIKES
 router.get(
@@ -51,7 +92,7 @@ router.get(
       include: [{ model: Song, include: [{ model: User }, { model: Like }] }],
       order: [["createdAt", "DESC"]]
     })
-    
+
     return res.json(likes);
   })
 )

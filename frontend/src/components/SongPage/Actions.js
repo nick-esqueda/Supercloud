@@ -1,36 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { deleteLike, postLike } from '../../store/likes';
+import { postLike, deleteLike } from '../../store/songs';
+import { postComment } from '../../store/songs';
 import { deleteSong } from '../../store/songs';
 import EditSongModal from '../Modal/EditSongModal';
 
 import './Actions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-solid-svg-icons';
-import { postComment } from '../../store/comments';
 
-export default function Actions({ song, user }) {
+export default function Actions({ song }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const songsLikes = useSelector(state => state.likes.songsLikes)[song.id];
-  const likeCount = !songsLikes ? 0 : songsLikes.length;
-  const isArtist = song.User.id === user?.id;
-  const [isLiked, setIsLiked] = useState(false);
-  const [commentCount, setCommentCount] = useState(song.Comments ? song.Comments.length : 0);
+  const user = useSelector(state => state.session.user);
+
+  const isArtist = song.User.id === user.id;
+  const [isLiked, setIsLiked] = useState(song.Likes.find(like => like.userId === user.id));
+  
   const [content, setContent] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);
   const [showErrors, setShowErrors] = useState(false);
   
-  useEffect(() => {
-    if (user && song.Likes.find(like => like.userId === user.id)) {
-      setIsLiked(true);
-    } else {
-      setIsLiked(false);
-    }
-  }, [user, song])
   
-  useState(() => {
+  useEffect(() => {
     const errors = [];
     if (content.length > 255) errors.push('comments must be under 255 characters');
     setValidationErrors(errors);
@@ -38,11 +31,13 @@ export default function Actions({ song, user }) {
 
   const likeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
+    
     setIsLiked(true);
     dispatch(postLike(user.id, song.id));
   }
   const unLikeSong = (e) => {
     if (!user) return document.getElementById('login_button').click();
+    
     setIsLiked(false);
     dispatch(deleteLike(user.id, song.id));
   }
@@ -55,10 +50,15 @@ export default function Actions({ song, user }) {
       return setShowErrors(true);
     }
 
+    const newComment = {
+      content, songId: song.id, userId: user.id
+    }
+    
     setShowErrors(false);
-    dispatch(postComment({ content, songId: song.id, userId: user.id }));
-    setCommentCount(prev => prev + 1);
-    setContent('');
+    dispatch(postComment(newComment))
+      .then(_ => {
+        setContent('');
+      })
   }
 
   return (
@@ -88,12 +88,12 @@ export default function Actions({ song, user }) {
         {isLiked ? (
           <button onClick={unLikeSong} className='btn btn--liked'>
             <FontAwesomeIcon icon={faHeart} style={{ color: '#d73543', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{likeCount}
+            &nbsp;{song.Likes.length}
           </button>
         ) : (
           <button onClick={likeSong} className='btn btn--secondary--outline'>
             <FontAwesomeIcon icon={faHeart} style={{ color: '#535353', transform: 'scale(1.2)', position: 'relative', top: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{likeCount}
+            &nbsp;{song.Likes.length}
           </button>)
         }
 
@@ -131,10 +131,10 @@ export default function Actions({ song, user }) {
         )}
 
         <div className='bottom__right'>
-          <span>▶ {song?.plays}</span>
+          <span>▶ {song.plays}</span>
           <span>
             <FontAwesomeIcon icon={faMessage} style={{ color: '#b3b3b3', position: 'relative', bottom: '-1px' }}></FontAwesomeIcon>
-            &nbsp;{commentCount}
+            &nbsp;{song.Comments.length}
           </span>
         </div>
 

@@ -2,8 +2,6 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 import thunk from 'redux-thunk';
 import artistsReducer from './artists';
-import commentsReducer from './comments';
-import likesReducer from './likes';
 import searchReducer from './search';
 
 import sessionReducer from './session';
@@ -12,8 +10,6 @@ import songsReducer from './songs';
 const rootReducer = combineReducers({
   session: sessionReducer,
   songs: songsReducer,
-  likes: likesReducer,
-  comments: commentsReducer,
   artists: artistsReducer,
   search: searchReducer,
   loadingBar: loadingBarReducer
@@ -25,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   const logger = require('redux-logger').default;
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  enhancer = composeEnhancers(applyMiddleware(thunk, /*logger*/));
+  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
 const configureStore = preloadedState => {

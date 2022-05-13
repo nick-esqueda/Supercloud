@@ -52,7 +52,6 @@ router.get(
       limit: 30
     });
     
-    console.log('\n\n\n', songs.length, users.length, '\n\n');
     return res.json([...songs, ...users]);
   })
 )

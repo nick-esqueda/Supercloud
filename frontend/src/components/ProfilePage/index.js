@@ -5,26 +5,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { useProfileTab } from '../../Context/ProfileTabContext';
 import { fetchArtist } from '../../store/artists';
-import { fetchUsersLikes } from '../../store/likes';
+import { fetchArtistsLikedSongs, fetchArtistsSongs } from '../../store/songs';
 import CommentCard from '../CommentCard';
 import SongCardSmall from '../SongCard/SongCardSmall';
 import ProfileBody from './ProfileBody';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
-  const dispatch = useDispatch();
-  const { setActiveTab } = useProfileTab();
   const { userId } = useParams();
+  const { setActiveTab } = useProfileTab();
+  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
+  
   const [artist, setArtist] = useState('');
-
+  const [artistsLikedSongs, setArtistsLikedSongs] = useState([]);
+  
   useEffect(() => {
     if (sessionUser?.id === userId) {
       setArtist(sessionUser);
     } else {
       (async () => {
         const artist = await dispatch(fetchArtist(userId));
-        await dispatch(fetchUsersLikes(userId));
+        await dispatch(fetchArtistsSongs(userId));
+        const likedSongs = await dispatch(fetchArtistsLikedSongs(userId));
+        setArtistsLikedSongs(likedSongs);
         setArtist(artist);
       })()
     }
@@ -60,7 +64,7 @@ export default function ProfilePage() {
 
 
       <div className='profile__body' >
-        <ProfileBody user={artist} />
+        <ProfileBody user={artist} artistsLikedSongs={artistsLikedSongs} />
       </div>
 
       <div className='profile__sidebar' id='profile_sidebar'>
@@ -78,9 +82,8 @@ export default function ProfilePage() {
           </h4>
 
           <ul className="songs">
-            {/* THIS MAP IS RETURNING DUPLICATES SOMETIMES, WHY? */}
-            {artist.Likes.slice(0, 3).map((like, i) => (
-              <li key={i}><SongCardSmall song={like.Song} /></li>
+            {artistsLikedSongs.slice(0, 3).map(song => (
+              <li key={song.id}><SongCardSmall song={song} /></li>
             ))}
           </ul>
         </div>
