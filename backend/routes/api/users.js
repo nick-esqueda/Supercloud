@@ -30,7 +30,7 @@ router.get(
     const artist = await User.findByPk(id, {
       include: [
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
-        { model: Like, include: [{ model: Song, include: { model: User } }] },
+        { model: Like },
         { model: Comment, include: [{ model: User }, { model: Song }] }
       ]
     });
@@ -60,7 +60,7 @@ router.get(
   })
 )
 
-// GET /api/users/:userId/likes - GET AN ARTIST'S LIKED SONGS
+// GET /api/users/:userId/likes - GET A ARTIST'S LIKED SONGS
 router.get(
   '/:userId/likes',
   asyncHandler(async (req, res) => {

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { useProfileTab } from '../../Context/ProfileTabContext';
 import { fetchArtist } from '../../store/artists';
-import { fetchUsersLikes } from '../../store/likes';
 import { fetchArtistsLikedSongs, fetchArtistsSongs } from '../../store/songs';
 import CommentCard from '../CommentCard';
 import SongCardSmall from '../SongCard/SongCardSmall';
@@ -65,7 +64,7 @@ export default function ProfilePage() {
 
 
       <div className='profile__body' >
-        <ProfileBody user={artist} />
+        <ProfileBody user={artist} artistsLikedSongs={artistsLikedSongs} />
       </div>
 
       <div className='profile__sidebar' id='profile_sidebar'>

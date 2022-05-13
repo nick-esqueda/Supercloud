@@ -36,3 +36,16 @@ export const getTimeElapsed = createdAt => {
 	if (yearsAgo === 1) return '1 year ago';
 	else return yearsAgo + ' years ago';
 }
+
+
+export function sortByCreatedAt(list) {
+    return list.sort((a, b) => {
+        if (Date.parse(b.createdAt) > Date.parse(a.createdAt)) {
+            return 1
+        } else if (Date.parse(a.createdAt) > Date.parse(b.createdAt)) {
+            return -1
+        } else {
+            return 0
+        }
+    })
+}

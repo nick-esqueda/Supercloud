@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { deleteLike, postLike } from '../../store/likes';
+import { deleteLike, postLike } from '../../store/songs';
 import './Footer.css';
 import Player from './Player';
 
