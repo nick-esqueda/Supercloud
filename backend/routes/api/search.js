@@ -3,11 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-
-const { Song, User, Like, Comment } = require('../../db/models');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { getTimeElapsed } = require('../../utils/utils');
-const { validateSong, validateSongEdit } = require('../../utils/validation');
+const { Song, User, Like } = require('../../db/models');
 
 const router = express.Router();
 
