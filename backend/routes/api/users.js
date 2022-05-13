@@ -33,7 +33,7 @@ router.get(
         { model: Like },
         { model: Comment, include: [{ model: User }, { model: Song }] }
       ],
-      order: [[{ model: Comment }, "createdAt", "DESC"]]
+      order: [[{ model: Comment }, "createdAt", "DESC"], [{ model: Like }, "createdAt", "DESC"]]
     });
     artist.Comments.forEach(comment => {
       comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
@@ -69,15 +69,18 @@ router.get(
 
     const likes = await Like.findAll({
       where: { userId },
-      include: [{ model: Song, include: [
-        { model: User },
-        { model: Like },
-        { model: Comment },
-      ], }]
+      include: [{
+        model: Song, include: [
+          { model: User },
+          { model: Like },
+          { model: Comment },
+        ],
+      }],
+      order: [["createdAt", "DESC"]]
     });
-    
+
     const songs = likes.map(like => like.Song);
-    
+
     return res.json(songs);
   })
 )
