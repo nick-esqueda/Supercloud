@@ -32,7 +32,8 @@ router.get(
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
         { model: Like },
         { model: Comment, include: [{ model: User }, { model: Song }] }
-      ]
+      ],
+      order: [[{ model: Comment }, "createdAt", "DESC"]]
     });
     artist.Comments.forEach(comment => {
       comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
