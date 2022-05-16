@@ -3,7 +3,6 @@ const asyncHandler = require('express-async-handler');
 
 const { Song, User, Like, Comment } = require('../../db/models');
 const { setTokenCookie, restoreUser, requireAuth, requireAuthFast } = require('../../utils/auth');
-const { getTimeElapsed } = require('../../utils/utils');
 const { validateSong, validateSongEdit } = require('../../utils/validation');
 
 const router = express.Router();
@@ -18,10 +17,10 @@ router.get(
     });
     return res.json(comments);
   })
-  )
-  
-  // GET /api/comments/:songId - GET ALL OF A SONG'S COMMENTS
-  router.get(
+)
+
+// GET /api/comments/:songId - GET ALL OF A SONG'S COMMENTS
+router.get(
   '/:songId',
   asyncHandler(async (req, res) => {
     const songId = parseInt(req.params.songId, 10);

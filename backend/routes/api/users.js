@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const { getTimeElapsed } = require('../../utils/utils');
 const Op = Sequelize.Op;
 const { User, Song, Comment, Like } = require('../../db/models');
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { setTokenCookie } = require('../../utils/auth');
 const { validateSignup } = require('../../utils/validation');
 
 const router = express.Router();
@@ -32,7 +32,8 @@ router.get(
         { model: Song, include: [{ model: User }, { model: Comment }, { model: Like }] },
         { model: Like },
         { model: Comment, include: [{ model: User }, { model: Song }] }
-      ]
+      ],
+      order: [[{ model: Comment }, "createdAt", "DESC"], [{ model: Like }, "createdAt", "DESC"]]
     });
     artist.Comments.forEach(comment => {
       comment.dataValues.createdAt = getTimeElapsed(comment.dataValues.createdAt);
@@ -68,15 +69,18 @@ router.get(
 
     const likes = await Like.findAll({
       where: { userId },
-      include: [{ model: Song, include: [
-        { model: User },
-        { model: Like },
-        { model: Comment },
-      ], }]
+      include: [{
+        model: Song, include: [
+          { model: User },
+          { model: Like },
+          { model: Comment },
+        ],
+      }],
+      order: [["createdAt", "DESC"]]
     });
-    
+
     const songs = likes.map(like => like.Song);
-    
+
     return res.json(songs);
   })
 )
@@ -110,7 +114,6 @@ router.post(
       email, password, username, bio, location, profileImageURL, bannerImageURL,
     });
 
-    // setTokenCookie (from walk-through) is not async... need to await?
     await setTokenCookie(res, user);
 
     return res.json({ user });

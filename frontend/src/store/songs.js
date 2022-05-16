@@ -324,8 +324,6 @@ const songsReducer = (state = initialState, action) => {
 
 
     // LIKES [] -------------------------------------------------
-    // isLiked should pull from this "likes" array, instead of from the session user's "likes" property
-    
     case ADD_LIKE: {
       const songId = action.like.songId;
       
@@ -358,7 +356,7 @@ const songsReducer = (state = initialState, action) => {
     }
 
 
-    // COMMENTS -------------------------------------------------
+    // COMMENTS [] -------------------------------------------------
     case ADD_COMMENT: {
       const songId = action.comment.songId;
       action.comment.createdAt = getTimeElapsed(action.comment.createdAt);
