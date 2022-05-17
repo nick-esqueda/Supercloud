@@ -44,6 +44,7 @@ export default function Player() {
         showSkipControls={false}
         showJumpControls={false}
         customAdditionalControls={[]}
+        showFilledVolume={true}
         style={{
           backgroundColor: 'transparent',
         }}
