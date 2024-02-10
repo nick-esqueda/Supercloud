@@ -15,7 +15,7 @@ export async function csrfFetch(url, options = {}) {
     options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN');
   }
   // call the default window's fetch with the url and the options passed in
-  const res = await window.fetch(url, options);
+  const res = await window.fetch(`${process.env.REACT_APP_BASE_URL + url}`, options);
 
   // if the response status code is 400 or above, then throw an error with the
     // error being the response
@@ -29,4 +29,27 @@ export async function csrfFetch(url, options = {}) {
 // call this to get the "XSRF-TOKEN" cookie, should only be used in development
 export function restoreCSRF() {
   return csrfFetch('/api/csrf/restore');
+}
+
+ 
+export const customFetch = (path, options = {}) => {
+    const customOptions = {
+        // must allow cookies to be sent in cross-origin requests.
+        // without credentials: 'include', cookies will not be sent to backend.
+        credentials: 'include', 
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    
+    const mergedOptions = {
+        ...customOptions,
+        ...options,
+        headers: {
+            ...customOptions.headers,
+            ...(options.headers || {})
+        }
+    }
+
+    return fetch(`${process.env.REACT_APP_BASE_URL}${path}`, mergedOptions);
 }
