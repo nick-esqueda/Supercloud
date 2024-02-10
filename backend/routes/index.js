@@ -7,7 +7,9 @@ const apiRouter = require('./api');
 router.use('/api', apiRouter);
 
 // ROUTES ***********************************************************
-
+router.get('/health', (req, res) => {
+  return res.json({ success: true });
+});
 
 // Add a XSRF-TOKEN cookie in development
 if (process.env.NODE_ENV !== 'production') {
