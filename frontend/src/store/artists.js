@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 // ACTION VARIABLES ***************************************
 const LOAD_ARTIST = 'session/LOAD_ARTIST';
 const LOAD_ARTISTS = 'session/LOAD_ARTISTS';
@@ -23,7 +25,7 @@ const loadArtists = (artists) => {
 
 // THUNK ACTION CREATORS **********************************
 export const fetchArtist = (userId) => async dispatch => {
-  const res = await fetch(`/api/users/${userId}`);
+  const res = await csrfFetch(`/api/users/${userId}`);
 
   if (res.ok) {
     const artist = await res.json();
@@ -33,7 +35,7 @@ export const fetchArtist = (userId) => async dispatch => {
 }
 
 export const fetchArtists = () => async dispatch => {
-  const res = await fetch(`/api/users`);
+  const res = await csrfFetch(`/api/users`);
 
   if (res.ok) {
     const artists = await res.json();
