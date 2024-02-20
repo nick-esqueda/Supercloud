@@ -5,7 +5,7 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
-const { environment } = require('./config');
+const { environment, allowedOrigin } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
@@ -13,7 +13,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin : allowedOrigin,
+  credentials: true,
+}));
 app.use(
   helmet.crossOriginResourcePolicy({
     policy: "cross-origin"

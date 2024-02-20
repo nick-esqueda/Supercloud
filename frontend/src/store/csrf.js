@@ -28,7 +28,7 @@ export async function csrfFetch(url, options = {}) {
 
 // call this to get the "XSRF-TOKEN" cookie, should only be used in development
 export function restoreCSRF() {
-  return csrfFetch('/api/csrf/restore');
+  return customFetch('/api/csrf/restore');
 }
 
  
@@ -39,6 +39,7 @@ export const customFetch = (path, options = {}) => {
         credentials: 'include', 
         headers: {
             'Content-Type': 'application/json',
+            'XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
         }
     }
     
