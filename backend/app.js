@@ -5,7 +5,7 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
-const { environment, allowedOrigin } = require('./config');
+const { environment, allowedOrigin, clientDomain } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
@@ -25,7 +25,8 @@ app.use(
 app.use(csurf({cookie: {
       secure: isProduction,
       sameSite: isProduction && "None",
-      httpOnly: true
+      httpOnly: true,
+      domain: clientDomain
     }
 }));
 // ??? set up csrfProtection variable?
