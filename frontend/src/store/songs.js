@@ -108,7 +108,7 @@ const removeComment = (comment) => {
 // THUNK ACTION CREATORS **********************************
 // SONGS ----------------------------
 export const fetchSong = songId => async dispatch => {
-  const res = await fetch(`/api/songs/${songId}`);
+  const res = await csrfFetch(`/api/songs/${songId}`);
 
   if (res.ok) {
     const song = await res.json();
@@ -118,7 +118,7 @@ export const fetchSong = songId => async dispatch => {
 }
 
 export const fetchSongs = () => async dispatch => {
-  const res = await fetch(`/api/songs`);
+  const res = await csrfFetch(`/api/songs`);
 
   if (res.ok) {
     const { orderByPlays, orderByRecent } = await res.json();
@@ -130,7 +130,7 @@ export const fetchSongs = () => async dispatch => {
 }
 
 export const fetchArtistsSongs = userId => async dispatch => {
-  const res = await fetch(`/api/users/${userId}/songs`);
+  const res = await csrfFetch(`/api/users/${userId}/songs`);
   
   if (res.ok) {
     const songs = await res.json();
@@ -192,7 +192,7 @@ export const deleteSong = id => async dispatch => {
 
 // LIKES ----------------------------
 export const fetchArtistsLikedSongs = userId => async dispatch => {
-  const res = await fetch(`/api/users/${userId}/likes`);
+  const res = await csrfFetch(`/api/users/${userId}/likes`);
   
   if (res.ok) {
     const songs = await res.json();

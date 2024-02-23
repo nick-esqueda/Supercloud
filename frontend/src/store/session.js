@@ -1,4 +1,4 @@
-import { csrfFetch } from './csrf';
+import { csrfFetch, customFetch } from './csrf';
 
 // ACTION VARIABLES ***************************************
 const SET_USER = 'session/setUser';
@@ -20,7 +20,7 @@ const removeUser = () => {
 // THUNK ACTION CREATORS **********************************
 export const loginUser = (user) => async (dispatch) => {
   const { credential, password } = user;
-  const res = await csrfFetch('/api/session', {
+  const res = await customFetch('/api/session', {
     method: 'POST',
     body: JSON.stringify({
       credential,
@@ -34,7 +34,7 @@ export const loginUser = (user) => async (dispatch) => {
 };
 
 export const restoreUser = () => async dispatch => {
-  const res = await csrfFetch('/api/session');
+  const res = await customFetch('/api/session');
   const data = await res.json();
   dispatch(setUser(data.user));
   return data; // this was originally "return res;" in the reading - why?
@@ -45,7 +45,7 @@ export const signupUser = (user) => async (dispatch) => {
     username, email, password, bio, location, profileImageURL, bannerImageURL
   } = user;
 
-  const res = await csrfFetch("/api/users", {
+  const res = await customFetch("/api/users", {
     method: "POST",
     body: JSON.stringify({
       username, email, password, bio, location, profileImageURL, bannerImageURL
@@ -58,7 +58,7 @@ export const signupUser = (user) => async (dispatch) => {
 };
 
 export const logoutUser = () => async (dispatch) => {
-  const res = await csrfFetch('/api/session', {
+  const res = await customFetch('/api/session', {
     method: 'DELETE',
   });
   dispatch(removeUser());

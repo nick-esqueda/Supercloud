@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 // ACTION VARIABLES ***************************************
 const LOAD_SEARCH = 'session/LOAD_SEARCH';
 
@@ -15,7 +17,7 @@ const loadSearch = (results) => {
 
 // THUNK ACTION CREATORS **********************************
 export const fetchQuery = query => async dispatch => {
-  const res = await fetch(`/api/search/${query}`);
+  const res = await csrfFetch(`/api/search/${query}`);
 
   if (res.ok) {
     const results = await res.json();

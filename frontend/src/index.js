@@ -14,16 +14,7 @@ import App from './App';
 
 const store = configureStore();
 
-if (process.env.NODE_ENV !== 'production') {
-  restoreCSRF();
-
-  window.csrfFetch = csrfFetch;
-  window.store = store;
-  window.sessionActions = sessionActions;
-  window.songsActions = songsActions;
-  window.artistsActions = artistsActions;
-  window.searchActions = searchActions;
-}
+restoreCSRF();
 
 function Root() {
   return (

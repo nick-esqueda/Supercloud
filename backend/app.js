@@ -5,7 +5,7 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
-const { environment } = require('./config');
+const { environment, allowedOrigin, clientDomain } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
@@ -13,7 +13,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
-if (!isProduction) app.use(cors());
+app.use(cors({
+  origin : allowedOrigin,
+  credentials: true,
+}));
 app.use(
   helmet.crossOriginResourcePolicy({
     policy: "cross-origin"
@@ -21,8 +24,9 @@ app.use(
 );
 app.use(csurf({cookie: {
       secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: true
+      sameSite: isProduction && "None",
+      httpOnly: true,
+      domain: clientDomain
     }
 }));
 // ??? set up csrfProtection variable?

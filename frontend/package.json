@@ -24,7 +24,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:uat": "npm run build:uat && npm run sync-s3:uat && npm run refresh-cdn:uat",
+    "deploy:prod": "npm run build:prod && npm run sync-s3:prod && npm run refresh-cdn:prod",
+    "build:prod": "env-cmd -f .env.production npm run build",
+    "build:uat": "env-cmd -f .env.test npm run build",
+    "sync-s3:uat": "aws s3 sync ./build/ s3://uat.supercloud.nickesqueda.com",
+    "sync-s3:prod": "aws s3 sync ./build/ s3://supercloud.nickesqueda.com",
+    "refresh-cdn:uat": "aws cloudfront create-invalidation --distribution-id E3DT3BEUMD94GF --paths \"/*\"",
+    "refresh-cdn:prod": "aws cloudfront create-invalidation --distribution-id E300VU1MWJATDS --paths \"/*\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,7 +50,7 @@
     ]
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "redux-logger": "^3.0.6"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }

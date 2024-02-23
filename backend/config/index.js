@@ -1,5 +1,7 @@
 module.exports = {
   environment: process.env.NODE_ENV || 'development',
+  clientDomain: process.env.CLIENT_DOMAIN || "",
+  allowedOrigin: process.env.ALLOWED_ORIGIN || 'http://localhost:3000',
   port: process.env.PORT || 5000,
   db: {
     username: process.env.DB_USERNAME,
