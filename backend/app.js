@@ -29,7 +29,6 @@ app.use(csurf({cookie: {
       domain: clientDomain
     }
 }));
-// ??? set up csrfProtection variable?
 
 
 // ROUTES ***********************************************************
