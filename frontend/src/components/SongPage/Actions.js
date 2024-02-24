@@ -15,8 +15,8 @@ export default function Actions({ song }) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
-  const isArtist = song.User.id === user.id;
-  const [isLiked, setIsLiked] = useState(song.Likes.find(like => like.userId === user.id));
+  const isArtist = song.User.id === user?.id;
+  const [isLiked, setIsLiked] = useState(song.Likes.find(like => like.userId === user?.id));
   
   const [content, setContent] = useState('');
   const [validationErrors, setValidationErrors] = useState([]);

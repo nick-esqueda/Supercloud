@@ -16,16 +16,14 @@ export default function SongPage() {
   const dispatch = useDispatch();
   
   const song = useSelector(state => state.songs.songs[songId]);
+  const artist = useSelector(state => state.artists[song?.userId]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [artist, setArtist] = useState('');
 
   useEffect(() => {
-    (async () => {
-      const song = await dispatch(fetchSong(songId));
-      const artist = await dispatch(fetchArtist(song.userId));
-      setArtist(artist);
-      setIsLoaded(true);
-    })();
+    setIsLoaded(false);
+    dispatch(fetchSong(songId))
+      .then(song => dispatch(fetchArtist(song.userId)))
+      .then(() => setIsLoaded(true));
   }, [dispatch, songId]);
 
   if (songId !== route) {
@@ -45,12 +43,12 @@ export default function SongPage() {
         </div>
 
         <div className='song__profile_card'>
-          <ArtistBadge artist={song?.User} />
+          <ArtistBadge artist={song.User} />
         </div>
 
         <div className='song__body'>
           <div className="song__description">
-            {song?.description}
+            {song.description}
           </div>
           <div className='song__comments'>
             <CommentSection comments={song.Comments} />
