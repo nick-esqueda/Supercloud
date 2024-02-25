@@ -74,7 +74,7 @@ export default function HomePage() {
         <h2>hot tracks</h2>
         <h4>songs that are stuck on repeat worldwide</h4>
       </div>
-      <div className='badge_grid__g1'>
+      <div className='badge_grid__g1 flexRowBetween'>
         {popularSongs.slice(0, 10).map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
@@ -84,7 +84,7 @@ export default function HomePage() {
         <h2>recent tracks</h2>
         <h4>freshly uploaded tracks that are ready to dig in to</h4>
       </div>
-      <div className='badge_grid__g2'>
+      <div className='badge_grid__g2 flexRowBetween'>
         {recentSongs.map(song => (
           <SongBadge key={song.id} song={song} />
         ))}
@@ -98,7 +98,7 @@ export default function HomePage() {
             <h2>artists you might like</h2>
             <h4>we've been digging your taste - here are some cool artists we found for you</h4>
           </div>
-          <div className='badge_grid__g3'>
+          <div className='badge_grid__g3 flexRowBetween'>
             {usersSuggestedArtists.map(artist => (
               <ArtistBadge key={artist?.id} artist={artists[artist.id]} />
             ))}
@@ -110,7 +110,7 @@ export default function HomePage() {
                 <h2>popular favorites</h2>
                 <h4>songs you like that are on everybody's mind</h4>
               </div>
-              <div className='badge_grid__g4'>
+              <div className='badge_grid__g4 flexRowBetween'>
                 {usersPopularLikedSongs.map((song, i) => (
                   <SongBadge key={i} song={song} />
                 ))}
