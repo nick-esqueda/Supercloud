@@ -65,17 +65,10 @@ h1 {
   overflow-x: scroll;
   overflow-y: hidden;
   margin-bottom: 20px;
-  
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 256px);
-  grid-auto-flow: column;
-  grid-template-rows: 1fr;
-  justify-items: center;
-  align-items: center;
 }
 ::-webkit-scrollbar {
   width: 12px;
-  height: 14px;
+  height: 12px;
 }
 ::-webkit-scrollbar-track {
   border-radius: 8px;
