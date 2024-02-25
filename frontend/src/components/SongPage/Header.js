@@ -69,9 +69,9 @@ export default function Header({ song }) {
       </div>
 
       <div className="song_header__bottom">
-        <div className="song_header__waveform" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {'[ sorry! this feature is currently under construction ]'}
-        </div>
+        {/* <div className="song_header__waveform"> */}
+          <img src="https://global.discourse-cdn.com/bubble/original/3X/d/1/d12bc5c16f9614ae7799d3fd592191e62a993ed2.png" alt='waveform' />
+        {/* </div> */}
       </div>
 
       <div className="song_header__right">

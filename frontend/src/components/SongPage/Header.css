@@ -114,15 +114,16 @@
 /* BOTTOM */
 .song_header__bottom {
   grid-area: bottom;
-  
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
 }
 
-.song_header__waveform {
-  height: 100px;
-  width: 100%;
-  border: 1px solid #535353; 
+.song_header__bottom img {
+  height: 65%;
+  width: 90%;
+  filter: hue-rotate(60deg) brightness(2.0) drop-shadow(30px 30px 10px rgba(0, 0, 0, 0.4));
+
 }
 
 
