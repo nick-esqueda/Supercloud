@@ -35,9 +35,7 @@ export default function ProfileBody({ user, artistsLikedSongs }) {
       </div>
 
 
-      <div
-        className={activeTab === 1 ? 'active_content content songs_tab' : 'inactive content songs_tab'}
-      >
+      <div className={activeTab === 1 ? 'active_content content songs_tab' : 'inactive content songs_tab'} >
         {!user.Songs.length ? (<h2 style={{ color: '#535353' }}>this user doesn't have any songs.</h2>)
           :
           Object.values(artistsSongs).map(song => (
@@ -46,9 +44,7 @@ export default function ProfileBody({ user, artistsLikedSongs }) {
         }
 
       </div>
-      <div
-        className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'}
-      >
+      <div className={activeTab === 2 ? 'active_content content likes_tab' : 'inactive content likes_tab'} >
         {!user.Likes.length ? (<h2 style={{ color: '#535353', width: '840px' }}>this user hasn't liked anything yet.</h2>)
           :
           artistsLikedSongs.map(song => (
@@ -56,9 +52,7 @@ export default function ProfileBody({ user, artistsLikedSongs }) {
           ))
         }
       </div>
-      <div
-        className={activeTab === 3 ? 'active_content content comments_tab' : 'inactive content comments_tab'}
-      >
+      <div className={activeTab === 3 ? 'active_content content comments_tab' : 'inactive content comments_tab'} >
         {!user.Comments.length ? (<h2 style={{ color: '#535353' }}>this user hasn't made any comments.</h2>)
           :
           user.Comments.map(comment => (

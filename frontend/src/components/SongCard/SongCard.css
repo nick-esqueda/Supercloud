@@ -100,11 +100,11 @@
 
 
 /* MIDDLE *****************************************/
-.song_card__waveform {
-  height: 80px;
+.song_card__waveform img {
+  height: 100px;
   width: 100%;
   padding: 16px;
-  border: 1px solid #535353;
+  filter: hue-rotate(60deg) brightness(1.5);
 }
 
 

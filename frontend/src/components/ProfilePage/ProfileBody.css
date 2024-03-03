@@ -52,6 +52,12 @@
   height: 100%;
 }
 
+.songs_tab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .likes_tab {
   max-width: 864px;
   
