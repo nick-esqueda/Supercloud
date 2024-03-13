@@ -102,7 +102,7 @@ export default function Search() {
                 // for users
                 return (
                   <li key={i}>
-                    <NavLink to={`/songs/${result.item.id}`}>
+                    <NavLink to={`/users/${result.item.id}`}>
                       <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
                       {result.item.username}
                       {/* <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {result.item.User.username}</span> */}
