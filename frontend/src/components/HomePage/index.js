@@ -50,23 +50,27 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    if (user === undefined) return history.push('/splash');
+    if (!user) {
+      return history.push('/splash');
+    }
 
-    (async () => {
-      await dispatch(fetchSongs());
-      await dispatch(fetchArtists());
-      const likedSongs = await dispatch(fetchArtistsLikedSongs(user.id));
-      setUsersLikedSongs(likedSongs.slice(0, 3));
-      setIsLoaded(true);
-    })()
-  }, [dispatch]);
+    dispatch(fetchSongs())
+      .then(_ => dispatch(fetchArtists()))
+      .then(_ => dispatch(fetchArtistsLikedSongs(user.id)))
+      .then(usersLikedSongs => {
+        setUsersLikedSongs(usersLikedSongs.slice(0, 3))
+        setIsLoaded(true);
+      });
+  }, [dispatch, user]);
 
   useEffect(() => {
-    if (isLoaded) populate();
+    if (isLoaded) {
+      populate();
+    }
   }, [isLoaded]);
 
 
-  return !isLoaded || !isPopulated ? <h2 id='loading'>loading...</h2> : (
+  return !isLoaded || !isPopulated || !user ? <h2 id='loading'>loading...</h2> : (
     <div id='home'>
       <h1><span style={{ color: '#FFFF5D' }}>super</span><span style={{ color: 'white', textDecoration: 'overline', textDecorationColor: '#FFFF5D' }}>cloud</span></h1>
 

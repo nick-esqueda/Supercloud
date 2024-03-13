@@ -31,12 +31,10 @@ function ProfileNavButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const logout = (e) => {
+  const logout = () => {
     if (window.confirm('Are you sure you want to log out?')) {
-      dispatch(logoutUser());
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      history.push('/splash');
-      window.location.reload();
+      dispatch(logoutUser())
+        .then(_ => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }));
     }
   };
 
