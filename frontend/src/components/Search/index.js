@@ -71,9 +71,10 @@ export default function Search() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!query) return;
-    setShowMenu(false);
-    return history.push(`/search/${query}`)
+    // TEMPORARILY DISABLING NAVIGATION TO SEARCH PAGE
+    // if (!query) return;
+    // setShowMenu(false);
+    // return history.push(`/search/${query}`)
   }
 
 
@@ -94,14 +95,14 @@ export default function Search() {
       {showMenu && (
         <div id="search_bg" onClick={closeMenu}>
           <ul className='search_filter' onClick={closeMenu}>
-            <div style={{ cursor: 'pointer' }} onClick={onSubmit} id="search_message">press enter to search for "{query}"...</div>
+            <div style={{ cursor: 'pointer' }} onClick={onSubmit} id="search_message">searching for "{query}"...</div>
 
             {results.map((result, i) => {
               if (result.item?.username !== undefined) {
                 // for users
                 return (
                   <li key={i}>
-                    <NavLink to={`/songs/${result.item.id}`}>
+                    <NavLink to={`/users/${result.item.id}`}>
                       <FontAwesomeIcon icon={faSearch} style={{ color: '#535353', marginRight: '12px' }}></FontAwesomeIcon>
                       {result.item.username}
                       {/* <span style={{ fontStyle: 'italic', color: '#b3b3b3' }} >&nbsp;by {result.item.User.username}</span> */}
