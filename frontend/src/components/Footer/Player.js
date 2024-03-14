@@ -9,25 +9,25 @@ export default function Player() {
   const dispatch = useDispatch();
   const song = useSelector(state => state.songs.playing);
   const { audioPlayer, paused, setPaused } = useAudioPlayer();
-  const [timer, setTimer] = useState('');
+  // const [timer, setTimer] = useState('');
   
 
-  useEffect(() => {
-    clearTimeout(timer);
-  }, [paused]);
+  // useEffect(() => {
+  //   clearTimeout(timer);
+  // }, [paused]);
 
   const onPlay = () => {
-    clearTimeout(timer);
-    setTimer(setTimeout(() => {
-      song.plays++;
-      dispatch(editSongPlays(song));
-    }, 5000))
+    // clearTimeout(timer);
+    // setTimer(setTimeout(() => {
+    //   song.plays++;
+    //   dispatch(editSongPlays(song));
+    // }, 5000))
 
     setPaused(false);
   }
   
   const onPause = () => {
-    clearTimeout(timer);
+    // clearTimeout(timer);
     setPaused(true);
   }
   
