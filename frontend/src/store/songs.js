@@ -1,5 +1,5 @@
-import { csrfFetch } from "./csrf";
-import { getTimeElapsed, normalizeOneLevel, sortByCreatedAt } from "./utils";
+import { customFetch } from "./csrf";
+import { getTimeElapsed, normalizeOneLevel, } from "./utils";
 
 // ACTION VARIABLES ***************************************
 // SONGS -----------------------
@@ -108,7 +108,7 @@ const removeComment = (comment) => {
 // THUNK ACTION CREATORS **********************************
 // SONGS ----------------------------
 export const fetchSong = songId => async dispatch => {
-  const res = await csrfFetch(`/api/songs/${songId}`);
+  const res = await customFetch(`/api/songs/${songId}`);
 
   if (res.ok) {
     const song = await res.json();
@@ -118,7 +118,7 @@ export const fetchSong = songId => async dispatch => {
 }
 
 export const fetchSongs = () => async dispatch => {
-  const res = await csrfFetch(`/api/songs`);
+  const res = await customFetch(`/api/songs`);
 
   if (res.ok) {
     const { orderByPlays, orderByRecent } = await res.json();
@@ -130,7 +130,7 @@ export const fetchSongs = () => async dispatch => {
 }
 
 export const fetchArtistsSongs = userId => async dispatch => {
-  const res = await csrfFetch(`/api/users/${userId}/songs`);
+  const res = await customFetch(`/api/users/${userId}/songs`);
   
   if (res.ok) {
     const songs = await res.json();
@@ -139,7 +139,7 @@ export const fetchArtistsSongs = userId => async dispatch => {
 }
 
 export const postSong = song => async dispatch => {
-  const res = await csrfFetch('/api/songs', {
+  const res = await customFetch('/api/songs', {
     method: 'POST',
     body: JSON.stringify(song)
   });
@@ -152,7 +152,7 @@ export const postSong = song => async dispatch => {
 }
 
 export const editSong = song => async dispatch => {
-  const res = await csrfFetch(`/api/songs/${song.id}`, {
+  const res = await customFetch(`/api/songs/${song.id}`, {
     method: "PUT",
     body: JSON.stringify(song)
   });
@@ -165,7 +165,7 @@ export const editSong = song => async dispatch => {
 }
 
 export const editSongPlays = song => async dispatch => {
-  const res = await csrfFetch(`/api/songs/${song.id}/plays`, {
+  const res = await customFetch(`/api/songs/${song.id}/plays`, {
     method: "PUT",
     body: JSON.stringify(song)
   });
@@ -178,7 +178,7 @@ export const editSongPlays = song => async dispatch => {
 }
 
 export const deleteSong = id => async dispatch => {
-  const res = await csrfFetch(`/api/songs/${id}`, {
+  const res = await customFetch(`/api/songs/${id}`, {
     method: 'DELETE',
   });
 
@@ -192,7 +192,7 @@ export const deleteSong = id => async dispatch => {
 
 // LIKES ----------------------------
 export const fetchArtistsLikedSongs = userId => async dispatch => {
-  const res = await csrfFetch(`/api/users/${userId}/likes`);
+  const res = await customFetch(`/api/users/${userId}/likes`);
   
   if (res.ok) {
     const songs = await res.json();
@@ -202,7 +202,7 @@ export const fetchArtistsLikedSongs = userId => async dispatch => {
 }
 
 export const postLike = (userId, songId) => async dispatch => {
-  const res = await csrfFetch(`/api/likes`, {
+  const res = await customFetch(`/api/likes`, {
     method: 'POST',
     body: JSON.stringify({ userId, songId })
   });
@@ -215,7 +215,7 @@ export const postLike = (userId, songId) => async dispatch => {
 }
 
 export const deleteLike = (userId, songId) => async dispatch => {
-  const res = await csrfFetch(`/api/likes/${userId}/${songId}`, {
+  const res = await customFetch(`/api/likes/${userId}/${songId}`, {
     method: 'DELETE',
   });
 
@@ -230,7 +230,7 @@ export const deleteLike = (userId, songId) => async dispatch => {
 
 // COMMENTS ----------------------------
 export const postComment = comment => async dispatch => {
-  const res = await csrfFetch(`/api/comments`, {
+  const res = await customFetch(`/api/comments`, {
     method: 'POST',
     body: JSON.stringify(comment)
   });
@@ -243,7 +243,7 @@ export const postComment = comment => async dispatch => {
 }
 
 export const deleteComment = comment => async dispatch => {
-  const res = await csrfFetch(`/api/comments/${comment.id}`, {
+  const res = await customFetch(`/api/comments/${comment.id}`, {
     method: 'DELETE'
   });
 
