@@ -1,30 +1,50 @@
-cd backend/
-pwd
+#!/bin/bash
 
-echo "This script will start the PROD EB environment (DB, EC2 instances, ELB). Are you sure you want to proceed? (yes/no)"
-read confirmation
+# RUN THIS SCRIPT FROM THE PROJECT ROOT DIRECTORY.
 
-if [ "$confirmation" == "yes" ]; then
-    echo "Proceeding with the rest of the script..."
-else
-    echo "Script aborted."
-    exit 1
+if [ -f scripts/.env ]; then
+  source scripts/.env
+else 
+  echo "ERROR: .env file must exist in the ./scripts/ directory. Aborting script."
+  echo "(make sure you run this script from the project root)"
+  exit 1
 fi
 
-echo 'triggering RDS DB startup...'
-aws rds start-db-instance --no-cli-pager --db-instance-identifier awseb-e-jx2adpmpzb-stack-awsebrdsdatabase-0si2tmuytexo
+logdir="$(pwd)/scripts/logs/start-infra-prod"
+mkdir -p "$logdir"
 
-echo 'enabling load balancer...'
+datetime=$(date +"%Y-%m-%dT%H.%M.%S-%Z")
+logfile="$logdir/$datetime.log"
+
+echo "saving logs to $logfile..."
+
+cd backend/
+
+echo 'triggering RDS DB startup...' >> $logfile
+
+aws rds start-db-instance \
+--no-cli-pager \
+--db-instance-identifier $PROD_RDS_DB_INSTANCE_ID \
+--profile $AWS_PROFILE \
+>> $logfile
+
+echo 'enabling load balancer in EB environment...' >> $logfile
+
 cd .elasticbeanstalk
-eb config supercloud-prod --update file://update-to-load-balanced-env.yml
+eb config supercloud-prod \
+--update file://update-to-load-balanced-env.yml \
+--profile $AWS_PROFILE \
+>> $logfile
 cd ..
 
-echo 'scaling up EC2 instances to 1...'
+echo 'scaling EC2 instances up to 1...' >> $logfile
+
 aws autoscaling update-auto-scaling-group \
---auto-scaling-group-name awseb-e-jx2adpmpzb-stack-AWSEBAutoScalingGroup-Qu3swT789bps \
+--auto-scaling-group-name $PROD_AUTO_SCALING_GROUP_NAME \
 --min-size 1 \
 --max-size 1 \
---desired-capacity 1
+--desired-capacity 1 \
+--profile $AWS_PROFILE \
+>> $logfile
 
-echo 'script completed. some AWS processes may still be running.'
-
+echo 'script completed. some AWS processes may still be running.' >> $logfile
