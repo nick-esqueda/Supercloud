@@ -35,7 +35,7 @@ echo "refreshing CloudFront cache..." >> $logfile
 aws cloudfront create-invalidation \
 --distribution-id $PROD_CLOUDFRONT_DISTRIBUTION_ID \
 --paths "/*" \
---profile nickesqueda3@gmail.com \
+--profile $AWS_PROFILE \
 >> $logfile
 
 cd ..
