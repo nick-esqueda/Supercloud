@@ -24,7 +24,7 @@ echo 'triggering RDS DB startup...' >> $logfile
 
 aws rds start-db-instance \
 --no-cli-pager \
---db-instance-identifier $RDS_DB_INSTANCE_ID_UAT \
+--db-instance-identifier $UAT_RDS_DB_INSTANCE_ID \
 --profile $AWS_PROFILE \
 >> $logfile
 
@@ -40,7 +40,7 @@ cd ..
 echo 'scaling EC2 instances up to 1...' >> $logfile
 
 aws autoscaling update-auto-scaling-group \
---auto-scaling-group-name $AUTO_SCALING_GROUP_NAME_UAT \
+--auto-scaling-group-name $UAT_AUTO_SCALING_GROUP_NAME \
 --min-size 1 \
 --max-size 1 \
 --desired-capacity 1 \
