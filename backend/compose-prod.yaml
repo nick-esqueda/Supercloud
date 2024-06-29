@@ -1,0 +1,38 @@
+services:
+  api:
+    image: public.ecr.aws/f0d1e9f6/supercloud-image-repo:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+      - CLIENT_DOMAIN=${CLIENT_DOMAIN}
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: arm64v8/postgres:13
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
+      start_period: 10s
+      interval: 5s
+      timeout: 5s
+      retries: 50
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./backup.sql:/docker-entrypoint-initdb.d/db.sql
+
+volumes:
+  db_data:
